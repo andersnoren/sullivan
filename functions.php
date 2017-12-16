@@ -565,92 +565,6 @@ if ( ! function_exists( 'eames_header_search' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
-   HERO SLIDER
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'eames_hero_slider' ) ) {
-
-	function eames_hero_slider() {
-
-		$slides = array(
-			array(
-				'url' 			=> 'http://www.google.com',
-				'title' 		=> 'Tinker & Ace Hotel',
-				'subtitle' 		=> 'A limited edition collaboration.',
-				'button_text' 	=> 'Read More',
-				'image_url' 	=> get_template_directory_uri() . '/assets/images/dummy-hero.jpg',
-			),
-			array(
-				'url' 			=> 'http://www.google.com',
-				'title' 		=> 'Tinker & Ace Hotel with a long title',
-				'subtitle' 		=> 'A limited edition collaboration.',
-				'button_text' 	=> 'Read More',
-				'image_url' 	=> get_template_directory_uri() . '/assets/images/dummy-hero.jpg',
-			),
-			array(
-				'url' 			=> 'http://www.google.com',
-				'title' 		=> 'Tinker & Ace Hotel',
-				'subtitle' 		=> 'A limited edition collaboration.',
-				'button_text' 	=> 'Read More',
-				'image_url' 	=> get_template_directory_uri() . '/assets/images/dummy-hero.jpg',
-			),
-			array(
-				'url' 			=> 'http://www.google.com',
-				'title' 		=> 'Tinker & Ace Hotel',
-				'subtitle' 		=> 'A limited edition collaboration.',
-				'button_text' 	=> 'Read More',
-				'image_url' 	=> get_template_directory_uri() . '/assets/images/dummy-hero.jpg',
-			),
-		);
-
-		if ( $slides ) : ?>
-		
-			<div class="flexslider hero-slider loading bg-black">
-			
-				<ul class="slides">
-		
-					<?php foreach( $slides as $slide ) : ?>
-						
-						<li class="slide">
-							<div class="bg-image dark-overlay" style="background-image: url( <?php echo $slide['image_url']; ?> );">
-								<div class="section-inner">
-									
-									<header>
-
-										<h1>
-											<?php if ( isset( $slide['url'] ) ) echo '<a href="' . $slide['url'] . '">'; ?>
-											<?php echo $slide['title']; ?>
-											<?php if ( isset( $slide['url'] ) ) echo '</a>'; ?>
-										</h1>
-
-										<p class="sans-excerpt"><?php echo $slide['subtitle']; ?></p>
-
-										<div class="button-wrapper">
-											<a href="<?php echo $slide['url']; ?>" class="button white"><?php echo $slide['button_text']; ?></a>
-										</div>
-
-									</header>
-
-								</div><!-- .section-inner -->
-							</div><!-- .bg-image -->
-						</li><!-- .slide -->
-						
-					<?php endforeach; ?>
-			
-				</ul>
-				
-			</div>
-			
-			<?php
-			
-		endif;
-
-	}
-}
-
-
-/* ---------------------------------------------------------------------------------------------
    AJAX SEARCH
    This function is called when the ajax search fields are updated
    --------------------------------------------------------------------------------------------- */
@@ -842,6 +756,165 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 	}
 
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+	GET SLIDESHOW AREAS
+	Ensure we get the right values for the slideshow areas by keeping that data in a single place.
+
+	Child theme devs: This function can be plugged, and the $slideshow_areas can be extended to
+	create another slideshow section with corresponding settings and controls in the Customizer. 
+	That slideshow will then be available for output by calling eames_hero_slider() with your 
+	area name as the function argument.
+   --------------------------------------------------------------------------------------------- */
+
+
+   if ( ! function_exists( 'eames_get_slideshow_area' ) ) {
+
+	function eames_get_slideshow_area( $area = '' ) {
+
+		// Blog slideshow area
+		$slideshow_areas = array(
+			'blog' => array(
+				'name'			=> 'blog',
+				'title' 		=> __( 'Slideshow (blog)', 'eames' ),
+				'description' 	=> __( 'Add information to be shown in the slideshow on the blog start page.', 'eames' ),
+				'priority'		=> 40,
+				'max_slides'	=> 10,
+			),
+		);
+
+		// Shop slideshow area (provided WC is installed and active)
+		if ( eames_is_woocommerce_activated() ) {
+			$slideshow_areas['shop'] = array(
+				'name'			=> 'shop',
+				'title' 		=> __( 'Slideshow (shop)', 'eames' ),
+				'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'eames' ),
+				'priority'		=> 40,
+				'max_slides'	=> 10,
+			);
+		}
+
+		// If a specific area is requested and exists, return that
+		if ( $area && isset( $slideshow_areas[$area] ) ) {
+			return $slideshow_areas[$area];
+
+		// If it's requested but doesn't exist, go fish
+		} elseif ( $area && ! isset( $slideshow_areas[$area] ) ) {
+			return false;
+		}
+
+		// If no argument is provided, return all areas
+		return $slideshow_areas;
+
+	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   HERO SLIDER
+   --------------------------------------------------------------------------------------------- */
+
+
+   if ( ! function_exists( 'eames_hero_slider' ) ) {
+
+	function eames_hero_slider( $area = 'blog', $return = false ) {
+
+		$number_of_slides = get_theme_mod( 'eames_' . $area . '_slider_max_slides' );
+
+		$area_data = eames_get_slideshow_area( $area );
+
+		$slides = false;
+
+		if ( $number_of_slides != 0 && $area_data ) : 
+
+			if ( $return == true ) {
+
+				// Start the output buffer
+				ob_start();
+
+			}
+		
+			?>
+		
+			<div class="flexslider hero-slider loading bg-black" id="heroslider_<?php echo $area; ?>">
+			
+				<ul class="slides">
+		
+					<?php for( $i = 1; $i <= $number_of_slides; $i++ ) : 
+						
+						// Get the customizer values for the current slideshow area and slide count
+						$slide = array(
+							'image' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_image' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_image' ) : '',
+							'title' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_title' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_title' ) : '',
+							'subtitle' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_subtitle' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_subtitle' ) : '',
+							'button_text' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_button_text' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_button_text' ) : '',
+							'url' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_url' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_url' ) : '',
+						);
+
+						// Make sure our required fields have values
+						if ( $slide['image'] && ( $slide['title'] || $slide['subtitle'] ) ) : ?>
+							
+							<li class="slide">
+								<div class="bg-image dark-overlay" style="background-image: url( <?php echo esc_url( $slide['image'] ); ?> );">
+									<div class="section-inner">
+										
+										<header>
+
+											<h1>
+												<?php
+												if ( isset( $slide['url'] ) ) echo '<a href="' . esc_url( $slide['url'] ) . '">';
+												echo $slide['title'];
+												if ( isset( $slide['url'] ) ) echo '</a>'; 
+												?>
+											</h1>
+
+											<p class="sans-excerpt"><?php echo $slide['subtitle']; ?></p>
+
+											<?php if ( $slide['url'] && $slide['button_text'] ) : ?>
+
+												<div class="button-wrapper">
+													<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php echo $slide['button_text']; ?></a>
+												</div>
+
+											<?php endif; ?>
+
+										</header>
+
+									</div><!-- .section-inner -->
+								</div><!-- .bg-image -->
+							</li><!-- .slide -->
+							
+							<?php
+
+						endif;
+
+						// Make sure we reset the $slide variable
+						unset( $slide );
+				
+					endfor; ?>
+			
+				</ul>
+				
+			</div>
+			
+			<?php
+
+			if ( $return == true ) {
+
+				$hero_slider_output = ob_get_contents();
+
+				ob_end_clean();
+
+				return $hero_slider_output;
+
+			}
+			
+		endif;
+
+	}
 
 }
 
@@ -916,26 +989,7 @@ class Eames_Customize {
 
 		/* Slideshow sections ----------------------------- */
 
-		$slideshow_areas = array(
-			array(
-				'name'			=> 'blog',
-				'title' 		=> __( 'Slideshow (blog)', 'eames' ),
-				'description' 	=> __( 'Add information to be shown in the slideshow on the blog start page.', 'eames' ),
-				'priority'		=> 40,
-				'max_slides'	=> 10,
-			),
-		);
-
-		// If WC is active, add a slideshow area for the shop home page
-		if ( eames_is_woocommerce_activated() ) {
-			$slideshow_areas[][] = array(
-				'name'			=> 'shop',
-				'title' 		=> __( 'Slideshow (shop)', 'eames' ),
-				'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'eames' ),
-				'priority'		=> 40,
-				'max_slides'	=> 10,
-			);
-		}
+		// Get the slideshow areas
 
 		// Loop through the slideshow areas and create a section with corresponding settings and controls for each
 		foreach( $slideshow_areas as $area ) {
