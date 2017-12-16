@@ -7,21 +7,24 @@
  
 ( function( $ ) {
 
+	document.addEventListener( 'DOMContentLoaded', function() {
 
-	// Site Name
-	wp.customize( 'blogname', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-name' ).text( newval );
-		} );
-	} );
+        hasSelectiveRefresh = (
+            'undefined' !== typeof wp &&
+            wp.customize &&
+            wp.customize.selectiveRefresh &&
+            wp.customize.widgetsPreview &&
+            wp.customize.widgetsPreview.WidgetPartial
+		);
+		
+        if ( hasSelectiveRefresh ) {
+            wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function( placement ) {
+				
+				WP.heroSlider.init();
 
-
-	// Background color
-	wp.customize( 'background_color', function( value ) {
-		value.bind( function( newval ) {
-			$( '.site-nav, .site-nav footer' ).css( 'background', newval );
-		} );
-	} );
+            } );
+        }
+    } );
 	
 	
 } )( jQuery );

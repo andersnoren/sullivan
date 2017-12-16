@@ -591,7 +591,7 @@ if ( ! function_exists( 'eames_header_search' ) ) {
 
 			<div class="compact-search-results ajax-search-results modal arrow-left">
 
-				<?php // Content is added to this element by the eames_ajax_search() function (by way of javascript) ?>
+				<?php // Content is added to this element by the eames_ajax_search() function ?>
 
 			</div>
 
@@ -861,17 +861,18 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 
 	function eames_hero_slider( $area = 'blog', $return = false ) {
 
+		// Get the number of slides to output
 		$number_of_slides = get_theme_mod( 'eames_' . $area . '_slider_max_slides' );
 
+		// Get the arguments for the area in question
 		$area_data = eames_get_slideshow_area( $area );
-
-		$slides = false;
 
 		if ( $number_of_slides != 0 && $area_data ) : 
 
+			// If we're returning the slider...
 			if ( $return == true ) {
 
-				// Start the output buffer
+				// ...start the output buffer
 				ob_start();
 
 			}
@@ -893,8 +894,9 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 							'url' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_url' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_url' ) : '',
 						);
 
-						// Make sure our required fields have values
-						if ( $slide['image'] && ( $slide['title'] || $slide['subtitle'] ) ) : ?>
+						// If we're in the customizer, always show the empty slides – if not, only show the ones with values
+						// Kudos Johanna for the UX input <3
+						if ( is_customize_preview() || ( $slide['image'] || $slide['title'] || $slide['subtitle'] ) ) : ?>
 							
 							<li class="slide">
 								<div class="bg-image dark-overlay" style="background-image: url( <?php echo esc_url( $slide['image'] ); ?> );">
@@ -902,15 +904,23 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 										
 										<header>
 
-											<h1>
-												<?php
-												if ( isset( $slide['url'] ) ) echo '<a href="' . esc_url( $slide['url'] ) . '">';
-												echo $slide['title'];
-												if ( isset( $slide['url'] ) ) echo '</a>'; 
-												?>
-											</h1>
+											<?php if ( $slide['title'] ) : ?>
 
-											<p class="sans-excerpt"><?php echo $slide['subtitle']; ?></p>
+												<h1>
+													<?php
+													if ( $slide['url'] ) echo '<a href="' . esc_url( $slide['url'] ) . '">';
+													echo $slide['title'];
+													if ( $slide['url'] ) echo '</a>'; 
+													?>
+												</h1>
+
+											<?php endif; ?>
+
+											<?php if ( $slide['subtitle'] ) : ?>
+
+												<p class="sans-excerpt"><?php echo $slide['subtitle']; ?></p>
+
+											<?php endif; ?>
 
 											<?php if ( $slide['url'] && $slide['button_text'] ) : ?>
 
@@ -941,6 +951,7 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 			
 			<?php
 
+			// If we're returning, get the output buffer contents and return them
 			if ( $return == true ) {
 
 				$hero_slider_output = ob_get_contents();
@@ -963,32 +974,56 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
    --------------------------------------------------------------------------------------------- */
 
 
-if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'EamesSeperator' ) ) :
+if ( class_exists( 'WP_Customize_Control' ) ) :
 
-	// Custom Customizer control that outputs an HR to seperate other controls
-	class EamesSeperator extends WP_Customize_Control {
-	
-		public function render_content() {
-			echo '<hr class="eames-customizer-seperator" />';
-		}
-	}
+	if ( ! class_exists( 'EamesSeperator' ) ) :
 
-endif;
-
-if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'EamesCustomizerTitle' ) ) :
-
-	// Custom Customizer control that outputs an HR to seperate other controls
-	class EamesCustomizerTitle extends WP_Customize_Control {
-
-		// Whitelist content parameter
-		public $content = '';
-
-		public function render_content() {
-			if ( isset( $this->content ) ) {
-				echo '<h2 style="margin: 0 0 5px;">' . $this->content . '</h2>';
+		// Custom Customizer control that outputs an HR to seperate other controls
+		class EamesSeperator extends WP_Customize_Control {
+		
+			public function render_content() {
+				echo '<hr class="eames-customizer-seperator" />';
 			}
+
 		}
-	}
+
+	endif;
+
+	if ( ! class_exists( 'EamesCustomizerTitle' ) ) :
+
+		// Custom Customizer control that outputs an HR to seperate other controls
+		class EamesCustomizerTitle extends WP_Customize_Control {
+
+			// Whitelist content parameter
+			public $content = '';
+
+			public function render_content() {
+				if ( isset( $this->content ) ) {
+					echo '<h2 style="margin: 0 0 5px;">' . $this->content . '</h2>';
+				}
+			}
+
+		}
+
+	endif;
+
+	if ( ! class_exists( 'EamesAddSlide' ) ) :
+
+		// Custom Customizer control that outputs a button that increments the max_slides number input
+		class EamesAddSlide extends WP_Customize_Control {
+
+			// Whitelist content parameter
+			public $content = '';
+
+			public function render_content() {
+				if ( isset( $this->content ) ) {
+					echo '<a href="#" class="button button-primary" id="button-add-slide" data-slideshow="' . $this->content . '">' . __( 'Add slide', 'eames' ) . '</a>';
+				}
+			}
+
+		}
+
+	endif;
 
 endif;
 
@@ -1105,6 +1140,7 @@ class Eames_Customize {
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
 					'sanitize_callback' => 'sanitize_text_field',
+					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
@@ -1114,6 +1150,7 @@ class Eames_Customize {
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_title', array(
 					'sanitize_callback' => 'sanitize_text_field',
+					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_title', array(
@@ -1124,6 +1161,7 @@ class Eames_Customize {
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
 					'sanitize_callback' => 'sanitize_text_field',
+					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
@@ -1135,6 +1173,7 @@ class Eames_Customize {
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_button_text', array(
 					'default'			=> __( 'Read More', 'eames' ),
 					'sanitize_callback' => 'sanitize_text_field',
+					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_button_text', array(
@@ -1144,7 +1183,8 @@ class Eames_Customize {
 				) );
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_url', array(
-					'sanitize_callback' => 'sanitize_url',
+					'sanitize_callback' => 'esc_url_raw',
+					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_url', array(
@@ -1160,6 +1200,7 @@ class Eames_Customize {
 				$wp_customize->selective_refresh->add_partial( 'eames_' . $area['name'] . '_slider_' . $i . '_partial_refresh', [
 					'selector'            => "#heroslider_" . $area['name'],
 					'settings'            => [
+						'eames_' . $area['name'] . '_slider_max_slides',
 						'eames_' . $area['name'] . '_slider_' . $i . '_image',
 						'eames_' . $area['name'] . '_slider_' . $i . '_title',
 						'eames_' . $area['name'] . '_slider_' . $i . '_subtitle',
@@ -1167,14 +1208,19 @@ class Eames_Customize {
 						'eames_' . $area['name'] . '_slider_' . $i . '_url',
 					],
 					'render_callback'     => function( $area ) { 
-						$slider_area = $area['name'];
-						$slider_contents = eames_hero_slider( 'blog', true );
-						return $slider_contents;
+						// Arguments: slideshow area to output, whether to return
+						return eames_hero_slider( 'blog', true );
 					},
-					'container_inclusive' => true,
 				] );
 
 			} // for
+
+			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_add_slide', array() );
+
+			$wp_customize->add_control( new EamesAddSlide( $wp_customize, 'eames_' . $area['name'] . '_slider_add_slide', array(
+				'content' 	=> $area['name'],
+				'section' 	=> 'eames_' . $area['name'] . '_slider',
+			) ) );
 
 		} // foreach $slideshow_areas
 
@@ -1194,7 +1240,25 @@ class Eames_Customize {
 
 
 		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-		$wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
+		$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
+
+		// Update blogname with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'eames_header_site_title', array(
+			'selector' => '.header-titles .site-title .site-name',
+			'settings' => array( 'blogname' ),
+			'render_callback' => function() {
+				return get_bloginfo( 'name', 'display' );
+			},
+		) );
+
+		// Update blogdescription with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'eames_header_site_description', array(
+			'selector' => '.header-titles .site-description',
+			'settings' => array( 'blogdescription' ),
+			'render_callback' => function() {
+				return get_bloginfo( 'description', 'display' );
+			},
+		) );
 		
 		
 		/* Sanitation functions ----------------------------- */
@@ -1206,14 +1270,14 @@ class Eames_Customize {
 		
 	}
 
-	// Initiate the live preview JS
-	public static function eames_customize_preview() {
-		wp_enqueue_script( 'eames-customize-preview', get_template_directory_uri() . '/assets/js/customize-preview.js', array(  'jquery', 'customize-preview' ), '', true );
-	}
-
-	// Initiate the live preview JS
+	// Initiate the customize controls js
 	public static function eames_customize_controls() {
 		wp_enqueue_script( 'eames-customize-controls', get_template_directory_uri() . '/assets/js/customize-controls.js', array(  'jquery', 'customize-controls' ), '', true );
+	}
+
+	// Initiate the customize preview js
+	public static function eames_customize_preview() {
+		wp_enqueue_script( 'eames-customize-preview', get_template_directory_uri() . '/assets/js/customize-preview.js', array(  'jquery', 'customize-preview' ), '', true );
 	}
 
 }
@@ -1221,11 +1285,12 @@ class Eames_Customize {
 // Setup the Theme Customizer settings and controls
 add_action( 'customize_register', array( 'Eames_Customize', 'eames_register' ) );
 
+// Enqueue customize controls javascript in Theme Customizer admin screen
+add_action( 'customize_controls_init', array( 'Eames_Customize' , 'eames_customize_controls' ) );
+
 // Enqueue customize preview javascript in Theme Customizer admin screen
 add_action( 'customize_preview_init', array( 'Eames_Customize' , 'eames_customize_preview' ) );
 
-// Enqueue customize controls javascript in Theme Customizer admin screen
-add_action( 'customize_controls_init', array( 'Eames_Customize' , 'eames_customize_controls' ) );
 
 
 ?>
