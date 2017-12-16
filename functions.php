@@ -894,12 +894,22 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 							'url' 	=> get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_url' ) ? get_theme_mod( 'eames_' . $area . '_slider_' . $i . '_url' ) : '',
 						);
 
+						$slide_image_url = '';
+
+						// Check if the id in the image customizer setting has a file to go along with it
+						if ( $slide['image'] ) {
+							$slide_image = wp_get_attachment_image_src( $slide['image'], 'eames_fullscreen' );
+							if ( $slide_image ) {
+								$slide_image_url = $slide_image[0];
+							}
+						}
+
 						// If we're in the customizer, always show the empty slides – if not, only show the ones with values
 						// Kudos Johanna for the UX input <3
 						if ( is_customize_preview() || ( $slide['image'] || $slide['title'] || $slide['subtitle'] ) ) : ?>
 							
 							<li class="slide">
-								<div class="bg-image dark-overlay" style="background-image: url( <?php echo esc_url( $slide['image'] ); ?> );">
+								<div class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . $slide_image_url . ' );"'; ?>>
 									<div class="section-inner">
 										
 										<header>
@@ -1143,8 +1153,9 @@ class Eames_Customize {
 					'transport'			=> 'postMessage'
 				) );
 
-				$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
+				$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
 					'label'		=> __( 'Background image', 'eames' ),
+					'mime_type'	=> 'image',
 					'section' 	=> 'eames_' . $area['name'] . '_slider',
 				) ) );
 
