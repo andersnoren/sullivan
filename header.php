@@ -103,15 +103,9 @@
 
 						<?php if ( function_exists( 'the_custom_logo' ) && get_theme_mod( 'custom_logo' ) ) :
 
-							$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
-							$logo_url = $logo[0];
-							?>
+							eames_custom_logo();
 							
-							<a href="<?php echo esc_url( home_url() ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo" style="background-image: url( <?php echo $logo_url; ?> );">
-								<img src="<?php echo $logo_url; ?>" />
-							</a>
-							
-						<?php elseif ( is_singular() ) : ?>
+						elseif ( is_singular() ) : ?>
 
 							<h1 class="site-title"><a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></h1>
 						

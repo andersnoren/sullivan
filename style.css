@@ -365,19 +365,14 @@ img {
 	margin-top: 18px;
 }
 
-.site-header .custom-logo {
-	background: no-repeat top left;
-	background-size: contain;
+.site-header .custom-logo-link {
 	display: block;
-	max-height: 100px;
-	max-width: calc( 100% - 80px );
-	overflow: hidden;
 }
 
-.site-header .custom-logo img {
+.site-header .custom-logo-link img {
+	margin: 0 auto;
+	object-fit: contain;
 	display: block;
-	visibility: hidden;
-	width: 100%;
 }
 
 .site-header .site-title a:hover {
@@ -2493,6 +2488,13 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 		max-width: 100%;
 	}
 
+	.site-header .custom-logo-link img {
+		margin-bottom: -10px;
+		margin-top: -10px;
+		max-height: 55px;
+		object-fit: contain;
+	}
+
 	.site-header .site-title {
 		font-size: 28px;
 	}
@@ -3020,6 +3022,12 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	.site-header .section-inner {
 		padding-top: 19px;
 		padding-bottom: 22px;
+	}
+
+	.site-header .custom-logo-link img {
+		margin-bottom: -7px;
+		margin-top: -7px;
+		max-height: 42px;
 	}
 
 	.site-header .site-title {

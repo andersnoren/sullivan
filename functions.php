@@ -31,7 +31,7 @@ if ( ! function_exists( 'eames_setup' ) ) {
 		
 		// Custom logo
 		add_theme_support( 'custom-logo', array(
-			'height'      => 400,
+			'height'      => 300,
 			'width'       => 600,
 			'flex-height' => true,
 			'flex-width'  => true,
@@ -439,10 +439,49 @@ if ( eames_is_woocommerce_activated() ) {
 	include( locate_template( 'functions-woocommerce.php' ) );
 
 	/* 
-		* EXCEPTION:
-		* eames_sidebar_registration() and eames_register_widgets() both have  
-		* conditional registration of shop specific sidebar areas and widgets.
-		* */
+	* EXCEPTION:
+	* eames_sidebar_registration() and eames_register_widgets() both have  
+	* conditional registration of shop specific sidebar areas and widgets.
+	* */
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   EAMES CUSTOM LOGO OUTPUT
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_custom_logo' ) ) {
+
+	function eames_custom_logo() {
+
+		// Get the logo
+		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+		
+		if ( $logo ) {
+
+			// For clarity
+			$logo_url = $logo[0];
+			$logo_width = $logo[1];
+			$logo_height = $logo[2];
+
+			// If the retina logo setting is active, reduce the width/height by half
+			if ( get_theme_mod( 'eames_retina_logo' ) ) {
+				$logo_width = floor( $logo_width / 2 );
+				$logo_height = floor( $logo_height / 2 );
+			}
+
+			?>
+			
+			<a href="<?php echo esc_url( home_url() ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo-link">
+				<img src="<?php echo $logo_url; ?>" width="<?php echo $logo_width; ?>" height="<?php echo $logo_height; ?>" />
+			</a>
+
+			<?php
+		}
+
+	}
 
 }
 
