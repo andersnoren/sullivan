@@ -1773,7 +1773,7 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 }
 
 .hero-slider .dark-overlay:before {
-	background: linear-gradient(26deg, rgba(0,0,0,0.00) 5%, rgba(0,0,0,0.60) 100%);
+	background: linear-gradient( -26deg, rgba( 0, 0, 0, 0 ) 5%, rgba( 0, 0, 0, 0.7 ) );
 }
 
 .hero-slider .slides,
