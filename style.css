@@ -1197,10 +1197,6 @@ hr {
 	margin: 50px 0;
 }
 
-.dark-mode hr {
-	border-top-color: rgba( 255, 255, 255, 0.13 );
-}
-
 .entry-content > *:first-child { margin-top: 0; }
 .entry-content > *:last-child { margin-bottom: 0; }
 
@@ -1261,13 +1257,24 @@ dd + dt {
 	margin-top: 15px; 
 }
 
-code {
-	background: rgba( 0, 0, 0, 0.1 );
-	padding: 0 1px;
+address {
+	background: #f1f1f5;
+	line-height: 1.5;
+	margin-bottom: 20px;
+	padding: 20px;
 }
 
-.dark-mode code {
-	background: rgba( 255, 255, 255, 0.2 );
+code {
+	background: #f1f1f5;
+	border-radius: 2px;
+	padding: 0 4px;
+}
+
+pre {
+	background: #f1f1f5;
+	font-size: 14px;
+	line-height: 1.35;
+	padding: 20px;
 }
 
 
