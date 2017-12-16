@@ -149,7 +149,7 @@ WP.stickyMenu = {
 
 		var winScroll = win.scrollTop();
 
-		if ( winScroll > stickyOffset ) {
+		if ( stickyElement.css( 'display' ) != 'none' && winScroll > stickyOffset ) {
 			
 			// If a sticky edge element exists and we've scrolled past it, hide the filter bar
 			if ( ! stickyElement.hasClass( stickyClass ) ) {
