@@ -315,7 +315,7 @@ WP.fadeBlocks = {
 			window.mozRequestAnimationFrame ||
 			window.msRequestAnimationFrame ||
 			window.oRequestAnimationFrame ||
-			// IE Fallback, you can even fallback to onscroll
+			// IE fallback
 			function(callback){ window.setTimeout(callback, 1000/60) };
 			
 		function loop(){
@@ -323,15 +323,18 @@ WP.fadeBlocks = {
 			var windowOffset = window.pageYOffset;
 
 			if ( windowOffset < win.outerHeight() ) {
+
 				$( '.fade-block' ).css({ 
-					'transform': 'translateY( ' + Math.ceil ( windowOffset * 0.25 ) + 'px)',
+					'transform': 'translateY( ' + Math.ceil ( windowOffset * 0.2 ) + 'px )',
 					'opacity': 1 - ( windowOffset * 0.002 )
-				});
+				} );
+
 			}
 
-			scroll( loop )
+			scroll( loop );
 
 		}
+
 		loop();
 
 	}
