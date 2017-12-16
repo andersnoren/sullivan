@@ -109,6 +109,7 @@ if ( ! function_exists( 'eames_add_editor_styles' ) ) {
    DEACTIVATE DEFAULT WP GALLERY STYLES
    --------------------------------------------------------------------------------------------- */
 
+
 add_filter( 'use_default_gallery_style', '__return_false' );
 
 
@@ -423,6 +424,25 @@ if ( ! function_exists( 'eames_is_woocommerce_activated' ) ) {
 			return false; 
 		}
 	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   INCLUDE WOOCOMMERCE FUNCTIONS
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( eames_is_woocommerce_activated() ) {
+
+	// All functions that require Woocommerce functionality to work are contained within this file
+	include( locate_template( 'functions-woocommerce.php' ) );
+
+	/* 
+		* EXCEPTION:
+		* eames_sidebar_registration() and eames_register_widgets() both have  
+		* conditional registration of shop specific sidebar areas and widgets.
+		* */
 
 }
 
