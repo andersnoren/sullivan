@@ -922,7 +922,7 @@ class Eames_Customize {
 				'title' 		=> __( 'Slideshow (blog)', 'eames' ),
 				'description' 	=> __( 'Add information to be shown in the slideshow on the blog start page.', 'eames' ),
 				'priority'		=> 40,
-				'max_slides'	=> 4,
+				'max_slides'	=> 10,
 			),
 		);
 
@@ -933,7 +933,7 @@ class Eames_Customize {
 				'title' 		=> __( 'Slideshow (shop)', 'eames' ),
 				'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'eames' ),
 				'priority'		=> 40,
-				'max_slides'	=> 4,
+				'max_slides'	=> 10,
 			);
 		}
 
@@ -948,8 +948,33 @@ class Eames_Customize {
 				'description' 	=> $area['description']
 			) );
 
+			// Add a setting for number of slides
+			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_maxsliders', array(
+				'default'			=> 1,
+				'sanitize_callback' => 'absint',
+				'transport'			=> 'postMessage'
+			) );
+
+			$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_maxsliders', array(
+				'type' 			=> 'number',
+				'section' 		=> 'eames_' . $area['name'] . '_slider',
+				'label' 		=> __( 'Number of slides', 'eames' ),
+				'description'	=> __( 'Empty slides will be skipped automatically.', 'eames' ),
+				'input_attrs'	=> array(
+					'min' 			=> 0,
+					'max' 			=> 10,
+				),
+			) );
+
 			// Loop through the number of slides, and add a set of settings for each slide
 			for ( $i = 1; $i <= $area['max_slides']; $i++ ) {
+
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array() );
+
+				$wp_customize->add_control( new EamesSeperator( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
+					'content' 	=> '',
+					'section' 	=> 'eames_' . $area['name'] . '_slider',
+				) ) );
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array() );
 
@@ -1003,18 +1028,6 @@ class Eames_Customize {
 					'label' 		=> __( 'URL', 'eames' ),
 				) );
 
-				// As long as it's not the last slide, output a <hr/> element to separate the slides
-				if ( $i != $area['max_slides'] ) {
-
-					$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array() );
-
-					$wp_customize->add_control( new EamesSeperator( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
-						'content' 	=> '',
-						'section' 	=> 'eames_' . $area['name'] . '_slider',
-					) ) );
-
-				}
-
 			} // for
 
 		} // foreach $slideshow_areas
@@ -1048,8 +1061,13 @@ class Eames_Customize {
 	}
 
 	// Initiate the live preview JS
-	public static function eames_live_preview() {
-		wp_enqueue_script( 'eames-themecustomizer', get_template_directory_uri() . '/assets/js/theme-customizer.js', array(  'jquery', 'customize-preview', 'masonry' ), '', true );
+	public static function eames_customize_preview() {
+		wp_enqueue_script( 'eames-customize-preview', get_template_directory_uri() . '/assets/js/customize-preview.js', array(  'jquery', 'customize-preview' ), '', true );
+	}
+
+	// Initiate the live preview JS
+	public static function eames_customize_controls() {
+		wp_enqueue_script( 'eames-customize-controls', get_template_directory_uri() . '/assets/js/customize-controls.js', array(  'jquery', 'customize-controls' ), '', true );
 	}
 
 }
@@ -1057,8 +1075,11 @@ class Eames_Customize {
 // Setup the Theme Customizer settings and controls
 add_action( 'customize_register', array( 'Eames_Customize', 'eames_register' ) );
 
-// Enqueue live preview javascript in Theme Customizer admin screen
-add_action( 'customize_preview_init', array( 'Eames_Customize' , 'eames_live_preview' ) );
+// Enqueue customize preview javascript in Theme Customizer admin screen
+add_action( 'customize_preview_init', array( 'Eames_Customize' , 'eames_customize_preview' ) );
+
+// Enqueue customize controls javascript in Theme Customizer admin screen
+add_action( 'customize_controls_init', array( 'Eames_Customize' , 'eames_customize_controls' ) );
 
 
 ?>
