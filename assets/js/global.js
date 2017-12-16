@@ -442,6 +442,11 @@ WP.ajaxSearch = {
 			}
 		} );
 
+		// Empty search on cancel search click
+		$( '.cancel-search' ).on( 'click', function(){
+			WP.ajaxSearch.emptyResults();
+		} )
+
 	},
 
 	loadPosts: function( $searchField ){
@@ -469,6 +474,7 @@ WP.ajaxSearch = {
 
 				if ( data ) {
 					$container.addClass( 'active' );
+					$container.closest( '.mobile-search, .header-search' ).addClass( 'search-active' );
 				}
 
 			},
@@ -490,6 +496,7 @@ WP.ajaxSearch = {
 
 			// Remove active class, empty element
 			if ( $( this ).hasClass( 'active' ) ) {
+				$( this ).parents( '.mobile-search, .header-search' ).removeClass( 'search-active' );
 				$( this ).removeClass( 'active', function(){
 					$( this ).empty();
 				} );
