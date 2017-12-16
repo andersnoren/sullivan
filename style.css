@@ -1557,9 +1557,10 @@ input[type="submit"] {
 	font-family: inherit;
 	font-size: 14px;
 	font-weight: 500;
+	line-height: 1.2;
 	margin: 0;
-	min-width: 120px;
-    padding: 12px 21px 14px;
+	min-width: 115px;
+	padding: 13px 21px 14px;
 	text-align: center;
 	transition: opacity .15s linear;
 	-moz-appearance: none;
