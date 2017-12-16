@@ -847,6 +847,41 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 
 
 /* ---------------------------------------------------------------------------------------------
+   	CUSTOM CUSTOMIZER CONTROLS
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'EamesSeperator' ) ) :
+
+	// Custom Customizer control that outputs an HR to seperate other controls
+	class EamesSeperator extends WP_Customize_Control {
+	
+		public function render_content() {
+			echo '<hr class="eames-customizer-seperator" />';
+		}
+	}
+
+endif;
+
+if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'EamesCustomizerTitle' ) ) :
+
+	// Custom Customizer control that outputs an HR to seperate other controls
+	class EamesCustomizerTitle extends WP_Customize_Control {
+
+		// Whitelist content parameter
+		public $content = '';
+
+		public function render_content() {
+			if ( isset( $this->content ) ) {
+				echo '<h2 style="margin: 0 0 5px;">' . $this->content . '</h2>';
+			}
+		}
+	}
+
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
    CUSTOMIZER SETTINGS
    --------------------------------------------------------------------------------------------- */
 
@@ -855,15 +890,16 @@ class Eames_Customize {
 
 	public static function eames_register( $wp_customize ) {
 
-		// Add our Customizer section
+
+		/* Theme Options section ----------------------------- */
+
 		$wp_customize->add_section( 'eames_options', array(
 			'title' 		=> __( 'Theme Options', 'eames' ),
 			'priority' 		=> 35,
 			'capability' 	=> 'edit_theme_options',
 			'description' 	=> __( 'Customize the theme settings for Eames.', 'eames' ),
 		) );
-		
-		
+
 		// Sticky the site navigation
 		$wp_customize->add_setting( 'eames_sticky_nav', array(
 			'capability' 		=> 'edit_theme_options',
@@ -876,14 +912,133 @@ class Eames_Customize {
 			'label' 		=> __( 'Sticky navigation', 'eames' ),
 			'description' 	=> __( 'Keep the site navigation stuck to the top of the window when the visitor has scrolled past it.', 'eames' ),
 		) );
-		
 
-		// Make built-in controls use live JS preview
+
+		/* Slideshow sections ----------------------------- */
+
+		$slideshow_areas = array(
+			array(
+				'name'			=> 'blog',
+				'title' 		=> __( 'Slideshow (blog)', 'eames' ),
+				'description' 	=> __( 'Add information to be shown in the slideshow on the blog start page.', 'eames' ),
+				'priority'		=> 40,
+				'max_slides'	=> 4,
+			),
+		);
+
+		// If WC is active, add a slideshow area for the shop home page
+		if ( eames_is_woocommerce_activated() ) {
+			$slideshow_areas[][] = array(
+				'name'			=> 'shop',
+				'title' 		=> __( 'Slideshow (shop)', 'eames' ),
+				'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'eames' ),
+				'priority'		=> 40,
+				'max_slides'	=> 4,
+			);
+		}
+
+		// Loop through the slideshow areas and create a section with corresponding settings and controls for each
+		foreach( $slideshow_areas as $area ) {
+
+			// Add the section
+			$wp_customize->add_section( 'eames_' . $area['name'] . '_slider', array(
+				'title' 		=> $area['title'],
+				'priority' 		=> $area['priority'],
+				'capability' 	=> 'edit_theme_options',
+				'description' 	=> $area['description']
+			) );
+
+			// Loop through the number of slides, and add a set of settings for each slide
+			for ( $i = 1; $i <= $area['max_slides']; $i++ ) {
+
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array() );
+
+				$wp_customize->add_control( new EamesCustomizerTitle( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array(
+					'content' 	=> sprintf( __( 'Slide %s', 'eames' ), $i ),
+					'section' 	=> 'eames_' . $area['name'] . '_slider',
+				) ) );
+
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_title', array(
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport'			=> 'postMessage'
+				) );
+
+				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_title', array(
+					'type' 			=> 'text',
+					'section' 		=> 'eames_' . $area['name'] . '_slider',
+					'label' 		=> __( 'Title', 'eames' ),
+				) );
+
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
+					'sanitize_callback' => 'sanitize_textarea_field',
+					'transport'			=> 'postMessage'
+				) );
+
+				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
+					'type' 			=> 'textarea',
+					'section' 		=> 'eames_' . $area['name'] . '_slider',
+					'label' 		=> __( 'Subtitle', 'eames' ),
+				) );
+
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_button_text', array(
+					'sanitize_callback' => 'sanitize_text_field',
+					'transport'			=> 'postMessage'
+				) );
+
+				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_button_text', array(
+					'default'		=> __( 'Read More', 'eames' ),
+					'type' 			=> 'text',
+					'section' 		=> 'eames_' . $area['name'] . '_slider',
+					'label' 		=> __( 'Button text', 'eames' ),
+				) );
+
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_url', array(
+					'sanitize_callback' => 'sanitize_url',
+					'transport'			=> 'postMessage'
+				) );
+
+				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_url', array(
+					'type' 			=> 'url',
+					'section' 		=> 'eames_' . $area['name'] . '_slider',
+					'label' 		=> __( 'URL', 'eames' ),
+				) );
+
+				// As long as it's not the last slide, output a <hr/> element to separate the slides
+				if ( $i != $area['max_slides'] ) {
+
+					$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array() );
+
+					$wp_customize->add_control( new EamesSeperator( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
+						'content' 	=> '',
+						'section' 	=> 'eames_' . $area['name'] . '_slider',
+					) ) );
+
+				}
+
+			} // for
+
+		} // foreach $slideshow_areas
+
+
+		/* Slideshow (shop) section ----------------------------- */
+
+
+		$wp_customize->add_section( 'eames_shop_slider', array(
+			'title' 		=> __( 'Slideshow (shop)', 'eames' ),
+			'priority' 		=> 45,
+			'capability' 	=> 'edit_theme_options',
+			'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'eames' ),
+		) );
+
+
+		/* Built-in controls ----------------------------- */
+
+
 		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
 		$wp_customize->get_setting( 'background_color' )->transport = 'postMessage';
 		
 		
-		// SANITATION
+		/* Sanitation functions ----------------------------- */
 
 		// Sanitize boolean for checkbox
 		function eames_sanitize_checkbox( $checked ) {
