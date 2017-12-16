@@ -2,12 +2,12 @@
 
     // Update the blog slider when the accordion is expanded
     $( '#accordion-section-eames_blog_slider' ).live( 'expanded', function(){
-        var originalValue = wp.customize( 'eames_blog_slider_maxsliders' ).get();
+        var originalValue = wp.customize( 'eames_blog_slider_max_slides' ).get();
         handleSlider( 'blog', originalValue );
     } );
 
 	// Slideshow blog: Hide controls depending on the number of slides
-	wp.customize( 'eames_blog_slider_maxsliders', function( value ) {
+	wp.customize( 'eames_blog_slider_max_slides', function( value ) {
 
         // Update on change
         value.bind( function( newval ) {
@@ -18,12 +18,12 @@
 
     // Update the shop slider when the accordion is expanded
     $( '#accordion-section-eames_shop_slider' ).live( 'expanded', function(){
-        var originalValue = wp.customize( 'eames_blog_slider_maxsliders' ).get();
+        var originalValue = wp.customize( 'eames_blog_slider_max_slides' ).get();
         handleSlider( 'shop', originalValue );
     } );
 
     // Slideshow shop: Hide controls depending on the number of slides
-	wp.customize( 'eames_shop_slider_maxsliders', function( value ) {
+	wp.customize( 'eames_shop_slider_max_slides', function( value ) {
 
         // Update on change
         value.bind( function( newval ) {
@@ -38,14 +38,14 @@
         // newval = the number of slides to show
 
         // Get the last element in the group of elements for our current number of slides
-        var $maxslidersControl = $( '#customize-control-eames_' + slideshowArea + '_slider_maxsliders' ),
-            $section = $maxslidersControl.parent(),
+        var $max_slidesControl = $( '#customize-control-eames_' + slideshowArea + '_slider_max_slides' ),
+            $section = $max_slidesControl.parent(),
             $lastMatchingControl = $section.find( $( '.customize-control[id*="_' + newval + '_"]:last ' ) );
 
         // If we're not showing any slides, hide all controls following the one setting number of slides
         if ( newval == 0 ) {
 
-            $maxslidersControl.nextAll().hide();
+            $max_slidesControl.nextAll().hide();
 
         // Otherwise, show the specified number of slides
         } else {
