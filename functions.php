@@ -990,8 +990,9 @@ class Eames_Customize {
 		/* Slideshow sections ----------------------------- */
 
 		// Get the slideshow areas
+		$slideshow_areas = eames_get_slideshow_area();
 
-		// Loop through the slideshow areas and create a section with corresponding settings and controls for each
+		// Loop through the slideshow areas and create a section with corresponding settings and controls for each one
 		foreach( $slideshow_areas as $area ) {
 
 			// Add the section
@@ -1003,20 +1004,20 @@ class Eames_Customize {
 			) );
 
 			// Add a setting for number of slides
-			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_maxsliders', array(
+			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_max_slides', array(
 				'default'			=> 1,
 				'sanitize_callback' => 'absint',
 				'transport'			=> 'postMessage'
 			) );
 
-			$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_maxsliders', array(
+			$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_max_slides', array(
 				'type' 			=> 'number',
 				'section' 		=> 'eames_' . $area['name'] . '_slider',
 				'label' 		=> __( 'Number of slides', 'eames' ),
 				'description'	=> __( 'Empty slides will be skipped automatically.', 'eames' ),
 				'input_attrs'	=> array(
 					'min' 			=> 0,
-					'max' 			=> 10,
+					'max' 			=> $area['max_slides'],
 				),
 			) );
 
@@ -1037,9 +1038,17 @@ class Eames_Customize {
 					'section' 	=> 'eames_' . $area['name'] . '_slider',
 				) ) );
 
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
+					'sanitize_callback' => 'sanitize_text_field',
+				) );
+
+				$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
+					'label'		=> __( 'Background image', 'eames' ),
+					'section' 	=> 'eames_' . $area['name'] . '_slider',
+				) ) );
+
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_title', array(
 					'sanitize_callback' => 'sanitize_text_field',
-					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_title', array(
@@ -1049,23 +1058,21 @@ class Eames_Customize {
 				) );
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
-					'sanitize_callback' => 'sanitize_textarea_field',
-					'transport'			=> 'postMessage'
+					'sanitize_callback' => 'sanitize_text_field',
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
-					'type' 			=> 'textarea',
+					'type' 			=> 'text',
 					'section' 		=> 'eames_' . $area['name'] . '_slider',
 					'label' 		=> __( 'Subtitle', 'eames' ),
 				) );
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_button_text', array(
+					'default'			=> __( 'Read More', 'eames' ),
 					'sanitize_callback' => 'sanitize_text_field',
-					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_button_text', array(
-					'default'		=> __( 'Read More', 'eames' ),
 					'type' 			=> 'text',
 					'section' 		=> 'eames_' . $area['name'] . '_slider',
 					'label' 		=> __( 'Button text', 'eames' ),
@@ -1073,14 +1080,34 @@ class Eames_Customize {
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_url', array(
 					'sanitize_callback' => 'sanitize_url',
-					'transport'			=> 'postMessage'
 				) );
 
 				$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_' . $i . '_url', array(
 					'type' 			=> 'url',
 					'section' 		=> 'eames_' . $area['name'] . '_slider',
 					'label' 		=> __( 'URL', 'eames' ),
+					'input_attrs'	=> array(
+						'placeholder' 	=> 'http://'
+					),
 				) );
+
+				// Update the hero slider using partial refresh
+				$wp_customize->selective_refresh->add_partial( 'eames_' . $area['name'] . '_slider_' . $i . '_partial_refresh', [
+					'selector'            => "#heroslider_" . $area['name'],
+					'settings'            => [
+						'eames_' . $area['name'] . '_slider_' . $i . '_image',
+						'eames_' . $area['name'] . '_slider_' . $i . '_title',
+						'eames_' . $area['name'] . '_slider_' . $i . '_subtitle',
+						'eames_' . $area['name'] . '_slider_' . $i . '_button_text',
+						'eames_' . $area['name'] . '_slider_' . $i . '_url',
+					],
+					'render_callback'     => function( $area ) { 
+						$slider_area = $area['name'];
+						$slider_contents = eames_hero_slider( 'blog', true );
+						return $slider_contents;
+					},
+					'container_inclusive' => true,
+				] );
 
 			} // for
 
