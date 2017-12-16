@@ -716,6 +716,16 @@ img {
 	transform: rotate( -90deg ) translateY( 2px );
 }
 
+.site-nav ul li.menu-item-has-children > a:before {
+	content: "";
+	display: block;
+	position: absolute;
+		bottom: 0;
+		right: -1px;
+		top: 0;
+	width: 2px;
+}
+
 .site-nav li:hover > ul {
 	left: 25px;
 	opacity: 1;
@@ -742,7 +752,7 @@ img {
 	display: block;
 	position: absolute;
 		bottom: 0;
-		left: -10px;
+		left: -12px;
 		top: 0;
 	width: 12px;
 }
