@@ -1026,7 +1026,33 @@ class Eames_Customize {
 		) );
 
 
+		// 2X Header Logo
+		$wp_customize->add_setting( 'eames_retina_logo', array(
+			'capability' 		=> 'edit_theme_options',
+			'sanitize_callback' => 'eames_sanitize_checkbox',
+			'transport'			=> 'postMessage'
+		) );
+
+		$wp_customize->add_control( 'eames_retina_logo', array(
+			'type' 			=> 'checkbox',
+			'section' 		=> 'title_tagline',
+			'priority'		=> 10,
+			'label' 		=> __( 'Retina logo', 'eames' ),
+			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'eames' ),
+		) );
+
+		// Update logo retina setting with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'eames_retina_logo', array(
+			'selector' => '.header-titles .custom-logo-link',
+			'settings' => array( 'eames_retina_logo' ),
+			'render_callback' => function() {
+				eames_custom_logo();
+			},
+		) );
+
+
 		/* Slideshow sections ----------------------------- */
+
 
 		// Get the slideshow areas
 		$slideshow_areas = eames_get_slideshow_area();
