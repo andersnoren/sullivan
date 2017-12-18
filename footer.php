@@ -20,21 +20,24 @@
 								
 											<?php dynamic_sidebar( 'footer-' . $i ); ?>
 																
-										</div>
+										</div><!-- .widgets -->
 										
 									</div><!-- .column-<?php echo $i; ?> -->
 									
 									<?php 
-
-									if ( $i == 4 ) echo '</div><!-- .secondary-widgets -->';
 								
 								endif;
 								
 							endfor; 
+
+							// If the secondary widgets div has been opened, close it
+							if ( $i > 1 ) {
+								echo '</div><!-- .secondary-widgets -->';
+							}
 							
 							?>
 
-						</div><!-- .widget-wrapper -->
+						</div><!-- .widgets-wrapper -->
 
 					</div><!-- .footer-widgets -->
 
@@ -70,7 +73,7 @@
 					
 					<?php endif; ?>
 
-				</div>
+				</div><!-- .section-inner.credits -->
 
 			</footer><!-- .footer -->
 
