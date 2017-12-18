@@ -244,6 +244,7 @@ WP.heroSlider = {
 
 					$currentSlide = $slider.find( '.flex-active-slide' );
 
+					// Add a class to the pagination if the current element only has an image
 					if ( $currentSlide.hasClass( 'only-image' ) ) {
 						console.log( 'true' );
 						$( '.flex-control-nav' ).addClass( 'on-only-image' );
