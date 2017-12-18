@@ -240,6 +240,18 @@ WP.heroSlider = {
 					$slider.removeClass( 'loading' ).addClass( 'loaded' );
 					$slider.update();
 				},
+				after: function( $slider ) {
+
+					$currentSlide = $slider.find( '.flex-active-slide' );
+
+					if ( $currentSlide.hasClass( 'only-image' ) ) {
+						console.log( 'true' );
+						$( '.flex-control-nav' ).addClass( 'on-only-image' );
+					} else {
+						console.log( 'false' );
+						$( '.flex-control-nav' ).removeClass( 'on-only-image' );
+					}
+				},
 			} );
 
 			win.bind( 'resize', function() {

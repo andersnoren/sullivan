@@ -908,9 +908,17 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 
 						// If we're in the customizer, always show the empty slides – if not, only show the ones with values
 						// Kudos Johanna for the UX input <3
-						if ( is_customize_preview() || ( $slide['image'] || $slide['title'] || $slide['subtitle'] ) ) : ?>
+						if ( is_customize_preview() || ( $slide['image'] || $slide['title'] || $slide['subtitle'] ) ) : 
+
+							$extra_slide_classes = '';
+
+							if ( $slide['image'] && ( ! $slide['title'] && ! $slide['subtitle'] ) )  {
+								$extra_slide_classes .= ' only-image';
+							}
+						
+							?>
 							
-							<li class="slide">
+							<li class="slide<?php echo $extra_slide_classes; ?>">
 								<div class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . $slide_image_url . ' );"'; ?>>
 									<div class="section-inner">
 										

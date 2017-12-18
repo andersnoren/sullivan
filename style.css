@@ -1788,6 +1788,10 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	transition: opacity .15s linear;
 }
 
+.hero-slider .slide.only-image .dark-overlay:before {
+	content: none;
+}
+
 .hero-slider.loaded .slide {
 	opacity: 1;
 }
@@ -1828,6 +1832,14 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	position: absolute;
 		bottom: 25px;
 		left: calc( 50vw - 640px );
+	transition: background-color .25s linear;
+}
+
+.flex-control-nav.on-only-image {
+	background: rgba( 0, 0, 0, 0.1 );
+	border-radius: 4px;
+	margin: -4px -6px;
+	padding: 4px 6px;
 }
 
 .flex-control-nav a {
