@@ -19,7 +19,19 @@
 		
         if ( hasSelectiveRefresh ) {
             wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function( placement ) {
-				
+                
+                // Slideshow blog: Hide controls depending on the number of slides
+                wp.customize( 'eames_blog_slider_speed', function( value ) {
+
+                    // Update on change
+                    value.bind( function( newval ) {
+                        
+                        $( '.hero-slider' ).attr( 'data-slideshow-speed', newval );
+
+                    } );
+
+                } );
+                
 				WP.heroSlider.init();
 
             } );

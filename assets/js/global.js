@@ -217,20 +217,24 @@ WP.coverPage = {
 
 WP.heroSlider = {
 	
-	init: function(){
+	init: function() {
 
-		if ( $( '.hero-slider' ).length ) {
+		var $slider = $( '.hero-slider' );
 
-			var animSpeed = 1000;
+		if ( $slider.length ) {
+
+			var animSpeed = 1000,
+				slideshowSpeed = $slider.attr( 'data-slideshow-speed' ) ? $slider.attr( 'data-slideshow-speed' ) : 7000;
 
 			// Load Flexslider
-			$( '.hero-slider' ).flexslider({
+			$slider.flexslider({
 				animation: "slide",
 				animationSpeed: animSpeed,
 				controlNav: true,
 				directionNav: false,
 				keyboard: false, 
 				pauseOnHover: true,
+				slideshowSpeed: slideshowSpeed,
 				smoothHeight: false,
 				start: function( $slider ) {
 					$slider.removeClass( 'loading' ).addClass( 'loaded' );
@@ -240,7 +244,7 @@ WP.heroSlider = {
 
 			win.bind( 'resize', function() {
 				setTimeout( function(){ 
-					var slider = $( '.hero-slider' ).data( 'flexslider' );
+					var slider = $slider.data( 'flexslider' );
 					slider.resize();
 				}, 1000 );
 			} );

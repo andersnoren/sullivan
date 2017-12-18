@@ -876,10 +876,12 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 				ob_start();
 
 			}
+
+			$slideshow_speed = get_theme_mod( 'eames_' . $area . '_slider_speed' ) ? get_theme_mod( 'eames_' . $area . '_slider_speed' ) : 7000;
 		
 			?>
 		
-			<div class="flexslider hero-slider loading bg-black" id="heroslider_<?php echo $area; ?>">
+			<div class="flexslider hero-slider loading bg-black" data-slideshow-speed="<?php echo $slideshow_speed; ?>" id="heroslider_<?php echo $area; ?>">
 			
 				<ul class="slides">
 		
@@ -1198,7 +1200,7 @@ class Eames_Customize {
 				'description' 	=> $area['description']
 			) );
 
-			// Add a setting for number of slides
+			// Number of slides setting
 			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_max_slides', array(
 				'default'			=> 1,
 				'sanitize_callback' => 'absint',
@@ -1213,6 +1215,24 @@ class Eames_Customize {
 				'input_attrs'	=> array(
 					'min' 			=> 0,
 					'max' 			=> $area['max_slides'],
+				),
+			) );
+
+			// Slideshow speed setting
+			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_speed', array(
+				'default'			=> 7000,
+				'sanitize_callback' => 'absint',
+				'transport'			=> 'postMessage'
+			) );
+
+			$wp_customize->add_control( 'eames_' . $area['name'] . '_slider_speed', array(
+				'type' 			=> 'number',
+				'section' 		=> 'eames_' . $area['name'] . '_slider',
+				'label' 		=> __( 'Slideshow duration', 'eames' ),
+				'description'	=> __( 'How long each slide should be shown, in milliseconds.', 'eames' ),
+				'input_attrs'	=> array(
+					'min' 			=> 1000,
+					'step'			=> 100,			
 				),
 			) );
 
@@ -1297,6 +1317,7 @@ class Eames_Customize {
 					'selector'            => "#heroslider_" . $area['name'],
 					'settings'            => [
 						'eames_' . $area['name'] . '_slider_max_slides',
+						'eames_' . $area['name'] . '_slider_speed',
 						'eames_' . $area['name'] . '_slider_' . $i . '_image',
 						'eames_' . $area['name'] . '_slider_' . $i . '_title',
 						'eames_' . $area['name'] . '_slider_' . $i . '_subtitle',
