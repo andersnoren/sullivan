@@ -2,16 +2,57 @@
 	
 	<header class="post-header">
 
-		<p class="header-meta subheading">
-			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
-			<?php if ( is_sticky() ) echo '<span class="sticky-post">' . __( 'Sticky', 'eames' ) . '</span>'; ?>
-
-			<?php if ( current_user_can( 'edit_post', get_the_id() ) ) : ?>
-				<span class="edit-post"><?php edit_post_link( __( 'Edit post', 'eames' ) ); ?></span>
-			<?php endif ;?>
-		</p><!-- .post-top-meta -->
-	
 		<?php 
+		
+		// Get the post meta top values
+		$post_meta_top = get_theme_mod( 'eames_post_meta_top' ); 
+
+		// If it's empty, use the default set of post meta
+		if ( ! $post_meta_top ) {
+			$post_meta_top = array(
+				'post-date',
+				'sticky',
+				'edit-link'
+			);
+		}
+		
+		// If it has the value empty, it's explicitly empty and the default post meta shouldn't be output
+		if ( $post_meta_top && ! in_array( 'empty', $post_meta_top ) ) : ?>
+
+			<p class="header-meta subheading">
+
+				<?php 
+				
+				// Post date
+				if ( in_array( 'post-date', $post_meta_top ) ) : ?>
+					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
+				<?php endif;
+				
+				// Post author
+				if ( in_array( 'author', $post_meta_top ) ) : ?>
+					<span class="post-author"><?php printf( __( 'By %s', 'eames' ), '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '">' . get_the_author_meta( 'display_name' ) . '</a>' ); ?></span>
+				<?php endif;
+				
+				// Comments
+				if ( in_array( 'comments', $post_meta_top ) && comments_open() ) : ?> 
+					<span><?php comments_popup_link(); ?></span>
+				<?php endif;
+				
+				// Sticky
+				if ( in_array( 'sticky', $post_meta_top ) && is_sticky() ) : ?>
+					<span class="sticky-post"><?php _e( 'Sticky', 'eames' ); ?></span>
+				<?php endif;
+				
+				// Edit link
+				if ( in_array( 'edit-link', $post_meta_top ) && current_user_can( 'edit_post', get_the_id() ) ) : ?>
+					<span class="edit-post"><?php edit_post_link( __( 'Edit post', 'eames' ) ); ?></span>
+				<?php endif; ?>
+
+			</p><!-- .post-top-meta -->
+
+			<?php 
+		endif;
+		
 		if ( get_the_title() ) :
 			if ( ! is_single() ) : ?>
 				<h1 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
@@ -42,29 +83,84 @@
 
 		<?php endif; ?>
 
-		<div class="post-meta top">
+		<?php 
+		
+		// Get the post meta top values
+		$post_meta_bottom = get_theme_mod( 'eames_post_meta_bottom' ); 
 
-			<p class="post-author">
-				<span class="meta-title subheading"><?php _e( 'Posted by', 'eames' ); ?></span>
-				<span class="meta-title mobile-meta-title subheading"><?php _e( 'By', 'eames' ); ?> </span>
-				<span class="meta-content"><?php the_author_posts_link(); ?></span>
-			</p>
+		// If it's empty, use the default set of post meta
+		if ( ! $post_meta_bottom ) {
+			$post_meta_bottom = array(
+				'author',
+				'categories',
+				'comments-link'
+			);
+		}
+		
+		// If it has the value empty, it's explicitly empty and the default post meta shouldn't be output
+		if ( $post_meta_bottom && ! in_array( 'empty', $post_meta_bottom ) ) : ?>
 
-			<p class="post-categories">
-				<span class="meta-title subheading"><?php _e( 'Posted in', 'eames' ); ?></span>
-				<span class="meta-content"><?php the_category( ', ' ); ?></span>
-			</p>
+			<div class="post-meta top">
 
-			<?php if ( comments_open() ) : ?>
+				<?php 
+				
+				// Author
+				if ( in_array( 'author', $post_meta_bottom ) ) : ?>
+					<p class="post-author">
+						<span class="meta-title subheading"><?php _e( 'Posted by', 'eames' ); ?></span>
+						<span class="meta-title mobile-meta-title subheading"><?php _e( 'By', 'eames' ); ?> </span>
+						<span class="meta-content"><?php the_author_posts_link(); ?></span>
+					</p>
+					<?php 
+				endif;
 
-				<p class="post-comment-link">
-					<span class="meta-title subheading"><?php _e( 'Discussion', 'eames' ); ?></span>
-					<span class="meta-content"><?php comments_popup_link(); ?></span>
-				</p>
 
-			<?php endif; ?>
+				// Categories
+				if ( in_array( 'categories', $post_meta_bottom ) ) : ?>
+					<p class="post-categories">
+						<span class="meta-title subheading"><?php _e( 'Posted in', 'eames' ); ?></span>
+						<span class="meta-content"><?php the_category( ', ' ); ?></span>
+					</p>
+					<?php
+				endif;
 
-		</div><!-- .post-meta -->
+				// Categories
+				if ( in_array( 'tags', $post_meta_bottom ) && has_tag() ) : ?>	
+					<p class="post-tags">
+						<span class="meta-title subheading"><?php _e( 'Tagged with', 'eames' ); ?></span>
+						<span class="meta-content"><?php the_tags( '', ', ', '' ); ?></span>
+					</p>
+					<?php
+				endif;
+
+				// Comments link
+				if ( in_array( 'comments', $post_meta_bottom ) && comments_open() ) : ?>
+					<p class="post-comment-link">
+						<span class="meta-title subheading"><?php _e( 'Discussion', 'eames' ); ?></span>
+						<span class="meta-content"><?php comments_popup_link(); ?></span>
+					</p>
+					<?php 
+				endif; 
+				
+				// Sticky
+				if ( in_array( 'sticky', $post_meta_bottom ) && is_sticky() ) : ?>
+					<p class="sticky-post">
+						<span class="meta-title subheading"><?php _e( 'Featured', 'eames' ); ?></span>
+						<span class="meta-content"><?php _e( 'Sticky post', 'eames' ); ?></span>
+					</p>
+				<?php endif;
+				
+				// Edit link
+				if ( in_array( 'edit-link', $post_meta_bottom ) && current_user_can( 'edit_post', get_the_id() ) ) : ?>
+					<p class="edit-post">
+						<span class="meta-title subheading"><?php _e( 'Administration', 'eames' ); ?></span>
+						<span class="meta-content"><?php edit_post_link( __( 'Edit post', 'eames' ) ); ?></span>
+					</p>
+				<?php endif; ?>
+
+			</div><!-- .post-meta -->
+
+		<?php endif; ?>
 
 		<div class="post-content-wrapper">
 

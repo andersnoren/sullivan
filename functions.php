@@ -986,10 +986,10 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 
 if ( class_exists( 'WP_Customize_Control' ) ) :
 
-	if ( ! class_exists( 'EamesSeperator' ) ) :
+	if ( ! class_exists( 'Eames_Customize_Control_Seperator' ) ) :
 
 		// Custom Customizer control that outputs an HR to seperate other controls
-		class EamesSeperator extends WP_Customize_Control {
+		class Eames_Customize_Control_Seperator extends WP_Customize_Control {
 		
 			public function render_content() {
 				echo '<hr class="eames-customizer-seperator" />';
@@ -999,10 +999,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 
 	endif;
 
-	if ( ! class_exists( 'EamesCustomizerTitle' ) ) :
+	if ( ! class_exists( 'Eames_Customize_Control_Group_Title' ) ) :
 
 		// Custom Customizer control that outputs an HR to seperate other controls
-		class EamesCustomizerTitle extends WP_Customize_Control {
+		class Eames_Customize_Control_Group_Title extends WP_Customize_Control {
 
 			// Whitelist content parameter
 			public $content = '';
@@ -1017,10 +1017,10 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 
 	endif;
 
-	if ( ! class_exists( 'EamesAddSlide' ) ) :
+	if ( ! class_exists( 'Eames_Customize_Control_Add_Slide' ) ) :
 
 		// Custom Customizer control that outputs a button that increments the max_slides number input
-		class EamesAddSlide extends WP_Customize_Control {
+		class Eames_Customize_Control_Add_Slide extends WP_Customize_Control {
 
 			// Whitelist content parameter
 			public $content = '';
@@ -1031,6 +1031,49 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 				}
 			}
 
+		}
+
+	endif;
+
+	if ( ! class_exists( 'Eames_Customize_Control_Checkbox_Multiple' ) ) :
+
+		// Custom Customizer control that outputs a specified number of checkboxes
+		// Based on a solution by Justin Tadlock: http://justintadlock.com/archives/2015/05/26/multiple-checkbox-customizer-control
+		class Eames_Customize_Control_Checkbox_Multiple extends WP_Customize_Control {
+
+			public $type = 'checkbox-multiple';
+
+			public function render_content() {
+
+				if ( empty( $this->choices ) )
+					return;
+					
+				if ( !empty( $this->label ) ) : ?>
+					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php endif;
+				
+				if ( !empty( $this->description ) ) : ?>
+					<span class="description customize-control-description"><?php echo $this->description; ?></span>
+				<?php endif;
+				
+				$multi_values = !is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
+		
+				<ul>
+					<?php foreach ( $this->choices as $value => $label ) : ?>
+		
+						<li>
+							<label>
+								<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ) ); ?> /> 
+								<?php echo esc_html( $label ); ?>
+							</label>
+						</li>
+		
+					<?php endforeach; ?>
+				</ul>
+		
+				<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( implode( ',', $multi_values ) ); ?>" />
+				<?php 
+			}
 		}
 
 	endif;
@@ -1049,6 +1092,7 @@ class Eames_Customize {
 
 
 		/* Theme Options section ----------------------------- */
+
 
 		$wp_customize->add_section( 'eames_options', array(
 			'title' 		=> __( 'Theme Options', 'eames' ),
@@ -1095,6 +1139,47 @@ class Eames_Customize {
 			},
 		) );
 
+		// Post Meta Top Setting
+		$wp_customize->add_setting( 'eames_post_meta_top', array(
+			'default'           => array( 'post-date', 'sticky', 'edit-link' ),
+			'sanitize_callback' => 'eames_sanitize_multiple_checkboxes'
+		) );
+
+		$wp_customize->add_control( new Eames_Customize_Control_Checkbox_Multiple( $wp_customize, 'eames_post_meta_top', array(
+			'section' 		=> 'eames_options',
+			'label'   		=> __( 'Post meta top displays:', 'eames' ),
+			'description'	=> __( 'Shown above the post titles in the blog.', 'eames' ),
+ 			'choices' 		=> array(
+				'author'		=> __( 'Author', 'eames' ),
+				'comments'		=> __( 'Comments', 'eames' ),
+				'edit-link'		=> __( 'Edit Link (for logged in users)', 'eames' ),
+				'post-date'		=> __( 'Post date', 'eames' ),
+				'sticky'		=> __( 'Sticky status', 'eames' ),
+			) 
+		) ) );
+
+
+		// Post Meta Bottom Setting
+		$wp_customize->add_setting( 'eames_post_meta_bottom', array(
+			'default'           => array( 'author', 'categories', 'comments' ),
+			'sanitize_callback' => 'eames_sanitize_multiple_checkboxes'
+		) );
+
+		$wp_customize->add_control( new Eames_Customize_Control_Checkbox_Multiple( $wp_customize, 'eames_post_meta_bottom', array(
+			'section' 		=> 'eames_options',
+			'label'   		=> __( 'Post meta bottom displays:', 'eames' ),
+			'description'	=> __( 'Shown next to the post content in the blog.', 'eames' ),
+			'choices' 		=> array(
+				'author'		=> __( 'Author', 'eames' ),
+				'categories'	=> __( 'Categories', 'eames' ),
+				'comments'		=> __( 'Comments', 'eames' ),
+				'edit-link'		=> __( 'Edit Link (for logged in users)', 'eames' ),
+				'post-date'		=> __( 'Post date', 'eames' ),
+				'sticky'		=> __( 'Sticky status', 'eames' ),
+				'tags'			=> __( 'Tags', 'eames' ),
+			) 
+		) ) );
+
 
 		/* Slideshow sections ----------------------------- */
 
@@ -1136,14 +1221,14 @@ class Eames_Customize {
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array() );
 
-				$wp_customize->add_control( new EamesSeperator( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
+				$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
 					'content' 	=> '',
 					'section' 	=> 'eames_' . $area['name'] . '_slider',
 				) ) );
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array() );
 
-				$wp_customize->add_control( new EamesCustomizerTitle( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array(
+				$wp_customize->add_control( new Eames_Customize_Control_Group_Title( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array(
 					'content' 	=> sprintf( __( 'Slide %s', 'eames' ), $i ),
 					'section' 	=> 'eames_' . $area['name'] . '_slider',
 				) ) );
@@ -1228,23 +1313,12 @@ class Eames_Customize {
 
 			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_add_slide', array() );
 
-			$wp_customize->add_control( new EamesAddSlide( $wp_customize, 'eames_' . $area['name'] . '_slider_add_slide', array(
+			$wp_customize->add_control( new Eames_Customize_Control_Add_Slide( $wp_customize, 'eames_' . $area['name'] . '_slider_add_slide', array(
 				'content' 	=> $area['name'],
 				'section' 	=> 'eames_' . $area['name'] . '_slider',
 			) ) );
 
 		} // foreach $slideshow_areas
-
-
-		/* Slideshow (shop) section ----------------------------- */
-
-
-		$wp_customize->add_section( 'eames_shop_slider', array(
-			'title' 		=> __( 'Slideshow (shop)', 'eames' ),
-			'priority' 		=> 45,
-			'capability' 	=> 'edit_theme_options',
-			'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'eames' ),
-		) );
 
 
 		/* Built-in controls ----------------------------- */
@@ -1277,6 +1351,12 @@ class Eames_Customize {
 		// Sanitize boolean for checkbox
 		function eames_sanitize_checkbox( $checked ) {
 			return ( ( isset( $checked ) && true == $checked ) ? true : false );
+		}
+
+		// Sanitize booleans for multiple checkboxes
+		function eames_sanitize_multiple_checkboxes( $values ) {
+			$multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
+			return !empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
 		}
 		
 	}
