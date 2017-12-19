@@ -1142,12 +1142,21 @@ class Eames_Customize {
 
 		// Update logo retina setting with selective refresh
 		$wp_customize->selective_refresh->add_partial( 'eames_retina_logo', array(
-			'selector' => '.header-titles .custom-logo-link',
-			'settings' => array( 'eames_retina_logo' ),
-			'render_callback' => function() {
+			'selector' 			=> '.header-titles .custom-logo-link',
+			'settings' 			=> array( 'eames_retina_logo' ),
+			'render_callback' 	=> function(){
 				eames_custom_logo();
 			},
 		) );
+
+
+		// Seperator before post meta
+		$wp_customize->add_setting( 'eames_post_meta_hr', array() );
+
+		$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_post_meta_hr', array(
+			'section' 	=> 'eames_options',
+		) ) );
+
 
 		// Post Meta Top Setting
 		$wp_customize->add_setting( 'eames_post_meta_top', array(
