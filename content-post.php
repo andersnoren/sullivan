@@ -154,7 +154,16 @@
 				if ( in_array( 'edit-link', $post_meta_bottom ) && current_user_can( 'edit_post', get_the_id() ) ) : ?>
 					<p class="edit-post">
 						<span class="meta-title subheading"><?php _e( 'Administration', 'eames' ); ?></span>
-						<span class="meta-content"><?php edit_post_link( __( 'Edit post', 'eames' ) ); ?></span>
+						<span class="meta-content">
+							<?php 
+							// Make sure we display something in the customizer, as edit_post_link() doesn't output anything there
+							if ( is_customize_preview() ) {
+								_e( 'Edit post', 'eames' );
+							} else {
+								edit_post_link( __( 'Edit post', 'eames' ) );
+							} 
+							?>
+						</span>
 					</p>
 				<?php endif; ?>
 
