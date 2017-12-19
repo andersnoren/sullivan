@@ -196,13 +196,13 @@ input::-moz-placeholder { color: #999; }
 }
 
 .split .content {
-	width: 910px;
+	width: calc( 75% + 10px );
 }
 
 .split .sidebar {
 	flex-shrink: 0;
 	margin-left: 40px;
-	width: calc( 25% - 30px );
+    width: calc( 25% - 30px );
 }
 
 
@@ -807,14 +807,12 @@ img {
 
 .post-inner.compensate {
 	margin-left: auto;
-	max-width: 69%;
 	position: relative;
-	width: 600px;
+	width: 61.86%;
 }
 
 .post-content-wrapper {
-	max-width: 600px;
-	width: 100%;
+	width: 61.86%;
 }
 
 .post-inner .excerpt {
@@ -833,8 +831,8 @@ img {
 }
 
 .post-inner.between .post-meta {
-	margin-right: 3.5%;
-	min-width: 27.5%;
+	margin-right: 5%;
+    min-width: 33.14%;
 }
 
 .post-meta p {
@@ -986,14 +984,13 @@ img {
 .hanging-titles .related-posts {
 	margin-left: auto;
 	margin-right: 0;
-	max-width: 69%;
-	width: 600px;
+	width: 61.86%;
 }
 
 .hanging-titles .comments:before,
 .hanging-titles .comment-respond:before,
 .hanging-titles .related-posts:before {
-	width: 151.5%;
+	width: 161.5555%;
 }
 
 .hanging-titles .comment-reply-title,
@@ -1002,7 +999,7 @@ img {
 	position: absolute;
 		right: 100%;
 		top: 30px;
-	width: 51.5%;
+	width: 61.6553508%;
 }
 
 
@@ -1426,6 +1423,10 @@ blockquote cite:before {
     padding: 0;
 }
 
+.gallery + .gallery {
+	margin-top: -30px;
+}
+
 .gallery .gallery-item {
     display: block;
 	float: left;
@@ -1457,46 +1458,14 @@ blockquote cite:before {
 }
 
 .gallery-caption {
-	font-size: 12px;
-	margin-top: 10px;
-}
-
-
-/* ENTRY CONTENT SPECIFIC GALLERY STYLING */ 
-
-.entry-content .gallery {
-	margin: 50px 0 30px;
-	position: relative;
-		left: calc( 50% - 630px );
-	width: 1260px;
-}
-
-.entry-content .gallery + .gallery {
-	margin-top: -30px;
-}
-
-.entry-content .gallery-columns-1 .gallery-caption,
-.entry-content .gallery-columns-2 .gallery-caption,
-.entry-content .gallery-columns-3 .gallery-caption {
-	bottom: 40px;
-	font-size: 14px;
-	left: 50px;
-	max-width: calc( 100% - 100px );
-}
-
-.entry-content .gallery-columns-3 .gallery-caption {
-	bottom: 30px;
-	left: 40px;
-	max-width: calc( 100% - 80px );
-}
-
-.entry-content .gallery-caption {
 	background: #fff;
+	color: inherit;
+	font-size: 14px;
 	line-height: 1.35;
 	margin: 0;
+	max-height: calc( 100% - 20px );
 	max-width: calc( 100% - 40px );
-	max-height: 50%;
-	overflow: hidden;
+    overflow: auto;
 	padding: 12px 14px;
 	position: absolute;
 		bottom: 10px;
@@ -1675,10 +1644,21 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 
 
 .post-content .alignnone {
-	margin-left: -310px;
-	max-width: 910px;
+	max-width: none;
 	position: relative;
-	width: 910px;
+		right: 25.7445vw;
+	width: 67.5vw;
+}
+
+
+/* Post Content Gallery -------------------------------- */
+
+
+.post-content .gallery {
+	margin: 50px 0 30px 0;
+	position: relative;
+		right: calc( 25.7445vw + 10px );
+	width: calc( 67.5vw + 20px );
 }
 
 
@@ -1686,6 +1666,9 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 /*	X.	Page Content
  * 		Styling specific to the page-content wrapper (used on pages)
 /* -------------------------------------------------------------------------------- */
+
+
+
 
 
 /* -------------------------------------------------------------------------------- */
@@ -1995,6 +1978,14 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	color: #111;
 	font-family: Charter, Georgia, serif;
 	font-size: 20px;
+}
+
+
+/* Widget Categories --------------------------------------- */
+
+
+.widget_categories li a {
+	margin-right: 3px;
 }
 
 
@@ -2413,11 +2404,6 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 
 	/* Post Content ---------------------------- */
 
-	.post-content .alignnone {
-		margin-left: 0;
-		width: 100%;
-	}
-
 
 	/* Product Archive ---------------------------- */
 
@@ -2453,6 +2439,24 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 		margin: 60px 0 0;
 		padding-top: 60px;
 		width: 100%;
+	}
+
+
+	/* Post Content ---------------------------- */
+
+
+	.post-content .alignnone {
+		max-width: none;
+		position: relative;
+			right: 34.326vw;
+		width: 90vw;
+	}
+
+	.post-content .gallery {
+		max-width: none;
+		position: relative;
+			right: calc( 34.326vw + 10px );
+		width: calc( 90vw + 20px );
 	}
 
 
@@ -2893,6 +2897,10 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 		display: inline;
 	}
 
+	.post-content-wrapper {
+		width: 100%;
+	}
+
 
 	/* Blog Single ---------------------------- */
 
@@ -2932,6 +2940,16 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	.hanging-titles .comment-reply-title, 
 	.hanging-titles .related-posts-title {
 		position: static;
+		width: 100%;
+	}
+
+
+	/* Post Content ---------------------------- */
+
+	.post-content .gallery,
+	.post-content .alignnone {
+		max-width: 100%;
+		right: auto;
 		width: 100%;
 	}
 
