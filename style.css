@@ -196,12 +196,12 @@ input::-moz-placeholder { color: #999; }
 }
 
 .split .content {
-	width: calc( 75% + 10px );
+	width: calc( 75% + -50px );
 }
 
 .split .sidebar {
 	flex-shrink: 0;
-	margin-left: 40px;
+	margin-left: 80px;
     width: calc( 25% - 30px );
 }
 
@@ -807,12 +807,14 @@ img {
 
 .post-inner.compensate {
 	margin-left: auto;
+	max-width: 600px;
 	position: relative;
-	width: 61.86%;
+	width: 69%;
 }
 
 .post-content-wrapper {
-	width: 61.86%;
+	max-width: 600px;
+	width: 69%;
 }
 
 .post-inner .excerpt {
@@ -831,8 +833,8 @@ img {
 }
 
 .post-inner.between .post-meta {
-	margin-right: 5%;
-    min-width: 33.14%;
+	margin-right: 3.5%;
+    min-width: 27.5%;
 }
 
 .post-meta p {
@@ -984,13 +986,14 @@ img {
 .hanging-titles .related-posts {
 	margin-left: auto;
 	margin-right: 0;
-	width: 61.86%;
+	max-width: 600px;
+	width: 69%;
 }
 
 .hanging-titles .comments:before,
 .hanging-titles .comment-respond:before,
 .hanging-titles .related-posts:before {
-	width: 161.5555%;
+	width: 150%;
 }
 
 .hanging-titles .comment-reply-title,
@@ -999,7 +1002,7 @@ img {
 	position: absolute;
 		right: 100%;
 		top: 30px;
-	width: 61.6553508%;
+	width: 50%;
 }
 
 
@@ -1646,8 +1649,8 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 .post-content .alignnone {
 	max-width: none;
 	position: relative;
-		right: 25.7445vw;
-	width: 67.5vw;
+		left: -310px;
+	width: 910px;
 }
 
 
@@ -1657,8 +1660,8 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 .post-content .gallery {
 	margin: 50px 0 30px 0;
 	position: relative;
-		right: calc( 25.7445vw + 10px );
-	width: calc( 67.5vw + 20px );
+		left: -320px;
+	width: 930px;
 }
 
 
@@ -2404,6 +2407,22 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 
 	/* Post Content ---------------------------- */
 
+	.post-content .alignnone {
+		max-width: 100%;
+		left: auto;
+		width: 100%;
+	}
+	
+	
+	/* Post Content Gallery -------------------------------- */
+	
+	
+	.post-content .gallery {
+		margin: 50px 0 30px 0;
+		left: -10px;
+		width: calc( 100% + 20px );
+	}
+
 
 	/* Product Archive ---------------------------- */
 
@@ -2439,24 +2458,6 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 		margin: 60px 0 0;
 		padding-top: 60px;
 		width: 100%;
-	}
-
-
-	/* Post Content ---------------------------- */
-
-
-	.post-content .alignnone {
-		max-width: none;
-		position: relative;
-			right: 34.326vw;
-		width: 90vw;
-	}
-
-	.post-content .gallery {
-		max-width: none;
-		position: relative;
-			right: calc( 34.326vw + 10px );
-		width: calc( 90vw + 20px );
 	}
 
 
