@@ -1,71 +1,75 @@
-<?php get_header(); ?>
+<?php get_header();
 
-	<?php if ( is_home() ) eames_hero_slider( 'blog' ); ?>
+global $paged;
+$paged = $paged ? $paged : 1;
 
-	<main id="site-content">
+// Show the hero slider on the first page of the blog
+if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 
-		<div class="section-inner split">
+<main id="site-content">
 
-			<div class="content">
-				
-				<?php if ( is_archive() ) : ?>
-				
-					<header class="archive-header">
-						<div>
-							<h6 class="subheading"><?php echo eames_get_archive_title_prefix(); ?></h6>
-							<h3 class="archive-title"><?php the_archive_title(); ?></h3>
-							<?php the_archive_description(); ?>
-						</div>
-					</header>
-				
-				<?php elseif ( is_search() && have_posts() ) : ?>
-				
+	<div class="section-inner split">
+
+		<div class="content">
+			
+			<?php if ( is_archive() ) : ?>
+			
+				<header class="archive-header">
+					<div>
+						<h6 class="subheading"><?php echo eames_get_archive_title_prefix(); ?></h6>
+						<h3 class="archive-title"><?php the_archive_title(); ?></h3>
+						<?php the_archive_description(); ?>
+					</div>
+				</header>
+			
+			<?php elseif ( is_search() && have_posts() ) : ?>
+			
+				<header class="archive-header">
+					<div>
+						<h6 class="subheading"><?php _e( 'Search', 'eames' ); ?></h6>
+						<h3 class="archive-title"><?php printf( __( 'Search: %s', 'eames' ), '&ldquo;' . get_search_query() . '&rdquo;' ); ?></h3>
+						<p><?php printf( _n( 'We found %s result matching your search.', 'We found %s results matching your search.', $wp_query->found_posts, 'eames' ), $wp_query->found_posts ); ?></p>
+					</div>
+				</header>
+			
+			<?php elseif ( is_search() ) : ?>
+
+				<div class="section-inner">
+
 					<header class="archive-header">
 						<div>
 							<h6 class="subheading"><?php _e( 'Search', 'eames' ); ?></h6>
-							<h3 class="archive-title"><?php printf( __( 'Search: %s', 'eames' ), '&ldquo;' . get_search_query() . '&rdquo;' ); ?></h3>
-							<p><?php printf( _n( 'We found %s result matching your search.', 'We found %s results matching your search.', $wp_query->found_posts, 'eames' ), $wp_query->found_posts ); ?></p>
+							<h3 class="archive-title"><?php _e( 'No results found', 'eames' ); ?></h3>
+							<p><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s".', 'eames' ), get_search_query() ); ?></p>
 						</div>
 					</header>
-				
-				<?php elseif ( is_search() ) : ?>
 
-					<div class="section-inner">
+				</div>
 
-						<header class="archive-header">
-							<div>
-								<h6 class="subheading"><?php _e( 'Search', 'eames' ); ?></h6>
-								<h3 class="archive-title"><?php _e( 'No results found', 'eames' ); ?></h3>
-								<p><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s".', 'eames' ), get_search_query() ); ?></p>
-							</div>
-						</header>
+			<?php endif;
+			
+			if ( have_posts() ) : ?>
 
-					</div>
+				<div class="posts" id="posts">
 
-				<?php endif;
-				
-				if ( have_posts() ) : ?>
+					<?php while ( have_posts() ) : the_post();
 
-					<div class="posts" id="posts">
+						get_template_part( 'content-post' );
 
-						<?php while ( have_posts() ) : the_post();
+					endwhile; ?>
 
-							get_template_part( 'content-post' );
+				</div><!-- .posts -->
 
-						endwhile; ?>
+				<?php get_template_part( 'pagination' ); ?>
+			
+			<?php endif; ?>
 
-					</div><!-- .posts -->
+		</div><!-- .content -->
 
-					<?php get_template_part( 'pagination' ); ?>
-				
-				<?php endif; ?>
+		<?php get_sidebar( 'blog' ); ?>
+	
+	</div><!-- .section-inner -->
 
-			</div><!-- .content -->
-
-			<?php get_sidebar( 'blog' ); ?>
-		
-		</div><!-- .section-inner -->
-
-	</main>
+</main>
 
 <?php get_footer(); ?>
