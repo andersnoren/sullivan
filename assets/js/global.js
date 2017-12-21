@@ -282,8 +282,8 @@ WP.postSlider = {
 			$slider.flexslider({
 				animation: "slide",
 				animationSpeed: 1000,
-				controlNav: true,
-				directionNav: false,
+				controlNav: false,
+				directionNav: true,
 				keyboard: false, 
 				pauseOnHover: true,
 				start: function( $slider ) {

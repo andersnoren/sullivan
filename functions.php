@@ -366,7 +366,7 @@ if ( ! function_exists( 'eames_has_format_gallery_gallery' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
-   OUTPUT POST GALLERY
+   OUTPUT POST SLIDER GALLERY
 
    @arg		$post_id int	Post ID for which to output the post gallery
    --------------------------------------------------------------------------------------------- */
@@ -403,12 +403,19 @@ if ( ! function_exists( 'eames_post_gallery' ) ) {
 							if ( $image ) :
 
 								$image_url = $image[0];
+								$image_caption = wp_get_attachment_caption( $image_id );
 							
 								?>
 									
 								<li class="slide">
 
 									<img src="<?php echo $image_url; ?>">
+
+									<?php if ( $image_caption ) : ?>
+
+										<p class="slider-caption"><?php echo $image_caption; ?></p>
+
+									<?php endif; ?>
 									
 								</li><!-- .slide -->
 
@@ -1063,14 +1070,28 @@ if ( ! function_exists( 'eames_get_fallback_image_url' ) ) {
 
 							$extra_slide_classes = '';
 
-							if ( $slide['image'] && ( ! $slide['title'] && ! $slide['subtitle'] ) )  {
+							$only_image = false;
+
+							if ( $slide['image'] && ( ! $slide['title'] && ! $slide['subtitle'] ) ) {
+								$only_image = true;
 								$extra_slide_classes .= ' only-image';
 							}
 						
 							?>
 							
 							<li class="slide<?php echo $extra_slide_classes; ?>">
-								<div class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . $slide_image_url . ' );"'; ?>>
+
+								<?php 
+								// If the only content is an image and a URL is set, make the wrapper a link pointing to the URL
+								if ( $only_image && $slide['url'] ) {
+									$opening_element = 'a href="' . $slide['url'] . '"';
+									$closing_element = 'a';
+								} else {
+									$opening_element = 'div';
+									$closing_element = 'div';
+								}
+								?>
+								<<?php echo $opening_element; ?> class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . $slide_image_url . ' );"'; ?>>
 									<div class="section-inner">
 										
 										<header>
@@ -1104,7 +1125,7 @@ if ( ! function_exists( 'eames_get_fallback_image_url' ) ) {
 										</header>
 
 									</div><!-- .section-inner -->
-								</div><!-- .bg-image -->
+								</<?php echo $closing_element; ?>><!-- .bg-image -->
 							</li><!-- .slide -->
 							
 							<?php
