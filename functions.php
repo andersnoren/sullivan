@@ -24,11 +24,6 @@ if ( ! function_exists( 'eames_setup' ) ) {
 		// Custom Image Sizes
 		add_image_size( 'eames_fullscreen', 1860, 9999 );
 		
-		// Background color
-		add_theme_support( 'custom-background', array(
-			'default-color' => 'ffffff',
-		) );
-		
 		// Custom logo
 		add_theme_support( 'custom-logo', array(
 			'height'      => 300,
