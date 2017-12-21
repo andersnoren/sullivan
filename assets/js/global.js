@@ -286,7 +286,6 @@ WP.postSlider = {
 				directionNav: false,
 				keyboard: false, 
 				pauseOnHover: true,
-				slideshowSpeed: 7000,
 				start: function( $slider ) {
 					$slider.removeClass( 'loading' ).addClass( 'loaded' );
 					$slider.update();
