@@ -246,9 +246,9 @@ WP.heroSlider = {
 
 					// Add a class to the pagination if the current element only has an image
 					if ( $currentSlide.hasClass( 'only-image' ) ) {
-						$( '.flex-control-nav' ).addClass( 'on-only-image' );
+						$( '.flex-control-nav' ).addClass( 'has-background' );
 					} else {
-						$( '.flex-control-nav' ).removeClass( 'on-only-image' );
+						$( '.flex-control-nav' ).removeClass( 'has-background' );
 					}
 				},
 			} );
@@ -265,6 +265,47 @@ WP.heroSlider = {
 	}
 
 } // WP.heroSlider
+
+
+// =======================================================================  Post Slider
+
+
+WP.postSlider = {
+	
+	init: function() {
+
+		var $slider = $( '.post-slider' );
+
+		if ( $slider.length ) {
+
+			// Load Flexslider
+			$slider.flexslider({
+				animation: "slide",
+				animationSpeed: 1000,
+				controlNav: true,
+				directionNav: false,
+				keyboard: false, 
+				pauseOnHover: true,
+				slideshowSpeed: 7000,
+				smoothHeight: true,
+				start: function( $slider ) {
+					$slider.removeClass( 'loading' ).addClass( 'loaded' );
+					$slider.update();
+				},
+			} );
+
+			win.bind( 'resize', function() {
+				setTimeout( function(){ 
+					var slider = $slider.data( 'flexslider' );
+					slider.resize();
+				}, 1000 );
+			} );
+
+		}
+
+	}
+
+} // WP.postSlider
 
 
 // =======================================================================  Scroll Show
@@ -543,6 +584,8 @@ doc.ready( function( ) {
 	WP.coverPage.init();							// Cover Page specifics
 
 	WP.heroSlider.init();							// Hero Slider
+
+	WP.postSlider.init();							// Post Slider
 
 	WP.intrinsicRatioEmbeds.init();					// Resize embeds
 

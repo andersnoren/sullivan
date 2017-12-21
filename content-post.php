@@ -65,11 +65,28 @@
 	
 	</header><!-- .post-header -->
 
-	<?php if ( has_post_thumbnail() ) : ?>
+	<?php
+
+	// Check whether the current post is format-gallery and starts with a gallery shortcode
+	$show_gallery = eames_has_post_gallery( $post->ID );
+
+	if ( has_post_thumbnail() || $show_gallery ) : ?>
 
 		<div class="featured-media">
 
-			<?php the_post_thumbnail(); ?>
+			<?php 
+			
+			// Either show the gallery
+			if ( $show_gallery ) {
+				eames_post_gallery( $post->ID );
+			
+			// Or display the post thumbnail
+			} else {
+				the_post_thumbnail();
+			}
+
+			?>
+
 
 		</div><!-- .featured-media -->
 

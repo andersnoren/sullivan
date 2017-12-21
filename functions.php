@@ -37,6 +37,9 @@ if ( ! function_exists( 'eames_setup' ) ) {
 			'flex-width'  => true,
 			'header-text' => array( 'site-title', 'site-description' ),
 		) );
+
+		// Post formats
+		add_theme_support( 'post-formats', array( 'gallery' ) );
 		
 		// Title tag
 		add_theme_support( 'title-tag' );
@@ -331,6 +334,144 @@ if ( ! function_exists( 'eames_register_widgets' ) ) {
 
 	}
 	add_action( 'widgets_init', 'eames_register_widgets' );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   CHECK WHETHER TO OUTPUT POST GALLERY
+
+   @arg		$post_id int	Post ID for which to check whether there's a format gallery gallery
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_has_format_gallery_gallery' ) ) {
+
+	function eames_has_post_gallery( $post_id = '' ) {
+
+		if ( ! $post_id )
+			return false;
+
+		if ( get_post_format( $post_id ) == 'gallery' ) {
+
+			$content = get_the_content( $post_id );
+
+			// Check if the post content starts with a gallery shortcode
+			if ( substr( $content, 0, 8 ) === "[gallery" ) {
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   OUTPUT POST GALLERY
+
+   @arg		$post_id int	Post ID for which to output the post gallery
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_post_gallery' ) ) {
+
+	function eames_post_gallery( $post_id = '' ) {
+
+		if ( ! $post_id )
+			return false;
+
+		$content = get_the_content( $post_id );
+
+		// Check if the post content starts with a gallery shortcode
+		if ( substr( $content, 0, 8 ) === "[gallery" ) {
+
+			// Get the IDs of the shortcode
+			preg_match( '/\[gallery.*ids=.(.*).\]/', $content, $ids );
+
+			// Build an array from them
+			$images_id = explode( ",", $ids[1] );
+
+			if ( $images_id ) : ?>
+			
+				<div class="flexslider post-slider loading">
+				
+					<ul class="slides">
+			
+						<?php foreach( $images_id as $image_id ) : 
+							
+							$image = wp_get_attachment_image_src( $image_id, 'post-thumbnail' );
+
+							if ( $image ) :
+
+								$image_url = $image[0];
+							
+								?>
+									
+								<li class="slide">
+
+									<img src="<?php echo $image_url; ?>">
+									
+								</li><!-- .slide -->
+
+							<?php endif; ?>
+								
+						<?php endforeach; ?>
+				
+					</ul>
+					
+				</div>
+				
+				<?php
+				
+			endif; // if $images_id
+
+		}
+
+	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   REMOVE GALLERY SHORTCODE IF WE'RE SHOWING THE FORMAT GALLERY POST GALLERY
+   --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eames_strip_out_post_gallery' ) ) {
+
+	function eames_strip_out_post_gallery( $content ) {
+
+		if ( eames_has_post_gallery( get_the_ID() ) ) {
+			
+			// Check if the post content starts with a gallery shortcode
+			if ( substr( $content, 0, 8 ) === '[gallery' ) {
+
+				$pattern = get_shortcode_regex();
+
+				// Find the gallery shortcode in question
+				if ( preg_match( '/'. $pattern .'/s', $content, $matches ) ) {
+					$gallery_shortcode = $matches[0];
+
+					// Get the position of the first occurrence of the gallery shortcode (prevents removing multiples, in case they exist)
+					$position = strpos( $content, $gallery_shortcode );
+
+					// If we have a position, remove the shortcode from the content
+					if ( $position !== false ) {
+						$content = substr_replace( $content, '', $position, strlen( $gallery_shortcode ) );
+					}
+				}
+
+			}
+
+		}
+
+		return $content;
+
+	}
+	add_filter( 'the_content', 'eames_strip_out_post_gallery' );
 
 }
    
