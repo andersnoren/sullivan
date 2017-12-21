@@ -789,6 +789,11 @@ img {
 	position: relative;
 }
 
+.post-slider .slides {
+	align-items: center;
+	display: flex;
+}
+
 .post-slider.loading .slide:not(:first-child) {
 	opacity: 0;
 }
@@ -2919,6 +2924,7 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	}
 
 	.post-content-wrapper {
+		max-width: none;
 		width: 100%;
 	}
 

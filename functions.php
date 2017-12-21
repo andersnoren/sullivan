@@ -392,7 +392,7 @@ if ( ! function_exists( 'eames_post_gallery' ) ) {
 
 			if ( $images_id ) : ?>
 			
-				<div class="flexslider post-slider loading">
+				<div class="flexslider post-slider bg-black loading">
 				
 					<ul class="slides">
 			
