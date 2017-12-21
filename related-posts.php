@@ -62,25 +62,28 @@ if ( $related_posts ) : ?>
 			<?php 
 
 			foreach( $related_posts as $post ) {
+
 				setup_postdata( $post );
 					
-					if ( has_post_thumbnail() ) {
-						$image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'mcluhan_preview-image' );
-						$image_style_attribute = ' style="background-image: url( ' . $image[0] . ');"';
-					} else {
-						$image_style_attribute = '';
-					}
+				if ( has_post_thumbnail() ) {
+					$image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'mcluhan_preview-image' );
+					$image_url = $image[0];
+				} else {
+					$image_url = eames_get_fallback_image_url();
+				}
 
-					?>
+				$image_style_attribute = ' style="background-image: url( ' . $image_url . ');"';
 
-					<a <?php post_class( 'related-post' ); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-						<div class="bg-image related-post-image"<?php echo $image_style_attribute; ?>>
-							<?php if ( isset( $image ) ) : ?>
-								<img src="<?php echo $image[0]; ?>" />
-							<?php endif; ?>
-						</div>
-						<?php the_title( '<h4 class="title"><span>', '</span></h4>' ); ?>
-					</a>
+				?>
+
+				<a <?php post_class( 'related-post' ); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+					<div class="bg-image related-post-image"<?php echo $image_style_attribute; ?>>
+						<?php if ( isset( $image ) ) : ?>
+							<img src="<?php echo $image[0]; ?>" />
+						<?php endif; ?>
+					</div>
+					<?php the_title( '<h4 class="title"><span>', '</span></h4>' ); ?>
+				</a>
 
 				<?php
 			}

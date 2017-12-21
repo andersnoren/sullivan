@@ -778,21 +778,12 @@ function eames_ajax_search() {
 					<li>
 						<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 					
-							<div class="post-icon">
-							
-								<?php 
-
-								if ( has_post_thumbnail() ) {
-									
-									the_post_thumbnail( 'thumbnail' );
-									
-								} else { ?>
+							<?php
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+							$image_url = $image ? $image[0] : eames_get_fallback_image_url();
+							?>
 								
-									<div class="genericon genericon-<?php echo $post_format; ?>"></div>
-								
-								<?php } ?>
-								
-							</div>
+							<div class="post-image" style="background-image: url( <?php echo $image_url; ?> );"></div>
 							
 							<div class="inner">
 											
@@ -983,6 +974,30 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 		// If no argument is provided, return all areas
 		return $slideshow_areas;
 
+	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   GET FALLBACK IMAGE
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_get_fallback_image_url' ) ) {
+
+	function eames_get_fallback_image_url() {
+
+		$fallback_image_id = get_theme_mod( 'eames_fallback_image' );
+
+		if ( $fallback_image_id ) {
+			$fallback_image = wp_get_attachment_image_src( $fallback_image_id, 'full' );
+		}
+
+		$fallback_image_url = isset( $fallback_image ) ? $fallback_image[0] : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
+
+		return $fallback_image_url;
+ 
 	}
 
 }
@@ -1284,6 +1299,28 @@ class Eames_Customize {
 				eames_custom_logo();
 			},
 		) );
+
+
+		// Seperator before fallback image
+		$wp_customize->add_setting( 'eames_fallback_image_hr', array() );
+
+		$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_fallback_image_hr', array(
+			'section' 	=> 'eames_options',
+		) ) );
+
+
+		// Fallback image setting
+		$wp_customize->add_setting( 'eames_fallback_image', array(
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'			=> 'postMessage'
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eames_fallback_image', array(
+			'label'			=> __( 'Fallback image', 'eames' ),
+			'description'	=> __( 'The selected image will be used when a post or product is missing a featured image.', 'eames' ),
+			'mime_type'		=> 'image',
+			'section' 		=> 'eames_options',
+		) ) );
 
 
 		// Seperator before post meta

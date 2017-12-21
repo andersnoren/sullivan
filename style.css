@@ -503,7 +503,7 @@ img {
 }
 
 .compact-search-results li img,
-.compact-search-results li .post-icon {
+.compact-search-results li .post-image {
 	height: 50px;
 	width: 50px;
 }
@@ -2202,17 +2202,13 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	display: flex; 
 }
 
-.eames-widget-list .post-icon {
-	background-color: #F5F5F7;
+.eames-widget-list .post-image {
+	background: no-repeat center;
+	background-size: cover;
 	border-radius: 2px;
 	flex-shrink: 0;
 	height: 60px;
 	width: 60px;
-}
-
-.eames-widget-list .post-icon img {
-	border-radius: 2px;
-	display: block;
 }
 
 .eames-widget-list .inner { 

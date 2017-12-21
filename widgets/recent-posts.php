@@ -54,24 +54,13 @@ class eames_recent_posts extends WP_Widget {
 					<li>
 					
 						<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-								
-							<div class="post-icon">
-							
-								<?php 
 
-								$post_format = get_post_format() ? get_post_format() : 'standard'; 
-
-								if ( has_post_thumbnail() ) {
-									
-									the_post_thumbnail( 'thumbnail' );
-									
-								} else { ?>
+							<?php
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+							$image_url = $image ? $image[0] : eames_get_fallback_image_url();
+							?>
 								
-									<div class="genericon genericon-<?php echo $post_format; ?>"></div>
-								
-								<?php } ?>
-								
-							</div>
+							<div class="post-image" style="background-image: url( <?php echo $image_url; ?> );"></div>
 							
 							<div class="inner">
 											

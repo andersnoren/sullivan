@@ -55,11 +55,7 @@ class eames_recent_comments extends WP_Widget {
 							
 							<a href="<?php echo get_permalink( $comment->comment_post_ID ); ?>#comment-<?php echo $comment->comment_ID; ?>" title="<?php printf( _x( 'Comment to %s, posted %s', 'Variables: post title, post date', 'eames' ), get_the_title( $comment->comment_post_ID ), get_the_time( get_option( 'date_format' ) ) ); ?>">
 								
-								<div class="post-icon">
-								
-									<?php echo get_avatar( get_comment_author_email( $comment->comment_ID ), $size = '100' ); ?>
-									
-								</div>
+								<div class="post-image" style="background-image: url( <?php echo get_avatar_url( get_comment_author_email( $comment->comment_ID ), $size = '100' ); ?> );"></div>
 								
 								<div class="inner">
 								
