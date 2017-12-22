@@ -135,6 +135,20 @@ li.product .price ins {
 }
 
 
+/* Related Products ----------------------------- */
+
+.products.related {
+    margin-top: 80px;
+}
+
+.products.related > h2 {
+    font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+}
+
+
 /* -------------------------------------------------------------------------------- */
 /*	X. Checkout
 /* -------------------------------------------------------------------------------- */
