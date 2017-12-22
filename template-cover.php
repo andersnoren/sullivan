@@ -20,7 +20,7 @@ get_header(); ?>
 
                 ?>
 
-                <div class="page-hero dark-overlay bg-image bg-attach"<?php if ( $featured_image_url ) echo ' style="background-image: url( ' . $featured_image_url . ' )"'; ?>>
+                <div class="page-hero with-content dark-overlay bg-image bg-attach"<?php if ( $featured_image_url ) echo ' style="background-image: url( ' . $featured_image_url . ' )"'; ?>>
                     
                     <header class="section-inner thin page-header text-center fade-block">
                     

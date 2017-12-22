@@ -3687,6 +3687,11 @@ ul.page-numbers .next { right: 0; }
 	/* TEMPLATE COVER */
 
 	.page-hero {
+		height: 100vw;
+		max-height: 400px;
+	}
+
+	.page-hero.with-content {
 		height: 400px;
 	}
 
