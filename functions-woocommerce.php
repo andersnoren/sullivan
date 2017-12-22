@@ -87,10 +87,10 @@ if ( ! function_exists( 'eames_woo_remove_title_on_shop_home' ) ) {
 }
 
 
-
 /* ---------------------------------------------------------------------------------------------
 	WOOCOMMERCE SPECIFIC BODY CLASSES
 	--------------------------------------------------------------------------------------------- */
+
 
 if ( ! function_exists( 'eames_woo_body_classes' ) ) {
 
@@ -99,7 +99,7 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
         // Check if term has an image set
         if ( is_product_category() && get_woocommerce_term_meta( get_queried_object()->term_id, 'thumbnail_id', true ) ) {
             $classes[] = 'term-has-image';
-        } else {
+        } elseif ( is_product_category() ) {
             $classes[] = 'term-missing-image';
         }
 
