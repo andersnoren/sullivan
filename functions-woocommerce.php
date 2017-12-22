@@ -62,6 +62,9 @@ if ( ! function_exists( 'eames_woo_remove_actions' ) ) {
         // Remove add to cart button from loop items
         remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
+        // Remove default output of sidebars
+        remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+
     }
     add_action( 'wp_head', 'eames_woo_remove_actions' );
 
