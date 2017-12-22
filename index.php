@@ -66,7 +66,7 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 
 		</div><!-- .content -->
 
-		<?php get_sidebar( 'blog' ); ?>
+		<?php get_sidebar(); ?>
 	
 	</div><!-- .section-inner -->
 
