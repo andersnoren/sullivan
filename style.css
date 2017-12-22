@@ -45,15 +45,15 @@ html, body {
     min-height: 100%; 
 }
 
-h1, h2, h3, h4, h5, h6, p, blockquote, address, big, cite, code, em, font, img, small, strike, sub, sup, li, ol, ul, fieldset, form, label, legend, button, table, caption, tr, th, td {
-	margin:0;
-	padding:0;
-	border:0;
-	font-weight:normal;
-	font-style:normal;
-	font-size:100%;
-	line-height:1;
-	text-align:left;
+h1, h2, h3, h4, h5, h6, p, blockquote, address, big, cite, code, em, font, img, small, strike, sub, sup, li, ol, ul, fieldset, form, label, legend, button, table, caption, tr, th, td, figure, figcaption {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 100%;
+	line-height: 1;
+	text-align: left;
 }
 
 table {
@@ -185,7 +185,7 @@ input::-moz-placeholder { color: #999; }
 .section-inner.medium { max-width: 870px; }
 .section-inner.thin { max-width: 600px; }
 
-.section-inner .section-inner {
+.section-inner.max-percentage {
 	width: 100%;
 }
 
@@ -1701,18 +1701,10 @@ fieldset {
 	padding: 25px;
 }
 
-.dark-mode fieldset {
-	border-color: rgba( 255, 255, 255, .3 );
-}
-
 fieldset legend {
     font-size: 14px;
 	font-weight: 700;
 	padding: 0 15px;
-}
-
-.dark-mode fieldset legend {
-	color: rgba( 255, 255, 255, .7 );
 }
 
 label {
@@ -1728,7 +1720,7 @@ input[type="tel"],
 input[type="number"],
 input[type="text"],
 input[type="url"] {
-	background: transparent;
+	background: #fff;
 	border-radius: 2px;
     border: 1px solid #e1e1e5;
 	box-shadow: none;
