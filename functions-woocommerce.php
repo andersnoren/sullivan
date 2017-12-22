@@ -252,6 +252,94 @@ if ( ! function_exists( 'eames_account_modal' ) ) {
 
     function eames_account_modal() {
 
+        $account_url = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
+        $account_title = is_user_logged_in() ? __( 'My account', 'eames' ) : __( 'Sign in', 'eames' );
+
+        $logged_in = is_user_logged_in();
+        $logged_in_class = $logged_in ? 'logged-in' : 'not-logged-in';
+
+        ?>
+
+        <div class="header-account">
+
+            <a href="<?php echo $account_url?>" class="account-toggle toggle" data-toggle-target=".account-modal">
+                <p><?php echo $account_title; ?></p>
+            </a>
+
+            <div class="account-modal modal arrow-right diva <?php echo $logged_in_class; ?>">
+
+                <?php
+                
+                if ( ! $logged_in ) :
+
+                    woocommerce_login_form();
+
+                else : 
+
+                    $user = wp_get_current_user();
+                    $user_name = ( $user->user_firstname && $user->user_lastname ) ? $user->user_firstname . ' ' . $user->user_lastname :
+                    $user->user_login;
+                    $user_firstname = $user->user_firstname ? $user->user_firstname : $user->user_login;
+                
+                    ?>
+
+                    <header>
+                        <strong class="user-name"><?php echo $user_name; ?></strong>
+                        <span class="user-email"><?php echo $user->user_email; ?></span>
+                    </header>
+
+                    <?php
+                    // Array with the labels and endpoints of the My account links
+                    $quicklinks = array(
+                        array(
+                            'label'     => __( 'Account details', 'eames' ),
+                            'endpoint'  => 'edit-account',
+                        ),
+                        array(
+                            'label'     => __( 'Adresses', 'eames' ),
+                            'endpoint'  => 'edit-address',
+                        ),
+                    );
+
+                    $orders = get_posts( apply_filters( 'woocommerce_my_account_my_orders_query', array(
+                        'meta_key'          => '_customer_user',
+                        'meta_value'        => get_current_user_id(),
+                        'post_status'       => array_keys( wc_get_order_statuses() ),
+                        'post_type'         => wc_get_order_types( 'view-orders' ),
+                        'posts_per_page'    => 1,
+                    ) ) );
+
+                    // If the user has orders, add a link to the order page
+                    if ( $orders ) {
+                        array_unshift( $quicklinks, array(
+                            'label'  => __( 'Orders', 'eames' ),
+                            'endpoint'  =>  'orders',
+                        ) );
+                    }
+                    ?>
+
+                    <nav class="user-quicklinks">
+                        <?php foreach( $quicklinks as $link ) :
+                            // Check if we're currently viewing this endpoint
+                            $classes = is_wc_endpoint_url( $link['endpoint'] ) ? 'active ' : '';
+                            $classes .= $link['endpoint'];
+                            ?>
+                            <a<?php if ( $classes ) echo ' class="' . $classes . '"'; ?> href="<?php echo get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) . $link['endpoint'] . '/'; ?>"><?php echo $link['label']; ?></a>
+                        <?php endforeach; ?>
+                    </nav>
+
+                    <footer class="log-out-wrapper">
+                        <a class="log-out" href="<?php echo wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Sign out', 'eames' ); ?></a>
+                    </footer>
+
+                <?php endif; ?>
+
+            </div><!-- .account-modal -->
+
+        </div><!-- .header-account -->
+
+        <?php
+
     }
 
 }
@@ -265,6 +353,36 @@ if ( ! function_exists( 'eames_account_modal' ) ) {
 if ( ! function_exists( 'eames_cart_modal' ) ) {
 
     function eames_cart_modal() {
+
+        global $woocommerce;
+
+        ?>
+
+        <div class="header-cart">
+
+            <div class="cart-toggle toggle" data-toggle-target=".cart-modal">
+
+                <p><?php _e( 'Basket', 'eames' ); ?></p>
+
+                <?php if ( $woocommerce->cart->cart_contents_count ) : ?>
+                
+                    <div class="cart-count <?php echo $cart_count_classes; ?>">
+                        <?php echo $woocommerce->cart->cart_contents_count; ?>
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+
+            <div class="cart-modal modal arrow-right diva">
+
+                <div class="widget_shopping_cart_content"></div>
+
+            </div><!-- .cart-modal -->
+
+        </div><!-- .header-cart -->
+        
+        <?php
 
     }
 

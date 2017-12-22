@@ -114,6 +114,47 @@ WP.mobileMenu = {
 } // WP.mobileMenu
 
 
+// ======================================================================= Toggles
+WP.toggles = {
+	
+	init: function () {
+
+		$( '.toggle' ).on( 'click', function( e ){
+
+			console.log( e );
+			
+			// Get our targets
+			var targetString = $( this ).data( 'toggle-target' );
+			var target = $( targetString );
+
+			// Untoggle any currently toggled toggles
+			$( '.toggle' ).not( this ).removeClass( 'active' );
+			
+			// The diva toggleable elements steal the stage for themselves
+			$( '.diva' ).not( target ).each( function() {
+				if ( $( this ).hasClass( 'active' ) ) {
+					$( this ).removeClass( 'active' );
+				}
+			} );
+
+			// Toggle the target of the clicked toggle
+			if ( $( this ).data( 'toggle-type' ) == 'slidetoggle' ) {
+				$( this ).toggleClass( 'active' );
+				var duration = $( this ).data( 'toggle-duration' ) ? $( this ).data( 'toggle-duration' ) : 400;
+				target.slideToggle( duration );
+			} else {
+				$( this ).add( target ).toggleClass( 'active' );
+			}
+
+			return false;
+		
+		} );
+
+	}
+
+} // WP.toggles
+
+
 // ==================================================================== Sticky Menu
 WP.stickyMenu = {
 	
@@ -574,6 +615,8 @@ WP.ajaxSearch = {
 doc.ready( function( ) {
 
 	WP.mobileMenu.init();							// Mobile menu
+
+	WP.toggles.init();								// Toggles
 
 	WP.stickyMenu.init();							// Sticky menu
 

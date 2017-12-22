@@ -349,7 +349,7 @@ img {
 
 .site-header .header-titles {
 	margin: 0 auto;
-	max-width: calc( 100% - 400px );
+	max-width: calc( 100% - 600px );
 	text-align: center;
 }
 
@@ -397,7 +397,7 @@ img {
 	font-size: 14px;
 	opacity: 0;
 	position: absolute;
-		top: calc( 100% + 10px );
+		top: calc( 100% + 15px );
 	transform: translateY( 5px );
 	transition: opacity .15s linear, transform .15s linear, left .0s .15s, right 0s .15s;
 	width: 300px;
@@ -423,7 +423,7 @@ img {
 }
 
 .modal.arrow-right {
-	left: 9999px;
+	right: 9999px;
 }
 
 .modal.arrow-left.active {
@@ -577,10 +577,180 @@ img {
 }
 
 
+/* Header Toggle Base ----------------------------- */
+
+
+.site-header .toggle {
+	align-items: center;
+	cursor: pointer;
+	display: flex;
+	height: 28px;
+	padding-right: 43px;
+}
+
+.site-header .toggle:hover {
+	text-decoration: none;
+}
+
+.site-header .toggle:before {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	content: "";
+	display: block;
+	height: 28px;
+	position: absolute;
+		right: 0;
+		top: calc( 50% - 14px );
+	width: 28px;
+}
+
+.site-header .toggle p {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+
 /* Header Account Modal ----------------------------- */
 
 
+.header-account {
+	position: absolute;
+		top: 50%;
+		right: 145px;
+	transform: translateY( -50% );
+	z-index: 5;
+}
+
+.account-toggle:before {
+	background-image: url( ./assets/svg/account-black.svg );
+}
+
+/* NOT LOGGED IN */
+
+.account-modal form {
+	padding: 20px;
+}
+
+.account-modal .form-row-first label,
+.account-modal .form-row-last label {
+	display: block;
+	font-size: 14px;
+	margin-bottom: 5px;
+}
+
+.account-modal form .input-text {
+	padding: 13px 15px;
+}
+
+.account-modal form input[type="submit"] {
+	margin-right: 10px;
+	min-width: 0;
+	padding: 12px 25px;
+}
+
+.account-modal form p.lost_password {
+	background: #F5F5F7;
+	margin: 20px -20px -20px;
+	padding: 20px 20px;
+	text-align: center;
+}
+
+/* LOGGED IN */
+
+.account-modal header,
+.account-modal nav,
+.account-modal footer {
+	display: block;
+	text-align: left;
+}
+
+.account-modal header {
+	padding: 20px 20px;
+}
+
+.account-modal header strong {
+	display: block;
+	font-weight: 500;
+}
+
+.account-modal header span {
+	display: block;
+	margin-top: 2px;
+}
+
+.account-modal nav,
+.account-modal footer {
+	border-top: 1px solid #e1e1e5;
+	padding: 10px 0;
+}
+
+.account-modal.logged-in a {
+	background: #fff;
+	display: block;
+	font-weight: 500;
+	padding: 14px 20px 16px 54px;
+	position: relative;
+}
+
+.account-modal.logged-in a:hover {
+	background-color: #F5F5F7;
+	text-decoration: none;
+}
+
+.account-modal.logged-in a:before {
+	background: no-repeat center;
+	content: "";
+	display: block;
+	height: 22px;
+	position: absolute;
+		left: 16px;
+		top: calc( 50% - 11px );
+	width: 22px;
+}
+
+.account-modal.logged-in a.edit-account:before { background-image: url( ./assets/svg/cog-black.svg ); background-size: 17px auto; }
+.account-modal.logged-in a.edit-address:before { background-image: url( ./assets/svg/location-black.svg ); background-size: auto 19px; }
+.account-modal.logged-in a.orders:before { background-image: url( ./assets/svg/orders-black.svg ); background-size: auto 21px; }
+.account-modal.logged-in a.log-out:before { background-image: url( ./assets/svg/sign-out-arrow-black.svg ); background-size: 16px auto; }
+
+
 /* Header Cart Modal ----------------------------- */
+
+.header-cart {
+	position: absolute;
+		top: 50%;
+		right: 0;
+	transform: translateY( -50% );
+	z-index: 5;
+}
+
+.cart-toggle:before {
+	background-image: url( ./assets/svg/cart-black.svg );
+}
+
+.cart-count {
+	align-items: center;
+	background: #111;
+	border: 2px solid #fff;
+	box-sizing: border-box;
+	border-radius: 50%;
+	color: #fff;
+	display: flex;
+	font-size: 10px;
+	font-weight: 700;
+	height: 24px;
+	justify-content: center;
+	padding-bottom: 2px;
+	position: absolute;
+		top: -11px;
+		right: -10px;
+	width: 24px;
+}
+
+.header-cart .widget_shopping_cart_content {
+	padding: 16px;
+}
 
 
 
@@ -2360,6 +2530,10 @@ ul.page-numbers .next { right: 0; }
 	margin-top: 3px;
 }
 
+.eames-widget-list .meta ins {
+	text-decoration: none;
+}
+
 .eames-widget-list a:hover {
 	text-decoration: none;
 }
@@ -2594,6 +2768,28 @@ ul.page-numbers .next { right: 0; }
 @media ( max-width: 1300px ) {
 
 
+	/* Site Header ---------------------------- */
+
+	.site-header .toggle p {
+		display: none;
+	}
+
+	.header-account {
+		right: 100px;
+	}
+
+	.header-account:after {
+		background: #e1e1e5;
+		content: "";
+		display: block;
+		height: 38px;
+		position: absolute;
+			right: -38px;
+			top: calc( 50% - 19px );
+		width: 1px;
+	}
+
+
 	/* Page Content ---------------------------- */
 
 	.page-content .gallery {
@@ -2702,6 +2898,10 @@ ul.page-numbers .next { right: 0; }
 	.header-account,
 	.social-menu.header {
 		display: none;
+	}
+
+	.header-cart {
+		right: 5%;
 	}
 
 
