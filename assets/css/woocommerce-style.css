@@ -119,6 +119,9 @@ p.stars.selected a:not(.active):before {
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .breadcrumbs .seperator {
@@ -138,6 +141,7 @@ p.stars.selected a:not(.active):before {
 
 
 /* WC Tabs ----------------------------- */
+
 
 .woocommerce-tabs {
     display: flex;
@@ -334,8 +338,6 @@ p.stars.selected a:not(.active):before {
     margin-top: 10px;
 }
 
-/* INFO SPECIFIC */
-
 
 /* -------------------------------------------------------------------------------- */
 /*	X. Product Archive
@@ -492,6 +494,17 @@ li.product .price ins {
     display: flex;
     justify-content: space-between;
     padding-bottom: 80px;
+    position: relative;
+}
+
+.product-upper-wrapper .onsale {
+    font-size: 16px;
+    height: 100px;
+    left: -20px;
+    right: auto;
+    top: 20px;
+    width: 100px;
+    z-index: 5;
 }
 
 .product-lower-wrapper {
@@ -514,14 +527,25 @@ li.product .price ins {
 
 .woocommerce-product-gallery {
     max-width: 50%;
-}
-
-.woocommerce-product-gallery__image:not(:first-child) {
-    display: none;
+    position: relative;
 }
 
 .woocommerce-product-gallery img {
     width: 100%;
+}
+
+.woocommerce-product-gallery .flex-control-nav {
+    position: static;
+    margin: 0 -5px;
+}
+
+.woocommerce-product-gallery .flex-control-nav li {
+    padding: 10px 5px 0;
+    width: 100px;
+}
+
+.woocommerce-product-gallery .flex-control-nav li:hover img {
+    cursor: pointer;
 }
 
 
@@ -546,7 +570,7 @@ li.product .price ins {
     margin: 20px 0 25px 0;
 }
 
-.single-product .product-price-rating .price {
+.single-product .product-upper-wrapper .price {
     font-size: 24px;
     font-weight: 500;
 }
@@ -633,6 +657,10 @@ li.product .price ins {
 
 .product-upper-wrapper table.variations tr + tr {
     border-top: none;
+}
+
+.variations_form .woocommerce-variation {
+    margin-bottom: 30px;
 }
 
 
@@ -955,6 +983,10 @@ li.product .price ins {
 
     /* Product Archive ----------------------------- */
 
+    .breadcrumbs {
+        margin-bottom: 12px;
+    }
+
     .term-has-image .woocommerce-products-header, 
     .term-missing-image .woocommerce-products-header {
         margin-bottom: 40px;
@@ -962,6 +994,16 @@ li.product .price ins {
 
     .term-description p {
         font-size: 18px;
+    }
+
+    .woocommerce-result-count .prefix {
+        display: none;
+    }
+
+    .onsale {
+        font-size: 12px;
+        height: 50px;
+        width: 50px;
     }
 
 
@@ -978,11 +1020,28 @@ li.product .price ins {
 
     /* Upper Wrapper */
 
+    .product-upper-wrapper .onsale {
+        font-size: 14px;
+        height: 80px;
+        left: 0;
+        top: 5vw;
+        width: 80px;
+    }
+
     .woocommerce-product-gallery {
         max-width: 100vw;
         position: relative;
             left: calc( 50% - 50vw );
         width: 100vw;
+    }
+
+    .woocommerce-product-gallery .flex-control-nav {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .woocommerce-product-gallery .flex-control-nav li {
+        width: 80px;
     }
 
     .single-product .summary h1 {
@@ -993,7 +1052,7 @@ li.product .price ins {
         margin: 15px 0 20px;
     }
 
-    .single-product .product-price-rating .price {
+    .single-product .product-upper-wrapper .price {
         font-size: 20px;
     }
 
@@ -1035,6 +1094,7 @@ li.product .price ins {
     }
 
     .product-lower-wrapper .wc-tabs a {
+        font-size: 14px;
         padding-left: 5%;
     }
 
@@ -1056,6 +1116,10 @@ li.product .price ins {
 
     #reviews li + li {
         margin-top: 10px;
+    }
+
+    #reviews .comment-text .description {
+        font-size: 15px;
     }
 
     #review_form .comment-respond {
