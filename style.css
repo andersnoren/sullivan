@@ -1538,10 +1538,6 @@ img {
 	color: rgba( 0, 0, 0, .35 );
 }
 
-.dark-mode .comments-pagination ul.page-numbers.dots {
-	color: rgba( 255, 255, 255, .35 );
-}
-
 .comments-pagination .prev,
 .comments-pagination .next {
 	padding: 0;
@@ -1764,10 +1760,6 @@ blockquote cite:before {
 	color: rgba( 0, 0, 0, .5 );
 }
 
-.dark-mode .wp-caption-text {
-	color: rgba( 255, 255, 255, .5 );
-}
-
 .wp-caption-text a {
 	color: inherit;
 }
@@ -1923,17 +1915,6 @@ input[type="url"]:focus {
 	outline: none;
 }
 
-.dark-mode textarea,
-.dark-mode input[type="email"],
-.dark-mode input[type="password"],
-.dark-mode input[type="search"],
-.dark-mode input[type="tel"],
-.dark-mode input[type="text"],
-.dark-mode input[type="url"] {
-	border-color: rgba( 255, 255, 255, 0.3 );
-	color: #fff;
-}
-
 select {
 	background: #fff url( ./assets/svg/chevron-down-black.svg ) no-repeat;
 	background-position: calc( 100% - 14px ) center;
@@ -2001,12 +1982,16 @@ table {
     width: 100%;
 }
 
+tr {
+	border-bottom: 1px solid #e1e1e5;
+}
+
 th,
 td {
     line-height: 1.4;
 	margin: 0;
 	overflow: visible;
-    padding: 2.5%;
+    padding: 20px;
 }
 
 caption {
@@ -2023,11 +2008,8 @@ thead {
 }
 
 th { 
-	font-weight: 700; 
+	font-weight: 500; 
 }
-
-tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
-.dark-mode tbody > tr:nth-child(odd) { background: rgba( 255, 255, 255, 0.1 ); }
 
 
 /* -------------------------------------------------------------------------------- */

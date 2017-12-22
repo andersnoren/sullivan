@@ -161,6 +161,8 @@ if ( ! function_exists( 'eames_post_classes' ) ) {
 
 	function eames_post_classes( $classes ) {
 
+		global $post;
+
 		// Class indicating presence/lack of post thumbnail
 		$classes[] = ( has_post_thumbnail() ? 'has-thumbnail' : 'missing-thumbnail' );
 		
@@ -1018,6 +1020,29 @@ if ( ! function_exists( 'eames_get_fallback_image_url' ) ) {
 
 		return $fallback_image_url;
  
+	}
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   CHECK WHETHER STRING HAS WOOCOMMERCE SHORTCODES
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
+
+	function eames_string_has_woo_shortcodes( $content ) {
+
+		// Check whether we have WooCommerce shortcode on this page
+		if ( has_shortcode( $content, 'woocommerce_my_account' )
+		|| has_shortcode( $content, 'woocommerce_checkout' )
+		|| has_shortcode( $content, 'woocommerce_cart' ) ) {
+			return true;
+		}
+
+		return false;
+
 	}
 
 }

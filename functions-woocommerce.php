@@ -89,6 +89,30 @@ if ( ! function_exists( 'eames_woo_remove_title_on_shop_home' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+	WOOCOMMERCE SPECIFIC BODY CLASSES
+	--------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eames_woo_body_classes' ) ) {
+
+    function eames_woo_body_classes( $classes ) {
+
+        // Check if term has an image set
+        if ( is_product_category() && get_woocommerce_term_meta( get_queried_object()->term_id, 'thumbnail_id', true ) ) {
+            $classes[] = 'term-has-image';
+        } else {
+            $classes[] = 'term-missing-image';
+        }
+
+        return $classes;
+
+    }
+    add_action( 'body_class', 'eames_woo_body_classes', 1 );
+
+}
+
+
+
+/* ---------------------------------------------------------------------------------------------
 	ADD THE HERO SLIDER TO THE SHOP HOME PAGE
     --------------------------------------------------------------------------------------------- */
 
@@ -147,6 +171,26 @@ if ( ! function_exists( 'eames_woo_breadcrumbs_arguments' ) ) {
     }
     add_filter( 'woocommerce_breadcrumb_defaults', 'eames_woo_breadcrumbs_arguments' );
 
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   WRAP SINGLE PRODUCT UPPER AREA
+   --------------------------------------------------------------------------------------------- */
+
+
+   if ( ! function_exists( 'eames_woo_wrap_archive_header_tools_opening' ) ) {
+    function eames_woo_wrap_archive_header_tools_opening() {
+        echo '<div class="archive-header-tools">';
+    }
+    add_action( 'woocommerce_before_shop_loop', 'eames_woo_wrap_archive_header_tools_opening', 15 );
+}
+
+if ( ! function_exists( 'eames_woo_wrap_archive_header_tools_closing' ) ) {
+    function eames_woo_wrap_archive_header_tools_closing() {
+        echo '</div>';
+    }
+    add_action( 'woocommerce_before_shop_loop', 'eames_woo_wrap_archive_header_tools_closing', 35 );
 }
 
 
@@ -241,6 +285,32 @@ function eames_woo_custom_thumbnail() {
 
 }
 add_action( 'init', 'eames_woo_custom_thumbnail' );
+
+
+/* ---------------------------------------------------------------------------------------------
+	SHOW PRODUCT CATEGORY IMAGE ON THE START OF PRODUCT ARCHIVE
+	--------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eames_woo_product_archive_image' ) ) {
+
+    function eames_woo_product_archive_image() {
+        if ( is_product_category() && get_woocommerce_term_meta( get_queried_object()->term_id, 'thumbnail_id', true ) ) {
+            
+            $image_id = get_woocommerce_term_meta( get_queried_object()->term_id, 'thumbnail_id', true );
+            $image_obj = wp_get_attachment_image_src( $image_id, 'fullscreen' );
+            $image_url = $image_obj[0];
+
+            ?>
+
+            <figure class="page-hero bg-image bg-attach" style="background-image: url( <?php echo $image_url; ?> );"></figure><!-- .page-hero -->
+
+            <?php
+        }
+    }
+    add_action( 'woocommerce_before_main_content', 'eames_woo_product_archive_image', 1 );
+
+}
+    
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -365,7 +435,7 @@ if ( ! function_exists( 'eames_cart_modal' ) ) {
                 <p><?php _e( 'Basket', 'eames' ); ?></p>
 
                 <?php if ( $woocommerce->cart->cart_contents_count ) : ?>
-                
+
                     <div class="cart-count <?php echo $cart_count_classes; ?>">
                         <?php echo $woocommerce->cart->cart_contents_count; ?>
                     </div>
