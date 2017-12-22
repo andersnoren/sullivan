@@ -1,0 +1,142 @@
+/* -----------------------------------------------------------------------------------
+
+	WOOCOMMERCE SPECIFIC STYLES
+
+-------------------------------------------------------------------------------------- */
+
+
+/* -------------------------------------------------------------------------------- */
+/*	X. Product Archive
+/* -------------------------------------------------------------------------------- */
+
+
+/* Products Header ----------------------------- */
+
+.post-type-archive-product #site-content .section-inner {
+    position: relative;
+}
+
+.woocommerce-result-count {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 60px;
+}
+
+.woocommerce-ordering {
+    position: absolute;
+        right: 0;
+        top: -11px;
+    width: 160px;
+}
+
+
+/* Products Grid ----------------------------- */
+
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-left: -40px;
+}
+
+.products li {
+    margin: 0 0 60px 40px;
+    position: relative;
+    width: calc( 25% - 40px );
+}
+
+
+/* Product Preview ----------------------------- */
+
+
+.onsale {
+    align-items: center;
+    background: #111;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+    height: 60px;
+    justify-content: center;
+    position: absolute;
+        left: -10px;
+        top: 10px;
+    width: 60px;
+}
+
+
+/* -------------------------------------------------------------------------------- */
+/*	X. Single Product
+/* -------------------------------------------------------------------------------- */
+
+
+/* -------------------------------------------------------------------------------- */
+/*	X. Checkout
+/* -------------------------------------------------------------------------------- */
+
+
+/* -------------------------------------------------------------------------------- */
+/*	X. Checkout
+/* -------------------------------------------------------------------------------- */
+
+
+
+/* -------------------------------------------------------------------------------- */
+/*	X. Media Queries
+/* -------------------------------------------------------------------------------- */
+
+
+@media ( max-width: 1100px ) {
+
+
+    /* Product Archive ----------------------------- */
+
+    .products {
+        margin-left: -30px;
+    }
+
+    .products li {
+        margin: 0 0 40px 30px;
+        width: calc( 33.3% - 30px );
+    }
+
+
+}
+
+
+@media ( max-width: 800px ) {
+
+
+    /* Product Archive ----------------------------- */
+
+    .products {
+        margin-left: -20px;
+    }
+
+    .products li {
+        margin: 0 0 40px 20px;
+        width: calc( 33.3% - 20px );
+    }
+
+    
+}
+
+
+@media ( max-width: 500px ) {
+
+
+    /* Product Archive ----------------------------- */
+
+    .products {
+        margin-left: -10px;
+    }
+
+    .products li {
+        margin: 0 0 30px 10px;
+        width: calc( 50% - 10px );
+    }
+
+    
+}

@@ -28,6 +28,8 @@
 	10.	Site Footer
 	11. Media Queries
 
+	WooCommerce specific styles are located in assets/css/woocoommerce-style.css.
+
 ----------------------------------------------------------------------------------- */
 
 
@@ -768,6 +770,167 @@ img {
 /* -------------------------------------------------------------------------------- */
 
 
+/* Hero Slider ---------------------------- */
+
+
+.hero-slider {
+	position: relative;
+}
+
+.hero-slider .dark-overlay:before {
+	background: linear-gradient( -26deg, rgba( 0, 0, 0, 0 ) 5%, rgba( 0, 0, 0, 0.7 ) );
+}
+
+.hero-slider .slides,
+.hero-slider .slide,
+.hero-slider .slide > .bg-image {
+	display: flex !important;
+}
+
+.hero-slider .slide {
+	opacity: 0;
+	transition: opacity .15s linear;
+}
+
+.hero-slider .slide.only-image .dark-overlay:before {
+	content: none;
+}
+
+.hero-slider.loaded .slide {
+	opacity: 1;
+}
+
+.hero-slider .slide > .bg-image {
+	align-items: center;
+	width: 100%;
+}
+
+.hero-slider .slide .section-inner {
+	padding: 140px 0;
+	position: relative;
+}
+
+.hero-slider .slide header {
+	max-width: 600px;
+	opacity: 1;
+	transition: opacity .15s linear;
+}
+
+.hero-slider.sliding .slide header {
+	opacity: 0;	
+}
+
+.hero-slider .slide h1,
+.hero-slider .slide p {
+	text-shadow: 0 1px 0 rgba( 17, 17, 17, 0.155 );
+}
+
+.hero-slider .slide .button-wrapper {
+	margin-top: 40px;
+}
+
+
+/* FLEX DIRECTION NAV */
+
+
+.flex-direction-nav a {
+	display: block;
+	opacity: 0;
+	position: absolute;
+		bottom: 0;
+		top: 0;
+	text-indent: -9999px;
+	transition: all .2s linear;
+	width: 90px;
+}
+
+.flex-direction-nav a:before {
+	background: no-repeat center;
+	background-size: contain;
+	content: "";
+	display: block;
+	height: 20px;
+	position: absolute;
+		left: calc( 50% - 14px );
+		top: calc( 50% - 10px );
+	width: 28px;
+}
+
+.flex-direction-nav .flex-prev { 
+	left: 0;
+	background-image: linear-gradient(270deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.50) 100%); 
+}
+
+.flex-direction-nav .flex-prev:before {
+	background-image: url( ./assets/svg/arrow-left-white.svg );
+}
+
+.flex-direction-nav .flex-next { 
+	right: 0;
+	background-image: linear-gradient(-270deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.50) 100%); 
+}
+
+.flex-direction-nav .flex-next:before {
+	background-image: url( ./assets/svg/arrow-right-white.svg );
+}
+
+.flex-direction-nav a:hover {
+	opacity: 1;
+	width: 100px;
+}
+
+
+/* FLEX CONTROL NAV */
+
+.flex-control-nav {
+	display: flex;
+	position: absolute;
+		bottom: 25px;
+		left: 25px;
+	transition: all .25s linear;
+}
+
+.hero-slider .flex-control-nav {
+	left: calc( 50vw - 640px );
+}
+
+.flex-control-nav.has-background {
+	background: rgba( 0, 0, 0, 0.1 );
+	border-radius: 4px;
+	margin: -4px -6px;
+	padding: 4px 6px;
+}
+
+.flex-control-nav a {
+	display: block;
+	text-indent: -9999px;
+	height: 20px;
+	position: relative;
+	width: 20px;
+}
+
+.flex-control-nav a:before {
+	background: rgba( 255, 255, 255, .4 );
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 10px;
+	position: absolute;
+		left: 5px;
+		top: 5px;
+	transition: background-color .15s linear;
+	width: 10px;
+}
+
+.flex-control-nav a:hover:before,
+.flex-control-nav a.flex-active:before {
+	background: rgba( 255, 255, 255, 1 );
+}
+
+
+/* Posts wrapper ----------------------------- */
+
+
 .posts article + article {
 	border-top: 1px solid #e1e1e5;
 	margin-top: 50px;
@@ -1298,6 +1461,15 @@ hr {
 .entry-content h5 { font-size: 24px; font-weight: 700; }
 .entry-content h6 { font-size: 20px; font-weight: 700; }
 
+.entry-content h1 + figure,
+.entry-content h2 + figure,
+.entry-content h3 + figure,
+.entry-content h4 + figure,
+.entry-content h5 + figure,
+.entry-content h6 + figure {
+	margin-top: 0;
+}
+
 .entry-content p {
 	line-height: 1.5;
 	margin-bottom: 20px;
@@ -1595,6 +1767,19 @@ input[type="url"]:focus {
 	color: #fff;
 }
 
+select {
+	background: #fff url( ./assets/svg/chevron-down-black.svg ) no-repeat;
+	background-position: calc( 100% - 14px ) center;
+	border-radius: 2px;
+	border: 1px solid #e1e1e5;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 9px 40px 11px 12px;
+	-webkit-appearance: none;
+	width: 100%;
+}
+
 button,
 .button,
 input[type="button"],
@@ -1709,6 +1894,28 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 /* -------------------------------------------------------------------------------- */
 
 
+/* Page Content Media ---------------------------- */
+
+/* IMAGES */
+
+.page-content .alignnone {
+	margin-left: -135px;
+	margin-right: -135px;
+	max-width: calc( 100% + 270px ) !important;
+}
+
+.page-content .alignleft {
+	margin-left: -135px;
+	width: 50%;
+}
+
+.page-content .alignright {
+	margin-right: -135px;
+	width: 50%;
+}
+
+/* VANILLA GALLERIES */
+
 .page-content .gallery {
 	margin: 52px 0 30px 0;
 	position: relative;
@@ -1793,174 +2000,6 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 .template-full-width #site-content .section-inner.thin {
 	max-width: 124rem;
 }
-
-
-/* -------------------------------------------------------------------------------- */
-/*	X.	Product Archive
-/* -------------------------------------------------------------------------------- */
-
-
-/* Hero Slider ---------------------------- */
-
-
-.hero-slider {
-	position: relative;
-}
-
-.hero-slider .dark-overlay:before {
-	background: linear-gradient( -26deg, rgba( 0, 0, 0, 0 ) 5%, rgba( 0, 0, 0, 0.7 ) );
-}
-
-.hero-slider .slides,
-.hero-slider .slide,
-.hero-slider .slide > .bg-image {
-	display: flex !important;
-}
-
-.hero-slider .slide {
-	opacity: 0;
-	transition: opacity .15s linear;
-}
-
-.hero-slider .slide.only-image .dark-overlay:before {
-	content: none;
-}
-
-.hero-slider.loaded .slide {
-	opacity: 1;
-}
-
-.hero-slider .slide > .bg-image {
-	align-items: center;
-	width: 100%;
-}
-
-.hero-slider .slide .section-inner {
-	padding: 140px 0;
-	position: relative;
-}
-
-.hero-slider .slide header {
-	max-width: 600px;
-	opacity: 1;
-	transition: opacity .15s linear;
-}
-
-.hero-slider.sliding .slide header {
-	opacity: 0;	
-}
-
-.hero-slider .slide h1,
-.hero-slider .slide p {
-	text-shadow: 0 1px 0 rgba( 17, 17, 17, 0.155 );
-}
-
-.hero-slider .slide .button-wrapper {
-	margin-top: 40px;
-}
-
-
-/* FLEX DIRECTION NAV */
-
-
-.flex-direction-nav a {
-	display: block;
-	opacity: 0;
-	position: absolute;
-		bottom: 0;
-		top: 0;
-	text-indent: -9999px;
-	transition: all .2s linear;
-	width: 90px;
-}
-
-.flex-direction-nav a:before {
-	background: no-repeat center;
-	background-size: contain;
-	content: "";
-	display: block;
-	height: 20px;
-	position: absolute;
-		left: calc( 50% - 14px );
-		top: calc( 50% - 10px );
-	width: 28px;
-}
-
-.flex-direction-nav .flex-prev { 
-	left: 0;
-	background-image: linear-gradient(270deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.50) 100%); 
-}
-
-.flex-direction-nav .flex-prev:before {
-	background-image: url( ./assets/svg/arrow-left-white.svg );
-}
-
-.flex-direction-nav .flex-next { 
-	right: 0;
-	background-image: linear-gradient(-270deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.50) 100%); 
-}
-
-.flex-direction-nav .flex-next:before {
-	background-image: url( ./assets/svg/arrow-right-white.svg );
-}
-
-.flex-direction-nav a:hover {
-	opacity: 1;
-	width: 100px;
-}
-
-
-/* FLEX CONTROL NAV */
-
-.flex-control-nav {
-	display: flex;
-	position: absolute;
-		bottom: 25px;
-		left: 25px;
-	transition: all .25s linear;
-}
-
-.hero-slider .flex-control-nav {
-	left: calc( 50vw - 640px );
-}
-
-.flex-control-nav.has-background {
-	background: rgba( 0, 0, 0, 0.1 );
-	border-radius: 4px;
-	margin: -4px -6px;
-	padding: 4px 6px;
-}
-
-.flex-control-nav a {
-	display: block;
-	text-indent: -9999px;
-	height: 20px;
-	position: relative;
-	width: 20px;
-}
-
-.flex-control-nav a:before {
-	background: rgba( 255, 255, 255, .4 );
-	border-radius: 50%;
-	content: "";
-	display: block;
-	height: 10px;
-	position: absolute;
-		left: 5px;
-		top: 5px;
-	transition: background-color .15s linear;
-	width: 10px;
-}
-
-.flex-control-nav a:hover:before,
-.flex-control-nav a.flex-active:before {
-	background: rgba( 255, 255, 255, 1 );
-}
-
-
-/* -------------------------------------------------------------------------------- */
-/*	X.	Product Single
-/* -------------------------------------------------------------------------------- */
 
 
 /* -------------------------------------------------------------------------------- */
@@ -2523,7 +2562,7 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	}
 
 
-	/* Product Archive ---------------------------- */
+	/* Blog Archive ---------------------------- */
 
 	/* HERO SLIDER */
 
@@ -2958,10 +2997,33 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 }
 
 
+@media ( max-width: 900px ) {
+
+
+	/* Page Content ---------------------------- */
+
+	.page-content .alignnone {
+		margin-left: 0;
+		margin-right: 0;
+		max-width: 100% !important;
+	}
+
+	.page-content .alignleft {
+		margin-left: 0;
+	}
+
+	.page-content .alignright {
+		margin-right: 0;
+	}
+
+
+}
+
+
 @media ( max-width: 800px ) {
 
 
-	/* Product Archive ---------------------------- */
+	/* Blog Archive ---------------------------- */
 
 	/* SLIDESHOWS */
 
@@ -2969,8 +3031,7 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 		display: none;
 	}
 
-
-	/* Blog Archive ---------------------------- */
+	/* BLOG STRUCTURE */
 
 	.post-inner.between {
 		display: block;
@@ -3252,14 +3313,23 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	}
 
 
-	/* Product Archive ---------------------------- */
+	/* Blog Archive ---------------------------- */
 
 	/* SLIDESHOWS */
+
+	.hero-slider .slide .section-inner {
+		padding: 80px 0;
+	}
+
+	.hero-slider .slide .button-wrapper {
+		margin-top: 25px;
+	}
 
 	.slider-caption {
 		font-size: 12px;
 		padding: 10px 15px;
 	}
+
 
 	/* Single Post ---------------------------- */
 
@@ -3354,6 +3424,14 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 
 
 	/* Page Content ---------------------------- */
+	
+	.page-content .alignleft {
+		margin: 5px 30px 20px 0;
+	}
+
+	.page-content .alignright {
+		margin: 5px 0 20px 30px;
+	}
 
 	.page-content .gallery {
 		margin: 30px 0 20px;
@@ -3361,17 +3439,6 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	
 	.gallery + .gallery {
 		margin-top: -20px;
-	}
-
-
-	/* Product Archive ---------------------------- */
-
-	.hero-slider .slide .section-inner {
-		padding: 80px 0;
-	}
-
-	.hero-slider .slide .button-wrapper {
-		margin-top: 25px;
 	}
 
 

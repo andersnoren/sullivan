@@ -35,6 +35,9 @@ if ( ! function_exists( 'eames_setup' ) ) {
 
 		// Post formats
 		add_theme_support( 'post-formats', array( 'gallery' ) );
+
+		// Declare WooCommerce support
+		add_theme_support( 'woocommerce' );
 		
 		// Title tag
 		add_theme_support( 'title-tag' );
@@ -75,9 +78,17 @@ if ( ! function_exists( 'eames_load_style' ) ) {
 	function eames_load_style() {
 		if ( ! is_admin() ) {
 			wp_register_style( 'eames-google-fonts', 'https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,400i,500,700,700i&amp;subset=latin-ext', array(), null );
-			wp_register_style( 'eames_fontawesome', get_stylesheet_directory_uri() . '/assets/font-awesome/css/font-awesome.css' );
+			wp_register_style( 'eames-fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.css' );
 
-			wp_enqueue_style( 'eames-style', get_stylesheet_uri(), array( 'eames-google-fonts', 'eames_fontawesome' ) );
+			$dependencies = array( 'eames-google-fonts', 'eames-fontawesome' );
+
+			// Add WooCommerce styles, if WC is activated
+			if ( eames_is_woocommerce_activated() ) {
+				wp_register_style( 'eames-woocommerce', get_template_directory_uri() . '/assets/css/woocommerce-style.css' );
+				$dependencies[] = 'eames-woocommerce';
+			}
+
+			wp_enqueue_style( 'eames-style', get_template_directory_uri() . '/style.css', $dependencies );
 		} 
 	}
 	add_action( 'wp_enqueue_scripts', 'eames_load_style' );
