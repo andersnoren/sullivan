@@ -38,6 +38,8 @@ if ( ! function_exists( 'eames_setup' ) ) {
 
 		// Declare WooCommerce support
 		add_theme_support( 'woocommerce' );
+		add_theme_support( 'wc-product-gallery-lightbox' );
+		add_theme_support( 'wc-product-gallery-slider' );
 		
 		// Title tag
 		add_theme_support( 'title-tag' );
