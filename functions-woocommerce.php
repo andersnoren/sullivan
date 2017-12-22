@@ -165,6 +165,19 @@ if ( ! function_exists( 'eames_woo_wrap_single_product_lower_closing' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   ADD SIDEBAR TO PRODUCT SINGLE
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_single_product_sidebar' ) ) {
+    function eames_woo_single_product_sidebar() {
+        get_template_part( 'sidebar' );
+    }
+    add_action( 'woocommerce_after_single_product_summary', 'eames_woo_single_product_sidebar', 3 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
 	CUSTOM FALLBACK IMAGE FOR PRODUCTS
 	--------------------------------------------------------------------------------------------- */
 
