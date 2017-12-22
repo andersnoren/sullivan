@@ -805,7 +805,7 @@ img {
 	opacity: 0;
 }
 
-.post-slider .slider-caption {
+.slider-caption {
 	background: rgba( 17, 17, 17, 0.5 );
 	font-size: 14px;
 	max-width: 100%;
@@ -816,7 +816,7 @@ img {
 	transition: background-color .15s linear;
 }
 
-.post-slider .slider-caption:hover {
+.slider-caption:hover {
 	background: #111;
 }
 
@@ -1464,12 +1464,8 @@ blockquote cite:before {
         display: -ms-flexbox;
     display: flex;
 		-ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
     padding: 0;
-}
-
-.gallery + .gallery {
-	margin-top: -30px;
 }
 
 .gallery .gallery-item {
@@ -1713,7 +1709,16 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 /* -------------------------------------------------------------------------------- */
 
 
+.page-content .gallery {
+	margin: 52px 0 30px 0;
+	position: relative;
+		left: calc( 50% - 640px );
+	width: 1280px;
+}
 
+.gallery + .gallery {
+	margin-top: -30px;
+}
 
 
 /* -------------------------------------------------------------------------------- */
@@ -2530,6 +2535,26 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 }
 
 
+@media ( max-width: 1300px ) {
+
+
+	/* Page Content ---------------------------- */
+
+	.page-content .gallery {
+		padding: 0 10px;
+		position: relative;
+			left: calc( 50% - 50vw );
+		width: 100vw;
+	}
+	
+	.gallery + .gallery {
+		margin-top: -30px;
+	}
+
+
+}
+
+
 @media ( max-width: 1100px ) {
 
 
@@ -3227,6 +3252,15 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	}
 
 
+	/* Product Archive ---------------------------- */
+
+	/* SLIDESHOWS */
+
+	.slider-caption {
+		font-size: 12px;
+		padding: 10px 15px;
+	}
+
 	/* Single Post ---------------------------- */
 
 	.post-header {
@@ -3305,6 +3339,28 @@ tbody > tr:nth-child(odd) { background: rgba( 0, 0, 0, 0.05 ); }
 	input[type="submit"] {
 		min-width: 100px;
 		padding: 13px 19px 14px;
+	}
+
+	/* VANILLA GALLERIES */
+
+	.gallery .gallery-item {
+		margin: 0 0 10px;
+		padding: 0 5px;
+	}
+
+	.gallery .gallery-caption {
+		display: none;
+	}
+
+
+	/* Page Content ---------------------------- */
+
+	.page-content .gallery {
+		margin: 30px 0 20px;
+	}
+	
+	.gallery + .gallery {
+		margin-top: -20px;
 	}
 
 
