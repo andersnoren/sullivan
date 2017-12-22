@@ -3,7 +3,7 @@
     <?php 
     
     // If WC is activated and we're on a WC page, show shop sidebar
-    if ( eames_is_woocommerce_activated() && is_woocommerce() ) {
+    if ( eames_is_woocommerce_activated() && is_woocommerce() && is_active_sidebar( 'sidebar-shop' ) ) {
         dynamic_sidebar( 'sidebar-shop' );
 
     // If not, show blog sidebar
