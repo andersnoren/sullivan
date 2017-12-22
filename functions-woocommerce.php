@@ -57,7 +57,10 @@ if ( ! function_exists( 'eames_woo_remove_actions' ) ) {
         if ( is_shop() ) remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
         // Remove rating from loop items
-	    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+        remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+        
+        // Remove add to cart button from loop items
+        remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
     }
     add_action( 'wp_head', 'eames_woo_remove_actions' );
@@ -99,6 +102,86 @@ if ( ! function_exists( 'eames_woo_hero_slider' ) ) {
     add_action( 'woocommerce_before_main_content', 'eames_woo_hero_slider', 5 );
 
 }
+
+
+/* ---------------------------------------------------------------------------------------------
+   ADJUST WOOCOMMERCE PAGINATION
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_pagination_arguments' ) ) {
+
+    function eames_woo_pagination_arguments( $args ) {
+
+        $args['prev_text'] = __( 'Previous', 'eames' );
+        $args['next_text'] = __( 'Next', 'eames' );
+
+        return $args;
+
+    }
+    add_filter( 'woocommerce_pagination_args', 'eames_woo_pagination_arguments' );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   WRAP SINGLE PRODUCT UPPER AREA
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_wrap_single_product_upper_opening' ) ) {
+    function eames_woo_wrap_single_product_upper_opening() {
+        echo '<section class="product-upper-wrapper">';
+    }
+    add_action( 'woocommerce_before_single_product_summary', 'eames_woo_wrap_single_product_upper_opening', 1 );
+}
+
+if ( ! function_exists( 'eames_woo_wrap_single_product_upper_closing' ) ) {
+    function eames_woo_wrap_single_product_upper_closing() {
+        echo '</section>';
+    }
+    add_action( 'woocommerce_after_single_product_summary', 'eames_woo_wrap_single_product_upper_closing', 1 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   WRAP SINGLE PRODUCT LOWER AREA
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_wrap_single_product_lower_opening' ) ) {
+    function eames_woo_wrap_single_product_lower_opening() {
+        echo '<section class="product-lower-wrapper"><div class="section-inner">';
+    }
+    add_action( 'woocommerce_after_single_product_summary', 'eames_woo_wrap_single_product_lower_opening', 5 );
+}
+
+if ( ! function_exists( 'eames_woo_wrap_single_product_lower_closing' ) ) {
+    function eames_woo_wrap_single_product_lower_closing() {
+        echo '</div></section>';
+    }
+    add_action( 'woocommerce_after_single_product_summary', 'eames_woo_wrap_single_product_lower_closing', 50 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+	CUSTOM FALLBACK IMAGE FOR PRODUCTS
+	--------------------------------------------------------------------------------------------- */
+
+
+function eames_woo_custom_thumbnail() {
+
+    function eames_woo_custom_thumbnail_src_replace( $src ) {
+
+        // Get either the customizer set fallback or the theme default
+        $src = eames_get_fallback_image_url();
+
+        return $src;
+    }
+    add_filter( 'woocommerce_placeholder_img_src', 'eames_woo_custom_thumbnail_src_replace' );
+
+}
+add_action( 'init', 'eames_woo_custom_thumbnail' );
 
 
 /* ---------------------------------------------------------------------------------------------
