@@ -278,17 +278,19 @@ if ( ! function_exists( 'eames_sidebar_registration' ) ) {
 		// If WooCommerce is activated, call the blog sidebar "Sidebar Blog"
 		if ( eames_is_woocommerce_activated() ) {
 			$sidebar_blog_name = __( 'Sidebar Blog', 'eames' );
+			$sidebar_description = __( 'Widgets in this area will be shown in the sidebar on regular posts and pages.', 'eames' );
 		
 		// If not, it's the only sidebar and we can just call it "Sidebar"
 		} else {
 			$sidebar_blog_name = __( 'Sidebar', 'eames' );
+			$sidebar_description = __( 'Widgets in this area will be shown in the sidebar.', 'eames' );
 		}
 
 		// Sidebar Blog
 		register_sidebar( array_merge( array(
 			'name' 			=> $sidebar_blog_name,
 			'id'			=> 'sidebar',
-			'description' 	=> __( 'Widgets in this area will be shown in the sidebar.', 'eames' ),
+			'description' 	=> $sidebar_description,
 		), $shared_args ) );
 
 		// Sidebar Shop (only if WC is activated)
@@ -297,7 +299,7 @@ if ( ! function_exists( 'eames_sidebar_registration' ) ) {
 			register_sidebar( array_merge( array(
 				'name' 			=> __( 'Sidebar Shop', 'eames' ),
 				'id'			=> 'sidebar-shop',
-				'description' 	=> __( 'Widgets in this area will be shown in the sidebar.', 'eames' ),
+				'description' 	=> __( 'Widgets in this area will be shown in the sidebar on shop pages.', 'eames' ),
 			), $shared_args ) );
 
 		}
