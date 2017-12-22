@@ -175,6 +175,35 @@ if ( ! function_exists( 'eames_woo_breadcrumbs_arguments' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   ADJUST WOOCOMMERCE SORTING STRINGS
+   --------------------------------------------------------------------------------------------- */
+
+
+   if ( ! function_exists( 'eames_woo_catalog_orderby_arguments' ) ) {
+
+    function eames_woo_catalog_orderby_arguments( $args ) {
+
+        $args['menu_order'] = __( 'Default sorting', 'eames' );
+        $args['popularity'] = __( 'By popularity', 'eames' );
+        $args['rating']     = __( 'By average rating', 'eames' );
+        $args['date']       = __( 'By newness', 'eames' );
+        $args['price']      = __( 'Price: low to high', 'eames' );
+        $args['price-desc'] = __( 'Price: high to low', 'eames' );
+
+        return $args;
+
+    }
+    add_filter( 'woocommerce_catalog_orderby', 'eames_woo_catalog_orderby_arguments' );
+
+}
+
+
+$catalog_orderby_options = apply_filters( 'woocommerce_catalog_orderby', array(
+    
+) );
+
+
+/* ---------------------------------------------------------------------------------------------
    WRAP SINGLE PRODUCT UPPER AREA
    --------------------------------------------------------------------------------------------- */
 
