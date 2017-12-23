@@ -61,6 +61,8 @@
                     // Conditional content classes, depending on whether we're on an active WooCommerce page
                     if ( $page_has_woocommerce_shortcodes ) {
                         $content_classes = 'section-inner ' . $section_inner_width . ' max-percentage';
+                        // Append class if we're on a my account page (while logged in)
+                        if ( is_account_page() && is_user_logged_in() ) $content_classes .= ' account-wrapper';
                     } else {
                         $content_classes = 'entry-content page-content section-inner ' . $section_inner_width . ' max-percentage';
                     }
@@ -69,8 +71,13 @@
 
                     <div class="<?php echo $content_classes; ?>">
 
-                        <?php the_content(); ?>
-                        <?php wp_link_pages(); ?>
+                        <?php 
+                        the_content();
+                        wp_link_pages();
+
+                        // Show the shop sidebar on my account pages
+                        if ( is_account_page() && is_user_logged_in() ) get_sidebar(); 
+                        ?>
 
                     </div><!-- .entry-content -->
 

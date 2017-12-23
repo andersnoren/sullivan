@@ -1683,20 +1683,25 @@ dd + dt {
 }
 
 address {
-	background: #f1f1f5;
+	background: #F9F9FB;
+	font-size: 16px;
 	line-height: 1.5;
 	margin-bottom: 20px;
 	padding: 20px;
 }
 
+address p {
+	line-height: inherit;
+}
+
 code {
-	background: #f1f1f5;
+	background: #F9F9FB;
 	border-radius: 2px;
 	padding: 0 4px;
 }
 
 pre {
-	background: #f1f1f5;
+	background: #F9F9FB;
 	font-size: 14px;
 	line-height: 1.35;
 	padding: 20px;
@@ -1875,7 +1880,7 @@ fieldset legend {
 }
 
 label {
-	font-size: 0.9em;
+	font-size: 14px;
     margin-bottom: 8px;
 }
 
@@ -1893,7 +1898,7 @@ input[type="url"] {
 	box-shadow: none;
     color: #111;
 	display: block;
-	font-size: 14px;
+	font-size: 15px;
     margin: 0 0 15px 0;
     padding: 15px;
 	transition: border-color .15s ease-in-out;
@@ -1990,8 +1995,12 @@ input[type="submit"].white {
 /* SELECT 2 */
 
 .select2-container {
-	font-size: 14px;
+	font-size: 15px;
 	margin-bottom: 15px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	color: #111;
 }
 
 .select2-container--default .select2-selection--single {

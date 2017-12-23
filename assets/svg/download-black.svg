@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="12px" viewBox="0 0 18 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="My-Account-Dashboard-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-312.000000, -577.000000)">
+        <path d="M326.512575,581.537537 C325.987425,578.950075 323.737425,577 321,577 C318.825075,577 316.950075,578.237425 316.012575,580.037537 C313.762575,580.262575 312,582.174925 312,584.5 C312,586.97485 314.024963,589 316.5,589 L326.25,589 C328.3125,589 330,587.3125 330,585.25 C330,583.262575 328.46265,581.649963 326.512575,581.537537 Z M319.8,583.45 L319.8,580.6 L322.2,580.6 L322.2,583.45 L324.75,583.45 L321,587.2 L317.25,583.45 L319.8,583.45 Z" id="Shape" fill="#111111" fill-rule="nonzero"></path>
+    </g>
+</svg>
