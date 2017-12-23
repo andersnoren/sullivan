@@ -770,6 +770,26 @@ li.product .price {
 }
 
 
+/* Product Content ----------------------------- */
+
+.product_meta {
+    color: #66666E;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+.product_meta span + span:before {
+    color: #99999E;
+    content: "•";
+    margin: 0 10px 0 6px;
+}
+
+.product_meta a {
+    text-decoration: underline;
+}
+
+
 /* Product Reviews ----------------------------- */
 
 #reviews ol {

@@ -65,7 +65,7 @@ if ( ! function_exists( 'eames_woo_remove_actions' ) ) {
         // Remove default output of sidebars
         remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
 
-        // Remove output of categories on single products
+        // Remove output of categories on single products from summary (added to the_content via filter)
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
     }
@@ -130,6 +130,34 @@ if ( ! function_exists( 'eames_woo_hero_slider' ) ) {
 
     }
     add_action( 'woocommerce_before_main_content', 'eames_woo_hero_slider', 5 );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+	ADD PRODUCT SINGLE META TO BOTTOM OF CONTENT
+    --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_product_meta_in_content' ) ) {
+
+    function eames_woo_product_meta_in_content( $content ) {
+
+        // On products, get the single meta and append it to the content
+        if ( is_singular( 'product' ) ) {
+
+            ob_start();
+
+            woocommerce_template_single_meta();
+
+            $content .= ob_get_clean();
+
+        }
+
+        return $content;
+
+    }
+    add_filter( 'the_content', 'eames_woo_product_meta_in_content' );
 
 }
 
