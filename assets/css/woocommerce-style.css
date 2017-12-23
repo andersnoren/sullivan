@@ -1049,7 +1049,7 @@ li.product .price {
 .shop_table.cart td.actions > .button {
     position: absolute;
         right: 0;
-        top: 10px;
+        top: 15px;
 }
 
 
@@ -1080,6 +1080,8 @@ li.product .price {
 
 .shipping-calculator-button {
     color: #99999E;
+    display: block;
+    margin-top: 3px;
     text-decoration: underline;
 }
 
@@ -1534,7 +1536,9 @@ li.product .price {
 
     /* RELATED PRODUCTS */
 
-    .products.related {
+    .products.related, 
+    .products.up-sells, 
+    .cross-sells {
         margin-top: 40px;
     }
 
@@ -1580,7 +1584,29 @@ li.product .price {
         width: 100%;
     }
 
+    /* CART TOTALS */
 
+    .cart_totals {
+        padding: 20px;
+    }
 
+    .cart_totals h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .cart_totals table {
+        margin-bottom: 5px;
+    }
+
+    .cart_totals th, 
+    .cart_totals td {
+        padding: 15px 0;
+    }
+
+    .cart_totals .checkout-button {
+        font-size: 14px;
+        padding: 18px 21px 19px;
+    }
     
 }
