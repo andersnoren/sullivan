@@ -1333,14 +1333,17 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 }
 
 .wc_payment_methods li + li {
+    margin-top: 20px;
     border-top: 1px solid #e1e1e5;
+    padding-top: 20px;
 }
 
 .wc_payment_methods label {
     display: block;
     font-weight: 500;
     font-size: 16px;
-    margin-bottom: 5px;
+    margin-bottom: 0;
+    position: relative;
 }
 
 .wc_payment_methods label:before,
@@ -1350,7 +1353,7 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
     display: block;
     height: 16px;
     position: absolute;
-        left: 0;
+        left: -30px;
         top: -1px;
     width: 16px;
 }
@@ -1363,13 +1366,16 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 .wc_payment_methods label:before {
     background: #fff;
     border: 2px solid #111;
+    cursor: pointer;
 }
 
 .wc_payment_methods label:after {
     background: #111;
     height: 10px;
-    left: 5px;
+    left: -25px;
     top: 4px;
+    transform: scale( 0 );
+    transition: transform .15s ease-out;
     width: 10px;
 }
 
@@ -1379,7 +1385,32 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 
 .wc_payment_methods p {
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+/* PayPal Specific */
+
+.payment_method_paypal img {
+    position: absolute;
+        right: 0;
+        top: 50%;
+    width: 40px;
+    transform: translateY( -50% );
+}
+
+.payment_method_paypal .about_paypal {
+    color: #66666E;
+    font-size: 12px;
+    position: absolute;
+        right: 50px;
+        top: 50%;
+    transform: translateY( -50% );
+}
+
+.payment_method_paypal .about_paypal:hover {
+    color: #111;
+    text-decoration: none;
 }
 
 
