@@ -253,6 +253,80 @@ WP.coverPage = {
 } // WP.coverPage
 
 
+// =======================================================================  Fancy Number Inputs
+
+WP.fancyNumberInputs = {
+
+	init: function(){
+
+		// Add the extra markup
+		$( '<div class="quantity-nav"><div class="quantity-button quantity-up"></div><div class="quantity-button quantity-down"></div></div>' ).insertAfter( '.quantity input' );
+
+		// Loop through all quantity elements and set up our variables
+		$( '.quantity' ).each( function() {
+			var $spinner = $( this ),
+				$input = $spinner.find( 'input[type="number"]' ),
+				inputVal = parseFloat( $input.val() ),
+				$btnUp = $spinner.find( '.quantity-up' ),
+				$btnDown = $spinner.find( '.quantity-down' ),
+				min = $input.attr( 'min' ) ? $input.attr( 'min' ) : 1,
+				max = $input.attr( 'max' ) ? $input.attr( 'max' ) : 99999;
+
+			if ( inputVal >= max ) { $btnUp.addClass( 'disabled' ); }
+			if ( inputVal <= min ) { $btnDown.addClass( 'disabled' ); }
+
+			$input.on( 'change blur', function(){
+
+				var newVal = parseFloat( $( this ).val() );
+
+				if ( ! newVal || newVal <= 0 ) {
+					$( this ).val( 1 );
+					newVal = 1;
+				}
+
+				if ( newVal >= max ) { 
+					$btnUp.addClass( 'disabled' ); 
+				} else if ( newVal <= min ) { 
+					$btnDown.addClass( 'disabled' ); 
+				} else {
+					$btnUp.add( $btnDown ).removeClass( 'disabled' ); 
+				}
+
+			} );
+
+			// Update quantity on increase click
+			$btnUp.on( 'click', function() {
+				var oldValue = parseFloat( $input.val() );
+				if ( oldValue >= max ) {
+					var newVal = oldValue;
+				} else {
+					var newVal = oldValue + 1;
+					$btnDown.removeClass( 'disabled' ); 
+				}
+				$spinner.find( 'input' ).val( newVal );
+				$spinner.find( 'input' ).trigger( 'change' );
+			} );
+
+			// Update quantity on decrease click
+			$btnDown.on( 'click', function() {
+				var oldValue = parseFloat( $input.val() );
+				if ( oldValue <= min ) {
+					var newVal = oldValue;
+				} else {
+					var newVal = oldValue - 1;
+					$btnUp.removeClass( 'disabled' ); 
+				}
+				$spinner.find( 'input' ).val( newVal );
+				$spinner.find( 'input' ).trigger( 'change' );
+			} );
+	
+		} );
+
+	}
+
+}
+
+
 // =======================================================================  Hero Slider
 
 
@@ -623,6 +697,8 @@ doc.ready( function( ) {
 	WP.modals.init();								// Handle modals
 
 	WP.coverPage.init();							// Cover Page specifics
+
+	WP.fancyNumberInputs.init();					// Make the number inputs fancy
 
 	WP.heroSlider.init();							// Hero Slider
 
