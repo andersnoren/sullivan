@@ -1269,11 +1269,93 @@ li.product .price {
 
     /* Cart ----------------------------- */
 
+    /* CART TABLE */
+
+    .shop_table.cart .product-remove {
+        width: 60px;
+    }
+
+    /* CART TOTALS */
+
     .cart_totals {
         width: 100%;
     }
 
     
+}
+
+
+@media ( max-width: 750px ) {
+
+
+    /* Cart ----------------------------- */
+
+    /* CART TABLE */
+
+    .shop_table.cart thead th {
+        display: none;
+    }
+
+    .shop_table.cart tbody {
+        border-top: 1px solid #e1e1e5;
+    }
+
+    .shop_table.cart tbody tr.cart_item {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 14px;
+        min-height: 110px;
+        padding: 15px 0 15px 95px;
+        position: relative;
+    }
+
+    .shop_table.cart .cart_item td {
+        padding: 0;
+    }
+
+    .shop_table.cart .product-thumbnail {
+        padding-right: 0;
+        position: absolute;
+            left: 0;
+            top: 15px;
+    }
+
+    .shop_table.cart .cart_item .product-remove {
+        display: none;
+    }
+
+    .shop_table.cart .product-name {
+        font-size: 18px;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .shop_table.cart .cart_item .product-price,
+    .shop_table.cart .cart_item .product-quantity,
+    .shop_table.cart .cart_item .product-subtotal {
+        width: 33.3%;
+    }
+
+    .shop_table.cart .cart_item .product-price:before,
+    .shop_table.cart .cart_item .product-quantity:before,
+    .shop_table.cart .cart_item .product-subtotal:before {
+        content: attr( data-title );
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 3px;
+    }
+
+    .shop_table.cart .product-quantity input {
+        padding: 4px 8px;
+        width: 50px;
+    }
+
+    .shop_table.cart .product-quantity .quantity-nav {
+        display: none;
+    }
+
+
 }
 
 
@@ -1458,6 +1540,22 @@ li.product .price {
     li.product .price {
         font-size: 13px;
     }
+
+
+    /* Cart ----------------------------- */
+
+    .shop_table.cart .coupon {
+        width: 100%;
+    }
+
+    .shop_table.cart td.actions > .button {
+        margin-top: 30px;
+        padding: 20px;
+        position: static;
+        width: 100%;
+    }
+
+
 
     
 }
