@@ -341,6 +341,33 @@ if ( ! function_exists( 'eames_woo_product_archive_image' ) ) {
 }
     
 
+/* ---------------------------------------------------------------------------------------------
+   UPDATE NUMBER OF ITEMS IN CART-COUNT ON CHANGE
+   --------------------------------------------------------------------------------------------- */
+
+
+function eames_woo_update_cart_count_on_change( $fragments ) {
+
+	global $woocommerce;
+
+	ob_start();
+
+	if ( $woocommerce->cart->cart_contents_count ) : ?>
+
+        <div class="cart-count">
+            <?php echo $woocommerce->cart->cart_contents_count; ?>
+        </div>
+
+    <?php endif;
+
+	$fragments['div.cart-count'] = ob_get_clean();
+
+	// Return our fragments
+	return $fragments;
+
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'eames_woo_update_cart_count_on_change' );
+
 
 /* ---------------------------------------------------------------------------------------------
    ACCOUNT MODAL
@@ -465,7 +492,7 @@ if ( ! function_exists( 'eames_cart_modal' ) ) {
 
                 <?php if ( $woocommerce->cart->cart_contents_count ) : ?>
 
-                    <div class="cart-count <?php echo $cart_count_classes; ?>">
+                    <div class="cart-count">
                         <?php echo $woocommerce->cart->cart_contents_count; ?>
                     </div>
 
