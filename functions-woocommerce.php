@@ -68,6 +68,10 @@ if ( ! function_exists( 'eames_woo_remove_actions' ) ) {
         // Remove output of categories on single products from summary (added to the_content via filter)
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 
+        // Move cross_sell from cart_collaterals to after_cart
+        remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+        add_action( 'woocommerce_after_cart', 'woocommerce_cross_sell_display' );
+
     }
     add_action( 'wp_head', 'eames_woo_remove_actions' );
 

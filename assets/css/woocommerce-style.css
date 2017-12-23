@@ -65,6 +65,7 @@
     cursor: pointer;
     height: 50%;
     position: absolute;
+        left: 0;
         right: 1px;
     transition: background-color .1s linear, opacity .1s linear;
         -webkit-user-select: none;
@@ -72,7 +73,6 @@
         -ms-user-select: none;
         -o-user-select: none;
     user-select: none;
-    width: 33px;
 }
 
 .quantity-button:active {
@@ -324,6 +324,10 @@ p.stars.selected a:not(.active):before {
     justify-content: space-between;
     margin-top: 20px;
     padding: 20px 0 0 62px;
+}
+
+.widget_shopping_cart_content .total strong {
+    font-weight: 500;
 }
 
 .widget_shopping_cart_content .woocommerce-mini-cart__buttons {
@@ -922,13 +926,15 @@ li.product .price {
 /* Related Products ----------------------------- */
 
 .products.related,
-.products.up-sells {
+.products.up-sells,
+.cross-sells {
     margin-top: 80px;
     width: 100%;
 }
 
 .products.related > h2,
-.products.up-sells > h2 {
+.products.up-sells > h2,
+.cross-sells > h2 {
     font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 1em;
     font-weight: 500;
@@ -951,12 +957,146 @@ li.product .price {
 
 
 /* -------------------------------------------------------------------------------- */
-/*	X. Checkout
-/* -------------------------------------------------------------------------------- */
-
-
-/* -------------------------------------------------------------------------------- */
 /*	X. Cart
+/* -------------------------------------------------------------------------------- */
+
+
+/* Shop Table ----------------------------- */
+
+.shop_table.cart {
+    margin-bottom: 40px;
+}
+
+.shop_table.cart tr {
+    position: relative;
+}
+
+.shop_table.cart th {
+    font-size: 16px;
+    padding: 0 10px 12px;
+}
+
+.shop_table.cart td {
+    padding: 15px 10px;
+}
+
+.shop_table.cart .product-remove {
+    width: 102px;
+}
+
+.shop_table.cart .product-remove .remove {
+    display: block;
+    font-size: 36px;
+    font-weight: 300;
+    text-align: center;
+    text-decoration: none;
+}
+
+.shop_table.cart .product-thumbnail,
+.shop_table.cart img {
+    padding-left: 0;
+    width: 80px;
+}
+
+.shop_table.cart td.product-name {
+    font-family: Charter, Georgia, serif;
+    font-size: 20px;
+}
+
+.shop_table.cart .product-quantity .quantity {
+    width: 82px;
+}
+
+.shop_table.cart .product-quantity input {
+    margin-bottom: 0;
+    padding: 10px 39px 10px 10px;
+}
+
+.shop_table.cart .product-quantity .quantity-nav {
+    width: 29px;
+}
+
+.shop_table.cart td.actions {
+    padding: 10px 0 0;
+    position: relative;
+}
+
+.shop_table.cart .coupon {
+    display: flex;
+    width: 300px;
+}
+
+.shop_table.cart .coupon input[type="text"] {
+    border-right: none;
+    border-radius: 2px 0 0 2px;
+    margin: 0 0 0 0;
+    padding: 13px 15px;
+}
+
+.shop_table.cart .coupon .button {
+    border-radius: 0 2px 2px 0;
+    flex-shrink: 0;
+}
+
+.shop_table.cart .coupon label {
+    text-indent: -9999px;
+}
+
+.shop_table.cart td.actions .coupon + .button {
+    position: absolute;
+        right: 0;
+        top: 10px;
+}
+
+
+/* Cart Totals ----------------------------- */
+
+.cart_totals {
+    background: #F9F9FB;
+    margin-left: auto;
+    padding: 40px;
+    width: calc( 50% - 40px );
+}
+
+.cart_totals h2 {
+    font-size: 28px;
+}
+
+.cart_totals table {
+    margin-bottom: 15px;
+}
+
+.cart_totals th,
+.cart_totals td {
+    line-height: 1.625;
+    padding: 20px 0;
+    vertical-align: top;
+    width: 50%;
+}
+
+.shipping-calculator-button {
+    color: #99999E;
+    text-decoration: underline;
+}
+
+.shipping-calculator-form {
+    margin-top: 20px;
+}
+
+.cart_totals .order-total strong {
+    font-weight: 500;
+}
+
+.cart_totals .checkout-button {
+    font-size: 16px;
+    padding: 22px 30px 24px;
+    width: 100%;
+}
+
+
+
+/* -------------------------------------------------------------------------------- */
+/*	X. Checkout
 /* -------------------------------------------------------------------------------- */
 
 
@@ -1004,6 +1144,13 @@ li.product .price {
 
     .single-product .woocommerce-tabs {
         max-width: 100%;
+    }
+
+
+    /* Cart ----------------------------- */
+
+    .cart_totals {
+        width: calc( 66.6% - 5px );
     }
 
 
@@ -1117,6 +1264,13 @@ li.product .price {
 
     .product-lower-wrapper .wc-tabs a {
         padding-left: 20px;
+    }
+
+
+    /* Cart ----------------------------- */
+
+    .cart_totals {
+        width: 100%;
     }
 
     

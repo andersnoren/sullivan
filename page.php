@@ -44,9 +44,18 @@
 
                         </div><!-- .featured-media -->
 
-                    <?php endif; ?>
+                    <?php endif;
+                    
+                    // Conditional content classes, depending on whether we're on an active WooCommerce page
+                    if ( $page_has_woocommerce_shortcodes ) {
+                        $content_classes = 'section-inner ' . $section_inner_width . ' max-percentage';
+                    } else {
+                        $content_classes = 'entry-content page-content section-inner ' . $section_inner_width . ' max-percentage';
+                    }
 
-                    <div class="entry-content page-content section-inner <?php echo $section_inner_width; ?> max-percentage">
+                    ?>
+
+                    <div class="<?php echo $content_classes; ?>">
 
                         <?php the_content(); ?>
                         <?php wp_link_pages(); ?>
