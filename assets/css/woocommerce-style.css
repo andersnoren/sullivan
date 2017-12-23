@@ -347,6 +347,47 @@ p.stars.selected a:not(.active):before {
 }
 
 
+/* WooCommerce Validated Password ----------------------------- */
+
+
+.woocommerce-password-strength {
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 12px;
+    padding-left: 18px;
+    position: relative;
+}
+
+.woocommerce-password-strength:before {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 12px;
+    position: absolute;
+        left: 0;
+        top: calc( 50% - 6px );
+    width: 12px;
+}
+
+.woocommerce-password-strength.short,
+.woocommerce-password-strength.bad { color: #E84747; }
+.woocommerce-password-strength.short:before,
+.woocommerce-password-strength.bad:before { background: #E84747; }
+
+.woocommerce-password-strength.good { color: #7C4CFF; }
+.woocommerce-password-strength.good:before { background: #7C4CFF; }
+
+.woocommerce-password-strength.strong { color: #21B755; }
+.woocommerce-password-strength.strong:before { background: #21B755; }
+
+.woocommerce-password-hint {
+    display: block;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+
 /* -------------------------------------------------------------------------------- */
 /*	X. Notifications
 /* -------------------------------------------------------------------------------- */
@@ -1210,6 +1251,19 @@ form.woocommerce-checkout .woocommerce-billing-fields h3,
 }
 
 
+/* Checkout Login ----------------------------- */
+
+.woocommerce-checkout .woocommerce-form-login {
+    margin: 40px auto;
+}
+
+.woocommerce-checkout .woocommerce-form-login > p:first-child {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+
 /* Checkout Form ----------------------------- */
 
 form.woocommerce-checkout #customer_details .form-row {
@@ -1343,11 +1397,16 @@ form.woocommerce-checkout .form-row label {
     margin-bottom: 25px;
 }
 
+.woocommerce .woocommerce-form-login {
+    max-width: 100%;
+    width: 400px;
+}
+
 .woocommerce .woocommerce-form-login .form-row {
     margin-bottom: 24px;
 }
 
-.woocommerce .woocommerce-form-login .form-row-wide label {
+.woocommerce .woocommerce-form-login .form-row label:not(.inline) {
     display: block;
 }
 
