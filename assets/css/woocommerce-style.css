@@ -703,6 +703,16 @@ li.product .price {
     width: 30px;
 }
 
+.out-of-stock {
+    background: #E84747;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 10px 9px;
+}
+
 .single-product .summary .cart:not(.variations_form),
 .woocommerce-variation-add-to-cart {
     align-items: stretch;
