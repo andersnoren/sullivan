@@ -461,13 +461,13 @@ li.product .price {
     margin-top: .5rem;
 }
 
-li.product .price del {
-    color: #99999E;
-}
-
-li.product .price ins {
+.price ins {
     margin-left: 4px;
     text-decoration: none;
+}
+
+.price del {
+    color: #99999E;
 }
 
 
