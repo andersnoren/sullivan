@@ -800,6 +800,30 @@ li.product .price {
 }
 
 
+/* Product Attributes ----------------------------- */
+
+.shop_attributes {
+    font-size: 16px;
+}
+
+.shop_attributes tr {
+    border-bottom: none;
+}
+
+.shop_attributes tr:nth-child(even) {
+    background-color: #F5F5F7;
+}
+
+.shop_attributes th,
+.shop_attributes td {
+    padding: 15px 15px 16px;
+}
+
+.shop_attributes th {
+    color: #66666E;
+}
+
+
 /* Product Reviews ----------------------------- */
 
 #reviews ol {
