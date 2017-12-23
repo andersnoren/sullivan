@@ -336,6 +336,60 @@ if ( ! function_exists( 'eames_woo_single_product_sidebar' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   WRAP CART TOTALS ON CART
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_wrap_cart_totals_opening' ) ) {
+    function eames_woo_wrap_cart_totals_opening() { ?>
+        
+        <div class="woo-gray-box">
+
+        <?php
+    }
+    add_action( 'woocommerce_before_cart_totals', 'eames_woo_wrap_cart_totals_opening', 1 );
+}
+
+if ( ! function_exists( 'eames_woo_wrap_cart_totals_closing' ) ) {
+    function eames_woo_wrap_cart_totals_closing() { ?>
+
+        </div><!-- .woo-gray-box -->
+
+        <?php
+    }
+    add_action( 'woocommerce_after_cart_totals', 'eames_woo_wrap_cart_totals_closing', 999 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   WRAP ORDER REVIEW ON CHECKOUT
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_wrap_order_review_opening' ) ) {
+    function eames_woo_wrap_order_review_opening() { ?>
+
+        <h3 id="order_review_heading"><?php _e( 'Your order', 'eames' ); ?></h3>
+        
+        <div class="order-review-wrapper woo-gray-box">
+
+        <?php
+    }
+    add_action( 'woocommerce_checkout_order_review', 'eames_woo_wrap_order_review_opening', 1 );
+}
+
+if ( ! function_exists( 'eames_woo_wrap_order_review_closing' ) ) {
+    function eames_woo_wrap_order_review_closing() { ?>
+
+        </div><!-- .order-review-wrapper -->
+
+        <?php
+    }
+    add_action( 'woocommerce_checkout_order_review', 'eames_woo_wrap_order_review_closing', 100 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
 	CUSTOM FALLBACK IMAGE FOR PRODUCTS
 	--------------------------------------------------------------------------------------------- */
 
