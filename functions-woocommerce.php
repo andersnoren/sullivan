@@ -111,8 +111,14 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
             }
         }
 
+        // Add class if we're on an empty cart
         if ( is_cart() && WC()->cart->get_cart_contents_count() == 0 ) {
             $classes[] = 'viewing-empty-cart';
+        }
+
+        // Add class if we're on the account page and not logged in
+        if ( is_account_page() && ! is_user_logged_in() ) {
+            $classes[] = 'viewing-login-form';
         }
 
         return $classes;

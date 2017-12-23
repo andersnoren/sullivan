@@ -15,8 +15,14 @@
                 $page_has_woocommerce_shortcodes = eames_string_has_woo_shortcodes( $content );
                 $section_inner_width = $page_has_woocommerce_shortcodes ? 'wide' : 'thin';
 
+                // Thin section-inner on the login page
+                $showing_login_form = ( is_account_page() && ! is_user_logged_in() );
+                if ( $showing_login_form ) {
+                    $section_inner_width = 'thin';
+                }
+
                 // Show WooCommerce breadcrumbs if we're showing WooCommerce content
-                if ( eames_is_woocommerce_activated() && $page_has_woocommerce_shortcodes ) {
+                if ( eames_is_woocommerce_activated() && $page_has_woocommerce_shortcodes && ! $showing_login_form ) {
                     woocommerce_breadcrumb();
                 }
 
@@ -24,17 +30,23 @@
 
                 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
                     
-                    <header class="section-inner <?php echo $section_inner_width; ?> max-percentage page-header text-center">
-                    
-                        <?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
+                    <?php 
+                    // Don't show the header on the login form page
+                    if ( ! $showing_login_form ) : ?>
 
-                        <?php if ( has_excerpt() ) : ?>
+                        <header class="section-inner <?php echo $section_inner_width; ?> max-percentage page-header text-center">
+                        
+                            <?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 
-                            <p class="sans-excerpt"><?php echo get_the_excerpt(); ?></p>
+                            <?php if ( has_excerpt() ) : ?>
 
-                        <?php endif; ?>
-                    
-                    </header><!-- .post-header -->
+                                <p class="sans-excerpt"><?php echo get_the_excerpt(); ?></p>
+
+                            <?php endif; ?>
+                        
+                        </header><!-- .post-header -->
+
+                    <?php endif; ?>
 
                     <?php if ( has_post_thumbnail() ) : ?>
 
