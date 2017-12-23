@@ -286,6 +286,7 @@ WP.fancyNumberInputs = {
 
 				if ( newVal >= max ) { 
 					$btnUp.addClass( 'disabled' ); 
+					$( this ).val( max );
 				} else if ( newVal <= min ) { 
 					$btnDown.addClass( 'disabled' ); 
 				} else {
