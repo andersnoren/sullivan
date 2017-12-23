@@ -279,7 +279,7 @@ WP.fancyNumberInputs = {
 
 				var newVal = parseFloat( $( this ).val() );
 
-				if ( ! newVal || newVal <= 0 ) {
+				if ( ! $( 'body' ).hasClass( 'woocommerce-cart' ) && ( ! newVal || newVal <= 0 ) ) {
 					$( this ).val( 1 );
 					newVal = 1;
 				}
