@@ -142,6 +142,7 @@
 
 /* Stars ----------------------------- */
 
+
 p.stars {
     display: inline-block;
 }
@@ -386,6 +387,36 @@ p.stars.selected a:not(.active):before {
     line-height: 1.4;
     margin-top: 8px;
 }
+
+
+/* Forms Helper Classes ----------------------------- */
+
+
+.form-row,
+.form-row + fieldset {
+    margin-top: 24px;
+}
+
+.form-row:first-child,
+legend + .form-row {
+    margin-top: 0;
+}
+
+.form-row textarea, 
+.form-row input[type="email"], 
+.form-row input[type="password"], 
+.form-row input[type="search"], 
+.form-row input[type="tel"], 
+.form-row input[type="number"], 
+.form-row input[type="text"], 
+.form-row input[type="url"],
+.form-row .select2-container,
+.form-row:last-child {
+    margin-bottom: 0;
+}
+
+.form-row label { display: block; }
+.form-row label.inline { display: inline; }
 
 
 /* -------------------------------------------------------------------------------- */
@@ -1265,20 +1296,6 @@ form.woocommerce-checkout .woocommerce-billing-fields h3,
 
 /* Checkout Form ----------------------------- */
 
-form.woocommerce-checkout #customer_details .form-row {
-    margin-bottom: 24px;
-}
-
-form.woocommerce-checkout #customer_details .select2-container,
-form.woocommerce-checkout .form-row > *:last-child {
-    margin-bottom: 0;
-}
-
-form.woocommerce-checkout .form-row label {
-    display: block;
-    margin-bottom: 8px;
-}
-
 .woocommerce-shipping-fields {
     margin-bottom: 24px;
 }
@@ -1295,10 +1312,6 @@ form.woocommerce-checkout .form-row label {
 
 form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     margin-top: 40px;
-}
-
-form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form-row:last-child {
-    margin-bottom: 0;
 }
 
 
@@ -1555,19 +1568,32 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 
 .account-wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .account-wrapper > .woocommerce {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     max-width: 75%;
     width: 870px;
 }
 
-.account-wrapper nav {
+.account-wrapper > .woocommerce > .woocommerce-message,
+.account-wrapper > .woocommerce > .woocommerce-error,
+.account-wrapper > .woocommerce > .woocommerce-info {
+    width: 100%;
+}
+
+.account-nav-wrapper {
+    flex-shrink: 0;
     margin-right: 50px;
     width: 220px;
+}
+
+.woocommerce-MyAccount-content {
+    width: calc( 100% - 270px );
 }
 
 .account-wrapper .sidebar {
@@ -1577,24 +1603,38 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 
 /* Account Nav ----------------------------- */
 
-.woocommerce-MyAccount-navigation li {
+
+@media ( min-width: 801px ) {
+    .account-nav-wrapper nav {
+        display: block !important;
+    }
+}
+
+.account-nav-wrapper .toggle {
+    display: none;
+}
+
+.account-nav-wrapper li {
     border-top: 1px solid #e1e1e5;
 }
 
-.woocommerce-MyAccount-navigation ul {
+.account-nav-wrapper ul {
     border-bottom: 1px solid #e1e1e5;
 }
 
-.woocommerce-MyAccount-navigation a {
+.account-nav-wrapper a {
     display: block;
     font-size: 16px;
     font-weight: 500;
-    opacity: 0.5;
-    padding: 19px 10px 20px;
+    padding: 19px 50px 20px 20px;
     position: relative;
 }
 
-.woocommerce-MyAccount-navigation a:before {
+.account-nav-wrapper li a {
+    opacity: .5;
+}
+
+.account-nav-wrapper a:before {
     background: no-repeat center;
     content: "";
     display: block;
@@ -1612,16 +1652,102 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 .woocommerce-MyAccount-navigation-link--edit-account a:before { background-image: url( ../svg/cog-black.svg ); background-size: 17px auto; }
 .woocommerce-MyAccount-navigation-link--customer-logout a:before { background-image: url( ../svg/sign-out-arrow-right-black.svg ); background-size: auto 16px; }
 
-.woocommerce-MyAccount-navigation .is-active a,
-.woocommerce-MyAccount-navigation a:hover {
+.account-nav-wrapper li .is-active a,
+.account-nav-wrapper li a:hover {
     opacity: 1;
     text-decoration: none;
 }
 
 
+/* WooCommerce Account Content ----------------------------- */
 
-/* WooCommerce Addresses ----------------------------- */
+.woocommerce-MyAccount-content > p {
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
 
+.woocommerce-MyAccount-content > *:last-child {
+    margin-bottom: 0;
+}
+
+.woocommerce-MyAccount-content mark {
+    background: none;
+}
+
+.woocommerce-MyAccount-content a {
+    text-decoration: underline;
+}
+
+.woocommerce-MyAccount-content form .button {
+    margin-top: 24px;
+}
+
+
+/* WooCommerce Account Orders ----------------------------- */
+
+.woocommerce-orders-table {
+    font-size: 14px;
+}
+
+.woocommerce-orders-table tr {
+    border: none;
+}
+
+.woocommerce-orders-table tbody tr:nth-child(odd) {
+    background: #F5F5F7;
+}
+
+.woocommerce-orders-table td,
+.woocommerce-orders-table th {
+    padding: 18px 20px 18px 0;
+}
+
+.woocommerce-orders-table td:first-child,
+.woocommerce-orders-table th:first-child {
+    padding-left: 20px;
+}
+
+.woocommerce-orders-table thead th {
+    padding-top: 0;
+}
+
+.woocommerce-orders-table__cell-order-number a {
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.woocommerce-orders-table .button {
+    background: none;
+    color: #111;
+    font-size: 1em;
+    font-weight: 400;
+    min-width: auto;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.woocommerce-orders-table .button:hover {
+    text-decoration: underline;
+}
+
+
+/* WooCommerce Account Order Details ----------------------------- */
+
+.woocommerce-MyAccount-content .woocommerce-column {
+    width: calc( 50% - 10px );
+}
+
+.woocommerce-order-details {
+    background: #F9F9FB;
+    padding: 40px;
+}
+
+
+/* WooCommerce Account Addresses ----------------------------- */
+
+.account-wrapper .woocommerce-Addresses {
+    margin-top: 40px;
+}
 
 .woocommerce-Addresses {
     display: flex;
@@ -1629,7 +1755,7 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 }
 
 .woocommerce-Addresses .woocommerce-Address {
-    width: calc( 50% - 20px );
+    width: calc( 50% - 10px );
 }
 
 .woocommerce-Address-title {
@@ -1649,6 +1775,19 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 
 .woocommerce-Address address {
     margin-bottom: 0;
+}
+
+/* EDIT ADDRESS */
+
+h3 + .woocommerce-address-fields {
+    margin-top: 30px;
+}
+
+
+/* Edit Account ----------------------------- */
+
+.woocommerce-EditAccountForm label {
+    display: block;
 }
 
 
@@ -1671,14 +1810,6 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 .woocommerce .woocommerce-form-login {
     max-width: 100%;
     width: 400px;
-}
-
-.woocommerce .woocommerce-form-login .form-row {
-    margin-bottom: 24px;
-}
-
-.woocommerce .woocommerce-form-login .form-row label:not(.inline) {
-    display: block;
 }
 
 .woocommerce .woocommerce-form-login .button {
@@ -1738,6 +1869,30 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 
     .cart_totals {
         width: calc( 66.6% - 5px );
+    }
+
+
+    /* My Account ----------------------------- */
+
+    .account-wrapper > .woocommerce {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .account-wrapper .sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 80px;
+        width: 100%;
+    }
+
+    .account-wrapper .sidebar .widget {
+        width: calc( 50% - 20px );
+    }
+
+    .account-wrapper .sidebar .widget:nth-child(2) {
+        margin-top: 0;
     }
 
 
@@ -1908,6 +2063,59 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form
 
     .cart_totals {
         width: 100%;
+    }
+
+
+    /* My Account ----------------------------- */
+
+    .account-wrapper > .woocommerce,
+    .account-nav-wrapper .toggle {
+        display: block;
+    }
+
+    .account-nav-wrapper,
+    .woocommerce-MyAccount-content {
+        width: 100%;
+    }
+
+    .account-nav-wrapper {
+        margin-bottom: 40px;
+    }
+
+    .account-nav-wrapper .toggle {
+        border: 1px solid #e1e1e5;
+        text-decoration: none;
+    }
+
+    .account-nav-wrapper .toggle:before {
+        background-image: url( ../svg/chevron-down-black.svg ); background-size: 16px auto;
+        transition: transform .25s linear;
+    }
+
+    .account-nav-wrapper .toggle.active:before {
+        transform: rotate(180deg);
+    }
+
+    .account-nav-wrapper li:first-child {
+        border-top: none;
+    }
+
+    .account-nav-wrapper .toggle .hide,
+    .account-nav-wrapper .toggle.active .show { display: none; }
+    .account-nav-wrapper .toggle.active .hide { display: inline; }
+
+    .account-nav-wrapper nav {
+        border-left: 1px solid #e1e1e5;
+        border-right: 1px solid #e1e1e5;
+        display: none;
+    }
+
+    .account-nav-wrapper a {
+        padding: 19px 60px 20px 20px;
+    }
+
+    .account-nav-wrapper a:before {
+        right: 20px;
     }
 
     

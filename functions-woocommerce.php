@@ -329,19 +329,6 @@ if ( ! function_exists( 'eames_woo_wrap_single_product_lower_closing' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
-   ADD SIDEBAR TO PRODUCT SINGLE
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'eames_woo_single_product_sidebar' ) ) {
-    function eames_woo_single_product_sidebar() {
-        get_template_part( 'sidebar' );
-    }
-    add_action( 'woocommerce_after_single_product_summary', 'eames_woo_single_product_sidebar', 10 );
-}
-
-
-/* ---------------------------------------------------------------------------------------------
    WRAP CART TOTALS ON CART
    --------------------------------------------------------------------------------------------- */
 
@@ -392,6 +379,50 @@ if ( ! function_exists( 'eames_woo_wrap_order_review_closing' ) ) {
         <?php
     }
     add_action( 'woocommerce_checkout_order_review', 'eames_woo_wrap_order_review_closing', 100 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   WRAP ACCOUNT NAVIGATION AND ADD TOGGLE
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_wrap_account_nav_opening' ) ) {
+    function eames_woo_wrap_account_nav_opening() { ?>
+        
+        <div class="account-nav-wrapper">
+
+            <a href="#" class="toggle toggle-account-nav" data-toggle-target="nav.woocommerce-MyAccount-navigation" data-toggle-type="slidetoggle">
+                <span class="show"><?php _e( 'Show account pages', 'eames' ); ?></span>
+                <span class="hide"><?php _e( 'Hide account pages', 'eames' ); ?></span>
+            </a>
+
+        <?php
+    }
+    add_action( 'woocommerce_before_account_navigation', 'eames_woo_wrap_account_nav_opening', 1 );
+}
+
+if ( ! function_exists( 'eames_woo_wrap_account_nav_closing' ) ) {
+    function eames_woo_wrap_account_nav_closing() { ?>
+
+        </div><!-- .account-nav-wrapper -->
+
+        <?php
+    }
+    add_action( 'woocommerce_after_account_navigation', 'eames_woo_wrap_account_nav_closing', 100 );
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+   ADD SIDEBAR TO PRODUCT SINGLE
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_single_product_sidebar' ) ) {
+    function eames_woo_single_product_sidebar() {
+        get_template_part( 'sidebar' );
+    }
+    add_action( 'woocommerce_after_single_product_summary', 'eames_woo_single_product_sidebar', 10 );
 }
 
 
