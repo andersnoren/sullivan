@@ -27,9 +27,6 @@ In the resume page template, all titles span the entire width of the content, wh
 
 == Frequently Asked Questions ==
 
-= How do I activate infinite scroll? =
-Eames uses the Jetpack module for infinite scroll. To activate it, install the Jetpack plugin and activate the infinite scroll module in the Jetpack settings. The theme will take care of the rest.
-
 = What do the Eames theme options in the WordPress customizer do? =
 Show Primary Menu in the Header — Replaces the navigation toggle in the header with the Primary Menu on desktop.
 Three Columns — Displays the post grid with up to three columns on desktop. The grid will still be displayed with two columns on tablets and mobile screen sizes.
@@ -47,6 +44,18 @@ Source: https://fonts.google.com/specimen/Libre+Franklin
 Images in screenshot.png by Fancycrave, supplied through Pexels
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 Source: https://www.pexels.com/u/fancycrave-60738/
+
+FontAwesome Icons
+License: XXXXXXX, 
+Source: https://www.fontawesome.io
+
+FontAwesome Code
+License: XXXXXXX, 
+Source: https://www.fontawesome.io
+
+Ion Icons
+License: MIT License, https://opensource.org/licenses/MIT
+Source: http://ionicons.com/
 
 
 == Changelog ==
