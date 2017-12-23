@@ -86,7 +86,7 @@ p.stars a {
 }
 
 p.stars a::before {
-    color: #99999E;
+    color: #D1D1D5;
     content: '\e020';
     display: block;
     font-family: 'WooCommerce';
