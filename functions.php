@@ -1378,7 +1378,7 @@ class Eames_Customize {
 
 		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eames_fallback_image', array(
 			'label'			=> __( 'Fallback image', 'eames' ),
-			'description'	=> __( 'The selected image will be used when a post or product is missing a featured image.', 'eames' ),
+			'description'	=> __( 'The selected image will be used when a post or product is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'eames' ),
 			'mime_type'		=> 'image',
 			'section' 		=> 'eames_options',
 		) ) );
