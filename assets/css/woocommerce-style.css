@@ -596,8 +596,8 @@ li.product .price {
 
 
 .woocommerce-product-gallery {
-    max-width: 50%;
     position: relative;
+    width: 50%;
 }
 
 .woocommerce-product-gallery img {
@@ -915,7 +915,7 @@ li.product .price {
     /* Single Product ----------------------------- */
 
     .woocommerce-product-gallery {
-        max-width: 40%;
+        width: 40%;
     }
 
     .single-product .summary {
@@ -944,7 +944,6 @@ li.product .price {
     }
 
     .woocommerce-product-gallery {
-        max-width: 100%;
         width: 100%;
     }
 
