@@ -921,12 +921,14 @@ li.product .price {
 
 /* Related Products ----------------------------- */
 
-.products.related {
+.products.related,
+.products.up-sells {
     margin-top: 80px;
     width: 100%;
 }
 
-.products.related > h2 {
+.products.related > h2,
+.products.up-sells > h2 {
     font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 1em;
     font-weight: 500;
