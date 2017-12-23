@@ -683,6 +683,26 @@ li.product .price {
     line-height: inherit;
 }
 
+.in-stock {
+    color: #88888E;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding-left: 40px;
+    position: relative;
+}
+
+.in-stock:before {
+    background: #d1d1d5;
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+        left: 0;
+        top: calc( 50% - .5px );
+    width: 30px;
+}
+
 .single-product .summary .cart:not(.variations_form),
 .woocommerce-variation-add-to-cart {
     align-items: stretch;
