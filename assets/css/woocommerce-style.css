@@ -355,13 +355,17 @@ p.stars.selected a:not(.active):before {
 .woocommerce-message,
 .woocommerce-error,
 .woocommerce-info {
-    background: #111;
+    background: #7C4CFF;
     border-radius: 2px;
     color: #fff;
     font-size: 16px;
     margin-bottom: 40px;
     padding: 20px 200px 21px 25px;
     position: relative;
+}
+
+.woocommerce-error {
+    background: #E84747;
 }
 
 .woocommerce-message strong,
@@ -1017,7 +1021,7 @@ li.product .price {
 }
 
 .shop_table.cart td.actions {
-    padding: 10px 0 0;
+    padding: 15px 0 0;
     position: relative;
 }
 
@@ -1030,7 +1034,7 @@ li.product .price {
     border-right: none;
     border-radius: 2px 0 0 2px;
     margin: 0 0 0 0;
-    padding: 13px 15px;
+    padding: 12px 15px;
 }
 
 .shop_table.cart .coupon .button {
@@ -1042,7 +1046,7 @@ li.product .price {
     text-indent: -9999px;
 }
 
-.shop_table.cart td.actions .coupon + .button {
+.shop_table.cart td.actions > .button {
     position: absolute;
         right: 0;
         top: 10px;
