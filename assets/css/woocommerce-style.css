@@ -1270,6 +1270,7 @@ form.woocommerce-checkout #customer_details .form-row {
     margin-bottom: 24px;
 }
 
+form.woocommerce-checkout #customer_details .select2-container,
 form.woocommerce-checkout .form-row > *:last-child {
     margin-bottom: 0;
 }
@@ -1280,10 +1281,7 @@ form.woocommerce-checkout .form-row label {
 }
 
 .woocommerce-shipping-fields {
-    border-bottom: 1px solid #e1e1e5;
-    border-top: 1px solid #e1e1e5;
     margin-bottom: 24px;
-    padding: 18px 0;
 }
 
 .woocommerce-shipping-fields #ship-to-different-address {
@@ -1294,6 +1292,14 @@ form.woocommerce-checkout .form-row label {
 
 .woocommerce-shipping-fields .shipping_address {
     margin-top: 24px;
+}
+
+form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
+    margin-top: 40px;
+}
+
+form.woocommerce-checkout #customer_details .woocommerce-additional-fields .form-row:last-child {
+    margin-bottom: 0;
 }
 
 
