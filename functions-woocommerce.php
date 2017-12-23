@@ -96,11 +96,15 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
 
     function eames_woo_body_classes( $classes ) {
 
-        // Check if term has an image set
-        if ( is_product_category() && get_woocommerce_term_meta( get_queried_object()->term_id, 'thumbnail_id', true ) ) {
-            $classes[] = 'term-has-image';
-        } elseif ( is_product_category() ) {
-            $classes[] = 'term-missing-image';
+        $queried_object = get_queried_object();
+
+        // Check if product category or tag has an image set
+        if ( is_woocommerce() && $queried_object ) {
+            if ( get_woocommerce_term_meta( $queried_object->term_id, 'thumbnail_id', true ) ) {
+                $classes[] = 'term-has-image';
+            } else {
+                $classes[] = 'term-missing-image';
+            }
         }
 
         return $classes;
@@ -109,7 +113,6 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
     add_action( 'body_class', 'eames_woo_body_classes', 1 );
 
 }
-
 
 
 /* ---------------------------------------------------------------------------------------------
