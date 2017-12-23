@@ -98,8 +98,8 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
 
         $queried_object = get_queried_object();
 
-        // Check if product category or tag has an image set
-        if ( is_woocommerce() && $queried_object ) {
+        // Check if a Woocommerce term has a thumbnail image set
+        if ( is_woocommerce() && is_archive() && $queried_object ) {
             if ( get_woocommerce_term_meta( $queried_object->term_id, 'thumbnail_id', true ) ) {
                 $classes[] = 'term-has-image';
             } else {
