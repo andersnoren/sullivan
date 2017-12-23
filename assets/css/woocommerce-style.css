@@ -1094,6 +1094,27 @@ li.product .price {
 }
 
 
+/* Empty Cart ----------------------------- */
+
+.viewing-empty-cart .breadcrumbs,
+.viewing-empty-cart .page-header,
+.viewing-empty-cart .woocommerce p {
+    text-align: center;
+}
+
+.viewing-empty-cart .woocommerce .woocommerce-message {
+    display: none;
+}
+
+.viewing-empty-cart .woocommerce .cart-empty {
+    font-size: 1.1em;
+}
+
+.viewing-empty-cart .woocommerce .return-to-shop {
+    margin-top: 50px;
+}
+
+
 
 /* -------------------------------------------------------------------------------- */
 /*	X. Checkout

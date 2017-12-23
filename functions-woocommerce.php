@@ -111,6 +111,10 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
             }
         }
 
+        if ( is_cart() && WC()->cart->get_cart_contents_count() == 0 ) {
+            $classes[] = 'viewing-empty-cart';
+        }
+
         return $classes;
 
     }
