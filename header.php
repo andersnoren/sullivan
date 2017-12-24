@@ -77,7 +77,30 @@
 					
 				</ul><!-- .social-menu -->
 			
-			<?php endif; ?>
+			<?php endif;
+
+			if ( eames_is_woocommerce_activated() ) {
+
+				$logged_in = is_user_logged_in(); 
+				$account_url = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ); ?>
+
+				<div class="mobile-account">
+
+					<?php if ( ! $logged_in ) : ?>
+
+						<a class="sign-in" href="<?php echo $account_url; ?>"><?php _e( 'Sign in', 'eames' ); ?></a>
+						<a class="register" href="<?php echo $account_url; ?>"><?php _e( 'Register', 'eames' ); ?></a>
+
+					<?php else : ?>
+
+						<a class="my-account" href="<?php echo $account_url; ?>"><?php _e( 'My account', 'eames' ); ?></a>
+						<a class="sign-out" href="<?php echo wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Sign out', 'eames' ); ?></a>
+						
+					<?php endif; ?>
+
+				</div><!-- .mobile-account -->
+
+			<?php } ?>
 
 		</div><!-- .mobile-menu-wrapper -->
 

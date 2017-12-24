@@ -1683,7 +1683,7 @@ dd + dt {
 }
 
 address {
-	background: #F9F9FB;
+	background: #F5F5F7;
 	font-size: 16px;
 	line-height: 1.5;
 	margin-bottom: 20px;
@@ -1695,13 +1695,13 @@ address p {
 }
 
 code {
-	background: #F9F9FB;
+	background: #F5F5F7;
 	border-radius: 2px;
 	padding: 0 4px;
 }
 
 pre {
-	background: #F9F9FB;
+	background: #F5F5F7;
 	font-size: 14px;
 	line-height: 1.35;
 	padding: 20px;
@@ -3179,7 +3179,7 @@ ul.page-numbers .next { right: 0; }
 	}
 
 	.mobile-menu {
-		background: #F9F9FB;
+		background: #F5F5F7;
 		padding: 10px 0;
 	}
 

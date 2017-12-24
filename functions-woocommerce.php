@@ -119,6 +119,9 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
         // Add class if we're on the account page and not logged in
         if ( is_account_page() && ! is_user_logged_in() ) {
             $classes[] = 'viewing-login-form';
+            if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) {
+                $classes[] = 'with-registration-form';
+            }
         }
 
         return $classes;

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Combined Shape</title>
+    <title>Combined-Shape</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Checkout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Combined-Shape" fill="#F9F9FB" transform="translate(8.000000, 8.000000) scale(1, -1) translate(-8.000000, -8.000000) " points="3.41060513e-13 8 0.0138528242 8 8.43769499e-14 7.98614718 7.98614718 0 15.9722944 7.98614718 15.9584415 8 16 8 16 16 0 16 0 8"></polygon>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="jagged-border-bottom" fill="#F5F5F7" fill-rule="nonzero">
+            <polygon id="Combined-Shape" transform="translate(8.000000, 8.000000) scale(-1, 1) rotate(-180.000000) translate(-8.000000, -8.000000) " points="3.41060513e-13 8 0.0138528242 8 8.43769499e-14 7.98614718 7.98614718 0 15.9722944 7.98614718 15.9584415 8 16 8 16 16 0 16 0 8"></polygon>
+        </g>
     </g>
 </svg>
