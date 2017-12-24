@@ -117,10 +117,33 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
         }
 
         // Add class if we're on the account page and not logged in
-        if ( is_account_page() && ! is_user_logged_in() ) {
-            $classes[] = 'viewing-login-form';
-            if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) {
-                $classes[] = 'with-registration-form';
+        if ( ( is_account_page() && ! is_user_logged_in() ) || is_wc_endpoint_url( 'lost-password' ) ) {
+
+            $classes[] = 'account-form';
+
+            // Lost password = single form            
+            if ( is_wc_endpoint_url( 'lost-password' ) ) {
+
+                $classes[] = 'single-account-form';
+                
+            // If the form query argument is set, add class indicating which form is visible
+            } elseif ( isset( $_GET['form'] ) && get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) {
+
+                $classes[] = 'single-account-form';
+
+                if ( $_GET['form'] == 'registration' ) {
+                    $classes[] = 'showing-registration-form';
+                } else {
+                    $classes[] = 'showing-login-form';
+                }
+
+            // If not, we're either showing one or both forms, depending on the WooCommerce registration setting
+            } else {
+                if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) {
+                    $classes[] = 'both-account-forms';
+                } else {
+                    $classes[] = 'single-account-form';
+                }
             }
         }
 
@@ -128,6 +151,38 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
 
     }
     add_action( 'body_class', 'eames_woo_body_classes', 1 );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
+	ADD FORGOTTEN PASSWORD AND REGISTRATION LINKS TO LOGIN FORM
+    --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eames_woo_add_login_footer' ) ) {
+
+    function eames_woo_add_login_footer() { ?>
+
+        <div class="login-registration-form-links">
+
+            <p class="lost_password">
+                <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost password', 'eames' ); ?></a>
+            </p>
+
+            <?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
+
+                <p class="register_link"> 
+                    <span class="sep">&bull;</span><a href="<?php echo add_query_arg( 'form', 'registration', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Create account', 'eames' ); ?></a>
+                </p>
+
+            <?php endif; ?>
+
+        </div>
+
+        <?php
+
+    }
+    add_action( 'woocommerce_login_form_end', 'eames_woo_add_login_footer', 5 );
 
 }
 

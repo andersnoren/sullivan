@@ -650,11 +650,24 @@ img {
 	padding: 12px 25px;
 }
 
-.account-modal form p.lost_password {
+.account-modal form > .lost_password {
+	display: none;
+}
+
+.account-modal .login-registration-form-links {
 	background: #F5F5F7;
 	margin: 20px -20px -20px;
 	padding: 20px 20px;
 	text-align: center;
+}
+
+.account-modal .login-registration-form-links p {
+	display: inline;
+}
+
+.account-modal .login-registration-form-links .sep {
+	color: #99999E;
+	margin: 0 7px 0 5px;
 }
 
 /* LOGGED IN */

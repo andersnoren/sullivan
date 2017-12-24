@@ -1834,49 +1834,58 @@ h3 + .woocommerce-address-fields {
 /* -------------------------------------------------------------------------------- */
 
 
-/* Log In Page ----------------------------- */
+.showing-registration-form #site-content .section-inner .col2-set .col-1 { display: none; }
+.showing-login-form #site-content .section-inner .col2-set .col-2 { display: none; }
 
-
-.viewing-login-form #site-content .section-inner .section-inner.max-percentage {
+.single-account-form #site-content .section-inner .section-inner.max-percentage {
     max-width: 400px;
 }
 
-.viewing-login-form.with-registration-form #site-content .col2-set > div {
+.both-account-forms #site-content .col2-set > div {
     max-width: 400px;
     width: calc( 50% - 20px );
 }
 
-.viewing-login-form.with-registration-form #site-content .section-inner .section-inner.max-percentage {
+.both-account-forms #site-content .section-inner .section-inner.max-percentage {
     max-width: 880px;
     width: 100%;
 }
 
-.viewing-login-form.with-registration-form #site-content .section-inner .col2-set {
+.both-account-forms #site-content .section-inner .col2-set {
     display: flex;
     justify-content: space-between;
 }
 
-.viewing-login-form .woocommerce h2 {
+.account-form .woocommerce h2 {
     margin-bottom: 25px;
 }
 
-.woocommerce .woocommerce-form-login {
-    max-width: 100%;
-    width: 400px;
+.account-form .woocommerce form p {
+    line-height: 1.5;
 }
 
 .woocommerce .woocommerce-form-login .button {
     margin-right: 1rem;
 }
 
-.woocommerce .woocommerce-form-login .lost_password {
-    font-size: 14px;
-    font-weight: 500;
+.woocommerce .woocommerce-form-login > .lost_password {
+    display: none;
+}
+
+.woocommerce .login-registration-form-links {
     margin-top: 20px;
 }
 
+.woocommerce .login-registration-form-links p {
+    display: inline;
+    font-size: 14px;
+    font-weight: 500;
+}
 
-/* Registration Page ----------------------------- */
+.woocommerce .login-registration-form-links .sep {
+    color: #99999E;
+    margin: 0 8px 0 5px;
+}
 
 
 /* -------------------------------------------------------------------------------- */
@@ -2517,18 +2526,18 @@ h3 + .woocommerce-address-fields {
 
     /* Login & Registration ----------------------------- */
 
-    .viewing-login-form #site-content .section-inner .section-inner.max-percentage,
-    .viewing-login-form.with-registration-form #site-content .col2-set > div {
+    .single-account-form #site-content .section-inner .section-inner.max-percentage,
+    .both-account-forms #site-content .col2-set > div {
         margin: 0 auto;
         max-width: 400px;
         width: 100%;
     }
 
-    .viewing-login-form.with-registration-form #site-content .col2-set > div + div {
+    .both-account-forms #site-content .col2-set > div + div {
         margin-top: 40px;
     }
 
-    .viewing-login-form.with-registration-form #site-content .section-inner .col2-set {
+    .both-account-forms #site-content .section-inner .col2-set {
         display: block;
     }
 

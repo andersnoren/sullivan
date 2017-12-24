@@ -81,21 +81,23 @@
 
 			if ( eames_is_woocommerce_activated() ) {
 
-				$logged_in = is_user_logged_in(); 
-				$account_url = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ); ?>
+				$logged_in = is_user_logged_in(); ?>
 
 				<div class="mobile-account">
 
 					<?php if ( ! $logged_in ) : ?>
 
-						<a class="sign-in" href="<?php echo $account_url; ?>"><?php _e( 'Sign in', 'eames' ); ?></a>
-						<a class="register" href="<?php echo $account_url; ?>"><?php _e( 'Register', 'eames' ); ?></a>
+						<a class="sign-in" href="<?php echo add_query_arg( 'form', 'sign-in', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Sign in', 'eames' ); ?></a>
+						
+						<?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
+							<a class="register" href="<?php echo add_query_arg( 'form', 'registration', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Register', 'eames' ); ?></a>
+						<?php endif; ?>
 
 					<?php else : ?>
 
 						<a class="my-account" href="<?php echo $account_url; ?>"><?php _e( 'My account', 'eames' ); ?></a>
 						<a class="sign-out" href="<?php echo wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Sign out', 'eames' ); ?></a>
-						
+
 					<?php endif; ?>
 
 				</div><!-- .mobile-account -->
