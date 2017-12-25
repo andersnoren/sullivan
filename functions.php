@@ -590,7 +590,7 @@ if ( ! function_exists( 'eames_is_woocommerce_activated' ) ) {
 if ( eames_is_woocommerce_activated() ) {
 
 	// All functions that require Woocommerce functionality to work are contained within this file
-	include( locate_template( 'functions-woocommerce.php' ) );
+	locate_template( 'functions-woocommerce.php', true );
 
 	/* 
 	* EXCEPTION:
