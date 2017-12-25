@@ -387,7 +387,7 @@ $catalog_orderby_options = apply_filters( 'woocommerce_catalog_orderby', array(
    --------------------------------------------------------------------------------------------- */
 
 
-   if ( ! function_exists( 'eames_woo_wrap_archive_header_tools_opening' ) ) {
+if ( ! function_exists( 'eames_woo_wrap_archive_header_tools_opening' ) ) {
     function eames_woo_wrap_archive_header_tools_opening() {
         echo '<div class="archive-header-tools">';
     }
