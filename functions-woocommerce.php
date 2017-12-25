@@ -281,6 +281,34 @@ if ( ! function_exists( 'eames_woo_pagination_arguments' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   GET WOOCOMMERCE PAGES
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_get_woocommerce_pages' ) ) {
+
+    function eames_woo_get_woocommerce_pages() {
+
+        $woocommerce_pages = array(
+            get_option( 'woocommerce_shop_page_id' ),
+            get_option( 'woocommerce_cart_page_id' ),
+            get_option( 'woocommerce_checkout_page_id' ),
+            get_option( 'woocommerce_myaccount_page_id' ),
+            get_option( 'woocommerce_edit_address_page_id' ),
+            get_option( 'woocommerce_view_order_page_id' ),
+            get_option( 'woocommerce_change_password_page_id' ),
+            get_option( 'woocommerce_logout_page_id' )
+        );
+
+        return $woocommerce_pages;
+
+    }
+    add_filter( 'pre_get_posts', 'eames_woo_get_woocommerce_pages' );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
    ADJUST WOOCOMMERCE BREADCRUMBS
    --------------------------------------------------------------------------------------------- */
 
