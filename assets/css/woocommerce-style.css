@@ -1036,15 +1036,15 @@ del + ins {
 
 /* Related Products ----------------------------- */
 
-.item-grid.related,
-.item-grid.up-sells,
+.products.related,
+.products.up-sells,
 .cross-sells {
     margin-top: 80px;
     width: 100%;
 }
 
-.item-grid.related > h2,
-.item-grid.up-sells > h2,
+.products.related > h2,
+.products.up-sells > h2,
 .cross-sells > h2 {
     font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 1em;
@@ -2511,8 +2511,8 @@ h3 + .woocommerce-address-fields {
 
     /* RELATED PRODUCTS */
 
-    .item-grid.related, 
-    .item-grid.up-sells, 
+    .products.related, 
+    .products.up-sells, 
     .cross-sells {
         margin-top: 40px;
     }
