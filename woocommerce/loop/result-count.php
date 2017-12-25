@@ -28,7 +28,7 @@ if ( ! woocommerce_products_will_display() ) {
 	$per_page = $wp_query->get( 'posts_per_page' );
 	$total    = $wp_query->found_posts;
 	$first    = ( $per_page * $paged ) - $per_page + 1;
-    $last     = min( $total, $wp_query->get( 'posts_per_page' ) * $paged );
+	$last     = min( $total, $wp_query->get( 'posts_per_page' ) * $paged );
     
     echo '<span class="prefix">' . __( 'Showing', 'eames' ) . ' </span>';
 
@@ -37,7 +37,7 @@ if ( ! woocommerce_products_will_display() ) {
 		printf( _n( 'one result', '%d results', $total, 'eames' ), $total );
 	} else {
 		/* translators: 1: first result 2: last result 3: total results */
-		printf( _n( 'one result', '%1$d of %2$d results', $total, 'eames' ), $first, $total );
+		printf( _n( 'one result', 'results %1$d-%2$d of %3$d', $total, 'eames' ), $first, $last, $total );
 	}
 	?>
 </p>
