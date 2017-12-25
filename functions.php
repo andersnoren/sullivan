@@ -1266,15 +1266,15 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 				if ( empty( $this->choices ) )
 					return;
 					
-				if ( !empty( $this->label ) ) : ?>
+				if ( ! empty( $this->label ) ) : ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php endif;
 				
-				if ( !empty( $this->description ) ) : ?>
+				if ( ! empty( $this->description ) ) : ?>
 					<span class="description customize-control-description"><?php echo $this->description; ?></span>
 				<?php endif;
 				
-				$multi_values = !is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
+				$multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
 		
 				<ul>
 					<?php foreach ( $this->choices as $value => $label ) : ?>
@@ -1624,7 +1624,7 @@ class Eames_Customize {
 		// Sanitize booleans for multiple checkboxes
 		function eames_sanitize_multiple_checkboxes( $values ) {
 			$multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
-			return !empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
+			return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
 		}
 		
 	}
