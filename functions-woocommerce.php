@@ -281,6 +281,31 @@ if ( ! function_exists( 'eames_woo_pagination_arguments' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   EXCLUDE WOOCOMMERCE PAGES FROM SEARCH
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_woo_exclude_wc_pages_in_search' ) ) {
+
+    function eames_woo_exclude_wc_pages_in_search( $query ) {
+
+        if ( $query->is_search && ! is_admin() ) {
+
+            $woocommerce_pages = eames_woo_get_woocommerce_pages();
+
+            $query->set( 'post__not_in', $woocommerce_pages );
+
+        }
+
+        return $query;
+
+    }
+    add_filter( 'pre_get_posts', 'eames_woo_exclude_wc_pages_in_search' );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
    GET WOOCOMMERCE PAGES
    --------------------------------------------------------------------------------------------- */
 
