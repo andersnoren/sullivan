@@ -1907,19 +1907,19 @@ h3 + .woocommerce-address-fields {
 /* Widget Products --------------------------- */
 
 
-.product_list_widget li {
+.widget_products .product_list_widget li {
     font-size: 14px;
     min-height: 60px;
     padding: 0 0 0 72px;
     position: relative;
 }
 
-.product_list_widget li a {
+.widget_products .product_list_widget li a {
     display: block;
     padding-top: 8px;
 }
 
-.product_list_widget li img {
+.widget_products .product_list_widget li img {
     border-radius: 2px;
     display: block;
     height: 60px;
@@ -1929,7 +1929,7 @@ h3 + .woocommerce-address-fields {
     width: 60px;
 }
 
-.product_list_widget .product-title {
+.widget_products .product_list_widget .product-title {
     display: block;
     font-family: Charter, Georgia, serif;
     font-size: 18px;
