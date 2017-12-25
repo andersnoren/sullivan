@@ -1,4 +1,4 @@
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 	
 	<header class="post-header">
 
