@@ -280,7 +280,7 @@ p.stars.selected a:not(.active):before {
 .woocommerce-mini-cart-item {
     font-size: 14px;
     min-height: 50px;
-    padding: 8px 0 8px 62px;
+    padding: 6px 0 6px 62px;
     position: relative;
 }
 
@@ -332,9 +332,13 @@ p.stars.selected a:not(.active):before {
 }
 
 .widget_shopping_cart_content .woocommerce-mini-cart__buttons {
-    background: #F5F5F7;
     display: flex;
-    margin: 20px -16px -15px;
+    margin-top: 20px;
+}
+
+.header-cart .widget_shopping_cart_content .woocommerce-mini-cart__buttons {
+    background: #F5F5F7;
+    margin: 20px -16px -16px;
     padding: 15px 16px;
 }
 
@@ -1902,23 +1906,61 @@ h3 + .woocommerce-address-fields {
 
 
 /* -------------------------------------------------------------------------------- */
+/*	X. WooCommerce Widgets
+/* -------------------------------------------------------------------------------- */
+
+
+/* Widget Cart ------------------------------- */
+
+.widget_shopping_cart_content {
+    font-size: 14px;
+}
+
+/* Widget Products --------------------------- */
+
+
+.product_list_widget li {
+    font-size: 14px;
+    min-height: 60px;
+    padding: 0 0 0 72px;
+    position: relative;
+}
+
+.product_list_widget li a {
+    display: block;
+    padding-top: 8px;
+}
+
+.product_list_widget li img {
+    border-radius: 2px;
+    display: block;
+    height: 60px;
+    position: absolute;
+        left: 0;
+        top: 0;
+    width: 60px;
+}
+
+.product_list_widget .product-title {
+    display: block;
+    font-family: Charter, Georgia, serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+
+/* Widget Product Categories ----------------- */
+
+/* Widget Products --------------------------- */
+
+
+/* -------------------------------------------------------------------------------- */
 /*	X. Media Queries
 /* -------------------------------------------------------------------------------- */
 
 
 @media ( max-width: 1100px ) {
-
-
-    /* Product Archive ----------------------------- */
-
-    ul.products {
-        margin: 0 0 -40px -30px;
-    }
-
-    ul.products li {
-        margin: 0 0 40px 30px;
-        width: calc( 33.3% - 30px );
-    }
 
 
     /* Single Product ----------------------------- */

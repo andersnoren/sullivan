@@ -2370,7 +2370,8 @@ ul.page-numbers .next { right: 0; }
 .widget_categories li,
 .widget_meta li,
 .widget_nav_menu li,
-.widget_pages {
+.widget_pages,
+.widget_product_categories li {
 	color: #999;
 	font-size: 12px;
 	font-weight: 500;
@@ -2380,10 +2381,11 @@ ul.page-numbers .next { right: 0; }
 .widget_categories li a,
 .widget_meta li a,
 .widget_nav_menu li a,
-.widget_pages li a { 
+.widget_pages li a,
+.widget_product_categories li a { 
 	color: #111;
 	font-family: Charter, Georgia, serif;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 
@@ -2508,17 +2510,21 @@ ul.page-numbers .next { right: 0; }
 /* Widget Search ------------------------------------------- */
 
 
-.widget_search form {
+.widget_search form,
+.widget_product_search form {
 	display: flex;
 }
 
 .widget_search form label,
-.widget_search form .search-field {
+.widget_search form .search-field,
+.widget_product_search form label,
+.widget_product_search form .search-field {
 	margin: 0;
 	width: 100%;
 }
 
-.widget_search form .search-submit {
+.widget_search form input[type="submit"],
+.widget_product_search form input[type="submit"] {
 	flex-shrink: 0;
 	margin-left: 10px;
 	min-width: 0;
