@@ -4,15 +4,9 @@ global $wp_query;
 
 if ( $wp_query->max_num_pages > 1 ) : 
 
-	$query_post_type = '';
-
-	if ( count( get_query_var( 'post_type' ) ) == 1 ) {
-		$query_post_type = get_query_var( 'post_type' );
-	}
-
 	?>
 			
-	<ul class="site-pagination<?php if ( $query_post_type ) echo ' type-' . $query_post_type; if ( ! get_previous_posts_link() && get_next_posts_link() ) echo ' only-next'; ?>">
+	<ul class="site-pagination<?php if ( ! get_previous_posts_link() && get_next_posts_link() ) echo ' only-next'; ?>">
 			
 		<?php 
 		if ( get_previous_posts_link() ) echo '<li class="prev">' . get_previous_posts_link( __( 'Previous', 'eames' ) ) . '</li>';
