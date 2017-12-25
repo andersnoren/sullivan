@@ -741,6 +741,23 @@ if ( ! function_exists( 'eames_header_search' ) ) {
 				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'eames' ); ?></span>
 				<label for="header-search-field"></label>
 				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'eames' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+				
+				<?php
+
+				$defaults = array( 'post', 'page' );
+
+				if ( eames_is_woocommerce_activated() ) {
+					$defaults[] = 'product';
+				}
+
+				$post_types_in_search = get_theme_mod( 'eames_filter_search_post_types', $defaults );
+
+				foreach( $post_types_in_search as $post_type ) {
+					echo '<input type="hidden" name="post_type" value="' . $post_type . '">';
+				}
+
+				?>
+
 			</form>
 
 			<div class="compact-search-results ajax-search-results modal arrow-left">
@@ -774,6 +791,16 @@ function eames_ajax_search() {
 			'posts_per_page'	=> 5,
 			'post_status'		=> 'publish',
 		);
+
+		// Exclude WooCommerce account/cart pages, if WC is activated
+		if ( eames_is_woocommerce_activated() ) {
+			$args['post__not_in'] = eames_woo_get_woocommerce_pages();
+		}
+
+		// Limit post types to the search post typ setting, if it has been set
+		if ( get_theme_mod( 'eames_filter_search_post_types' ) ) {
+			$args['post_type'] = get_theme_mod( 'eames_filter_search_post_types' );
+		}
 
 		$ajax_query = new WP_Query( $args );
 
@@ -1198,6 +1225,31 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   	LIMIT SEARCH RESULTS BY POST TYPE	
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'eames_search_results_filter' ) ) {
+
+	function eames_search_results_filter( $query ) {
+	
+		if ( $query->is_search && ! is_admin() ) {
+
+			// Get the value of the customizer setting (second arg: default value)
+			$post_types_in_search = get_theme_mod( 'eames_filter_search_post_types', array( 'post', 'page', 'product' ) );
+
+			// Set the query to the specific post types
+			$query->set( 'post_type', $post_types_in_search );
+		}
+	
+		return $query;
+	} 
+	add_filter( 'pre_get_posts', 'eames_search_results_filter' );
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
    	CUSTOM CUSTOMIZER CONTROLS
    --------------------------------------------------------------------------------------------- */
 
@@ -1378,6 +1430,56 @@ class Eames_Customize {
 			'mime_type'		=> 'image',
 			'section' 		=> 'eames_options',
 		) ) );
+
+
+		/* Search Post Type Filter ----------------------------- */
+
+
+		// Get post types that are public, and visible in search
+		$post_types = get_post_types( array(
+			'public'				=> true,
+			'exclude_from_search'	=> false,
+		) );
+
+		$post_types_customizer_values = array();
+
+		// Build an array of post types, with key: name and value: label
+		foreach( $post_types as $post_type ) {
+			$post_type_obj = get_post_type_object( $post_type );
+			$post_type_singular_label = $post_type_obj->labels->singular_name;
+			$post_types_customizer_values[$post_type] = $post_type_singular_label;
+		}
+
+		// Seperator before post types
+		$wp_customize->add_setting( 'eames_post_types_hr', array() );
+
+		$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_post_types_hr', array(
+			'section' 	=> 'eames_options',
+		) ) );
+
+		// Default post types
+		$defaults = array( 'post', 'page' );
+
+		// Add products, if WooCommerce is active
+		if ( eames_is_woocommerce_activated() ) {
+			$defaults[] = 'product';
+		}
+
+		// Add multiple checkbox setting for post types
+		$wp_customize->add_setting( 'eames_filter_search_post_types', array(
+			'default'           => $defaults,
+			'sanitize_callback' => 'eames_sanitize_multiple_checkboxes'
+		) );
+
+		$wp_customize->add_control( new Eames_Customize_Control_Checkbox_Multiple( $wp_customize, 'eames_filter_search_post_types', array(
+			'section' 		=> 'eames_options',
+			'label'   		=> __( 'Post types to include in search:', 'eames' ),
+			'description'	=> __( 'If you do not select any post types, search results will always display as "No results found".', 'eames' ),
+			'choices' 		=> $post_types_customizer_values 
+		) ) );
+
+
+		/* Post Meta Setting ----------------------------- */
 
 
 		// Seperator before post meta
