@@ -322,7 +322,6 @@ if ( ! function_exists( 'eames_sidebar_registration' ) ) {
 require_once( get_template_directory() . '/widgets/contact-information.php' );
 require_once( get_template_directory() . '/widgets/recent-comments.php' );
 require_once( get_template_directory() . '/widgets/recent-posts.php' );
-require_once( get_template_directory() . '/widgets/recent-products.php' );
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -338,11 +337,6 @@ if ( ! function_exists( 'eames_register_widgets' ) ) {
 		register_widget( 'eames_contact_information' );
 		register_widget( 'eames_recent_comments' );
 		register_widget( 'eames_recent_posts' );
-
-		// Widgets that require Woocommerce
-		if ( eames_is_woocommerce_activated() ) {
-			register_widget( 'eames_recent_products' );
-		}
 
 	}
 	add_action( 'widgets_init', 'eames_register_widgets' );
