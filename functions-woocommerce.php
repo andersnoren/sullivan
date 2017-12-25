@@ -119,6 +119,11 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
 
         $queried_object = get_queried_object();
 
+        // Add class to the front page of the shop
+        if ( is_shop() && ! get_search_query() ) {
+            $classes[] = 'shop-start';
+        }
+
         // Check if a Woocommerce term has a thumbnail image set
         if ( is_woocommerce() && is_archive() && $queried_object && isset( $queried_object->term_id ) ) {
             if ( get_woocommerce_term_meta( $queried_object->term_id, 'thumbnail_id', true ) ) {

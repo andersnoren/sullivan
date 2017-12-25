@@ -530,6 +530,11 @@ legend + .form-row {
 
 /* Products Header ----------------------------- */
 
+
+.shop-start .woocommerce-products-header {
+    display: none;
+}
+
 .archive-header-tools {
     align-items: center;
     display: flex;
