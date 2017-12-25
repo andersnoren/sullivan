@@ -85,13 +85,22 @@ if ( ! function_exists( 'eames_woo_remove_actions' ) ) {
 
 }
 
+
+/* ---------------------------------------------------------------------------------------------
+	REMOVE TITLE ON THE FRONT PAGE
+	--------------------------------------------------------------------------------------------- */
+
 // Remove title on the front page
 if ( ! function_exists( 'eames_woo_remove_title_on_shop_home' ) ) {
 
     function eames_woo_remove_title_on_shop_home( $title ) {
 
-        // Remove breadcrumbs on the front page of the shop
-        return is_shop() ? '' : $title;
+        // Remove title on the front page of the shop
+        if ( is_shop() && ! get_search_query() ) {
+            $title = '';
+        }
+
+        return $title;
 
     }
     add_action( 'woocommerce_show_page_title', 'eames_woo_remove_title_on_shop_home' );
