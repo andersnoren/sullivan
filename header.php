@@ -88,7 +88,7 @@
 					<?php if ( ! $logged_in ) : ?>
 
 						<a class="sign-in" href="<?php echo add_query_arg( 'form', 'sign-in', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Sign in', 'eames' ); ?></a>
-						
+
 						<?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
 							<a class="register" href="<?php echo add_query_arg( 'form', 'registration', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Register', 'eames' ); ?></a>
 						<?php endif; ?>
@@ -148,9 +148,9 @@
 						
 						if ( eames_is_woocommerce_activated() ) {
 
-							eames_account_modal();
+							eames_woo_account_modal();
 
-							eames_cart_modal();
+							eames_woo_cart_modal();
 
 						} elseif ( isset( $nav_social_args ) ) {
 

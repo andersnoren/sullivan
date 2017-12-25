@@ -12,28 +12,37 @@
 	CUSTOM WRAPPER ELEMENT
 	--------------------------------------------------------------------------------------------- */
 
+if ( ! function_exists( 'eames_woo_theme_wrapper_start' ) ) {
 
-// Disable defaults
-remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
-remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
+    // Disable defaults
+    remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 
-// Replace with our own
-function eames_woo_theme_wrapper_start() { 
-	?>
-	<main id="site-content">
-		<div class="section-inner">
-	<?php
+    // Replace with our own
+    function eames_woo_theme_wrapper_start() { 
+        ?>
+        <main id="site-content">
+            <div class="section-inner">
+        <?php
+    }
+    add_action( 'woocommerce_before_main_content', 'eames_woo_theme_wrapper_start', 10 );
+
 }
-add_action( 'woocommerce_before_main_content', 'eames_woo_theme_wrapper_start', 10 );
 
-// End wrapper
-function eames_woo_theme_wrapper_end() { 
-	?>
-		</div><!-- .section-inner -->
-	</main><!-- #site-content -->
-	<?php
+if ( ! function_exists( 'eames_woo_theme_wrapper_end' ) ) {
+
+    // Disable defaults
+    remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
+
+    // End wrapper
+    function eames_woo_theme_wrapper_end() { 
+        ?>
+            </div><!-- .section-inner -->
+        </main><!-- #site-content -->
+        <?php
+    }
+    add_action( 'woocommerce_after_main_content', 'eames_woo_theme_wrapper_end', 10 );
+
 }
-add_action( 'woocommerce_after_main_content', 'eames_woo_theme_wrapper_end', 10 );
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -43,7 +52,6 @@ add_action( 'woocommerce_after_main_content', 'eames_woo_theme_wrapper_end', 10 
 
 // Disable default Woocommerce styles
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
-
 
 // Conditional removals of actions
 if ( ! function_exists( 'eames_woo_remove_actions' ) ) {
@@ -125,7 +133,7 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
             if ( is_wc_endpoint_url( 'lost-password' ) ) {
 
                 $classes[] = 'single-account-form';
-                
+
             // If the form query argument is set, add class indicating which form is visible
             } elseif ( isset( $_GET['form'] ) && get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) {
 
@@ -158,6 +166,7 @@ if ( ! function_exists( 'eames_woo_body_classes' ) ) {
 /* ---------------------------------------------------------------------------------------------
 	ADD FORGOTTEN PASSWORD AND REGISTRATION LINKS TO LOGIN FORM
     --------------------------------------------------------------------------------------------- */
+
 
 if ( ! function_exists( 'eames_woo_add_login_footer' ) ) {
 
@@ -488,20 +497,23 @@ if ( ! function_exists( 'eames_woo_single_product_sidebar' ) ) {
 	CUSTOM FALLBACK IMAGE FOR PRODUCTS
 	--------------------------------------------------------------------------------------------- */
 
+if ( ! function_exists( 'eames_woo_custom_thumbnail' ) ) {
 
-function eames_woo_custom_thumbnail() {
+    function eames_woo_custom_thumbnail() {
 
-    function eames_woo_custom_thumbnail_src_replace( $src ) {
+        function eames_woo_custom_thumbnail_src_replace( $src ) {
 
-        // Get either the customizer set fallback or the theme default
-        $src = eames_get_fallback_image_url();
+            // Get either the customizer set fallback or the theme default
+            $src = eames_get_fallback_image_url();
 
-        return $src;
+            return $src;
+        }
+        add_filter( 'woocommerce_placeholder_img_src', 'eames_woo_custom_thumbnail_src_replace' );
+
     }
-    add_filter( 'woocommerce_placeholder_img_src', 'eames_woo_custom_thumbnail_src_replace' );
+    add_action( 'init', 'eames_woo_custom_thumbnail' );
 
 }
-add_action( 'init', 'eames_woo_custom_thumbnail' );
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -534,27 +546,31 @@ if ( ! function_exists( 'eames_woo_product_archive_image' ) ) {
    --------------------------------------------------------------------------------------------- */
 
 
-function eames_woo_update_cart_count_on_change( $fragments ) {
+if ( ! function_exists( 'eames_woo_update_cart_count_on_change' ) ) {
 
-	global $woocommerce;
+    function eames_woo_update_cart_count_on_change( $fragments ) {
 
-	ob_start();
+        global $woocommerce;
 
-	if ( $woocommerce->cart->cart_contents_count ) : ?>
+        ob_start();
 
-        <div class="cart-count">
-            <?php echo $woocommerce->cart->cart_contents_count; ?>
-        </div>
+        if ( $woocommerce->cart->cart_contents_count ) : ?>
 
-    <?php endif;
+            <div class="cart-count">
+                <?php echo $woocommerce->cart->cart_contents_count; ?>
+            </div>
 
-	$fragments['div.cart-count'] = ob_get_clean();
+        <?php endif;
 
-	// Return our fragments
-	return $fragments;
+        $fragments['div.cart-count'] = ob_get_clean();
+
+        // Return our fragments
+        return $fragments;
+
+    }
+    add_filter( 'woocommerce_add_to_cart_fragments', 'eames_woo_update_cart_count_on_change' );
 
 }
-add_filter( 'woocommerce_add_to_cart_fragments', 'eames_woo_update_cart_count_on_change' );
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -562,9 +578,9 @@ add_filter( 'woocommerce_add_to_cart_fragments', 'eames_woo_update_cart_count_on
    --------------------------------------------------------------------------------------------- */
 
 
-if ( ! function_exists( 'eames_account_modal' ) ) {
+if ( ! function_exists( 'eames_woo_account_modal' ) ) {
 
-    function eames_account_modal() {
+    function eames_woo_account_modal() {
 
         $account_url = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
         $account_title = is_user_logged_in() ? __( 'My account', 'eames' ) : __( 'Sign in', 'eames' );
@@ -664,9 +680,9 @@ if ( ! function_exists( 'eames_account_modal' ) ) {
    --------------------------------------------------------------------------------------------- */
 
 
-if ( ! function_exists( 'eames_cart_modal' ) ) {
+if ( ! function_exists( 'eames_woo_cart_modal' ) ) {
 
-    function eames_cart_modal() {
+    function eames_woo_cart_modal() {
 
         global $woocommerce;
 
