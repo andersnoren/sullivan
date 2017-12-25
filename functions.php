@@ -1371,7 +1371,10 @@ class Eames_Customize {
 			'description' 	=> __( 'Customize the theme settings for Eames.', 'eames' ),
 		) );
 
-		// Sticky the site navigation
+		
+		/* Sticky the site navigation ----------------------------- */
+
+
 		$wp_customize->add_setting( 'eames_sticky_nav', array(
 			'capability' 		=> 'edit_theme_options',
 			'sanitize_callback' => 'eames_sanitize_checkbox'
@@ -1385,7 +1388,9 @@ class Eames_Customize {
 		) );
 
 
-		// 2X Header Logo
+		/* 2X Header Logo ----------------------------- */
+
+
 		$wp_customize->add_setting( 'eames_retina_logo', array(
 			'capability' 		=> 'edit_theme_options',
 			'sanitize_callback' => 'eames_sanitize_checkbox',
@@ -1408,6 +1413,9 @@ class Eames_Customize {
 				eames_custom_logo();
 			},
 		) );
+
+
+		/* Fallback image setting ----------------------------- */
 
 
 		// Seperator before fallback image
