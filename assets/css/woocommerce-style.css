@@ -1860,7 +1860,7 @@ h3 + .woocommerce-address-fields {
     margin-bottom: 25px;
 }
 
-.account-form .woocommerce form p {
+.account-form .woocommerce p {
     line-height: 1.5;
 }
 
@@ -1885,6 +1885,14 @@ h3 + .woocommerce-address-fields {
 .woocommerce .login-registration-form-links .sep {
     color: #99999E;
     margin: 0 8px 0 5px;
+}
+
+
+/* Lost Password ----------------------------- */
+
+
+.account-form.woocommerce-lost-password .woocommerce-message {
+    padding-right: 20px;
 }
 
 
