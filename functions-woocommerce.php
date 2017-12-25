@@ -222,7 +222,7 @@ if ( ! function_exists( 'eames_woo_hero_slider' ) ) {
         global $paged;
         if ( ! $paged ) $paged = 1;
 
-        if ( is_shop() && $paged == 1 ) {
+        if ( is_shop() && ! get_search_query() && $paged == 1 ) {
             eames_hero_slider( 'shop' );
         }
 
