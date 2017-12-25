@@ -596,8 +596,8 @@ WP.ajaxSearch = {
 			}
 		})();
 
-		// Update results on keyup, after delay
-		$( '.ajax-search-field' ).on( 'keyup', function() {
+		// Update results on keyup and focus, after delay
+		$( '.ajax-search-field' ).on( 'keyup focus', function() {
 			if ( this.value.length != 0 ) {
 				$searchField = $( this );
 				delay( function(){
