@@ -193,6 +193,7 @@ input::-moz-placeholder { color: #999; }
 
 /* Split Section ----------------------------- */
 
+
 .split {
 	display: flex;
 	justify-content: space-between;
@@ -206,6 +207,23 @@ input::-moz-placeholder { color: #999; }
 	flex-shrink: 0;
 	margin-left: 80px;
     width: calc( 25% - 30px );
+}
+
+
+/* Item Grid ----------------------------- */
+
+
+ul.item-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 0 -60px -40px;
+}
+
+.item-grid li {
+    margin: 0 0 60px 40px;
+    position: relative;
+    width: calc( 25% - 40px );
 }
 
 
@@ -2244,6 +2262,41 @@ th {
 
 
 /* -------------------------------------------------------------------------------- */
+/*	X.	Site Search
+/* -------------------------------------------------------------------------------- */
+
+
+/* Search Preview ---------------------------- */
+
+.content-search a {
+	display: block;
+}
+
+.content-search a:hover {
+	text-decoration: none;
+}
+
+.content-search img {
+	display: block;
+	margin-bottom: 18px;
+}
+
+.content-search h2 {
+	font-size: 22px;
+	letter-spacing: -0.018em;
+	margin: 0;
+}
+
+.content-search a:hover h2 {
+	text-decoration: underline;
+}
+
+.content-search .post-date {
+	margin-top: 8px;
+}
+
+
+/* -------------------------------------------------------------------------------- */
 /*	X.	Site Pagination
 /* -------------------------------------------------------------------------------- */
 
@@ -2892,14 +2945,12 @@ ul.page-numbers .next { right: 0; }
 
 	/* Element Base ---------------------------- */
 
-
 	.bg-attach {
 		background-attachment: initial;
 	}
 
 
 	/* Structure ---------------------------- */
-
 
 	.split {
 		display: block;
@@ -2918,6 +2969,15 @@ ul.page-numbers .next { right: 0; }
 		padding-top: 60px;
 		width: 100%;
 	}
+
+	ul.item-grid {
+        margin: 0 0 -40px -30px;
+    }
+
+    ul.item-grid li {
+        margin: 0 0 40px 30px;
+        width: calc( 33.3% - 30px );
+    }
 
 
 	/* Sidebar ---------------------------- */
@@ -3328,6 +3388,18 @@ ul.page-numbers .next { right: 0; }
 @media ( max-width: 800px ) {
 
 
+	/* Structure ---------------------------- */
+
+	ul.item-grid {
+        margin: 0 0 -40px -20px;
+    }
+
+    ul.item-grid li {
+        margin: 0 0 40px 20px;
+        width: calc( 33.3% - 20px );
+    }
+
+
 	/* Blog Archive ---------------------------- */
 
 	/* SLIDESHOWS */
@@ -3466,6 +3538,17 @@ ul.page-numbers .next { right: 0; }
 	.comment-metadata, 
 	.comment-metadata .edit-link {
 		margin-left: 10px;
+	}
+
+
+	/* Site Search ---------------------------- */
+
+	.content-search img {
+		margin-bottom: 10px;
+	}
+
+	.content-search h2 {
+		font-size: 18px;
 	}
 
 
@@ -3918,6 +4001,31 @@ ul.page-numbers .next { right: 0; }
 
 	.credits .social-menu {
 		margin-top: 27px;
+	}
+
+
+}
+
+
+@media ( max-width: 500px ) {
+
+
+	/* Structure ---------------------------- */
+
+	ul.item-grid {
+        margin: 0 0 -30px -10px;
+    }
+
+    ul.item-grid li {
+        margin: 0 0 30px 10px;
+        width: calc( 50% - 10px );
+	}
+	
+
+	/* Site Search ---------------------------- */
+
+	.content-search h2 {
+		font-size: 16px;
 	}
 
 

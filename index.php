@@ -22,30 +22,6 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 					</div>
 				</header>
 			
-			<?php elseif ( is_search() && have_posts() ) : ?>
-			
-				<header class="archive-header">
-					<div>
-						<h6 class="subheading"><?php _e( 'Search', 'eames' ); ?></h6>
-						<h3 class="archive-title"><?php printf( __( 'Search: %s', 'eames' ), '&ldquo;' . get_search_query() . '&rdquo;' ); ?></h3>
-						<p><?php printf( _n( 'We found %s result matching your search.', 'We found %s results matching your search.', $wp_query->found_posts, 'eames' ), $wp_query->found_posts ); ?></p>
-					</div>
-				</header>
-			
-			<?php elseif ( is_search() ) : ?>
-
-				<div class="section-inner">
-
-					<header class="archive-header">
-						<div>
-							<h6 class="subheading"><?php _e( 'Search', 'eames' ); ?></h6>
-							<h3 class="archive-title"><?php _e( 'No results found', 'eames' ); ?></h3>
-							<p><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s".', 'eames' ), get_search_query() ); ?></p>
-						</div>
-					</header>
-
-				</div>
-
 			<?php endif;
 			
 			if ( have_posts() ) : ?>

@@ -534,6 +534,10 @@ legend + .form-row {
 
 /* Products Header ----------------------------- */
 
+.woocommerce-products-header {
+    margin: 0 auto 60px auto;
+    text-align: center;
+}
 
 .shop-start .woocommerce-products-header {
     display: none;
@@ -566,7 +570,7 @@ legend + .form-row {
 .term-has-image .woocommerce-products-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 80px;
+    text-align: left;
 }
 
 .term-has-image .woocommerce-products-header h1,
@@ -575,9 +579,7 @@ legend + .form-row {
 }
 
 .term-missing-image .woocommerce-products-header {
-    margin: 0 auto 50px auto;
     max-width: 100%;
-    text-align: center;
     width: 600px;
 }
 
@@ -588,23 +590,6 @@ legend + .form-row {
 .woocommerce-products-header h1,
 .woocommerce-products-header p {
     text-align: inherit;
-}
-
-
-/* Products Grid ----------------------------- */
-
-
-ul.products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 0 0 -60px -40px;
-}
-
-.products li {
-    margin: 0 0 60px 40px;
-    position: relative;
-    width: calc( 25% - 40px );
 }
 
 
@@ -651,16 +636,19 @@ li.product a:hover .woocommerce-loop-product__title {
 
 li.product .price {
     display: block;
-    margin-top: .5rem;
+    margin-top: 8px;
 }
 
-.price ins {
-    margin-left: 4px;
+del {
+    color: #99999E;
+}
+
+ins {
     text-decoration: none;
 }
 
-.price del {
-    color: #99999E;
+del + ins {
+    margin-left: 4px;
 }
 
 
@@ -1048,15 +1036,15 @@ li.product .price {
 
 /* Related Products ----------------------------- */
 
-.products.related,
-.products.up-sells,
+.item-grid.related,
+.item-grid.up-sells,
 .cross-sells {
     margin-top: 80px;
     width: 100%;
 }
 
-.products.related > h2,
-.products.up-sells > h2,
+.item-grid.related > h2,
+.item-grid.up-sells > h2,
 .cross-sells > h2 {
     font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 1em;
@@ -2116,6 +2104,10 @@ h3 + .woocommerce-address-fields {
 
     /* Product Archive ----------------------------- */
 
+    .woocommerce-products-header {
+        margin-bottom: 40px;
+    }
+
     /* TERM ARCHIVE */
 
     .term-has-image .woocommerce-products-header,
@@ -2134,17 +2126,6 @@ h3 + .woocommerce-address-fields {
     .term-has-image .woocommerce-products-header h1,
     .term-has-image .woocommerce-products-header .term-description {
         width: 100%;
-    }
-
-    /* PRODUCT GRID */
-
-    ul.products {
-        margin: 0 0 -40px -20px;
-    }
-
-    ul.products li {
-        margin: 0 0 40px 20px;
-        width: calc( 33.3% - 20px );
     }
 
     /* PRODUCT PREVIEW */
@@ -2530,8 +2511,8 @@ h3 + .woocommerce-address-fields {
 
     /* RELATED PRODUCTS */
 
-    .products.related, 
-    .products.up-sells, 
+    .item-grid.related, 
+    .item-grid.up-sells, 
     .cross-sells {
         margin-top: 40px;
     }
@@ -2676,15 +2657,6 @@ h3 + .woocommerce-address-fields {
 
 
     /* Product Archive ----------------------------- */
-
-    ul.products {
-        margin: 0 0 -30px -10px;
-    }
-
-    ul.products li {
-        margin: 0 0 30px 10px;
-        width: calc( 50% - 10px );
-    }
 
     /* PRODUCT PREVIEW */
 
