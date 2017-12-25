@@ -811,9 +811,11 @@ function eames_ajax_search() {
 
 									<p class="meta"><?php the_time( get_option( 'date_format' ) ); ?></p>
 
-								<?php elseif( $post_type == 'product' ) : ?>
+								<?php elseif( $post_type == 'product' ) : 
 
-									<p class="meta">PRICE HERE</p>
+									global $product; ?>
+
+									<p class="meta"><?php echo $product->get_price_html(); ?></p>
 									
 								<?php endif; ?>
 							
