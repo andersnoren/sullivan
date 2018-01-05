@@ -114,7 +114,7 @@ body {
     background: #111;
 	border: none;
     color: #111; 
-	font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: Archivo, 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 18px;
 }
 
@@ -275,7 +275,7 @@ h6 { font-size: 16px; }
 
 .subheading {
 	color: #999;
-	font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: Archivo, 'Helvetica Neue', Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: 500;
 	letter-spacing: 0;
@@ -530,7 +530,7 @@ img {
 }
 
 .compact-search-results li a .title {
-	font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: Archivo, 'Helvetica Neue', Helvetica, sans-serif;
 	font-size: 14px;
 	font-weight: 500;
 }
@@ -1589,9 +1589,16 @@ img {
 }
 
 .comment-respond .logged-in-as {
-	color: #999;
 	line-height: 1.155;
 	margin: 10px 0 40px 0;
+}
+
+.comment-respond .comment-form p {
+	margin-bottom: 20px;
+}
+
+.comment-respond .comment-form p:last-of-type {
+	margin-bottom: 0;
 }
 
 .comment-respond .comment-form-author,
@@ -1966,7 +1973,7 @@ select {
 	font-family: inherit;
 	font-size: 14px;
 	font-weight: 500;
-	padding: 9px 40px 11px 12px;
+	padding: 10px 40px 10px 12px;
 	-webkit-appearance: none;
 	width: 100%;
 }
@@ -2099,7 +2106,7 @@ tr {
 }
 
 tr:last-child {
-	border-bottom: none;
+	border-bottom-width: 0;
 }
 
 th,
@@ -2417,7 +2424,7 @@ ul.page-numbers .next { right: 0; }
 }
 
 .widget_text .show-more {
-	font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: Archivo, 'Helvetica Neue', Helvetica, sans-serif;
 	font-size: 14px;
 }
 
@@ -4032,6 +4039,19 @@ ul.page-numbers .next { right: 0; }
 
 	.content-search h2 {
 		font-size: 16px;
+	}
+
+
+	/* Comments ---------------------------- */
+
+	.comment-respond .comment-form-author, 
+	.comment-respond .comment-form-email {
+		float: none;
+		width: 100%;
+	}
+
+	.comment-respond .comment-form-email {
+		margin-left: 0;
 	}
 
 

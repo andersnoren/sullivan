@@ -251,7 +251,7 @@ p.stars.selected a:not(.active):before {
     display: block;
     font-size: 16px;
     font-weight: 500;
-    padding: 20px 10px 22px;
+    padding: 20px 10px;
     position: relative;
     width: 100%;
 }
@@ -1049,7 +1049,7 @@ del + ins {
 .products.related > h2,
 .products.up-sells > h2,
 .cross-sells > h2 {
-    font-family: 'Aktiv Grotesk', 'Helvetica Neue', Helvetica, sans-serif;
+    font-family: Archivo, 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 1em;
     font-weight: 500;
     margin: 0 0 20px 0;
@@ -1158,7 +1158,8 @@ del + ins {
 }
 
 .shop_table.cart .coupon label {
-    text-indent: -9999px;
+    position: absolute;
+        left: -99999px;
 }
 
 .shop_table.cart td.actions > .button {
@@ -1302,7 +1303,7 @@ form.woocommerce-checkout .woocommerce-billing-fields h3,
 }
 
 .checkout_coupon p + p {
-    margin-left: 10px;
+    margin: 0 0 0 10px;
 }
 
 .checkout_coupon input[type="text"] {
@@ -1350,6 +1351,10 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     display: none;
 }
 
+#order_review tbody tr:last-child {
+    border-bottom-width: 1px;
+}
+
 #order_review tbody tr:first-child td {
     padding-top: 0;
 }
@@ -1374,12 +1379,13 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
 }
 
 .wc_payment_methods li + li {
-    margin-top: 20px;
     border-top: 1px solid #e1e1e5;
+    margin-top: 20px;
     padding-top: 20px;
 }
 
 .wc_payment_methods label {
+    cursor: pointer;
     display: block;
     font-weight: 500;
     font-size: 16px;
@@ -1401,11 +1407,10 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
 
 .wc_payment_methods input {
     position: absolute;
-    left: -9999px;
+        left: -9999px;
 }
 
 .wc_payment_methods label:before {
-    background: #fff;
     border: 2px solid #111;
     cursor: pointer;
 }
@@ -1436,8 +1441,8 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     position: absolute;
         right: 0;
         top: 50%;
-    width: 35px;
     transform: translateY( -50% );
+    width: 35px;
 }
 
 .payment_method_paypal .about_paypal {
@@ -1528,6 +1533,7 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     font-family: Charter, Georgia, serif;
     font-size: 20px;
     font-weight: 400;
+    letter-spacing: -0.005em;
     margin-top: 8px;
 }
 
@@ -1541,6 +1547,10 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
 .woocommerce-order-details__title,
 .woocommerce-order-details thead {
     display: none;
+}
+
+.woocommerce-order-details tbody tr:last-child {
+    border-bottom-width: 1px;
 }
 
 .woocommerce-order-details tbody tr:first-child td {
