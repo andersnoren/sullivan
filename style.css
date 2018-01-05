@@ -769,14 +769,14 @@ img {
 	border-radius: 50%;
 	color: #fff;
 	display: flex;
-	font-size: 10px;
-	font-weight: 700;
+	font-size: 11px;
+	font-weight: 500;
 	height: 24px;
 	justify-content: center;
-	padding-bottom: 2px;
+	padding-bottom: 1px;
 	position: absolute;
-		top: -11px;
 		right: -10px;
+		top: -11px;
 	width: 24px;
 }
 
@@ -1597,7 +1597,7 @@ img {
 	margin-bottom: 20px;
 }
 
-.comment-respond .comment-form p:last-of-type {
+.comment-respond .comment-form > p:last-of-type {
 	margin-bottom: 0;
 }
 
@@ -1938,6 +1938,7 @@ input[type="url"] {
 	box-shadow: none;
     color: #111;
 	display: block;
+	font-family: inherit;
 	font-size: 15px;
     margin: 0 0 15px 0;
     padding: 15px;
@@ -2060,7 +2061,7 @@ input[type="submit"].white {
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
 	line-height: 1.5;
-	padding: 0 20px 2px 16px;
+	padding: 0 20px 0 16px;
 	width: 100%;
 }
 
