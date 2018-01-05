@@ -260,9 +260,27 @@ WP.fancyNumberInputs = {
 	init: function(){
 
 		// Add the extra markup
-		$( '<div class="quantity-nav"><div class="quantity-button quantity-up"></div><div class="quantity-button quantity-down"></div></div>' ).insertAfter( '.quantity input' );
+		WP.fancyNumberInputs.addQuantityMarkup();
 
 		// Loop through all quantity elements and set up our variables
+		WP.fancyNumberInputs.handleQuantityElements();
+
+		// Add the quantity markup back and rerun the handling when WC fragments have been refreshed
+		$( 'body' ).on( 'wc_fragments_refreshed', function(){
+			WP.fancyNumberInputs.addQuantityMarkup();
+			WP.fancyNumberInputs.handleQuantityElements();
+		} );
+
+	},
+
+	// Add the extra markup
+	addQuantityMarkup: function() {
+		$( '<div class="quantity-nav"><div class="quantity-button quantity-up"></div><div class="quantity-button quantity-down"></div></div>' ).insertAfter( '.quantity input' );
+	},
+
+	// Loop through all quantity elements and set up our variables
+	handleQuantityElements: function() {
+
 		$( '.quantity' ).each( function() {
 			var $spinner = $( this ),
 				$input = $spinner.find( 'input[type="number"]' ),
