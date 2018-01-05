@@ -1594,14 +1594,9 @@ img {
 	margin: 10px 0 40px 0;
 }
 
-.comment-respond p + p { 
-	margin-top: 20px; 
-}
-
 .comment-respond .comment-form-author,
 .comment-respond .comment-form-email {
 	float: left;
-	margin: 20px 0;
 	width: calc( 50% - 10px );
 }
 
@@ -1611,6 +1606,12 @@ img {
 
 .comment-respond label { 
 	display: block; 
+}
+
+.comment-respond input[type="text"],
+.comment-respond input[type="email"],
+.comment-respond textarea {
+	margin-bottom: 0;
 }
 
 
@@ -1803,6 +1804,7 @@ blockquote cite:before {
 
 .wp-caption-text a {
 	color: inherit;
+	display: inline;
 }
 
 .alignleft,
@@ -2094,6 +2096,10 @@ table {
 
 tr {
 	border-bottom: 1px solid #e1e1e5;
+}
+
+tr:last-child {
+	border-bottom: none;
 }
 
 th,

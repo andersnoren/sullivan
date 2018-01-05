@@ -145,6 +145,7 @@
 
 p.stars {
     display: inline-block;
+    margin-bottom: 12px;
 }
 
 p.stars a {
@@ -900,10 +901,8 @@ del + ins {
     margin-top: 30px;
 }
 
-.product_meta span + span:before {
-    color: #99999E;
-    content: "•";
-    margin: 0 10px 0 6px;
+.product_meta span + span {
+    margin-left: 18px;
 }
 
 .product_meta a {
@@ -990,7 +989,7 @@ del + ins {
 #reviews time {
     color: #99999E;
     font-size: 14px;
-    margin-left: 7px;
+    margin-left: 5px;
 }
 
 #reviews .comment-text .description {
@@ -1019,6 +1018,10 @@ del + ins {
 
 #review_form .comment-respond:before {
     content: none;
+}
+
+#review_form .comment-notes {
+    margin: -5px 0 25px;
 }
 
 #review_form .form-submit {
@@ -1081,6 +1084,10 @@ del + ins {
 
 .shop_table.cart tr {
     position: relative;
+}
+
+.shop_table.cart tbody tr:first-child {
+    border-top: 1px solid #e1e1e5;
 }
 
 .shop_table.cart th {
@@ -1212,6 +1219,11 @@ del + ins {
 
 .shipping-calculator-form {
     margin-top: 20px;
+}
+
+.shipping-calculator-form .form-row + .form-row,
+.shipping-calculator-form p:last-of-type {
+    margin-top: 15px;
 }
 
 .order-total strong {
@@ -1554,6 +1566,10 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     text-align: right;
 }
 
+.woocommerce-order-details .order-again {
+    margin-top: 25px;
+}
+
 
 /* Customer Details ----------------------------- */
 
@@ -1694,8 +1710,12 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     background: none;
 }
 
-.woocommerce-MyAccount-content a {
+.woocommerce-MyAccount-content a:not(.button) {
     text-decoration: underline;
+}
+
+.woocommerce-MyAccount-content a:not(.button):hover {
+    opacity: .5;
 }
 
 .woocommerce-MyAccount-content form .button {
@@ -1904,8 +1924,8 @@ h3 + .woocommerce-address-fields {
     font-size: 14px;
 }
 
-/* Widget Products --------------------------- */
 
+/* Widget Products --------------------------- */
 
 .widget_products .product_list_widget li {
     font-size: 14px;
@@ -1936,11 +1956,6 @@ h3 + .woocommerce-address-fields {
     margin-bottom: 5px;
     width: 100%;
 }
-
-
-/* Widget Product Categories ----------------- */
-
-/* Widget Products --------------------------- */
 
 
 /* -------------------------------------------------------------------------------- */
@@ -2485,6 +2500,20 @@ h3 + .woocommerce-address-fields {
     .woocommerce-tabs #review_form .comment-reply-title {
         font-size: 24px;
         margin: 0 0 15px;
+    }
+
+    /* PRODUCT CONTENT */
+
+    .product_meta {
+        margin-top: 25px;
+    }
+
+    .product_meta > span {
+        display: block;
+    }
+
+    .product_meta > span + span {
+        margin: 8px 0 0;
     }
 
     /* PRODUCT REVIEWS */
