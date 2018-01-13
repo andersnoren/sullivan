@@ -50,11 +50,11 @@ License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/z
 Source: https://www.pexels.com/
 
 FontAwesome Icons
-License: XXXXXXX, 
+License: SIL Open Font License, 1.1,
 Source: https://www.fontawesome.io
 
 FontAwesome Code
-License: XXXXXXX, 
+License: MIT License,
 Source: https://www.fontawesome.io
 
 Ion Icons
