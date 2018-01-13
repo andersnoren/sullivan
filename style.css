@@ -353,6 +353,32 @@ img {
 /* -------------------------------------------------------------------------------- */
 
 
+.woocommerce-store-notice {
+	color: #fff;
+	font-family: Charter, Georgia, serif;
+	font-size: 14px;
+	font-style: italic;
+	line-height: 1.25;
+	margin: 0 auto;
+	max-width: 1280px;
+	padding: 13px 44px 14px;
+	position: relative;
+	text-align: center;
+	width: 90%;
+}
+
+.woocommerce-store-notice__dismiss-link {
+	background: url( ./assets/svg/cross-white.svg ) no-repeat center;
+	background-size: 16px;
+	display: block;
+	height: 44px;
+	position: absolute;
+		right: 0;
+		top: calc( 50% - 22px );
+	text-indent: -99999px;
+	width: 44px;
+}
+
 .site-header { 
 	background: #fff;
 	border-bottom: 1px solid #e1e1e5;
@@ -1994,7 +2020,7 @@ input[type="submit"] {
 	line-height: 1.15;
 	margin: 0;
 	min-width: 115px;
-	padding: 14px 21px 15px;
+	padding: 14px 21px 14px;
 	text-align: center;
 	transition: opacity .15s linear;
 	-moz-appearance: none;
@@ -4033,6 +4059,18 @@ ul.page-numbers .next { right: 0; }
     ul.item-grid li {
         margin: 0 0 30px 10px;
         width: calc( 50% - 10px );
+	}
+
+
+	/* Site Header ---------------------------- */
+
+	.woocommerce-store-notice {
+		padding: 10px 64px;
+		width: 100%;
+	}
+
+	.woocommerce-store-notice__dismiss-link {
+		width: 64px;
 	}
 	
 

@@ -109,6 +109,8 @@
 		<div class="body-inner">
 
 			<div class="mobile-nav-content-overlay dark-overlay"></div>
+
+			<?php if ( eames_is_woocommerce_activated() ) woocommerce_demo_store(); ?>
     
 			<header class="site-header">
 
