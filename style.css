@@ -2324,7 +2324,8 @@ th {
 /* Template Full Width ---------------------------- */
 
 
-.template-full-width #site-content .section-inner.thin {
+.template-full-width #site-content .section-inner.thin,
+.template-full-width #site-content .section-inner.medium {
 	max-width: 124rem;
 }
 
