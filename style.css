@@ -163,6 +163,34 @@ input:-ms-input-placeholder { color: #999; }
 input::-moz-placeholder { color: #999; }
 
 
+/* Fonts ----------------------------- */
+
+
+@font-face {
+	font-family: 'Charis SIL';
+	src: url( ./assets/fonts/CharisSIL-R.woff );
+}
+
+@font-face {
+	font-family: 'Charis SIL';
+	font-style: italic;
+	src: url( ./assets/fonts/CharisSIL-I.woff );
+}
+
+@font-face {
+	font-family: 'Charis SIL';
+	font-weight: bold;
+	src: url( ./assets/fonts/CharisSIL-B.woff );
+}
+
+@font-face {
+	font-family: 'Charis SIL';
+	font-weight: bold;
+	font-style: italic;
+	src: url( ./assets/fonts/CharisSIL-BI.woff );
+}
+
+
 /* -------------------------------------------------------------------------------- */
 /*	X.	Structure
 /* -------------------------------------------------------------------------------- */
@@ -252,7 +280,7 @@ a {
 /* TITLES */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	letter-spacing: -0.005em;
 	line-height: 1.155;
 	margin: .75em 0 .4em;
@@ -285,7 +313,7 @@ h6 { font-size: 16px; }
 /* EXCERPTS */
 
 .excerpt {
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 28px;
 	letter-spacing: -0.01em;
 	line-height: 1.4;
@@ -355,7 +383,7 @@ img {
 
 .woocommerce-store-notice {
 	color: #fff;
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 14px;
 	font-style: italic;
 	line-height: 1.25;
@@ -1792,7 +1820,7 @@ blockquote cite:before {
 /* Pull Quotes ----------------------------- */
 
 .entry-content .pull {
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 29px;
 	font-weight: 700;
 	letter-spacing: -0.01em;
@@ -2443,7 +2471,7 @@ ul.page-numbers .next { right: 0; }
 
 
 .widget_text {
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 }
 
 .widget_text .textwidget {
@@ -2477,7 +2505,7 @@ ul.page-numbers .next { right: 0; }
 .widget_pages li a,
 .widget_product_categories li a { 
 	color: #111;
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 18px;
 }
 
@@ -2503,7 +2531,7 @@ ul.page-numbers .next { right: 0; }
 
 .widget_rss li a {
 	display: block;
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	color: #111;
 }
 
@@ -2693,7 +2721,7 @@ ul.page-numbers .next { right: 0; }
 }
 
 .eames-widget-list .title {
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 18px;
 	line-height: 1.15;
 }
@@ -2738,7 +2766,7 @@ ul.page-numbers .next { right: 0; }
 
 
 .widget_eames_contact {
-	font-family: Charter, Georgia, serif;
+	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 16px;
 }
 
@@ -3309,7 +3337,7 @@ ul.page-numbers .next { right: 0; }
 
 	.mobile-menu > li > a,
 	.mobile-menu > li > div > a {
-		font-family: Charter, Georgia, serif;
+		font-family: 'Charis SIL', Georgia, serif;
 		font-size: 22px;
 	}
 

@@ -226,7 +226,7 @@ p.stars.selected a:not(.active):before {
 .woocommerce-tabs .panel h2,
 .woocommerce-tabs #review_form .comment-reply-title {
     display: block;
-    font-family: Charter, Georgia, serif;
+    font-family: 'Charis SIL', Georgia, serif;
     font-size: 28px;
     margin: 0 0 20px;
 }
@@ -977,7 +977,7 @@ del + ins {
 }
 
 #reviews .woocommerce-review__author {
-    font-family: Charter, Georgia, serif;
+    font-family: 'Charis SIL', Georgia, serif;
     font-size: 20px;
     font-weight: 400;
 }
@@ -1118,7 +1118,7 @@ del + ins {
 }
 
 .shop_table.cart td.product-name {
-    font-family: Charter, Georgia, serif;
+    font-family: 'Charis SIL', Georgia, serif;
     font-size: 20px;
 }
 
@@ -1535,7 +1535,7 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
 
 .woocommerce-order-overview strong {
     display: block;
-    font-family: Charter, Georgia, serif;
+    font-family: 'Charis SIL', Georgia, serif;
     font-size: 20px;
     font-weight: 400;
     letter-spacing: -0.005em;
@@ -1966,7 +1966,7 @@ h3 + .woocommerce-address-fields {
 
 .widget_products .product_list_widget .product-title {
     display: block;
-    font-family: Charter, Georgia, serif;
+    font-family: 'Charis SIL', Georgia, serif;
     font-size: 18px;
     margin-bottom: 5px;
     width: 100%;
