@@ -37,13 +37,17 @@ Dark Mode (displayed in the Colors tab) — Displays the site with white text an
 
 == Licenses ==
 
-Libre Franklin font
+Archivo font
 License: SIL Open Font License, 1.1
-Source: https://fonts.google.com/specimen/Libre+Franklin
+Source: https://fonts.google.com/specimen/Archivo
 
-Images in screenshot.png by Fancycrave, supplied through Pexels
+Charter SIL font
+License: SIL Open Font License, 1.1
+Source: https://software.sil.org/charis/
+
+Images in screenshot.png from Pexels
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
-Source: https://www.pexels.com/u/fancycrave-60738/
+Source: https://www.pexels.com/
 
 FontAwesome Icons
 License: XXXXXXX, 
