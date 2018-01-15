@@ -3,7 +3,7 @@
 	Theme Name: Eames
     Text Domain: eames
 	Version: 1.00
-	Description: 
+	Description: Eames is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, a search field displaying instant results, full-width slideshows on both the blog page and the store page, custom widgets, social menus, 
 	Tags: 
 	Author: Anders Norén
 	Author URI: http://www.andersnoren.se
@@ -2272,6 +2272,7 @@ th {
 
 
 /* Template Cover ---------------------------- */
+
 
 .template-cover #site-content {
 	padding-top: 0;
