@@ -1552,6 +1552,11 @@ img {
 	line-height: 1.155;
 }
 
+.bypostauthor .comment-author b {
+	font-style: italic;
+	font-weight: 500;
+}
+
 .comment-author b {
 	font-weight: 500;
 }
