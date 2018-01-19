@@ -57,7 +57,7 @@ if ( $related_posts ) : ?>
 
 		<div class="related-posts">
 
-			<h3 class="related-posts-title"><?php _e( 'Related Posts', 'mcluhan' ); ?></h3>
+			<h3 class="related-posts-title"><?php _e( 'Related Posts', 'eames' ); ?></h3>
 
 			<?php 
 
@@ -66,7 +66,7 @@ if ( $related_posts ) : ?>
 				setup_postdata( $post );
 					
 				if ( has_post_thumbnail() ) {
-					$image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'mcluhan_preview-image' );
+					$image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
 					$image_url = $image[0];
 				} else {
 					$image_url = eames_get_fallback_image_url();
