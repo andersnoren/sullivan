@@ -1180,7 +1180,14 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 											<?php if ( $slide['url'] && $slide['button_text'] ) : ?>
 
 												<div class="button-wrapper">
-													<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php echo $slide['button_text']; ?></a>
+													<?php 
+													
+													// If we're wrapping the slide in a link, we need to output the "button" as a div to prevent element breakage
+													if ( $opening_element == 'div' ) : ?>
+														<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php echo $slide['button_text']; ?></a>
+													<?php else : ?>
+														<div class="button white"><?php echo $slide['button_text']; ?></div>
+													<?php endif; ?>
 												</div>
 
 											<?php endif; ?>
