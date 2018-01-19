@@ -79,7 +79,7 @@ if ( ! function_exists( 'eames_load_style' ) ) {
 
 	function eames_load_style() {
 		if ( ! is_admin() ) {
-			wp_register_style( 'eames-google-fonts', 'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,700,700i&amp;subset=latin-ext', array(), null );
+			wp_register_style( 'eames-google-fonts', 'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,700,700i&amp;subset=latin-ext', array(), null );
 			wp_register_style( 'eames-fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.css' );
 
 			$dependencies = array( 'eames-google-fonts', 'eames-fontawesome' );
