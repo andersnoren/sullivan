@@ -1510,19 +1510,6 @@ img {
 	word-break: break-word;
 }
 
-.related-post .title span {
-	border-bottom: 1px solid transparent;
-	transition: border-color .15s linear;
-}
-
-.related-post:hover {
-	text-decoration: none;
-}
-
-.related-post:hover .title span {
-	border-bottom-color: #121212;
-}
-
 
 /* -------------------------------------------------------------------------------- */
 /*	X.	Comments
