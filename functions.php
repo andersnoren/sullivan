@@ -1419,7 +1419,9 @@ class Eames_Customize {
 
 
 		// Seperator before fallback image
-		$wp_customize->add_setting( 'eames_fallback_image_hr', array() );
+		$wp_customize->add_setting( 'eames_fallback_image_hr', array(
+			'sanitize_callback' => 'esc_attr',
+		) );
 
 		$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_fallback_image_hr', array(
 			'section' 	=> 'eames_options',
@@ -1459,7 +1461,9 @@ class Eames_Customize {
 		}
 
 		// Seperator before post types
-		$wp_customize->add_setting( 'eames_post_types_hr', array() );
+		$wp_customize->add_setting( 'eames_post_types_hr', array(
+			'sanitize_callback'	=> 'esc_attr',
+		) );
 
 		$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_post_types_hr', array(
 			'section' 	=> 'eames_options',
@@ -1491,7 +1495,9 @@ class Eames_Customize {
 
 
 		// Seperator before post meta
-		$wp_customize->add_setting( 'eames_post_meta_hr', array() );
+		$wp_customize->add_setting( 'eames_fallback_image_hr', array(
+			'sanitize_callback' => 'esc_attr',
+		) );
 
 		$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_post_meta_hr', array(
 			'section' 	=> 'eames_options',
@@ -1596,14 +1602,18 @@ class Eames_Customize {
 			// Loop through the number of slides, and add a set of settings for each slide
 			for ( $i = 1; $i <= $area['max_slides']; $i++ ) {
 
-				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array() );
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
+					'sanitize_callback' => 'esc_attr',
+				) );
 
 				$wp_customize->add_control( new Eames_Customize_Control_Seperator( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_hr', array(
 					'content' 	=> '',
 					'section' 	=> 'eames_' . $area['name'] . '_slider',
 				) ) );
 
-				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array() );
+				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array(
+					'sanitize_callback' => 'sanitize_text_field',
+				) );
 
 				$wp_customize->add_control( new Eames_Customize_Control_Group_Title( $wp_customize, 'eames_' . $area['name'] . '_slider_' . $i . '_section_title', array(
 					'content' 	=> sprintf( __( 'Slide %s', 'eames' ), $i ),
@@ -1611,7 +1621,7 @@ class Eames_Customize {
 				) ) );
 
 				$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_' . $i . '_image', array(
-					'sanitize_callback' => 'sanitize_text_field',
+					'sanitize_callback' => 'absint',
 					'transport'			=> 'postMessage'
 				) );
 
@@ -1689,7 +1699,9 @@ class Eames_Customize {
 
 			} // for
 
-			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_add_slide', array() );
+			$wp_customize->add_setting( 'eames_' . $area['name'] . '_slider_add_slide', array(
+				'sanitize_callback'	=> 'esc_attr',
+			) );
 
 			$wp_customize->add_control( new Eames_Customize_Control_Add_Slide( $wp_customize, 'eames_' . $area['name'] . '_slider_add_slide', array(
 				'content' 	=> $area['name'],
