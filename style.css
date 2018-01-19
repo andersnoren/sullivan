@@ -1630,7 +1630,7 @@ img {
 }
 
 .comment-respond .logged-in-as {
-	line-height: 1.155;
+	line-height: 1.25;
 	margin: 10px 0 40px 0;
 }
 
@@ -3889,14 +3889,18 @@ ul.page-numbers .next { right: 0; }
 
 	/* Comments ---------------------------- */
 
-
 	.comments-pagination {
 		height: 21px;
 		margin-top: 50px;
 	}
 
-	.comments-pagination ul.page-numbers {
+	.comments-pagination .page-numbers {
 		display: none;
+	}
+
+	.comments-pagination .page-numbers.prev,
+	.comments-pagination .page-numbers.next {
+		display: block;
 	}
 
 	.comments-pagination .prev,
