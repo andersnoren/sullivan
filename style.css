@@ -1602,7 +1602,7 @@ img {
 	text-align: center;
 }
 
-.comments-pagination ul.page-numbers {
+.comments-pagination .page-numbers {
 	display: inline-block;
 	padding: 0 10px;
 }
