@@ -983,7 +983,7 @@ class Eames_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
    --------------------------------------------------------------------------------------------- */
 
 
-   if ( ! function_exists( 'eames_get_slideshow_area' ) ) {
+if ( ! function_exists( 'eames_get_slideshow_area' ) ) {
 
 	function eames_get_slideshow_area( $area = '' ) {
 
