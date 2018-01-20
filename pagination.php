@@ -9,7 +9,7 @@ if ( $wp_query->max_num_pages > 1 ) :
 	<ul class="site-pagination<?php if ( ! get_previous_posts_link() && get_next_posts_link() ) echo ' only-next'; ?>">
 			
 		<?php 
-		if ( get_previous_posts_link() ) echo '<li class="prev">' . get_previous_posts_link( __( 'Previous', 'wright' ) ) . '</li>';
+		if ( get_previous_posts_link() ) echo '<li class="prev">' . get_previous_posts_link( __( 'Previous', 'sullivan' ) ) . '</li>';
 
 		$paged = get_query_var( 'paged' ) ?: 1;
 		$max   = intval( $wp_query->max_num_pages );
@@ -57,7 +57,7 @@ if ( $wp_query->max_num_pages > 1 ) :
 			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
 		}
 					
-		if ( get_next_posts_link() ) echo '<li class="next">' . get_next_posts_link( __( 'Next', 'wright' ) ) . '</li>'; 
+		if ( get_next_posts_link() ) echo '<li class="next">' . get_next_posts_link( __( 'Next', 'sullivan' ) ) . '</li>'; 
 		?>
 					
 	</ul><!-- .pagination -->

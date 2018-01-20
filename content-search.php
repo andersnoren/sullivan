@@ -4,13 +4,13 @@
 	
         <?php
 
-        if ( wright_is_woocommerce_activated() ) {
+        if ( sullivan_is_woocommerce_activated() ) {
             $image_size = apply_filters( 'single_product_archive_thumbnail_size', 'shop_catalog' );
         } else {
             $image_size = 'post-thumbnail';
         }
 
-        $image_url = esc_url( get_the_post_thumbnail_url( $image_size ) ) ?: wright_get_fallback_image_url(); ?>
+        $image_url = esc_url( get_the_post_thumbnail_url( $image_size ) ) ?: sullivan_get_fallback_image_url(); ?>
 
         <img src="<?php echo $image_url; ?>" />
 

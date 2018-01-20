@@ -5,7 +5,7 @@
 		<?php 
 
 		$comments_number = absint( get_comments_number() );
-		$comments_title = sprintf( _n( '%s Comment', '%s Comments', $comments_number, 'wright' ), $comments_number ); ?>
+		$comments_title = sprintf( _n( '%s Comment', '%s Comments', $comments_number, 'sullivan' ), $comments_number ); ?>
 	  
 		<h3 class="comment-reply-title"><?php echo $comments_title; ?></h3>
 		
@@ -34,7 +34,7 @@
 
 	<div id="respond">
 		
-		<p class="closed"><?php _e( 'Comments closed', 'wright' ); ?></p>
+		<p class="closed"><?php _e( 'Comments closed', 'sullivan' ); ?></p>
 		
 	</div><!-- #respond -->
 

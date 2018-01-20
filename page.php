@@ -12,7 +12,7 @@
 
                 // If the page has WooCommerce shortcodes, make the inner sections wide
                 $content = get_the_content();
-                $page_has_woocommerce_shortcodes = wright_string_has_woo_shortcodes( $content );
+                $page_has_woocommerce_shortcodes = sullivan_string_has_woo_shortcodes( $content );
                 $section_inner_width = $page_has_woocommerce_shortcodes ? 'wide' : 'thin';
 
                 // Thin section-inner on the login page
@@ -22,7 +22,7 @@
                 }
 
                 // Show WooCommerce breadcrumbs if we're showing WooCommerce content
-                if ( wright_is_woocommerce_activated() && $page_has_woocommerce_shortcodes && ! $showing_login_form ) {
+                if ( sullivan_is_woocommerce_activated() && $page_has_woocommerce_shortcodes && ! $showing_login_form ) {
                     woocommerce_breadcrumb();
                 }
 

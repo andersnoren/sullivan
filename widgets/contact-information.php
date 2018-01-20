@@ -1,13 +1,13 @@
 <?php 
 
-class wright_contact_information extends WP_Widget {
+class sullivan_contact_information extends WP_Widget {
 
 	function __construct() {
         $widget_ops = array( 
-			'classname'     => 'widget_wright_contact', 
-			'description'   => __( 'Allows you to display contact information. Built with the "Footer #1" widget area in mind.', 'wright' ) 
+			'classname'     => 'widget_sullivan_contact', 
+			'description'   => __( 'Allows you to display contact information. Built with the "Footer #1" widget area in mind.', 'sullivan' ) 
 		);
-        parent::__construct( 'widget_wright_contact', __( 'Contact Information', 'wright' ), $widget_ops );
+        parent::__construct( 'widget_sullivan_contact', __( 'Contact Information', 'sullivan' ), $widget_ops );
     }
 	
 	function widget( $args, $instance ) {
@@ -73,17 +73,17 @@ class wright_contact_information extends WP_Widget {
 		?>
 		
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php  _e( 'Title', 'wright' ); ?>:
+			<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php  _e( 'Title', 'sullivan' ); ?>:
 			<input id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $widget_title ); ?>" /></label>
         </p>
         
         <p>
-			<label for="<?php echo $this->get_field_id( 'widget_address' ); ?>"><?php  _e( 'Address', 'wright' ); ?>:
+			<label for="<?php echo $this->get_field_id( 'widget_address' ); ?>"><?php  _e( 'Address', 'sullivan' ); ?>:
 			<textarea id="<?php echo $this->get_field_id( 'widget_address' ); ?>" name="<?php echo $this->get_field_name( 'widget_address' ); ?>" class="widefat"><?php echo esc_attr( $widget_address ); ?></textarea></label>
         </p>
         
         <p>
-			<label for="<?php echo $this->get_field_id( 'widget_phone' ); ?>"><?php  _e( 'Phone number', 'wright' ); ?>:
+			<label for="<?php echo $this->get_field_id( 'widget_phone' ); ?>"><?php  _e( 'Phone number', 'sullivan' ); ?>:
 			<input id="<?php echo $this->get_field_id( 'widget_phone' ); ?>" name="<?php echo $this->get_field_name( 'widget_phone' ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $widget_phone ); ?>" /></label>
         </p>
 		

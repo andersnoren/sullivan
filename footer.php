@@ -47,7 +47,7 @@
 
 					<p>
 						<span>&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></span>
-						<span><?php _e( 'Theme by', 'wright' ); ?> <a href="http://www.andersnoren.se">Anders Nor&eacute;n</a></span>
+						<span><?php _e( 'Theme by', 'sullivan' ); ?> <a href="http://www.andersnoren.se">Anders Nor&eacute;n</a></span>
 					</p>
 
 					<?php if ( has_nav_menu( 'social' ) ) : ?>

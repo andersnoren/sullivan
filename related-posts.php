@@ -57,7 +57,7 @@ if ( $related_posts ) : ?>
 
 		<div class="related-posts">
 
-			<h3 class="related-posts-title"><?php _e( 'Related Posts', 'wright' ); ?></h3>
+			<h3 class="related-posts-title"><?php _e( 'Related Posts', 'sullivan' ); ?></h3>
 
 			<?php 
 
@@ -69,7 +69,7 @@ if ( $related_posts ) : ?>
 					$image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
 					$image_url = $image[0];
 				} else {
-					$image_url = wright_get_fallback_image_url();
+					$image_url = sullivan_get_fallback_image_url();
 				}
 
 				$image_style_attribute = ' style="background-image: url( ' . esc_url( $image_url ) . ');"';

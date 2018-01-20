@@ -30,14 +30,14 @@ if ( ! woocommerce_products_will_display() ) {
 	$first    = ( $per_page * $paged ) - $per_page + 1;
 	$last     = min( $total, $wp_query->get( 'posts_per_page' ) * $paged );
     
-    echo '<span class="prefix">' . __( 'Showing', 'wright' ) . ' </span>';
+    echo '<span class="prefix">' . __( 'Showing', 'sullivan' ) . ' </span>';
 
 	if ( $total <= $per_page || -1 === $per_page ) {
 		/* translators: %d: total results */
-		printf( _n( 'one result', '%d results', $total, 'wright' ), $total );
+		printf( _n( 'one result', '%d results', $total, 'sullivan' ), $total );
 	} else {
 		/* translators: 1: first result 2: last result 3: total results */
-		printf( _n( 'one result', 'results %1$d-%2$d of %3$d', $total, 'wright' ), $first, $last, $total );
+		printf( _n( 'one result', 'results %1$d-%2$d of %3$d', $total, 'sullivan' ), $first, $last, $total );
 	}
 	?>
 </p>
