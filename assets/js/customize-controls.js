@@ -125,12 +125,13 @@
     // Update the specified slideshowArea
     function handleSlider( slideshowArea, newval ){
 
-        // newval = the number of slides to show
+		// newval = the number of slides to show
+		console.log( newval );
 
         // Get the last element in the group of elements for our current number of slides
         var $max_slidesControl = $( '#customize-control-eames_' + slideshowArea + '_slider_max_slides' ),
             $section = $max_slidesControl.parent(),
-            $lastMatchingControl = $section.find( $( '.customize-control[id*="_' + newval + '_"]:last ' ) );
+			$lastMatchingControl = $section.find( $( '.customize-control[id*="_' + newval + '_"]' ) );
 
         // If we're not showing any slides, hide all controls following the one setting number of slides
         if ( newval == 0 ) {
