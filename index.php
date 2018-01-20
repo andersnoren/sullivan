@@ -4,7 +4,7 @@ global $paged;
 $paged = $paged ? $paged : 1;
 
 // Show the hero slider on the first page of the blog
-if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
+if ( is_home() && $paged == 1 ) wright_hero_slider( 'blog' ); ?>
 
 <main id="site-content">
 
@@ -16,7 +16,7 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 			
 				<header class="archive-header">
 					<div>
-						<h6 class="subheading"><?php echo eames_get_archive_title_prefix(); ?></h6>
+						<h6 class="subheading"><?php echo wright_get_archive_title_prefix(); ?></h6>
 						<h3 class="archive-title"><?php the_archive_title(); ?></h3>
 						<?php the_archive_description(); ?>
 					</div>

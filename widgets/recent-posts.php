@@ -1,13 +1,13 @@
 <?php 
 
-class eames_recent_posts extends WP_Widget {
+class wright_recent_posts extends WP_Widget {
 
 	function __construct() {
         $widget_ops = array( 
-			'classname' => 'widget_eames_recent_posts', 
-			'description' => __( 'Displays recent blog entries.', 'eames' ) 
+			'classname' => 'widget_wright_recent_posts', 
+			'description' => __( 'Displays recent blog entries.', 'wright' ) 
 		);
-        parent::__construct( 'widget_eames_recent_posts', __( 'Recent Posts', 'eames' ), $widget_ops );
+        parent::__construct( 'widget_wright_recent_posts', __( 'Recent Posts', 'wright' ), $widget_ops );
     }
 	
 	function widget( $args, $instance ) {
@@ -43,7 +43,7 @@ class eames_recent_posts extends WP_Widget {
 		
 		if ( $recent_posts ) : ?>
 
-			<ul class="eames-widget-list">
+			<ul class="wright-widget-list">
 				
 				<?php foreach ( $recent_posts as $post ) : 
 
@@ -57,7 +57,7 @@ class eames_recent_posts extends WP_Widget {
 
 							<?php
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-							$image_url = $image ? $image[0] : eames_get_fallback_image_url();
+							$image_url = $image ? $image[0] : wright_get_fallback_image_url();
 							?>
 								
 							<div class="post-image" style="background-image: url( <?php echo esc_url( $image_url ); ?> );"></div>
@@ -77,7 +77,7 @@ class eames_recent_posts extends WP_Widget {
 		
 			</ul>
 
-			<p class="show-more"><a href="<?php echo esc_url( get_post_type_archive_link( $post->post_type ) ); ?>"><?php _e( 'Show All', 'eames' ); ?></a></p>
+			<p class="show-more"><a href="<?php echo esc_url( get_post_type_archive_link( $post->post_type ) ); ?>"><?php _e( 'Show All', 'wright' ); ?></a></p>
 
 			<?php wp_reset_postdata(); ?>
 			
@@ -113,14 +113,14 @@ class eames_recent_posts extends WP_Widget {
 		?>
 		
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php  _e( 'Title', 'eames' ); ?>:
+			<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php  _e( 'Title', 'wright' ); ?>:
 			<input id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" class="widefat" value="<?php echo esc_attr($widget_title); ?>" /></label>
 		</p>
 						
 		<p>
-			<label for="<?php echo $this->get_field_id( 'number_of_posts' ); ?>"><?php _e( 'Number of posts to display', 'eames' ); ?>:
+			<label for="<?php echo $this->get_field_id( 'number_of_posts' ); ?>"><?php _e( 'Number of posts to display', 'wright' ); ?>:
 			<input id="<?php echo $this->get_field_id( 'number_of_posts' ); ?>" name="<?php echo $this->get_field_name( 'number_of_posts' ); ?>" type="text" class="widefat" value="<?php echo esc_attr($number_of_posts); ?>" /></label>
-			<small>(<?php _e( 'Defaults to 5 if empty', 'eames' ); ?>)</small>
+			<small>(<?php _e( 'Defaults to 5 if empty', 'wright' ); ?>)</small>
 		</p>
 		
 		<?php

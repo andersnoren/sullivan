@@ -1,9 +1,9 @@
 /*---------------------------------------------------------------------------------
 
-	Theme Name: Eames
-    Text Domain: eames
+	Theme Name: Wright
+    Text Domain: wright
 	Version: 1.00
-	Description: Eames is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more.
+	Description: Wright is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more.
 	Tags: two-columns, right-sidebar, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, e-commerce
 	Author: Anders Norén
 	Author URI: http://www.andersnoren.se
@@ -2685,23 +2685,23 @@ ul.page-numbers .next { right: 0; }
 }
 
 
-/* Eames Widget List --------------------------------------- */
+/* wright Widget List --------------------------------------- */
 
 
-.eames-widget-list li {
+.wright-widget-list li {
 	margin-bottom: 15px;
 }
 
-.eames-widget-list li:last-child {
+.wright-widget-list li:last-child {
 	margin-bottom: 0;
 }
 
-.eames-widget-list a {
+.wright-widget-list a {
 	align-items: center;
 	display: flex; 
 }
 
-.eames-widget-list .post-image {
+.wright-widget-list .post-image {
 	background: #f1f1f5 no-repeat center;
 	background-size: cover;
 	border-radius: 2px;
@@ -2710,34 +2710,34 @@ ul.page-numbers .next { right: 0; }
 	width: 60px;
 }
 
-.eames-widget-list .inner { 
+.wright-widget-list .inner { 
 	margin-left: 10px;
 }
 
-.eames-widget-list .title {
+.wright-widget-list .title {
 	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 18px;
 	line-height: 1.15;
 }
 
-.eames-widget-list .meta { 
+.wright-widget-list .meta { 
 	font-size: 14px;
 	margin-top: 3px;
 }
 
-.eames-widget-list .meta ins {
+.wright-widget-list .meta ins {
 	text-decoration: none;
 }
 
-.eames-widget-list a:hover {
+.wright-widget-list a:hover {
 	text-decoration: none;
 }
 
-.eames-widget-list a:hover .title { 
+.wright-widget-list a:hover .title { 
 	text-decoration: underline; 
 }
 
-#site-footer .eames-widget-list a:hover .title {
+#site-footer .wright-widget-list a:hover .title {
 	text-decoration: none;
 }
 
@@ -2759,22 +2759,22 @@ ul.page-numbers .next { right: 0; }
 /* Contact Information Widget --------------------------------------- */
 
 
-.widget_eames_contact {
+.widget_wright_contact {
 	font-family: 'Charis SIL', Georgia, serif;
 	font-size: 16px;
 }
 
-.widget_eames_contact .contact-title {
+.widget_wright_contact .contact-title {
 	font-size: 32px;
 }
 
-.widget_eames_contact p {
+.widget_wright_contact p {
 	color: #999;
 	font-style: italic;
 	line-height: 1.5;
 }
 
-.widget_eames_contact div + div {
+.widget_wright_contact div + div {
 	margin-top: 20px;
 }
 
@@ -4046,8 +4046,8 @@ ul.page-numbers .next { right: 0; }
 
 	/* CONTACT INFORMATION WIDGET */
 
-	.footer-widgets .column-1 .widget_eames_contact:first-of-type h3,
-	.footer-widgets .column-1 .widget_eames_contact:first-of-type p {
+	.footer-widgets .column-1 .widget_wright_contact:first-of-type h3,
+	.footer-widgets .column-1 .widget_wright_contact:first-of-type p {
 		text-align: center;
 	}
 

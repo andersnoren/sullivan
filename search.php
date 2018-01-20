@@ -4,7 +4,7 @@ global $paged;
 $paged = $paged ? $paged : 1;
 
 // Show the hero slider on the first page of the blog
-if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
+if ( is_home() && $paged == 1 ) wright_hero_slider( 'blog' ); ?>
 
 <main id="site-content">
 
@@ -14,9 +14,9 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 
             <header class="section-inner thin max-percentage page-header text-center">
                             
-                <h1 class="page-title"><?php printf( __( 'Search: %s', 'eames' ), '&ldquo;' . esc_attr( get_search_query() ) . '&rdquo;' ); ?></h1>
+                <h1 class="page-title"><?php printf( __( 'Search: %s', 'wright' ), '&ldquo;' . esc_attr( get_search_query() ) . '&rdquo;' ); ?></h1>
 
-                <p class="sans-excerpt"><?php printf( _n( 'We found %s result matching your search.', 'We found %s results matching your search.', $wp_query->found_posts, 'eames' ), $wp_query->found_posts ); ?></p>
+                <p class="sans-excerpt"><?php printf( _n( 'We found %s result matching your search.', 'We found %s results matching your search.', $wp_query->found_posts, 'wright' ), $wp_query->found_posts ); ?></p>
             
             </header><!-- .page-header -->
         
@@ -24,9 +24,9 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 
             <header class="section-inner thin max-percentage page-header text-center">
                 
-                <h1 class="page-title"><?php _e( 'No results found', 'eames' ); ?></h1>
+                <h1 class="page-title"><?php _e( 'No results found', 'wright' ); ?></h1>
 
-                <p class="sans-excerpt"><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s", but you can try a different one through the form below.', 'eames' ), esc_attr( get_search_query() ) ); ?></p>
+                <p class="sans-excerpt"><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s", but you can try a different one through the form below.', 'wright' ), esc_attr( get_search_query() ) ); ?></p>
             
             </header><!-- .page-header -->
 
@@ -44,7 +44,7 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 
                 <?php while ( have_posts() ) : the_post();
 
-                    if ( eames_is_woocommerce_activated() && $post->post_type == 'product' ) {
+                    if ( wright_is_woocommerce_activated() && $post->post_type == 'product' ) {
                         wc_get_template_part( 'content', 'product' );
                     } else {
                         get_template_part( 'content-search' );

@@ -33,7 +33,7 @@
             buttonSlideshowArea = $button.data( 'slideshow' );
 
         // Number of slides input data
-        var $numberInput = $button.closest( '.customize-control' ).siblings( '#customize-control-eames_blog_slider_max_slides' ).find( 'input[type="number"]' ),
+        var $numberInput = $button.closest( '.customize-control' ).siblings( '#customize-control-wright_blog_slider_max_slides' ).find( 'input[type="number"]' ),
             maxNumberVal = parseInt( $numberInput.attr( 'max' ) ),
             currentNumberVal = parseInt( $numberInput.val() );
 
@@ -51,7 +51,7 @@
         var buttonSlideshowArea = $( this ).data( 'slideshow' );
 
         // Number of slides input data
-        var $numberInput = $( this ).closest( '.customize-control' ).siblings( '#customize-control-eames_blog_slider_max_slides' ).find( 'input[type="number"]' ),
+        var $numberInput = $( this ).closest( '.customize-control' ).siblings( '#customize-control-wright_blog_slider_max_slides' ).find( 'input[type="number"]' ),
             maxNumberVal = parseInt( $numberInput.attr( 'max' ) ),
             currentNumberVal = parseInt( $numberInput.val() ),
             newNumberVal = currentNumberVal + 1;
@@ -87,14 +87,14 @@
 
 
     // Update the blog slider when the accordion is expanded
-    $( '#accordion-section-eames_blog_slider' ).live( 'expanded', function(){
-        var originalValue = wp.customize( 'eames_blog_slider_max_slides' ).get();
+    $( '#accordion-section-wright_blog_slider' ).live( 'expanded', function(){
+        var originalValue = wp.customize( 'wright_blog_slider_max_slides' ).get();
         handleSlider( 'blog', originalValue );
     } );
 
 
 	// Slideshow blog: Hide controls depending on the number of slides
-	wp.customize( 'eames_blog_slider_max_slides', function( value ) {
+	wp.customize( 'wright_blog_slider_max_slides', function( value ) {
 
         // Update on change
         value.bind( function( newval ) {
@@ -105,14 +105,14 @@
 
 
     // Update the shop slider when the accordion is expanded
-    $( '#accordion-section-eames_shop_slider' ).live( 'expanded', function(){
-        var originalValue = wp.customize( 'eames_blog_slider_max_slides' ).get();
+    $( '#accordion-section-wright_shop_slider' ).live( 'expanded', function(){
+        var originalValue = wp.customize( 'wright_blog_slider_max_slides' ).get();
         handleSlider( 'shop', originalValue );
     } );
 
 
     // Slideshow shop: Hide controls depending on the number of slides
-	wp.customize( 'eames_shop_slider_max_slides', function( value ) {
+	wp.customize( 'wright_shop_slider_max_slides', function( value ) {
 
         // Update on change
         value.bind( function( newval ) {
@@ -129,7 +129,7 @@
 		console.log( newval );
 
         // Get the last element in the group of elements for our current number of slides
-        var $max_slidesControl = $( '#customize-control-eames_' + slideshowArea + '_slider_max_slides' ),
+        var $max_slidesControl = $( '#customize-control-wright_' + slideshowArea + '_slider_max_slides' ),
             $section = $max_slidesControl.parent(),
 			$lastMatchingControl = $section.find( $( '.customize-control[id*="_' + newval + '_"]' ) );
 

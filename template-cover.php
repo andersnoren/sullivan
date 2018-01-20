@@ -15,7 +15,7 @@ get_header(); ?>
 
                 <?php 
 
-                $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'eames_fullscreen' );
+                $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'wright_fullscreen' );
                 $featured_image_url = isset( $featured_image[0] ) ? esc_url( $featured_image[0] ) : '';
 
                 ?>
