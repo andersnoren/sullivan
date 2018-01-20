@@ -102,7 +102,7 @@ if ( ! function_exists( 'eames_add_editor_styles' ) ) {
 	function eames_add_editor_styles() {
 		add_editor_style( array( 
 			'eames-editor-styles.css', 
-			'https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,400i,500,700,700i&amp;subset=latin-ext' 
+			'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,700,700i&amp;subset=latin-ext' 
 		) );
 	}
 	add_action( 'init', 'eames_add_editor_styles' );

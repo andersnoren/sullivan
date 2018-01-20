@@ -3,9 +3,40 @@
 ---------------------------------------------------------------------------------*/
 
 
+/* Fonts ----------------------------- */
+
+
+@font-face {
+	font-family: 'Charis SIL';
+	src: url( ./assets/fonts/CharisSIL-R.woff );
+}
+
+@font-face {
+	font-family: 'Charis SIL';
+	font-style: italic;
+	src: url( ./assets/fonts/CharisSIL-I.woff );
+}
+
+@font-face {
+	font-family: 'Charis SIL';
+	font-weight: bold;
+	src: url( ./assets/fonts/CharisSIL-B.woff );
+}
+
+@font-face {
+	font-family: 'Charis SIL';
+	font-weight: bold;
+	font-style: italic;
+	src: url( ./assets/fonts/CharisSIL-BI.woff );
+}
+
+
+/* Structure ----------------------------- */
+
+
 body#tinymce.wp-editor { 
 	color: #000;
-	font-family: 'Libre Franklin', 'Helvetica Neue', Helvetica, sans-serif;
+	font-family: 'Archivo', 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 20px;
 	margin: 0 auto;
 	max-width: 100%;
@@ -56,41 +87,17 @@ body#tinymce.wp-editor h3,
 body#tinymce.wp-editor h4, 
 body#tinymce.wp-editor h5, 
 body#tinymce.wp-editor h6 {
+	font-family: 'Charis SIL', Georgia, serif;
 	line-height: 1.2;
-	margin: 60px 0 40px;
+	margin: 2em 0 1em;
 }
 
-body#tinymce.wp-editor h1 { 
-	font-size: 2em; 
-	font-weight: 300;
-}
-
-body#tinymce.wp-editor h2 { 
-	font-size: 1.8em; 
-	font-weight: 300;
-}
-
-body#tinymce.wp-editor h3 { 
-	font-size: 1.6em; 
-	font-weight: 400;
-}
-
-body#tinymce.wp-editor h4 { 
-	font-size: 1.4em; 
-	font-weight: 400;
-}
-
-body#tinymce.wp-editor h5 { 
-	font-size: 1.2em; 
-	font-weight: 500;
-}
-
-body#tinymce.wp-editor h6 {
-	font-size: 16px;
-	font-weight: 700;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-}
+body#tinymce.wp-editor h1 { font-size: 40px; font-weight: 400; }
+body#tinymce.wp-editor h2 { font-size: 36px; font-weight: 400; }
+body#tinymce.wp-editor h3 { font-size: 32px; font-weight: 400; }
+body#tinymce.wp-editor h4 { font-size: 28px; font-weight: 700; }
+body#tinymce.wp-editor h5 { font-size: 24px; font-weight: 700; }
+body#tinymce.wp-editor h6 { font-size: 20px; font-weight: 700; }
 
 body#tinymce.wp-editor h1+h1, body#tinymce.wp-editor h1+h2, body#tinymce.wp-editor h1+h3, body#tinymce.wp-editor h1+h4, body#tinymce.wp-editor h1+h5, body#tinymce.wp-editor h1+h6,
 body#tinymce.wp-editor h2+h1, body#tinymce.wp-editor h2+h2, body#tinymce.wp-editor h2+h3, body#tinymce.wp-editor h2+h4, body#tinymce.wp-editor h2+h5, body#tinymce.wp-editor h2+h6,
@@ -198,6 +205,10 @@ body#tinymce.wp-editor .alignright {
 	max-width: 40%;
 }
 
+body#tinymce.wp-editor .wp-caption img {
+	display: block;
+}
+
 body#tinymce.wp-editor .wp-caption .alignleft,
 body#tinymce.wp-editor .wp-caption .alignright {
 	margin-bottom: 0;
@@ -219,19 +230,16 @@ body#tinymce.wp-editor .aligncenter {
 	margin-right: auto;
 }
 
-body#tinymce.wp-editor .wp-caption-text,
-body#tinymce.wp-editor .gallery-caption {
-	color: #666;
-	font-size: 0.9em;
-	font-style: italic;
-	line-height: 1.2;
-	padding-top: 10px;
-	text-align: center;
+body#tinymce.wp-editor .wpview[data-wpview-type="gallery"] + .wpview[data-wpview-type="gallery"] {
+	margin-top: -34px;
 }
 
+body#tinymce.wp-editor .wp-caption-text,
+body#tinymce.wp-editor .wp-caption-dd,
 body#tinymce.wp-editor .gallery-caption {
-	font-size: 16px;
-	line-height: 1.5;
+	display: block;
+	line-height: 1.2;
+	margin-top: 15px;
 }
 
 
@@ -341,11 +349,11 @@ body#tinymce.wp-editor input[type="button"] {
 	background: #000;
 	border: none;
 	color: #fff;
-	font-size: 16px;
-	font-weight: 700;
+	font-size: 14px;
+	font-weight: 500;
 	line-height: 1;
 	margin: 0;
-	padding: 12px 16px;
+	padding: 15px 24px;
 	-webkit-appearance: none;
 }
 
