@@ -16,12 +16,11 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 All theme specific options are handled through the WordPress Customizer.
 
 
-== Resume Page Template ==
+== Full Width Page Template ==
 
-1. Create a new page, or edit an existing one
-2. Click the dropdown beneath "Template" in "Page Attributes", and select Resum.
+1. Create a new page, or edit an existing one.
+2. Click the dropdown beneath "Template" in "Page Attributes", and select Full Width Template.
 
-In the resume page template, all titles span the entire width of the content, whereas all other elements are aligned to the right. This enables you to create sections in the resume content by simple adding another title. For instance, adding a title called "Education" and adding a paragraph of text beneath it will automatically create a section with the "Education" title to the left and the paragraph of text to the right.
 
 
 == Licenses ==
