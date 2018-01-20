@@ -53,7 +53,7 @@ $related_posts = get_posts( $related_posts_args );
 
 if ( $related_posts ) : ?>
 
-	<div class="section-inner hanging-titles">
+	<div class="hanging-titles">
 
 		<div class="related-posts">
 

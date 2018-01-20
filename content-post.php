@@ -268,7 +268,7 @@
 		// If comments are open, or there are at least one comment
 		if ( get_comments_number() || comments_open() ) : ?>
 		
-			<div class="section-inner hanging-titles">
+			<div class="hanging-titles">
 				<?php comments_template(); ?>
 			</div>
 		
