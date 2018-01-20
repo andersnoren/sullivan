@@ -20,7 +20,7 @@
 
                         <?php if ( $post->post_excerpt ) : ?>
 
-                            <p class="sans-excerpt"><?php esc_attr_e( $post->post_excerpt ); ?></p>
+                            <p class="sans-excerpt"><?php echo esc_attr( $post->post_excerpt ); ?></p>
 
                         <?php endif; ?>
                     
@@ -36,7 +36,7 @@
 
                         <div class="featured-media section-inner medium">
 
-                            <img src="<?php esc_url_e( $image[0] ); ?>" />
+                            <img src="<?php echo esc_url( $image[0] ); ?>" />
 
                         </div><!-- .featured-media -->
 

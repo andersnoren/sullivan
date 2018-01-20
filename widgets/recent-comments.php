@@ -59,7 +59,7 @@ class eames_recent_comments extends WP_Widget {
 								
 								<div class="inner">
 								
-									<p class="title"><span><?php esc_attr_e( get_comment_author() ); ?></span></p>
+									<p class="title"><span><?php echo esc_attr( get_comment_author() ); ?></span></p>
 									<p class="meta">&ldquo;<?php echo esc_attr( eames_get_comment_excerpt( $comment->comment_ID, 10 ) ); ?>&rdquo;</p>
 								
 								</div>

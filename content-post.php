@@ -243,7 +243,7 @@
 
 						<a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>" title="<?php the_title_attribute( array( 'post' => $next_post->ID ) ); ?>">
 							<span class="subheading"><?php _e( 'Next post', 'eames' ); ?></span>
-							<span class="title"><?php esc_attr_e( get_the_title( $next_post->ID ) ); ?></span>
+							<span class="title"><?php echo esc_attr( get_the_title( $next_post->ID ) ); ?></span>
 						</a>
 
 					<?php endif; ?>
@@ -252,7 +252,7 @@
 
 						<a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>" title="<?php the_title_attribute( array( 'post' => $prev_post->ID ) ); ?>">
 							<span class="subheading"><?php _e( 'Previous post', 'eames' ); ?></span>
-							<span class="title"><?php esc_attr_e( get_the_title( $prev_post->ID ) ); ?></span>
+							<span class="title"><?php echo esc_attr( get_the_title( $prev_post->ID ) ); ?></span>
 						</a>
 
 					<?php endif; ?>

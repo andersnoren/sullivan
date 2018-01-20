@@ -1158,7 +1158,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 												<h1>
 													<?php
 													if ( $slide['url'] ) echo '<a href="' . esc_url( $slide['url'] ) . '">';
-													esc_attr_e( $slide['title'] );
+													echo esc_attr( $slide['title'] );
 													if ( $slide['url'] ) echo '</a>'; 
 													?>
 												</h1>
@@ -1167,7 +1167,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 
 											<?php if ( $slide['subtitle'] ) : ?>
 
-												<p class="sans-excerpt"><?php esc_attr_e( $slide['subtitle'] ); ?></p>
+												<p class="sans-excerpt"><?php echo esc_attr( $slide['subtitle'] ); ?></p>
 
 											<?php endif; ?>
 
@@ -1178,9 +1178,9 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 													
 													// If we're wrapping the slide in a link, we need to output the "button" as a div to prevent element breakage
 													if ( $opening_element == 'div' ) : ?>
-														<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php esc_attr_e( $slide['button_text'] ); ?></a>
+														<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php echo esc_attr( $slide['button_text'] ); ?></a>
 													<?php else : ?>
-														<div class="button white"><?php esc_attr_e( $slide['button_text'] ); ?></div>
+														<div class="button white"><?php echo esc_attr( $slide['button_text'] ); ?></div>
 													<?php endif; ?>
 												</div>
 
@@ -1324,7 +1324,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 				<?php endif;
 				
 				if ( ! empty( $this->description ) ) : ?>
-					<span class="description customize-control-description"><?php esc_attr_e( $this->description ); ?></span>
+					<span class="description customize-control-description"><?php echo esc_attr( $this->description ); ?></span>
 				<?php endif;
 				
 				$multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
