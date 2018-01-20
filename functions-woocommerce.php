@@ -195,7 +195,7 @@ if ( ! function_exists( 'eames_woo_add_login_footer' ) ) {
             <?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
 
                 <p class="register_link"> 
-                    <span class="sep">&bull;</span><a href="<?php echo add_query_arg( 'form', 'registration', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Create account', 'eames' ); ?></a>
+                    <span class="sep">&bull;</span><a href="<?php echo esc_url( add_query_arg( 'form', 'registration', get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Create account', 'eames' ); ?></a>
                 </p>
 
             <?php endif; ?>
@@ -594,7 +594,7 @@ if ( ! function_exists( 'eames_woo_product_archive_image' ) ) {
             
             $image_id = get_woocommerce_term_meta( get_queried_object()->term_id, 'thumbnail_id', true );
             $image_obj = wp_get_attachment_image_src( $image_id, 'fullscreen' );
-            $image_url = $image_obj[0];
+            $image_url = esc_url( $image_obj[0] );
 
             ?>
 
@@ -624,7 +624,7 @@ if ( ! function_exists( 'eames_woo_update_cart_count_on_change' ) ) {
         if ( $woocommerce->cart->cart_contents_count ) : ?>
 
             <div class="cart-count">
-                <?php echo $woocommerce->cart->cart_contents_count; ?>
+                <?php echo absint( $woocommerce->cart->cart_contents_count ); ?>
             </div>
 
         <?php endif;
@@ -649,7 +649,7 @@ if ( ! function_exists( 'eames_woo_account_modal' ) ) {
 
     function eames_woo_account_modal() {
 
-        $account_url = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );
+        $account_url = esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) );
         $account_title = is_user_logged_in() ? __( 'My account', 'eames' ) : __( 'Sign in', 'eames' );
 
         $logged_in = is_user_logged_in();
@@ -673,16 +673,16 @@ if ( ! function_exists( 'eames_woo_account_modal' ) ) {
 
                 else : 
 
-                    $user = wp_get_current_user();
-                    $user_name = ( $user->user_firstname && $user->user_lastname ) ? $user->user_firstname . ' ' . $user->user_lastname :
+                    $user 			= wp_get_current_user();
+                    $user_name 		= ( $user->user_firstname && $user->user_lastname ) ? $user->user_firstname . ' ' . $user->user_lastname :
                     $user->user_login;
                     $user_firstname = $user->user_firstname ? $user->user_firstname : $user->user_login;
                 
                     ?>
 
                     <header>
-                        <strong class="user-name"><?php echo $user_name; ?></strong>
-                        <span class="user-email"><?php echo $user->user_email; ?></span>
+                        <strong class="user-name"><?php echo esc_attr( $user_name ); ?></strong>
+                        <span class="user-email"><?php echo esc_attr( $user->user_email ); ?></span>
                     </header>
 
                     <?php
@@ -726,7 +726,7 @@ if ( ! function_exists( 'eames_woo_account_modal' ) ) {
                     </nav>
 
                     <footer class="log-out-wrapper">
-                        <a class="log-out" href="<?php echo wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>"><?php _e( 'Sign out', 'eames' ); ?></a>
+                        <a class="log-out" href="<?php echo esc_attr( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Sign out', 'eames' ); ?></a>
                     </footer>
 
                 <?php endif; ?>
@@ -764,7 +764,7 @@ if ( ! function_exists( 'eames_woo_cart_modal' ) ) {
                 <?php if ( $woocommerce->cart->cart_contents_count ) : ?>
 
                     <div class="cart-count">
-                        <?php echo $woocommerce->cart->cart_contents_count; ?>
+                        <?php echo absint( $woocommerce->cart->cart_contents_count ); ?>
                     </div>
 
                 <?php endif; ?>

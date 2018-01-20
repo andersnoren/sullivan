@@ -60,7 +60,7 @@ class eames_recent_posts extends WP_Widget {
 							$image_url = $image ? $image[0] : eames_get_fallback_image_url();
 							?>
 								
-							<div class="post-image" style="background-image: url( <?php echo $image_url; ?> );"></div>
+							<div class="post-image" style="background-image: url( <?php echo esc_url( $image_url ); ?> );"></div>
 							
 							<div class="inner">
 											
@@ -77,7 +77,7 @@ class eames_recent_posts extends WP_Widget {
 		
 			</ul>
 
-			<p class="show-more"><a href="<?php echo get_post_type_archive_link( $post->post_type ); ?>"><?php _e( 'Show All', 'eames' ); ?></a></p>
+			<p class="show-more"><a href="<?php echo esc_url( get_post_type_archive_link( $post->post_type ) ); ?>"><?php _e( 'Show All', 'eames' ); ?></a></p>
 
 			<?php wp_reset_postdata(); ?>
 			

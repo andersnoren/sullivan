@@ -393,22 +393,22 @@ if ( ! function_exists( 'eames_post_gallery' ) ) {
 			preg_match( '/\[gallery.*ids=.(.*).\]/', $content, $ids );
 
 			// Build an array from them
-			$images_id = explode( ",", $ids[1] );
+			$image_ids = explode( ",", $ids[1] );
 
-			if ( $images_id ) : ?>
+			if ( $image_ids ) : ?>
 			
 				<div class="flexslider post-slider bg-black loading">
 				
 					<ul class="slides">
 			
-						<?php foreach( $images_id as $image_id ) : 
+						<?php foreach( $image_ids as $image_id ) : 
 							
 							$image = wp_get_attachment_image_src( $image_id, 'post-thumbnail' );
 
 							if ( $image ) :
 
-								$image_url = $image[0];
-								$image_caption = wp_get_attachment_caption( $image_id );
+								$image_url = esc_url( $image[0] );
+								$image_caption = esc_attr( wp_get_attachment_caption( $image_id ) );
 							
 								?>
 									
@@ -586,7 +586,7 @@ if ( eames_is_woocommerce_activated() ) {
 	// All functions that require Woocommerce functionality to work are contained within this file
 	locate_template( 'functions-woocommerce.php', true );
 
-	/* 
+   /* 
 	* EXCEPTION:
 	* eames_sidebar_registration() and eames_register_widgets() both have  
 	* conditional registration of shop specific sidebar areas and widgets.
@@ -610,7 +610,7 @@ if ( ! function_exists( 'eames_custom_logo' ) ) {
 		if ( $logo ) {
 
 			// For clarity
-			$logo_url = $logo[0];
+			$logo_url = esc_url( $logo[0] );
 			$logo_width = $logo[1];
 			$logo_height = $logo[2];
 
@@ -734,7 +734,7 @@ if ( ! function_exists( 'eames_header_search' ) ) {
 			<form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'eames' ); ?></span>
 				<label for="header-search-field"></label>
-				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'eames' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'eames' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" autocomplete="off" />
 				
 				<?php
 
@@ -747,7 +747,7 @@ if ( ! function_exists( 'eames_header_search' ) ) {
 				$post_types_in_search = get_theme_mod( 'eames_filter_search_post_types', $defaults );
 
 				foreach( $post_types_in_search as $post_type ) {
-					echo '<input type="hidden" name="post_type" value="' . $post_type . '">';
+					echo '<input type="hidden" name="post_type" value="' . esc_attr( $post_type ) . '">';
 				}
 
 				?>
@@ -809,8 +809,8 @@ function eames_ajax_search() {
 				// Custom loop
 				while ( $ajax_query->have_posts() ) : $ajax_query->the_post(); 
 
-					$post_format = get_post_format() ? get_post_format() : 'standard';
-					$post_type = get_post_type();
+					$post_format = get_post_format() ? esc_attr( get_post_format() ) : 'standard';
+					$post_type = esc_attr( get_post_type() );
 				
 					?>
 
@@ -819,7 +819,7 @@ function eames_ajax_search() {
 					
 							<?php
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-							$image_url = $image ? $image[0] : eames_get_fallback_image_url();
+							$image_url = $image ? esc_url( $image[0] ) : eames_get_fallback_image_url();
 							?>
 								
 							<div class="post-image" style="background-image: url( <?php echo $image_url; ?> );"></div>
@@ -855,7 +855,7 @@ function eames_ajax_search() {
 
 			<?php if ( $ajax_query->max_num_pages > 1 ) : ?>
 
-				<a class="show-all" href="<?php echo home_url( '?s=' . $string ); ?>"><span><?php printf( _n( 'Show %s result', 'Show all %s results', $ajax_query->found_posts, 'eames' ), $ajax_query->found_posts ); ?></span></a>
+				<a class="show-all" href="<?php echo esc_url( add_query_arg( 's', $string, home_url() ) ); ?>"><span><?php printf( _n( 'Show %s result', 'Show all %s results', $ajax_query->found_posts, 'eames' ), $ajax_query->found_posts ); ?></span></a>
 
 			<?php endif; ?>
 
@@ -1035,7 +1035,7 @@ if ( ! function_exists( 'eames_get_fallback_image_url' ) ) {
 			$fallback_image = wp_get_attachment_image_src( $fallback_image_id, 'full' );
 		}
 
-		$fallback_image_url = isset( $fallback_image ) ? $fallback_image[0] : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
+		$fallback_image_url = isset( $fallback_image ) ? esc_url( $fallback_image[0] ) : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
 
 		return $fallback_image_url;
  
@@ -1077,7 +1077,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 	function eames_hero_slider( $area = 'blog', $return = false ) {
 
 		// Get the number of slides to output
-		$number_of_slides = get_theme_mod( 'eames_' . $area . '_slider_max_slides' );
+		$number_of_slides = absint( get_theme_mod( 'eames_' . $area . '_slider_max_slides' ) );
 
 		// Get the arguments for the area in question
 		$area_data = eames_get_slideshow_area( $area );
@@ -1092,7 +1092,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 
 			}
 
-			$slideshow_speed = get_theme_mod( 'eames_' . $area . '_slider_speed' ) ? get_theme_mod( 'eames_' . $area . '_slider_speed' ) : 7000;
+			$slideshow_speed = get_theme_mod( 'eames_' . $area . '_slider_speed' ) ? absint( get_theme_mod( 'eames_' . $area . '_slider_speed' ) ) : 7000;
 		
 			?>
 		
@@ -1136,7 +1136,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 						
 							?>
 							
-							<li class="slide<?php echo $extra_slide_classes; ?>">
+							<li class="slide<?php echo esc_attr( $extra_slide_classes ); ?>">
 
 								<?php 
 								// If the only content is an image and a URL is set, make the wrapper a link pointing to the URL
@@ -1148,7 +1148,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 									$closing_element = 'div';
 								}
 								?>
-								<<?php echo $opening_element; ?> class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . $slide_image_url . ' );"'; ?>>
+								<<?php echo $opening_element; ?> class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . esc_url( $slide_image_url ) . ' );"'; ?>>
 									<div class="section-inner">
 										
 										<header>
@@ -1158,7 +1158,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 												<h1>
 													<?php
 													if ( $slide['url'] ) echo '<a href="' . esc_url( $slide['url'] ) . '">';
-													echo $slide['title'];
+													esc_attr_e( $slide['title'] );
 													if ( $slide['url'] ) echo '</a>'; 
 													?>
 												</h1>
@@ -1167,7 +1167,7 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 
 											<?php if ( $slide['subtitle'] ) : ?>
 
-												<p class="sans-excerpt"><?php echo $slide['subtitle']; ?></p>
+												<p class="sans-excerpt"><?php esc_attr_e( $slide['subtitle'] ); ?></p>
 
 											<?php endif; ?>
 
@@ -1178,9 +1178,9 @@ if ( ! function_exists( 'eames_string_has_woo_shortcodes' ) ) {
 													
 													// If we're wrapping the slide in a link, we need to output the "button" as a div to prevent element breakage
 													if ( $opening_element == 'div' ) : ?>
-														<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php echo $slide['button_text']; ?></a>
+														<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php esc_attr_e( $slide['button_text'] ); ?></a>
 													<?php else : ?>
-														<div class="button white"><?php echo $slide['button_text']; ?></div>
+														<div class="button white"><?php esc_attr_e( $slide['button_text'] ); ?></div>
 													<?php endif; ?>
 												</div>
 
@@ -1280,7 +1280,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 
 			public function render_content() {
 				if ( isset( $this->content ) ) {
-					echo '<h2 style="margin: 0 0 5px;">' . $this->content . '</h2>';
+					echo '<h2 style="margin: 0 0 5px;">' . esc_attr( $this->content ) . '</h2>';
 				}
 			}
 
@@ -1298,7 +1298,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 
 			public function render_content() {
 				if ( isset( $this->content ) ) {
-					echo '<a href="#" class="button button-primary" id="button-add-slide" data-slideshow="' . $this->content . '">' . __( 'Add slide', 'eames' ) . '</a>';
+					echo '<a href="#" class="button button-primary" id="button-add-slide" data-slideshow="' . esc_attr( $this->content ) . '">' . __( 'Add slide', 'eames' ) . '</a>';
 				}
 			}
 
@@ -1324,7 +1324,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 				<?php endif;
 				
 				if ( ! empty( $this->description ) ) : ?>
-					<span class="description customize-control-description"><?php echo $this->description; ?></span>
+					<span class="description customize-control-description"><?php esc_attr_e( $this->description ); ?></span>
 				<?php endif;
 				
 				$multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
@@ -1548,7 +1548,6 @@ class Eames_Customize {
 
 
 		/* Slideshow sections ----------------------------- */
-
 
 		// Get the slideshow areas
 		$slideshow_areas = eames_get_slideshow_area();

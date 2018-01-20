@@ -16,7 +16,7 @@ get_header(); ?>
                 <?php 
 
                 $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'eames_fullscreen' );
-                $featured_image_url = isset( $featured_image[0] ) ? $featured_image[0] : '';
+                $featured_image_url = isset( $featured_image[0] ) ? esc_url( $featured_image[0] ) : '';
 
                 ?>
 
@@ -28,7 +28,7 @@ get_header(); ?>
 
                         <?php if ( has_excerpt() ) : ?>
 
-                            <p class="sans-excerpt"><?php echo get_the_excerpt(); ?></p>
+                            <p class="sans-excerpt"><?php echo esc_attr( get_the_excerpt() ); ?></p>
 
                         <?php endif; ?>
                     

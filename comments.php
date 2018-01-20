@@ -2,7 +2,10 @@
 
 	<div class="comments" id="comments">
 
-		<?php $comments_title = sprintf( _n( '%s Comment', '%s Comments', get_comments_number(), 'eames' ), get_comments_number() ); ?>
+		<?php 
+
+		$comments_number = absint( get_comments_number() );
+		$comments_title = sprintf( _n( '%s Comment', '%s Comments', $comments_number, 'eames' ), $comments_number ); ?>
 	  
 		<h3 class="comment-reply-title"><?php echo $comments_title; ?></h3>
 		

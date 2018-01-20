@@ -14,7 +14,7 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
 
             <header class="section-inner thin max-percentage page-header text-center">
                             
-                <h1 class="page-title"><?php printf( __( 'Search: %s', 'eames' ), '&ldquo;' . get_search_query() . '&rdquo;' ); ?></h1>
+                <h1 class="page-title"><?php printf( __( 'Search: %s', 'eames' ), '&ldquo;' . esc_attr( get_search_query() ) . '&rdquo;' ); ?></h1>
 
                 <p class="sans-excerpt"><?php printf( _n( 'We found %s result matching your search.', 'We found %s results matching your search.', $wp_query->found_posts, 'eames' ), $wp_query->found_posts ); ?></p>
             
@@ -26,7 +26,7 @@ if ( is_home() && $paged == 1 ) eames_hero_slider( 'blog' ); ?>
                 
                 <h1 class="page-title"><?php _e( 'No results found', 'eames' ); ?></h1>
 
-                <p class="sans-excerpt"><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s", but you can try a different one through the form below.', 'eames' ), get_search_query() ); ?></p>
+                <p class="sans-excerpt"><?php global $found_posts; printf( __( 'We could not find any results for the search query "%s", but you can try a different one through the form below.', 'eames' ), esc_attr( get_search_query() ) ); ?></p>
             
             </header><!-- .page-header -->
 

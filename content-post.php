@@ -30,7 +30,7 @@
 				
 				// Post author
 				if ( in_array( 'author', $post_meta_top ) ) : ?>
-					<span class="post-author"><?php printf( __( 'By %s', 'eames' ), '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '">' . get_the_author_meta( 'display_name' ) . '</a>' ); ?></span>
+					<span class="post-author"><?php printf( __( 'By %s', 'eames' ), '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_attr( get_the_author_meta( 'display_name' ) ) . '</a>' ); ?></span>
 				<?php endif;
 				
 				// Comments
@@ -178,7 +178,7 @@
 								_e( 'Edit post', 'eames' );
 							} else {
 								edit_post_link( __( 'Edit post', 'eames' ) );
-							} 
+							}
 							?>
 						</span>
 					</p>
@@ -192,7 +192,7 @@
 
 			<?php if ( has_excerpt() ) : ?>
 
-				<p class="excerpt desktop-excerpt"><?php echo get_the_excerpt(); ?></p>
+				<p class="excerpt desktop-excerpt"><?php echo esc_attr( get_the_excerpt() ); ?></p>
 
 			<?php endif; ?>
 
@@ -241,18 +241,18 @@
 
 					<?php if ( $next_post ) : ?>
 
-						<a class="next-post" href="<?php echo get_permalink( $next_post->ID ); ?>" title="<?php the_title_attribute( array( 'post' => $next_post->ID ) ); ?>">
+						<a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>" title="<?php the_title_attribute( array( 'post' => $next_post->ID ) ); ?>">
 							<span class="subheading"><?php _e( 'Next post', 'eames' ); ?></span>
-							<span class="title"><?php echo get_the_title( $next_post->ID ); ?></span>
+							<span class="title"><?php esc_attr_e( get_the_title( $next_post->ID ) ); ?></span>
 						</a>
 
 					<?php endif; ?>
 
 					<?php if ( $prev_post ) : ?>
 
-						<a class="previous-post" href="<?php echo get_permalink( $prev_post->ID ); ?>" title="<?php the_title_attribute( array( 'post' => $prev_post->ID ) ); ?>">
+						<a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>" title="<?php the_title_attribute( array( 'post' => $prev_post->ID ) ); ?>">
 							<span class="subheading"><?php _e( 'Previous post', 'eames' ); ?></span>
-							<span class="title"><?php echo get_the_title( $prev_post->ID ); ?></span>
+							<span class="title"><?php esc_attr_e( get_the_title( $prev_post->ID ) ); ?></span>
 						</a>
 
 					<?php endif; ?>
