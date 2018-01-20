@@ -41,7 +41,7 @@ Archivo font
 License: SIL Open Font License, 1.1
 Source: https://fonts.google.com/specimen/Archivo
 
-Charter SIL font
+Charis SIL font
 License: SIL Open Font License, 1.1
 Source: https://software.sil.org/charis/
 
