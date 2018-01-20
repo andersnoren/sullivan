@@ -1543,6 +1543,27 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
 }
 
 
+/* Order Downloads ----------------------------- */
+
+
+.woocommerce-order-downloads + .woocommerce-order-details {
+	margin-top: 40px;
+}
+
+.woocommerce-order-downloads__title {
+	font-size: 24px;
+	margin-bottom: 25px;
+}
+
+.woocommerce-order-downloads table {
+	margin-bottom: 0;
+}
+
+.woocommerce-order-downloads .woocommerce-table--order-downloads tbody tr:nth-child(odd) {
+	background: rgba( 0, 0, 0, 0.025 );
+}
+
+
 /* Order Details ----------------------------- */
 
 .woocommerce-order-details table {
@@ -2114,12 +2135,14 @@ h3 + .woocommerce-address-fields {
         display: block;
     }
 
-    .woocommerce-order .woocommerce-order-overview, 
+	.woocommerce-order .woocommerce-order-overview,
+	.woocommerce-order .woocommerce-order-downloads, 
     .woocommerce-order .woocommerce-order-details,
     .woocommerce-columns--addresses .woocommerce-column {
         width: 100%;
     }
 
+	.woocommerce-order .woocommerce-order-downloads,
     .woocommerce-order .woocommerce-order-details {
         margin-top: 60px;
     }
@@ -2593,6 +2616,7 @@ h3 + .woocommerce-address-fields {
     /* Order Review ----------------------------- */
 
     .woocommerce-order .woocommerce-order-overview, 
+    .woocommerce-order .woocommerce-order-downloads, 
     .woocommerce-order .woocommerce-order-details {
         padding: 20px;
     }
