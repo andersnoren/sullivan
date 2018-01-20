@@ -22,6 +22,18 @@ All theme specific options are handled through the WordPress Customizer.
 2. Click the dropdown beneath "Template" in "Page Attributes", and select Full Width Template.
 
 
+== Add a Post Gallery ==
+
+1. Create a new post, or edit an existing one.
+2. In the right hand column, in the box titled "Format", select "Gallery".
+3. Select the very first line of the content of your post (either in the Visual Editor och the Text Editor – which one doesn't matter).
+4. Click the button labeled "Add Media", directly above the content box.
+5. In the lefthand panel navigation, click on "Create Gallery".
+6. Select the images you want to include in your slideshow. Add captions if you want to display a descriptive text along with each slide.
+7. When you have selected the images you want to include, click the "Create a new gallery" button in the lower right corner of the window.
+8. Finally, click the "Insert gallery" button in the same corner of the window.
+9. Publish the post. As long as you leave the gallery as the first element in your content, it will be displayed in place of the featured image for that post (and won't be displayed at the start of the post itself).
+
 
 == Licenses ==
 
