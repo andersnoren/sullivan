@@ -149,6 +149,38 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
+   SHOW NOTICE ON THEME ACTIVATION
+   When the theme is activated, display a notice informing the user about the compatibility 
+   plugin (if it isn't active)
+   --------------------------------------------------------------------------------------------- */
+
+function sullivan_theme_activation_notice() {
+
+	// If Sullivan compat is already active, don't show the notice
+	if ( is_plugin_active( 'sullivan-compat/sullivan-compat.php' ) ) {
+		return;
+	}
+
+	// Add our notice function to the admin notices
+	add_action( 'admin_notices', 'sullivan_theme_activation_notice_output' );
+
+}
+add_action( 'after_switch_theme', 'sullivan_theme_activation_notice' );
+
+function sullivan_theme_activation_notice_output() {
+
+	?>
+
+	<div class="updated notice is-dismissible">
+        <p><?php printf( __( 'Thanks for installing Sullivan! In order to activate the slideshow functionality, you need to install the Sullivan Compatibility Plugin from the %s.', 'sullivan' ), '<a href="' . admin_url( 'plugin-install.php?s=sullivan&tab=search' ) . '">' . __( 'WordPress.org plugin directory', 'sullivan' ) . '</a>' ); ?></p>
+    </div>
+
+	<?php
+
+}
+
+
+/* ---------------------------------------------------------------------------------------------
    POST CLASSES
    --------------------------------------------------------------------------------------------- */
 
