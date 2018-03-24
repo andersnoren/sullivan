@@ -48,6 +48,7 @@ Source: https://software.sil.org/charis/
 Images in screenshot.png from Pexels
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 Source: https://www.pexels.com/
+- Hero image: 
 
 FontAwesome Icons
 License: SIL Open Font License, 1.1,
@@ -56,6 +57,10 @@ Source: https://www.fontawesome.io
 FontAwesome Code
 License: MIT License,
 Source: https://www.fontawesome.io
+
+Flexslider
+License: GNU General Public License v2.0,
+Source: https://github.com/woocommerce/FlexSlider
 
 Ion Icons
 License: MIT License, https://opensource.org/licenses/MIT

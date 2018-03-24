@@ -127,7 +127,7 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) {
 
 	function sullivan_enqueue_scripts() {
 
-		wp_register_script( 'sullivan_flexslider', get_template_directory_uri() . '/assets/js/flexslider.min.js', '', true );
+		wp_register_script( 'sullivan_flexslider', get_template_directory_uri() . '/assets/js/jquery.flexslider.js', '', true );
 		wp_enqueue_script( 'sullivan_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'sullivan_flexslider' ), '', true );
 
 		if ( ( ! is_admin() ) && is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
