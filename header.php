@@ -26,11 +26,7 @@
 					<div class="cancel-search"></div>
 				</form>
 
-				<div class="compact-search-results ajax-search-results">
-
-					<?php // Content is added to this element by the sullivan_ajax_search() function (by way of javascript) ?>
-
-				</div><!-- .compact-search-results -->
+				<div class="compact-search-results ajax-search-results"></div><!-- .compact-search-results -->
 
 			</div><!-- .mobile-search -->
 

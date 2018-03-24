@@ -786,11 +786,7 @@ if ( ! function_exists( 'sullivan_header_search' ) ) {
 
 			</form>
 
-			<div class="compact-search-results ajax-search-results modal arrow-left">
-
-				<?php // Content is added to this element by the sullivan_ajax_search() function ?>
-
-			</div>
+			<div class="compact-search-results ajax-search-results modal arrow-left"></div>
 
 		</div><!-- .header-search -->
 
