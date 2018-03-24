@@ -77,6 +77,14 @@ Version 1.02 (2018-02-13)
 -------------------------
 - Added missing overflow: auto on mobile menu
 - Fixed incorrect theme_location check in mobile menu
+- Updated output of slideshows to use the new sullivan compat slideshow post type
+- Show notice instructing the user to install the sullivan compat plugin on theme activation
+- Updated page.php with conditionals to prevent it breaking when WC is not activated
+- Replaced esc_attr with wp_kses_post in some cases
+- Escaped text in footer, made theme credit fully translateable
+- Added flexslider to readme licenses, change to non-minified version
+- Updated Google Fonts font enqueuing method to match TwentySeventeen
+- Added URLs to specific images used in screenshot.png
 
 Version 1.01 (2018-01-22)
 -------------------------
