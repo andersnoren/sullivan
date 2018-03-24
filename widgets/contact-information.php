@@ -18,9 +18,9 @@ class sullivan_contact_information extends WP_Widget {
 		$widget_title = ''; 
 		$widget_address = ''; 
 		
-		$widget_title = esc_attr( apply_filters( 'widget_title', $instance['widget_title'] ) );
-		$widget_address = esc_attr( apply_filters( 'widget_address', $instance['widget_address'] ) );
-		$widget_phone = esc_attr( apply_filters( 'widget_phone', $instance['widget_phone'] ) );
+		$widget_title = wp_kses_post( apply_filters( 'widget_title', $instance['widget_title'] ) );
+		$widget_address = wp_kses_post( apply_filters( 'widget_address', $instance['widget_address'] ) );
+		$widget_phone = wp_kses_post( apply_filters( 'widget_phone', $instance['widget_phone'] ) );
 		
 		echo $before_widget;
 
@@ -67,24 +67,24 @@ class sullivan_contact_information extends WP_Widget {
 		if ( ! isset( $instance['widget_phone'] ) ) $instance['widget_phone'] = '';
 	
 		// Get the options into variables, escaping html characters on the way
-		$widget_title = esc_attr( $instance['widget_title'] );
-		$widget_address = esc_attr( $instance['widget_address'] );
-		$widget_phone = esc_attr( $instance['widget_phone'] );
+		$widget_title = wp_kses_post( $instance['widget_title'] );
+		$widget_address = wp_kses_post( $instance['widget_address'] );
+		$widget_phone = wp_kses_post( $instance['widget_phone'] );
 		?>
 		
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php  _e( 'Title', 'sullivan' ); ?>:
-			<input id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $widget_title ); ?>" /></label>
+			<input id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" class="widefat" value="<?php echo wp_kses_post( $widget_title ); ?>" /></label>
         </p>
         
         <p>
 			<label for="<?php echo $this->get_field_id( 'widget_address' ); ?>"><?php  _e( 'Address', 'sullivan' ); ?>:
-			<textarea id="<?php echo $this->get_field_id( 'widget_address' ); ?>" name="<?php echo $this->get_field_name( 'widget_address' ); ?>" class="widefat"><?php echo esc_attr( $widget_address ); ?></textarea></label>
+			<textarea id="<?php echo $this->get_field_id( 'widget_address' ); ?>" name="<?php echo $this->get_field_name( 'widget_address' ); ?>" class="widefat"><?php echo wp_kses_post( $widget_address ); ?></textarea></label>
         </p>
         
         <p>
 			<label for="<?php echo $this->get_field_id( 'widget_phone' ); ?>"><?php  _e( 'Phone number', 'sullivan' ); ?>:
-			<input id="<?php echo $this->get_field_id( 'widget_phone' ); ?>" name="<?php echo $this->get_field_name( 'widget_phone' ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $widget_phone ); ?>" /></label>
+			<input id="<?php echo $this->get_field_id( 'widget_phone' ); ?>" name="<?php echo $this->get_field_name( 'widget_phone' ); ?>" type="text" class="widefat" value="<?php echo wp_kses_post( $widget_phone ); ?>" /></label>
         </p>
 		
 		<?php

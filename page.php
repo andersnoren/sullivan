@@ -40,7 +40,7 @@
 
                             <?php if ( has_excerpt() ) : ?>
 
-                                <p class="sans-excerpt"><?php echo esc_attr( get_the_excerpt() ); ?></p>
+                                <p class="sans-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
 
                             <?php endif; ?>
                         

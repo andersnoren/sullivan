@@ -18,7 +18,7 @@ class sullivan_recent_posts extends WP_Widget {
 		$widget_title = null; 
 		$number_of_posts = null; 
 		
-		$widget_title = esc_attr( apply_filters( 'widget_title', $instance['widget_title'] ) );
+		$widget_title = wp_kses_post( apply_filters( 'widget_title', $instance['widget_title'] ) );
 		$number_of_posts = esc_attr( $instance['number_of_posts'] );
 		
 		echo $before_widget;
@@ -108,13 +108,13 @@ class sullivan_recent_posts extends WP_Widget {
 		if ( ! isset( $instance['number_of_posts'] ) ) $instance['number_of_posts'] = 5;
 	
 		// Get the options into variables, escaping html characters on the way
-		$widget_title = esc_attr( $instance['widget_title'] );
+		$widget_title = wp_kses_post( $instance['widget_title'] );
 		$number_of_posts = esc_attr( $instance['number_of_posts'] );
 		?>
 		
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_title' ); ?>"><?php  _e( 'Title', 'sullivan' ); ?>:
-			<input id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" class="widefat" value="<?php echo esc_attr($widget_title); ?>" /></label>
+			<input id="<?php echo $this->get_field_id( 'widget_title' ); ?>" name="<?php echo $this->get_field_name( 'widget_title' ); ?>" type="text" class="widefat" value="<?php echo wp_kses_post( $widget_title ); ?>" /></label>
 		</p>
 						
 		<p>

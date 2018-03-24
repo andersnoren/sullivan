@@ -681,8 +681,8 @@ if ( ! function_exists( 'sullivan_woo_account_modal' ) ) {
                     ?>
 
                     <header>
-                        <strong class="user-name"><?php echo esc_attr( $user_name ); ?></strong>
-                        <span class="user-email"><?php echo esc_attr( $user->user_email ); ?></span>
+                        <strong class="user-name"><?php echo wp_kses_post( $user_name ); ?></strong>
+                        <span class="user-email"><?php echo wp_kses_post( $user->user_email ); ?></span>
                     </header>
 
                     <?php
@@ -726,7 +726,7 @@ if ( ! function_exists( 'sullivan_woo_account_modal' ) ) {
                     </nav>
 
                     <footer class="log-out-wrapper">
-                        <a class="log-out" href="<?php echo esc_attr( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Sign out', 'sullivan' ); ?></a>
+                        <a class="log-out" href="<?php echo esc_url( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Sign out', 'sullivan' ); ?></a>
                     </footer>
 
                 <?php endif; ?>

@@ -18,7 +18,7 @@ class sullivan_recent_comments extends WP_Widget {
 		$widget_title = null; 
 		$number_of_comments = null; 
 		
-		$widget_title = esc_attr( apply_filters( 'widget_title', $instance['widget_title'] ) );
+		$widget_title = wp_kses_post( apply_filters( 'widget_title', $instance['widget_title'] ) );
 		$number_of_comments = esc_attr( $instance['number_of_comments'] );
 		
 		echo $before_widget;
@@ -59,8 +59,8 @@ class sullivan_recent_comments extends WP_Widget {
 								
 								<div class="inner">
 								
-									<p class="title"><span><?php echo esc_attr( get_comment_author() ); ?></span></p>
-									<p class="meta">&ldquo;<?php echo esc_attr( sullivan_get_comment_excerpt( $comment->comment_ID, 10 ) ); ?>&rdquo;</p>
+									<p class="title"><span><?php echo wp_kses_post( get_comment_author() ); ?></span></p>
+									<p class="meta">&ldquo;<?php echo wp_kses_post( sullivan_get_comment_excerpt( $comment->comment_ID, 10 ) ); ?>&rdquo;</p>
 								
 								</div>
 				
@@ -99,7 +99,7 @@ class sullivan_recent_comments extends WP_Widget {
 		if ( ! isset( $instance['number_of_comments'] ) ) $instance['number_of_comments'] = 5;
 	
 		// Get the options into variables, escaping html characters on the way
-		$widget_title = esc_attr( $instance['widget_title'] );
+		$widget_title = wp_kses_post( $instance['widget_title'] );
 		$number_of_comments = esc_attr( $instance['number_of_comments'] );
 		?>
 		

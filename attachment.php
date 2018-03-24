@@ -20,7 +20,7 @@
 
                         <?php if ( $post->post_excerpt ) : ?>
 
-                            <p class="sans-excerpt"><?php echo esc_attr( $post->post_excerpt ); ?></p>
+                            <p class="sans-excerpt"><?php echo wp_kses_post( $post->post_excerpt ); ?></p>
 
                         <?php endif; ?>
                     

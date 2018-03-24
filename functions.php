@@ -440,7 +440,7 @@ if ( ! function_exists( 'sullivan_post_gallery' ) ) {
 							if ( $image ) :
 
 								$image_url = esc_url( $image[0] );
-								$image_caption = esc_attr( wp_get_attachment_caption( $image_id ) );
+								$image_caption = wp_kses_post( wp_get_attachment_caption( $image_id ) );
 							
 								?>
 									
@@ -766,7 +766,7 @@ if ( ! function_exists( 'sullivan_header_search' ) ) {
 			<form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'sullivan' ); ?></span>
 				<label for="header-search-field"></label>
-				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'sullivan' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" autocomplete="off" />
+				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'sullivan' ); ?>" value="<?php echo wp_kses_post( get_search_query() ); ?>" name="s" autocomplete="off" />
 				
 				<?php
 
