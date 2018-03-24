@@ -48,7 +48,11 @@ Source: https://software.sil.org/charis/
 Images in screenshot.png from Pexels
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 Source: https://www.pexels.com/
-- Hero image: 
+- Slideshow image: https://www.pexels.com/photo/boutique-clothes-clothing-indoors-264554/
+- Product image #1: https://www.pexels.com/photo/accessory-analog-analogue-band-277431/
+- Product image #2: https://www.pexels.com/photo/brown-and-black-round-analog-watch-on-beige-rocks-220570/
+- Product image #3: https://www.pexels.com/photo/dial-electronics-hands-indoors-277308/
+- Product image #4: https://www.pexels.com/photo/round-silver-colored-analog-watch-beside-compass-691640/
 
 FontAwesome Icons
 License: SIL Open Font License, 1.1,
