@@ -36,7 +36,7 @@
 
 			<ul class="mobile-menu">
 				<?php 
-				if ( has_nav_menu( 'primary-menu' ) ) {
+				if ( has_nav_menu( 'mobile-menu' ) ) {
 					wp_nav_menu( array( 
 						'container' 		=> '',
 						'items_wrap' 		=> '%3$s',

@@ -64,6 +64,11 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.02 (2018-02-13)
+-------------------------
+- Added missing overflow: auto on mobile menu
+- Fixed incorrect theme_location check in mobile menu
+
 Version 1.01 (2018-01-22)
 -------------------------
 - Fixed incorrect filename for editor styles in functions.php

@@ -884,6 +884,7 @@ class Sullivan_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 	
 
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
 			$t = '';
 			$n = '';
@@ -943,6 +944,7 @@ class Sullivan_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
 		$item_output  = $args->before;
+
 		// Add a sub-nav-toggle if there are children and close the wrapper
 		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
 			$item_output .= '<div class="menu-toggle-wrapper">';
