@@ -73,10 +73,34 @@ if ( ! function_exists( 'sullivan_load_style' ) ) {
 
 	function sullivan_load_style() {
 		if ( ! is_admin() ) {
-			wp_register_style( 'sullivan-google-fonts', 'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,700,700i&amp;subset=latin-ext', array(), null );
-			wp_register_style( 'sullivan-fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.css' );
 
-			$dependencies = array( 'sullivan-google-fonts', 'sullivan-fontawesome' );
+			$dependencies = array();
+
+			/**
+			 * Translators: If there are characters in your language that are not
+			 * supported by Archivo, translate this to 'off'. Do not translate
+			 * into your own language.
+			 */
+			$archivo = _x( 'on', 'Archivo font: on or off', 'sullivan' );
+
+			if ( 'off' !== $archivo ) {
+				$font_families = array();
+
+				$font_families[] = 'Archivo:400,400i,500,500i,700,700i';
+
+				$query_args = array(
+					'family' => urlencode( implode( '|', $font_families ) ),
+					'subset' => urlencode( 'latin-ext' ),
+				);
+
+				$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+
+				wp_register_style( 'sullivan-google-fonts', $fonts_url, array(), null );
+				$dependencies[] = 'sullivan-google-fonts';
+			}
+
+			wp_register_style( 'sullivan-fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.css' );
+			$dependencies[] = 'sullivan-fontawesome';
 
 			// Add WooCommerce styles, if WC is activated
 			if ( sullivan_is_woocommerce_activated() ) {
