@@ -1048,10 +1048,6 @@ img {
 	transition: opacity .15s linear;
 }
 
-.hero-slider .slide.only-image .dark-overlay:before {
-	content: none;
-}
-
 .hero-slider.loaded .slide {
 	opacity: 1;
 }

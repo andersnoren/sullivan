@@ -969,60 +969,6 @@ class Sullivan_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 
 
 /* ---------------------------------------------------------------------------------------------
-	GET SLIDESHOW AREAS
-	Ensure we get the right values for the slideshow areas by keeping that data in a single place.
-
-	Child theme devs: This function can be plugged, and the $slideshow_areas can be extended to
-	create another slideshow section with corresponding settings and controls in the Customizer. 
-	That slideshow will then be available for output by calling sullivan_hero_slider() with your 
-	area name as the function argument.
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'sullivan_get_slideshow_area' ) ) {
-
-	function sullivan_get_slideshow_area( $area = '' ) {
-
-		// Blog slideshow area
-		$slideshow_areas = array(
-			'blog' => array(
-				'name'			=> 'blog',
-				'title' 		=> __( 'Slideshow (blog)', 'sullivan' ),
-				'description' 	=> __( 'Add information to be shown in the slideshow on the blog start page.', 'sullivan' ),
-				'priority'		=> 40,
-				'max_slides'	=> 10,
-			),
-		);
-
-		// Shop slideshow area (provided WC is installed and active)
-		if ( sullivan_is_woocommerce_activated() ) {
-			$slideshow_areas['shop'] = array(
-				'name'			=> 'shop',
-				'title' 		=> __( 'Slideshow (shop)', 'sullivan' ),
-				'description' 	=> __( 'Add information to be shown in the slideshow on the shop start page.', 'sullivan' ),
-				'priority'		=> 40,
-				'max_slides'	=> 10,
-			);
-		}
-
-		// If a specific area is requested and exists, return that
-		if ( $area && isset( $slideshow_areas[$area] ) ) {
-			return $slideshow_areas[$area];
-
-		// If it's requested but doesn't exist, go fish
-		} elseif ( $area && ! isset( $slideshow_areas[$area] ) ) {
-			return false;
-		}
-
-		// If no argument is provided, return all areas
-		return $slideshow_areas;
-
-	}
-
-}
-
-
-/* ---------------------------------------------------------------------------------------------
    GET FALLBACK IMAGE
    --------------------------------------------------------------------------------------------- */
 
@@ -1074,153 +1020,109 @@ if ( ! function_exists( 'sullivan_string_has_woo_shortcodes' ) ) {
    --------------------------------------------------------------------------------------------- */
 
 
-   if ( ! function_exists( 'sullivan_hero_slider' ) ) {
+if ( ! function_exists( 'sullivan_hero_slider' ) ) {
 
 	function sullivan_hero_slider( $area = 'blog', $return = false ) {
 
-		// Get the number of slides to output
-		$number_of_slides = absint( get_theme_mod( 'sullivan_' . $area . '_slider_max_slides' ) );
+		// Get the slides for the area in question
+		$slideshow_location = get_term_by( 'slug', $area, 'sullivan_slideshow_location' );
 
-		// Get the arguments for the area in question
-		$area_data = sullivan_get_slideshow_area( $area );
+		// No matching slideshow location = no output
+		if ( ! $slideshow_location ) {
+			return;
+		}
 
-		if ( $number_of_slides != 0 && $area_data ) : 
+		$slides = get_posts( array(
+			'post_status'		=> 'publish',
+			'post_type'			=> 'sullivan_slideshow',
+			'posts_per_page'	=> -1,
+			'tax_query'			=> array(
+				array(
+					'taxonomy'		=> 'sullivan_slideshow_location',
+					'terms'			=> $slideshow_location->term_id,
+				),
+			),
+		) );
 
-			// If we're returning the slider...
-			if ( $return == true ) {
+		// No slides = no output
+		if ( ! $slides ) {
+			return;
+		}
 
-				// ...start the output buffer
-				ob_start();
-
-			}
-
-			$slideshow_speed = get_theme_mod( 'sullivan_' . $area . '_slider_speed' ) ? absint( get_theme_mod( 'sullivan_' . $area . '_slider_speed' ) ) : 7000;
+		// If we're returning the slider, start the output buffer
+		if ( $return == true ) {
+			ob_start();
+		}
 		
-			?>
+		?>
+	
+		<div class="flexslider hero-slider loading bg-black" data-slideshow-speed="7000" id="heroslider_<?php echo $area; ?>">
 		
-			<div class="flexslider hero-slider loading bg-black" data-slideshow-speed="<?php echo $slideshow_speed; ?>" id="heroslider_<?php echo $area; ?>">
-			
-				<ul class="slides">
-		
-					<?php for( $i = 1; $i <= $number_of_slides; $i++ ) : 
+			<ul class="slides">
+	
+				<?php foreach( $slides as $slide ) : 
+
+					// Check if the id in the image customizer setting has a file to go along with it
+					if ( has_post_thumbnail( $slide->ID ) ) {
+						$slide_image_url = get_the_post_thumbnail_url( $slide->ID, 'sullivan_fullscreen' );
+					}
+					
+					?>
+					
+					<li class="slide">
+
+						<div class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . esc_url( $slide_image_url ) . ' );"'; ?>>
+							<div class="section-inner">
+								
+								<header>
+
+									<?php 
+
+									$slide_title = get_post_meta( $slide->ID, 'sullivan_slide_title', true );
+									$slide_subtitle = get_post_meta( $slide->ID, 'sullivan_slide_subtitle', true );
+									$slide_button_text = get_post_meta( $slide->ID, 'sullivan_slide_button_text', true );
+									$slide_button_url = get_post_meta( $slide->ID, 'sullivan_slide_button_url', true );
+									
+									if ( $slide_title ) : ?>
+										<h1><?php echo wp_kses_post( $slide_title ); ?></h1>
+									<?php endif;
+									
+									if ( $slide_subtitle ) : ?>
+										<p class="sans-excerpt"><?php echo wp_kses_post( $slide_subtitle ); ?></p>
+									<?php endif;
+
+									if ( $slide_button_text && $slide_button_url ) : ?>
+
+										<div class="button-wrapper">
+											<a href="<?php echo esc_url( $slide_button_url ); ?>" class="button white"><?php echo wp_kses_post( $slide_button_text ); ?></a>
+										</div>
+
+									<?php endif; ?>
+
+								</header>
+
+							</div><!-- .section-inner -->
+						</div><!-- .bg-image -->
+					</li><!-- .slide -->
 						
-						// Get the customizer values for the current slideshow area and slide count
-						$slide = array(
-							'image' 	=> get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_image' ) ? get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_image' ) : '',
-							'title' 	=> get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_title' ) ? get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_title' ) : '',
-							'subtitle' 	=> get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_subtitle' ) ? get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_subtitle' ) : '',
-							'button_text' 	=> get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_button_text' ) ? get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_button_text' ) : '',
-							'url' 	=> get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_url' ) ? get_theme_mod( 'sullivan_' . $area . '_slider_' . $i . '_url' ) : '',
-						);
-
-						$slide_image_url = '';
-
-						// Check if the id in the image customizer setting has a file to go along with it
-						if ( $slide['image'] ) {
-							$slide_image = wp_get_attachment_image_src( $slide['image'], 'sullivan_fullscreen' );
-							if ( $slide_image ) {
-								$slide_image_url = $slide_image[0];
-							}
-						}
-
-						// If we're in the customizer, always show the empty slides – if not, only show the ones with values
-						// Kudos Johanna for the UX input <3
-						if ( is_customize_preview() || ( $slide['image'] || $slide['title'] || $slide['subtitle'] ) ) : 
-
-							$extra_slide_classes = '';
-
-							$only_image = false;
-
-							if ( $slide['image'] && ( ! $slide['title'] && ! $slide['subtitle'] ) ) {
-								$only_image = true;
-								$extra_slide_classes .= ' only-image';
-							}
-						
-							?>
-							
-							<li class="slide<?php echo esc_attr( $extra_slide_classes ); ?>">
-
-								<?php 
-								// If the only content is an image and a URL is set, make the wrapper a link pointing to the URL
-								if ( $only_image && $slide['url'] ) {
-									$opening_element = 'a href="' . $slide['url'] . '"';
-									$closing_element = 'a';
-								} else {
-									$opening_element = 'div';
-									$closing_element = 'div';
-								}
-								?>
-								<<?php echo $opening_element; ?> class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . esc_url( $slide_image_url ) . ' );"'; ?>>
-									<div class="section-inner">
-										
-										<header>
-
-											<?php if ( $slide['title'] ) : ?>
-
-												<h1>
-													<?php
-													if ( $slide['url'] ) echo '<a href="' . esc_url( $slide['url'] ) . '">';
-													echo esc_attr( $slide['title'] );
-													if ( $slide['url'] ) echo '</a>'; 
-													?>
-												</h1>
-
-											<?php endif; ?>
-
-											<?php if ( $slide['subtitle'] ) : ?>
-
-												<p class="sans-excerpt"><?php echo esc_attr( $slide['subtitle'] ); ?></p>
-
-											<?php endif; ?>
-
-											<?php if ( $slide['url'] && $slide['button_text'] ) : ?>
-
-												<div class="button-wrapper">
-													<?php 
-													
-													// If we're wrapping the slide in a link, we need to output the "button" as a div to prevent element breakage
-													if ( $opening_element == 'div' ) : ?>
-														<a href="<?php echo esc_url( $slide['url'] ); ?>" class="button white"><?php echo esc_attr( $slide['button_text'] ); ?></a>
-													<?php else : ?>
-														<div class="button white"><?php echo esc_attr( $slide['button_text'] ); ?></div>
-													<?php endif; ?>
-												</div>
-
-											<?php endif; ?>
-
-										</header>
-
-									</div><!-- .section-inner -->
-								</<?php echo $closing_element; ?>><!-- .bg-image -->
-							</li><!-- .slide -->
-							
-							<?php
-
-						endif;
-
-						// Make sure we reset the $slide variable
-						unset( $slide );
-				
-					endfor; ?>
+				<?php endforeach; ?>
+		
+			</ul>
 			
-				</ul>
-				
-			</div>
+		</div>
 			
-			<?php
+		<?php
 
-			// If we're returning, get the output buffer contents and return them
-			if ( $return == true ) {
+		// If we're returning, get the output buffer contents and return them
+		if ( $return == true ) {
 
-				$hero_slider_output = ob_get_contents();
+			$hero_slider_output = ob_get_contents();
 
-				ob_end_clean();
+			ob_end_clean();
 
-				return $hero_slider_output;
+			return $hero_slider_output;
 
-			}
-			
-		endif;
+		}
 
 	}
 
@@ -1250,530 +1152,6 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 	add_filter( 'pre_get_posts', 'sullivan_search_results_filter' );
 
 }
-
-
-/* ---------------------------------------------------------------------------------------------
-   	CUSTOM CUSTOMIZER CONTROLS
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( class_exists( 'WP_Customize_Control' ) ) :
-
-	if ( ! class_exists( 'sullivan_Customize_Control_Seperator' ) ) :
-
-		// Custom Customizer control that outputs an HR to seperate other controls
-		class Sullivan_Customize_Control_Seperator extends WP_Customize_Control {
-		
-			public function render_content() {
-				echo '<hr class="sullivan-customizer-seperator" />';
-			}
-
-		}
-
-	endif;
-
-	if ( ! class_exists( 'sullivan_Customize_Control_Group_Title' ) ) :
-
-		// Custom Customizer control that outputs an HR to seperate other controls
-		class Sullivan_Customize_Control_Group_Title extends WP_Customize_Control {
-
-			// Whitelist content parameter
-			public $content = '';
-
-			public function render_content() {
-				if ( isset( $this->content ) ) {
-					echo '<h2 style="margin: 0 0 5px;">' . esc_attr( $this->content ) . '</h2>';
-				}
-			}
-
-		}
-
-	endif;
-
-	if ( ! class_exists( 'sullivan_Customize_Control_Add_Slide' ) ) :
-
-		// Custom Customizer control that outputs a button that increments the max_slides number input
-		class Sullivan_Customize_Control_Add_Slide extends WP_Customize_Control {
-
-			// Whitelist content parameter
-			public $content = '';
-
-			public function render_content() {
-				if ( isset( $this->content ) ) {
-					echo '<a href="#" class="button button-primary" id="button-add-slide" data-slideshow="' . esc_attr( $this->content ) . '">' . __( 'Add slide', 'sullivan' ) . '</a>';
-				}
-			}
-
-		}
-
-	endif;
-
-	if ( ! class_exists( 'sullivan_Customize_Control_Checkbox_Multiple' ) ) :
-
-		// Custom Customizer control that outputs a specified number of checkboxes
-		// Based on a solution by Justin Tadlock: http://justintadlock.com/archives/2015/05/26/multiple-checkbox-customizer-control
-		class Sullivan_Customize_Control_Checkbox_Multiple extends WP_Customize_Control {
-
-			public $type = 'checkbox-multiple';
-
-			public function render_content() {
-
-				if ( empty( $this->choices ) )
-					return;
-					
-				if ( ! empty( $this->label ) ) : ?>
-					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-				<?php endif;
-				
-				if ( ! empty( $this->description ) ) : ?>
-					<span class="description customize-control-description"><?php echo esc_attr( $this->description ); ?></span>
-				<?php endif;
-				
-				$multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
-		
-				<ul>
-					<?php foreach ( $this->choices as $value => $label ) : ?>
-		
-						<li>
-							<label>
-								<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ) ); ?> /> 
-								<?php echo esc_html( $label ); ?>
-							</label>
-						</li>
-		
-					<?php endforeach; ?>
-				</ul>
-		
-				<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( implode( ',', $multi_values ) ); ?>" />
-				<?php 
-			}
-		}
-
-	endif;
-
-endif;
-
-
-/* ---------------------------------------------------------------------------------------------
-   CUSTOMIZER SETTINGS
-   --------------------------------------------------------------------------------------------- */
-
-
-class Sullivan_Customize {
-
-	public static function sullivan_register( $wp_customize ) {
-
-
-		/* Theme Options section ----------------------------- */
-
-
-		$wp_customize->add_section( 'sullivan_options', array(
-			'title' 		=> __( 'Theme Options', 'sullivan' ),
-			'priority' 		=> 35,
-			'capability' 	=> 'edit_theme_options',
-			'description' 	=> __( 'Customize the theme settings for Sullivan.', 'sullivan' ),
-		) );
-
-		
-		/* Sticky the site navigation ----------------------------- */
-
-
-		$wp_customize->add_setting( 'sullivan_sticky_nav', array(
-			'capability' 		=> 'edit_theme_options',
-			'sanitize_callback' => 'sullivan_sanitize_checkbox'
-		) );
-
-		$wp_customize->add_control( 'sullivan_sticky_nav', array(
-			'type' 			=> 'checkbox',
-			'section' 		=> 'sullivan_options',
-			'label' 		=> __( 'Sticky navigation', 'sullivan' ),
-			'description' 	=> __( 'Keep the site navigation stuck to the top of the window when the visitor has scrolled past it.', 'sullivan' ),
-		) );
-
-
-		/* 2X Header Logo ----------------------------- */
-
-
-		$wp_customize->add_setting( 'sullivan_retina_logo', array(
-			'capability' 		=> 'edit_theme_options',
-			'sanitize_callback' => 'sullivan_sanitize_checkbox',
-			'transport'			=> 'postMessage'
-		) );
-
-		$wp_customize->add_control( 'sullivan_retina_logo', array(
-			'type' 			=> 'checkbox',
-			'section' 		=> 'title_tagline',
-			'priority'		=> 10,
-			'label' 		=> __( 'Retina logo', 'sullivan' ),
-			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'sullivan' ),
-		) );
-
-		// Update logo retina setting with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'sullivan_retina_logo', array(
-			'selector' 			=> '.header-titles .custom-logo-link',
-			'settings' 			=> array( 'sullivan_retina_logo' ),
-			'render_callback' 	=> function(){
-				sullivan_custom_logo();
-			},
-		) );
-
-
-		/* Fallback image setting ----------------------------- */
-
-
-		// Seperator before fallback image
-		$wp_customize->add_setting( 'sullivan_fallback_image_hr', array(
-			'sanitize_callback' => 'esc_attr',
-		) );
-
-		$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_fallback_image_hr', array(
-			'section' 	=> 'sullivan_options',
-		) ) );
-
-
-		// Fallback image setting
-		$wp_customize->add_setting( 'sullivan_fallback_image', array(
-			'sanitize_callback' => 'sanitize_text_field',
-			'transport'			=> 'postMessage'
-		) );
-
-		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'sullivan_fallback_image', array(
-			'label'			=> __( 'Fallback image', 'sullivan' ),
-			'description'	=> __( 'The selected image will be used when a post or product is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'sullivan' ),
-			'mime_type'		=> 'image',
-			'section' 		=> 'sullivan_options',
-		) ) );
-
-
-		/* Search Post Type Filter ----------------------------- */
-
-
-		// Get post types that are public, and visible in search
-		$post_types = get_post_types( array(
-			'public'				=> true,
-			'exclude_from_search'	=> false,
-		) );
-
-		$post_types_customizer_values = array();
-
-		// Build an array of post types, with key: name and value: label
-		foreach( $post_types as $post_type ) {
-			$post_type_obj = get_post_type_object( $post_type );
-			$post_type_singular_label = $post_type_obj->labels->singular_name;
-			$post_types_customizer_values[$post_type] = $post_type_singular_label;
-		}
-
-		// Seperator before post types
-		$wp_customize->add_setting( 'sullivan_post_types_hr', array(
-			'sanitize_callback'	=> 'esc_attr',
-		) );
-
-		$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_post_types_hr', array(
-			'section' 	=> 'sullivan_options',
-		) ) );
-
-		// Default post types
-		$defaults = array( 'post', 'page' );
-
-		// Add products, if WooCommerce is active
-		if ( sullivan_is_woocommerce_activated() ) {
-			$defaults[] = 'product';
-		}
-
-		// Add multiple checkbox setting for post types
-		$wp_customize->add_setting( 'sullivan_filter_search_post_types', array(
-			'default'           => $defaults,
-			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
-		) );
-
-		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_filter_search_post_types', array(
-			'section' 		=> 'sullivan_options',
-			'label'   		=> __( 'Post types to include in search:', 'sullivan' ),
-			'description'	=> __( 'If you do not select any post types, search results will always display as "No results found".', 'sullivan' ),
-			'choices' 		=> $post_types_customizer_values 
-		) ) );
-
-
-		/* Post Meta Setting ----------------------------- */
-
-
-		// Seperator before post meta
-		$wp_customize->add_setting( 'sullivan_fallback_image_hr', array(
-			'sanitize_callback' => 'esc_attr',
-		) );
-
-		$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_post_meta_hr', array(
-			'section' 	=> 'sullivan_options',
-		) ) );
-
-
-		// Post Meta Top Setting
-		$wp_customize->add_setting( 'sullivan_post_meta_top', array(
-			'default'           => array( 'post-date', 'sticky', 'edit-link' ),
-			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
-		) );
-
-		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_post_meta_top', array(
-			'section' 		=> 'sullivan_options',
-			'label'   		=> __( 'Post meta top displays:', 'sullivan' ),
-			'description'	=> __( 'Shown above the post titles in the blog.', 'sullivan' ),
- 			'choices' 		=> array(
-				'author'		=> __( 'Author', 'sullivan' ),
-				'comments'		=> __( 'Comments', 'sullivan' ),
-				'edit-link'		=> __( 'Edit Link (for logged in users)', 'sullivan' ),
-				'post-date'		=> __( 'Post date', 'sullivan' ),
-				'sticky'		=> __( 'Sticky status', 'sullivan' ),
-			) 
-		) ) );
-
-
-		// Post Meta Bottom Setting
-		$wp_customize->add_setting( 'sullivan_post_meta_bottom', array(
-			'default'           => array( 'author', 'categories', 'comments' ),
-			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
-		) );
-
-		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_post_meta_bottom', array(
-			'section' 		=> 'sullivan_options',
-			'label'   		=> __( 'Post meta bottom displays:', 'sullivan' ),
-			'description'	=> __( 'Shown next to the post content in the blog.', 'sullivan' ),
-			'choices' 		=> array(
-				'author'		=> __( 'Author', 'sullivan' ),
-				'categories'	=> __( 'Categories', 'sullivan' ),
-				'comments'		=> __( 'Comments', 'sullivan' ),
-				'edit-link'		=> __( 'Edit Link (for logged in users)', 'sullivan' ),
-				'post-date'		=> __( 'Post date', 'sullivan' ),
-				'sticky'		=> __( 'Sticky status', 'sullivan' ),
-				'tags'			=> __( 'Tags', 'sullivan' ),
-			) 
-		) ) );
-
-
-		/* Slideshow sections ----------------------------- */
-
-		// Get the slideshow areas
-		$slideshow_areas = sullivan_get_slideshow_area();
-
-		// Loop through the slideshow areas and create a section with corresponding settings and controls for each one
-		foreach( $slideshow_areas as $area ) {
-
-			// Add the section
-			$wp_customize->add_section( 'sullivan_' . $area['name'] . '_slider', array(
-				'title' 		=> $area['title'],
-				'priority' 		=> $area['priority'],
-				'capability' 	=> 'edit_theme_options',
-				'description' 	=> $area['description']
-			) );
-
-			// Number of slides setting
-			$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_max_slides', array(
-				'default'			=> 1,
-				'sanitize_callback' => 'absint',
-				'transport'			=> 'postMessage'
-			) );
-
-			$wp_customize->add_control( 'sullivan_' . $area['name'] . '_slider_max_slides', array(
-				'type' 			=> 'number',
-				'section' 		=> 'sullivan_' . $area['name'] . '_slider',
-				'label' 		=> __( 'Number of slides', 'sullivan' ),
-				'description'	=> __( 'Empty slides will be skipped automatically.', 'sullivan' ),
-				'input_attrs'	=> array(
-					'min' 			=> 0,
-					'max' 			=> $area['max_slides'],
-				),
-			) );
-
-			// Slideshow speed setting
-			$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_speed', array(
-				'default'			=> 7000,
-				'sanitize_callback' => 'absint',
-				'transport'			=> 'postMessage'
-			) );
-
-			$wp_customize->add_control( 'sullivan_' . $area['name'] . '_slider_speed', array(
-				'type' 			=> 'number',
-				'section' 		=> 'sullivan_' . $area['name'] . '_slider',
-				'label' 		=> __( 'Slideshow duration', 'sullivan' ),
-				'description'	=> __( 'How long each slide should be shown, in milliseconds.', 'sullivan' ),
-				'input_attrs'	=> array(
-					'min' 			=> 1000,
-					'step'			=> 100,			
-				),
-			) );
-
-			// Loop through the number of slides, and add a set of settings for each slide
-			for ( $i = 1; $i <= $area['max_slides']; $i++ ) {
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_hr', array(
-					'sanitize_callback' => 'esc_attr',
-				) );
-
-				$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_' . $area['name'] . '_slider_' . $i . '_hr', array(
-					'content' 	=> '',
-					'section' 	=> 'sullivan_' . $area['name'] . '_slider',
-				) ) );
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_section_title', array(
-					'sanitize_callback' => 'sanitize_text_field',
-				) );
-
-				$wp_customize->add_control( new Sullivan_Customize_Control_Group_Title( $wp_customize, 'sullivan_' . $area['name'] . '_slider_' . $i . '_section_title', array(
-					'content' 	=> sprintf( __( 'Slide %s', 'sullivan' ), $i ),
-					'section' 	=> 'sullivan_' . $area['name'] . '_slider',
-				) ) );
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_image', array(
-					'sanitize_callback' => 'absint',
-					'transport'			=> 'postMessage'
-				) );
-
-				$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'sullivan_' . $area['name'] . '_slider_' . $i . '_image', array(
-					'label'		=> __( 'Background image', 'sullivan' ),
-					'mime_type'	=> 'image',
-					'section' 	=> 'sullivan_' . $area['name'] . '_slider',
-				) ) );
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_title', array(
-					'sanitize_callback' => 'sanitize_text_field',
-					'transport'			=> 'postMessage'
-				) );
-
-				$wp_customize->add_control( 'sullivan_' . $area['name'] . '_slider_' . $i . '_title', array(
-					'type' 			=> 'text',
-					'section' 		=> 'sullivan_' . $area['name'] . '_slider',
-					'label' 		=> __( 'Title', 'sullivan' ),
-				) );
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
-					'sanitize_callback' => 'sanitize_text_field',
-					'transport'			=> 'postMessage'
-				) );
-
-				$wp_customize->add_control( 'sullivan_' . $area['name'] . '_slider_' . $i . '_subtitle', array(
-					'type' 			=> 'text',
-					'section' 		=> 'sullivan_' . $area['name'] . '_slider',
-					'label' 		=> __( 'Subtitle', 'sullivan' ),
-				) );
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_button_text', array(
-					'default'			=> __( 'Read More', 'sullivan' ),
-					'sanitize_callback' => 'sanitize_text_field',
-					'transport'			=> 'postMessage'
-				) );
-
-				$wp_customize->add_control( 'sullivan_' . $area['name'] . '_slider_' . $i . '_button_text', array(
-					'type' 			=> 'text',
-					'section' 		=> 'sullivan_' . $area['name'] . '_slider',
-					'label' 		=> __( 'Button text', 'sullivan' ),
-				) );
-
-				$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_' . $i . '_url', array(
-					'sanitize_callback' => 'esc_url_raw',
-					'transport'			=> 'postMessage'
-				) );
-
-				$wp_customize->add_control( 'sullivan_' . $area['name'] . '_slider_' . $i . '_url', array(
-					'type' 			=> 'url',
-					'section' 		=> 'sullivan_' . $area['name'] . '_slider',
-					'label' 		=> __( 'URL', 'sullivan' ),
-					'input_attrs'	=> array(
-						'placeholder' 	=> 'http://'
-					),
-				) );
-
-				// Update the hero slider using partial refresh
-				$wp_customize->selective_refresh->add_partial( 'sullivan_' . $area['name'] . '_slider_' . $i . '_partial_refresh', [
-					'selector'            => "#heroslider_" . $area['name'],
-					'settings'            => [
-						'sullivan_' . $area['name'] . '_slider_max_slides',
-						'sullivan_' . $area['name'] . '_slider_speed',
-						'sullivan_' . $area['name'] . '_slider_' . $i . '_image',
-						'sullivan_' . $area['name'] . '_slider_' . $i . '_title',
-						'sullivan_' . $area['name'] . '_slider_' . $i . '_subtitle',
-						'sullivan_' . $area['name'] . '_slider_' . $i . '_button_text',
-						'sullivan_' . $area['name'] . '_slider_' . $i . '_url',
-					],
-					'render_callback'     => function( $area ) { 
-						// Arguments: slideshow area to output, whether to return
-						return sullivan_hero_slider( 'blog', true );
-					},
-				] );
-
-			} // for
-
-			$wp_customize->add_setting( 'sullivan_' . $area['name'] . '_slider_add_slide', array(
-				'sanitize_callback'	=> 'esc_attr',
-			) );
-
-			$wp_customize->add_control( new Sullivan_Customize_Control_Add_Slide( $wp_customize, 'sullivan_' . $area['name'] . '_slider_add_slide', array(
-				'content' 	=> $area['name'],
-				'section' 	=> 'sullivan_' . $area['name'] . '_slider',
-			) ) );
-
-		} // foreach $slideshow_areas
-
-
-		/* Built-in controls ----------------------------- */
-
-
-		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-		$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
-		// Update blogname with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'sullivan_header_site_title', array(
-			'selector' => '.header-titles .site-title .site-name',
-			'settings' => array( 'blogname' ),
-			'render_callback' => function() {
-				return get_bloginfo( 'name', 'display' );
-			},
-		) );
-
-		// Update blogdescription with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'sullivan_header_site_description', array(
-			'selector' => '.header-titles .site-description',
-			'settings' => array( 'blogdescription' ),
-			'render_callback' => function() {
-				return get_bloginfo( 'description', 'display' );
-			},
-		) );
-		
-		
-		/* Sanitation functions ----------------------------- */
-
-		// Sanitize boolean for checkbox
-		function sullivan_sanitize_checkbox( $checked ) {
-			return ( ( isset( $checked ) && true == $checked ) ? true : false );
-		}
-
-		// Sanitize booleans for multiple checkboxes
-		function sullivan_sanitize_multiple_checkboxes( $values ) {
-			$multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
-			return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
-		}
-		
-	}
-
-	// Initiate the customize controls js
-	public static function sullivan_customize_controls() {
-		wp_enqueue_script( 'sullivan-customize-controls', get_template_directory_uri() . '/assets/js/customize-controls.js', array(  'jquery', 'customize-controls' ), '', true );
-	}
-
-	// Initiate the customize preview js
-	public static function sullivan_customize_preview() {
-		wp_enqueue_script( 'sullivan-customize-preview', get_template_directory_uri() . '/assets/js/customize-preview.js', array(  'jquery', 'customize-preview' ), '', true );
-	}
-
-}
-
-// Setup the Theme Customizer settings and controls
-add_action( 'customize_register', array( 'sullivan_Customize', 'sullivan_register' ) );
-
-// Enqueue customize controls javascript in Theme Customizer admin screen
-add_action( 'customize_controls_init', array( 'sullivan_Customize' , 'sullivan_customize_controls' ) );
-
-// Enqueue customize preview javascript in Theme Customizer admin screen
-add_action( 'customize_preview_init', array( 'sullivan_Customize' , 'sullivan_customize_preview' ) );
-
 
 
 ?>
