@@ -16,7 +16,7 @@
                 $section_inner_width = $page_has_woocommerce_shortcodes ? 'wide' : 'thin';
 
                 // Thin section-inner on the login page
-                $showing_login_form = ( is_account_page() && ! is_user_logged_in() );
+                $showing_login_form = ( sullivan_is_woocommerce_activated() && is_account_page() && ! is_user_logged_in() );
                 if ( $showing_login_form ) {
                     $section_inner_width = 'thin';
                 }
@@ -76,7 +76,7 @@
                         wp_link_pages();
 
                         // Show the shop sidebar on my account pages
-                        if ( is_account_page() && is_user_logged_in() ) get_sidebar(); 
+                        if ( sullivan_is_woocommerce_activated() && is_account_page() && is_user_logged_in() ) get_sidebar(); 
                         ?>
 
                     </div><!-- .entry-content -->
