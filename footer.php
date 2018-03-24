@@ -46,8 +46,8 @@
 				<div class="section-inner credits">
 
 					<p>
-						<span>&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></span>
-						<span><?php _e( 'Theme by', 'sullivan' ); ?> <a href="http://www.andersnoren.se">Anders Nor&eacute;n</a></span>
+						<span>&copy; <?php echo date( 'Y' ); ?> <a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php wp_kses_post( bloginfo( 'name' ) ); ?></a></span>
+						<span><?php printf( __( 'Theme by %s', 'sullivan' ), '<a href="http://www.andersnoren.se">' . __( 'Anders Norén', 'sullivan' ) . '</a>' ); ?></span>
 					</p>
 
 					<?php if ( has_nav_menu( 'social' ) ) : ?>
