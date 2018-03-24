@@ -72,12 +72,10 @@ if ( $related_posts ) : ?>
 					$image_url = sullivan_get_fallback_image_url();
 				}
 
-				$image_style_attribute = ' style="background-image: url( ' . esc_url( $image_url ) . ');"';
-
 				?>
 
 				<a <?php post_class( 'related-post' ); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-					<div class="bg-image related-post-image"<?php echo $image_style_attribute; ?>>
+					<div class="bg-image related-post-image" style="background-image: url( <?php echo esc_url( $image_url ); ?> );">
 						<img src="<?php echo $image_url; ?>" />
 					</div>
 					<?php the_title( '<h4 class="title"><span>', '</span></h4>' ); ?>
