@@ -6,6 +6,9 @@ $related_post_ids = array();
 $exclude = get_option( 'sticky_posts' );
 $exclude[] = $post->ID;
 
+// Sanitize the exclude values
+$exclude = array_map( 'esc_attr', $exclude );
+
 // Arguments used by all the queries below
 $base_args = array(
 	'orderby' 			=> 'rand',
