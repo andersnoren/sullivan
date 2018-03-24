@@ -643,8 +643,8 @@ if ( ! function_exists( 'sullivan_custom_logo' ) ) {
 
 			// For clarity
 			$logo_url = esc_url( $logo[0] );
-			$logo_width = $logo[1];
-			$logo_height = $logo[2];
+			$logo_width = esc_attr( $logo[1] );
+			$logo_height = esc_attr( $logo[2] );
 
 			// If the retina logo setting is active, reduce the width/height by half
 			if ( get_theme_mod( 'sullivan_retina_logo' ) ) {
@@ -655,7 +655,7 @@ if ( ! function_exists( 'sullivan_custom_logo' ) ) {
 			?>
 			
 			<a href="<?php echo esc_url( home_url() ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo-link">
-				<img src="<?php echo $logo_url; ?>" width="<?php echo $logo_width; ?>" height="<?php echo $logo_height; ?>" />
+				<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" />
 			</a>
 
 			<?php
