@@ -1437,7 +1437,8 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
 
 /* PayPal Specific */
 
-.payment_method_paypal img {
+.payment_method_paypal img,
+.payment_method_ppec_paypal img {
     position: absolute;
         right: 0;
         top: 50%;

@@ -83,6 +83,15 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.05 (2018-XX-XX)
+-------------------------
+- PayPal Express checkout styling
+- Bumbed version numbers in included WooCommerce files
+
+Version 1.04 (2018-03-25)
+-------------------------
+- Added extra check before calling is_plugin_active on theme activation
+
 Version 1.03 (2018-03-25)
 -------------------------
 - Added back customizer functionality removed in overzealous cleanup yesterday
