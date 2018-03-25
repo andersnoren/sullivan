@@ -89,6 +89,7 @@ Version 1.05 (2018-XX-XX)
 - Bumbed version numbers in included WooCommerce files
 - Added styling to links in entry-content
 - Site nav current menu item styling
+- Fixed capitalization of "Results x-xx of xx" in shop archive on mobile
 
 Version 1.04 (2018-03-25)
 -------------------------
