@@ -1556,9 +1556,6 @@ add_action( 'customize_register', array( 'sullivan_Customize', 'sullivan_registe
 // Enqueue customize controls javascript in Theme Customizer admin screen
 add_action( 'customize_controls_init', array( 'sullivan_Customize' , 'sullivan_customize_controls' ) );
 
-// Enqueue customize preview javascript in Theme Customizer admin screen
-add_action( 'customize_preview_init', array( 'sullivan_Customize' , 'sullivan_customize_preview' ) );
-
 
 
 
