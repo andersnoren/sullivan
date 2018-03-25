@@ -652,7 +652,7 @@ if ( sullivan_is_woocommerce_activated() ) {
 
 
 /* ---------------------------------------------------------------------------------------------
-   sullivan CUSTOM LOGO OUTPUT
+   SULLIVAN CUSTOM LOGO OUTPUT
    --------------------------------------------------------------------------------------------- */
 
 
@@ -1204,6 +1204,362 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 	add_filter( 'pre_get_posts', 'sullivan_search_results_filter' );
 
 }
+
+
+/* ---------------------------------------------------------------------------------------------
+   	CUSTOM CUSTOMIZER CONTROLS
+   --------------------------------------------------------------------------------------------- */
+
+
+   if ( class_exists( 'WP_Customize_Control' ) ) :
+
+	if ( ! class_exists( 'sullivan_Customize_Control_Seperator' ) ) :
+
+		// Custom Customizer control that outputs an HR to seperate other controls
+		class Sullivan_Customize_Control_Seperator extends WP_Customize_Control {
+		
+			public function render_content() {
+				echo '<hr class="sullivan-customizer-seperator" />';
+			}
+
+		}
+
+	endif;
+
+	if ( ! class_exists( 'sullivan_Customize_Control_Group_Title' ) ) :
+
+		// Custom Customizer control that outputs an HR to seperate other controls
+		class Sullivan_Customize_Control_Group_Title extends WP_Customize_Control {
+
+			// Whitelist content parameter
+			public $content = '';
+
+			public function render_content() {
+				if ( isset( $this->content ) ) {
+					echo '<h2 style="margin: 0 0 5px;">' . esc_attr( $this->content ) . '</h2>';
+				}
+			}
+
+		}
+
+	endif;
+
+	if ( ! class_exists( 'sullivan_Customize_Control_Add_Slide' ) ) :
+
+		// Custom Customizer control that outputs a button that increments the max_slides number input
+		class Sullivan_Customize_Control_Add_Slide extends WP_Customize_Control {
+
+			// Whitelist content parameter
+			public $content = '';
+
+			public function render_content() {
+				if ( isset( $this->content ) ) {
+					echo '<a href="#" class="button button-primary" id="button-add-slide" data-slideshow="' . esc_attr( $this->content ) . '">' . __( 'Add slide', 'sullivan' ) . '</a>';
+				}
+			}
+
+		}
+
+	endif;
+
+	if ( ! class_exists( 'sullivan_Customize_Control_Checkbox_Multiple' ) ) :
+
+		// Custom Customizer control that outputs a specified number of checkboxes
+		// Based on a solution by Justin Tadlock: http://justintadlock.com/archives/2015/05/26/multiple-checkbox-customizer-control
+		class Sullivan_Customize_Control_Checkbox_Multiple extends WP_Customize_Control {
+
+			public $type = 'checkbox-multiple';
+
+			public function render_content() {
+
+				if ( empty( $this->choices ) )
+					return;
+					
+				if ( ! empty( $this->label ) ) : ?>
+					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+				<?php endif;
+				
+				if ( ! empty( $this->description ) ) : ?>
+					<span class="description customize-control-description"><?php echo esc_attr( $this->description ); ?></span>
+				<?php endif;
+				
+				$multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
+		
+				<ul>
+					<?php foreach ( $this->choices as $value => $label ) : ?>
+		
+						<li>
+							<label>
+								<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ) ); ?> /> 
+								<?php echo esc_html( $label ); ?>
+							</label>
+						</li>
+		
+					<?php endforeach; ?>
+				</ul>
+		
+				<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( implode( ',', $multi_values ) ); ?>" />
+				<?php 
+			}
+		}
+
+	endif;
+
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   CUSTOMIZER SETTINGS
+   --------------------------------------------------------------------------------------------- */
+
+
+class Sullivan_Customize {
+
+	public static function sullivan_register( $wp_customize ) {
+
+
+		/* Theme Options section ----------------------------- */
+
+
+		$wp_customize->add_section( 'sullivan_options', array(
+			'title' 		=> __( 'Theme Options', 'sullivan' ),
+			'priority' 		=> 35,
+			'capability' 	=> 'edit_theme_options',
+			'description' 	=> __( 'Customize the theme settings for Sullivan.', 'sullivan' ),
+		) );
+
+		
+		/* Sticky the site navigation ----------------------------- */
+
+
+		$wp_customize->add_setting( 'sullivan_sticky_nav', array(
+			'capability' 		=> 'edit_theme_options',
+			'sanitize_callback' => 'sullivan_sanitize_checkbox'
+		) );
+
+		$wp_customize->add_control( 'sullivan_sticky_nav', array(
+			'type' 			=> 'checkbox',
+			'section' 		=> 'sullivan_options',
+			'label' 		=> __( 'Sticky navigation', 'sullivan' ),
+			'description' 	=> __( 'Keep the site navigation stuck to the top of the window when the visitor has scrolled past it.', 'sullivan' ),
+		) );
+
+
+		/* 2X Header Logo ----------------------------- */
+
+
+		$wp_customize->add_setting( 'sullivan_retina_logo', array(
+			'capability' 		=> 'edit_theme_options',
+			'sanitize_callback' => 'sullivan_sanitize_checkbox',
+			'transport'			=> 'postMessage'
+		) );
+
+		$wp_customize->add_control( 'sullivan_retina_logo', array(
+			'type' 			=> 'checkbox',
+			'section' 		=> 'title_tagline',
+			'priority'		=> 10,
+			'label' 		=> __( 'Retina logo', 'sullivan' ),
+			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'sullivan' ),
+		) );
+
+		// Update logo retina setting with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'sullivan_retina_logo', array(
+			'selector' 			=> '.header-titles .custom-logo-link',
+			'settings' 			=> array( 'sullivan_retina_logo' ),
+			'render_callback' 	=> function(){
+				sullivan_custom_logo();
+			},
+		) );
+
+
+		/* Fallback image setting ----------------------------- */
+
+
+		// Seperator before fallback image
+		$wp_customize->add_setting( 'sullivan_fallback_image_hr', array(
+			'sanitize_callback' => 'esc_attr',
+		) );
+
+		$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_fallback_image_hr', array(
+			'section' 	=> 'sullivan_options',
+		) ) );
+
+
+		// Fallback image setting
+		$wp_customize->add_setting( 'sullivan_fallback_image', array(
+			'sanitize_callback' => 'sanitize_text_field',
+			'transport'			=> 'postMessage'
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'sullivan_fallback_image', array(
+			'label'			=> __( 'Fallback image', 'sullivan' ),
+			'description'	=> __( 'The selected image will be used when a post or product is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'sullivan' ),
+			'mime_type'		=> 'image',
+			'section' 		=> 'sullivan_options',
+		) ) );
+
+
+		/* Search Post Type Filter ----------------------------- */
+
+
+		// Get post types that are public, and visible in search
+		$post_types = get_post_types( array(
+			'public'				=> true,
+			'exclude_from_search'	=> false,
+		) );
+
+		$post_types_customizer_values = array();
+
+		// Build an array of post types, with key: name and value: label
+		foreach( $post_types as $post_type ) {
+			$post_type_obj = get_post_type_object( $post_type );
+			$post_type_singular_label = $post_type_obj->labels->singular_name;
+			$post_types_customizer_values[$post_type] = $post_type_singular_label;
+		}
+
+		// Seperator before post types
+		$wp_customize->add_setting( 'sullivan_post_types_hr', array(
+			'sanitize_callback'	=> 'esc_attr',
+		) );
+
+		$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_post_types_hr', array(
+			'section' 	=> 'sullivan_options',
+		) ) );
+
+		// Default post types
+		$defaults = array( 'post', 'page' );
+
+		// Add products, if WooCommerce is active
+		if ( sullivan_is_woocommerce_activated() ) {
+			$defaults[] = 'product';
+		}
+
+		// Add multiple checkbox setting for post types
+		$wp_customize->add_setting( 'sullivan_filter_search_post_types', array(
+			'default'           => $defaults,
+			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
+		) );
+
+		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_filter_search_post_types', array(
+			'section' 		=> 'sullivan_options',
+			'label'   		=> __( 'Post types to include in search:', 'sullivan' ),
+			'description'	=> __( 'If you do not select any post types, search results will always display as "No results found".', 'sullivan' ),
+			'choices' 		=> $post_types_customizer_values 
+		) ) );
+
+
+		/* Post Meta Setting ----------------------------- */
+
+
+		// Seperator before post meta
+		$wp_customize->add_setting( 'sullivan_fallback_image_hr', array(
+			'sanitize_callback' => 'esc_attr',
+		) );
+
+		$wp_customize->add_control( new Sullivan_Customize_Control_Seperator( $wp_customize, 'sullivan_post_meta_hr', array(
+			'section' 	=> 'sullivan_options',
+		) ) );
+
+
+		// Post Meta Top Setting
+		$wp_customize->add_setting( 'sullivan_post_meta_top', array(
+			'default'           => array( 'post-date', 'sticky', 'edit-link' ),
+			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
+		) );
+
+		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_post_meta_top', array(
+			'section' 		=> 'sullivan_options',
+			'label'   		=> __( 'Post meta top displays:', 'sullivan' ),
+			'description'	=> __( 'Shown above the post titles in the blog.', 'sullivan' ),
+ 			'choices' 		=> array(
+				'author'		=> __( 'Author', 'sullivan' ),
+				'comments'		=> __( 'Comments', 'sullivan' ),
+				'edit-link'		=> __( 'Edit Link (for logged in users)', 'sullivan' ),
+				'post-date'		=> __( 'Post date', 'sullivan' ),
+				'sticky'		=> __( 'Sticky status', 'sullivan' ),
+			) 
+		) ) );
+
+
+		// Post Meta Bottom Setting
+		$wp_customize->add_setting( 'sullivan_post_meta_bottom', array(
+			'default'           => array( 'author', 'categories', 'comments' ),
+			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
+		) );
+
+		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_post_meta_bottom', array(
+			'section' 		=> 'sullivan_options',
+			'label'   		=> __( 'Post meta bottom displays:', 'sullivan' ),
+			'description'	=> __( 'Shown next to the post content in the blog.', 'sullivan' ),
+			'choices' 		=> array(
+				'author'		=> __( 'Author', 'sullivan' ),
+				'categories'	=> __( 'Categories', 'sullivan' ),
+				'comments'		=> __( 'Comments', 'sullivan' ),
+				'edit-link'		=> __( 'Edit Link (for logged in users)', 'sullivan' ),
+				'post-date'		=> __( 'Post date', 'sullivan' ),
+				'sticky'		=> __( 'Sticky status', 'sullivan' ),
+				'tags'			=> __( 'Tags', 'sullivan' ),
+			) 
+		) ) );
+
+
+		/* Built-in controls ----------------------------- */
+
+
+		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
+		$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
+
+		// Update blogname with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'sullivan_header_site_title', array(
+			'selector' => '.header-titles .site-title .site-name',
+			'settings' => array( 'blogname' ),
+			'render_callback' => function() {
+				return get_bloginfo( 'name', 'display' );
+			},
+		) );
+
+		// Update blogdescription with selective refresh
+		$wp_customize->selective_refresh->add_partial( 'sullivan_header_site_description', array(
+			'selector' => '.header-titles .site-description',
+			'settings' => array( 'blogdescription' ),
+			'render_callback' => function() {
+				return get_bloginfo( 'description', 'display' );
+			},
+		) );
+		
+		
+		/* Sanitation functions ----------------------------- */
+
+		// Sanitize boolean for checkbox
+		function sullivan_sanitize_checkbox( $checked ) {
+			return ( ( isset( $checked ) && true == $checked ) ? true : false );
+		}
+
+		// Sanitize booleans for multiple checkboxes
+		function sullivan_sanitize_multiple_checkboxes( $values ) {
+			$multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
+			return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
+		}
+		
+	}
+
+	// Initiate the customize controls js
+	public static function sullivan_customize_controls() {
+		wp_enqueue_script( 'sullivan-customize-controls', get_template_directory_uri() . '/assets/js/customize-controls.js', array(  'jquery', 'customize-controls' ), '', true );
+	}
+
+}
+
+// Setup the Theme Customizer settings and controls
+add_action( 'customize_register', array( 'sullivan_Customize', 'sullivan_register' ) );
+
+// Enqueue customize controls javascript in Theme Customizer admin screen
+add_action( 'customize_controls_init', array( 'sullivan_Customize' , 'sullivan_customize_controls' ) );
+
+// Enqueue customize preview javascript in Theme Customizer admin screen
+add_action( 'customize_preview_init', array( 'sullivan_Customize' , 'sullivan_customize_preview' ) );
+
+
 
 
 ?>
