@@ -87,6 +87,8 @@ Version 1.05 (2018-XX-XX)
 -------------------------
 - PayPal Express checkout styling
 - Bumbed version numbers in included WooCommerce files
+- Added styling to links in entry-content
+- Site nav current menu item styling
 
 Version 1.04 (2018-03-25)
 -------------------------

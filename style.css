@@ -892,6 +892,10 @@ img {
 	padding: 24px 25px;
 }
 
+.site-nav .current-menu-item > a {
+	text-decoration: underline;
+}
+
 .site-nav li.menu-item-has-children > a {
 	padding-right: 42px;
 }
@@ -1720,6 +1724,14 @@ hr {
 .entry-content h5 + figure,
 .entry-content h6 + figure {
 	margin-top: 0;
+}
+
+.entry-content a {
+	text-decoration: underline;
+}
+
+.entry-content .more-link {
+	text-decoration: none;
 }
 
 .entry-content p {
