@@ -2455,7 +2455,15 @@ h3 + .woocommerce-address-fields {
 
     .woocommerce-result-count .prefix {
         display: none;
-    }
+	}
+
+	.woocommerce-result-count .rest {
+		display: block;
+	}
+	
+	.woocommerce-result-count .rest:first-letter {
+		text-transform: uppercase;
+	}
 
     .onsale {
         font-size: 12px;
