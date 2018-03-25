@@ -13,7 +13,17 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 1. Upload the theme
 2. Activate the theme
 
-All theme specific options are handled through the WordPress Customizer.
+If you want to use the slideshow functionality, you also need to install and activate the Sullivan Compatibility Plugin. It's available for free on the WordPress.org plugin directory, or through the Plugins page in the WordPress dashboard.
+
+
+== Slideshows ==
+
+1. Install and activate the Sullivan Compatibility Plugin, if you haven't already.
+2. Click Slideshows > Add New in the admin menu.
+3. Fill in the fields, select a post thumbnail and select which of the slideshow locations you want the slide to be displayed in. The shop location is only visible if you have WooCommerce installed.
+4. Save the slide.
+
+The slide will now be displayed in the slideshow location you selected.
 
 
 == Full Width Page Template ==
@@ -73,7 +83,7 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
-Version 1.02 (2018-02-13)
+Version 1.02 (2018-03-24)
 -------------------------
 - Added missing overflow: auto on mobile menu
 - Fixed incorrect theme_location check in mobile menu
@@ -85,6 +95,7 @@ Version 1.02 (2018-02-13)
 - Added flexslider to readme licenses, change to non-minified version
 - Updated Google Fonts font enqueuing method to match TwentySeventeen
 - Added URLs to specific images used in screenshot.png
+- Updated theme description and the readme with details about the compatibility plugin.
 
 Version 1.01 (2018-01-22)
 -------------------------
