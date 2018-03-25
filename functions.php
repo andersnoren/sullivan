@@ -180,6 +180,10 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) {
 
 function sullivan_theme_activation_notice() {
 
+	if ( ! function_exists( 'is_plugin_active' ) ) {
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	}
+
 	// If Sullivan compat is already active, don't show the notice
 	if ( is_plugin_active( 'sullivan-compat/sullivan-compat.php' ) ) {
 		return;
