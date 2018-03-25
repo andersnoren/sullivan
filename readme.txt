@@ -83,6 +83,11 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.03 (2018-03-25)
+-------------------------
+- Added back customizer functionality removed in overzealous cleanup yesterday
+- Removed more stuff related to the old slideshow solution in the javascript customizer files
+
 Version 1.02 (2018-03-24)
 -------------------------
 - Added missing overflow: auto on mobile menu
