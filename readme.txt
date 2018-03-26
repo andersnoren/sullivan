@@ -83,7 +83,7 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
-Version 1.05 (2018-XX-XX)
+Version 1.05 (2018-03-26)
 -------------------------
 - PayPal Express checkout styling
 - Bumbed version numbers in included WooCommerce files
