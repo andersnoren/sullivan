@@ -34,7 +34,7 @@
                     // Don't show the header on the login form page
                     if ( ! $showing_login_form ) : ?>
 
-                        <header class="section-inner <?php echo $section_inner_width; ?> max-percentage page-header text-center">
+                        <header class="section-inner <?php echo esc_attr( $section_inner_width ); ?> max-percentage page-header text-center">
                         
                             <?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 

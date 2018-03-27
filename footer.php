@@ -14,7 +14,7 @@
 								
 									if ( $i == 2 ) echo '<div class="secondary-widgets">'; ?>
 						
-									<div class="column column-<?php echo $i; ?>">
+									<div class="column column-<?php echo absint( $i ); ?>">
 									
 										<div class="widgets">
 								
@@ -22,7 +22,7 @@
 																
 										</div><!-- .widgets -->
 										
-									</div><!-- .column-<?php echo $i; ?> -->
+									</div><!-- .column-<?php echo absint( $i ); ?> -->
 									
 									<?php 
 								

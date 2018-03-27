@@ -34,7 +34,7 @@ if ( $wp_query->max_num_pages > 1 ) :
 		if ( ! in_array( 1, $links ) ) {
 			$class = 1 == $paged ? ' active' : '';
 	
-			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
+			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", esc_attr( $class ), esc_url( get_pagenum_link( 1 ) ), '1' );
 	
 			if ( ! in_array( 2, $links ) ) {
 				echo '<li>...</li>';
@@ -45,7 +45,7 @@ if ( $wp_query->max_num_pages > 1 ) :
 		sort( $links );
 		foreach ( (array) $links as $link ) {
 			$class = $paged == $link ? ' active' : '';
-			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
+			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", esc_attr( $class ), esc_url( get_pagenum_link( $link ) ), $link );
 		}
 	
 		// Link to last page, plus ellipses if necessary
@@ -54,7 +54,7 @@ if ( $wp_query->max_num_pages > 1 ) :
 				echo '<li class="number"><span>...</span></li>' . "\n";
 	
 			$class = $paged == $max ? ' active' : '';
-			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
+			printf( '<li class="number%s"><a href="%s">%s</a></li>' . "\n", esc_attr( $class ), esc_url( get_pagenum_link( $max ) ), $max );
 		}
 					
 		if ( get_next_posts_link() ) echo '<li class="next">' . get_next_posts_link( __( 'Next', 'sullivan' ) ) . '</li>'; 

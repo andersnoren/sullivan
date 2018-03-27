@@ -75,7 +75,7 @@
 			
 			<?php endif;
 
-			if ( sullivan_is_woocommerce_activated() ) {
+			if ( sullivan_is_woocommerce_activated() ) :
 
 				$logged_in = is_user_logged_in(); ?>
 
@@ -89,7 +89,9 @@
 							<a class="register" href="<?php echo add_query_arg( 'form', 'registration', esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Register', 'sullivan' ); ?></a>
 						<?php endif; ?>
 
-					<?php else : ?>
+					<?php else : 
+
+						$account_url = esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>
 
 						<a class="my-account" href="<?php echo $account_url; ?>"><?php _e( 'My account', 'sullivan' ); ?></a>
 						<a class="sign-out" href="<?php echo esc_url( wp_logout_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Sign out', 'sullivan' ); ?></a>
@@ -98,7 +100,7 @@
 
 				</div><!-- .mobile-account -->
 
-			<?php } ?>
+			<?php endif; ?>
 
 		</div><!-- .mobile-menu-wrapper -->
 
@@ -128,7 +130,7 @@
 
 							sullivan_custom_logo();
 							
-						elseif ( is_singular() ) : ?>
+						elseif ( is_front_page() || is_home() ) : ?>
 
 							<h1 class="site-title"><a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></h1>
 						
@@ -140,7 +142,7 @@
 						
 						if ( get_bloginfo( 'description' ) ) : ?>
 
-							<p class="site-description"><?php bloginfo( 'description' ); ?></p>
+							<p class="site-description"><?php echo wp_kses_post( get_bloginfo( 'description' ) ); ?></p>
 
 						<?php endif;
 						

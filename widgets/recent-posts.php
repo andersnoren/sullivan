@@ -108,8 +108,8 @@ class sullivan_recent_posts extends WP_Widget {
 		if ( ! isset( $instance['number_of_posts'] ) ) $instance['number_of_posts'] = 5;
 	
 		// Get the options into variables, escaping html characters on the way
-		$widget_title = wp_kses_post( $instance['widget_title'] );
-		$number_of_posts = esc_attr( $instance['number_of_posts'] );
+		$widget_title = $instance['widget_title'];
+		$number_of_posts = $instance['number_of_posts'];
 		?>
 		
 		<p>
@@ -119,7 +119,7 @@ class sullivan_recent_posts extends WP_Widget {
 						
 		<p>
 			<label for="<?php echo $this->get_field_id( 'number_of_posts' ); ?>"><?php _e( 'Number of posts to display', 'sullivan' ); ?>:
-			<input id="<?php echo $this->get_field_id( 'number_of_posts' ); ?>" name="<?php echo $this->get_field_name( 'number_of_posts' ); ?>" type="text" class="widefat" value="<?php echo esc_attr($number_of_posts); ?>" /></label>
+			<input id="<?php echo $this->get_field_id( 'number_of_posts' ); ?>" name="<?php echo $this->get_field_name( 'number_of_posts' ); ?>" type="text" class="widefat" value="<?php echo esc_attr( $number_of_posts ); ?>" /></label>
 			<small>(<?php _e( 'Defaults to 5 if empty', 'sullivan' ); ?>)</small>
 		</p>
 		

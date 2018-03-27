@@ -48,11 +48,11 @@ The slide will now be displayed in the slideshow location you selected.
 == Licenses ==
 
 Archivo font
-License: SIL Open Font License, 1.1
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
 Source: https://fonts.google.com/specimen/Archivo
 
 Charis SIL font
-License: SIL Open Font License, 1.1
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
 Source: https://software.sil.org/charis/
 
 Images in screenshot.png from Pexels
@@ -65,15 +65,15 @@ Source: https://www.pexels.com/
 - Product image #4: https://www.pexels.com/photo/round-silver-colored-analog-watch-beside-compass-691640/
 
 FontAwesome Icons
-License: SIL Open Font License, 1.1,
+License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
 Source: https://www.fontawesome.io
 
 FontAwesome Code
-License: MIT License,
+License: MIT License, https://opensource.org/licenses/MIT
 Source: https://www.fontawesome.io
 
 Flexslider
-License: GNU General Public License v2.0,
+License: GNU General Public License v2.0, https://github.com/woocommerce/FlexSlider/blob/master/LICENSE.md
 Source: https://github.com/woocommerce/FlexSlider
 
 Ion Icons
@@ -82,6 +82,12 @@ Source: http://ionicons.com/
 
 
 == Changelog ==
+
+Version 1.06 (2018-03-27)
+-------------------------
+- Updated licenses in readme
+- Updated enqueue name for Flexslider
+- Checked all files for unescaped variables
 
 Version 1.05 (2018-03-26)
 -------------------------

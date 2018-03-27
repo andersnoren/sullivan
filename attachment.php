@@ -30,9 +30,7 @@
 
                     $image = wp_get_attachment_image_src( get_the_ID(), 'post-thumbnail' );
                     
-                    if ( $image ) : 
-                    
-                        ?>
+                    if ( $image ) :  ?>
 
                         <div class="featured-media section-inner medium">
 

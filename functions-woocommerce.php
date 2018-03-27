@@ -598,7 +598,7 @@ if ( ! function_exists( 'sullivan_woo_product_archive_image' ) ) {
 
             ?>
 
-            <figure class="page-hero bg-image bg-attach" style="background-image: url( <?php echo $image_url; ?> );"></figure><!-- .page-hero -->
+            <figure class="page-hero bg-image bg-attach" style="background-image: url( <?php echo esc_url( $image_url ); ?> );"></figure><!-- .page-hero -->
 
             <?php
         }
@@ -721,7 +721,7 @@ if ( ! function_exists( 'sullivan_woo_account_modal' ) ) {
                             $classes = is_wc_endpoint_url( $link['endpoint'] ) ? 'active ' : '';
                             $classes .= $link['endpoint'];
                             ?>
-                            <a<?php if ( $classes ) echo ' class="' . $classes . '"'; ?> href="<?php echo get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) . $link['endpoint'] . '/'; ?>"><?php echo $link['label']; ?></a>
+                            <a<?php if ( $classes ) echo ' class="' . $classes . '"'; ?> href="<?php echo get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) . $link['endpoint'] . '/'; ?>"><?php echo wp_kses_post( $link['label'] ); ?></a>
                         <?php endforeach; ?>
                     </nav>
 

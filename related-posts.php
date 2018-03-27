@@ -79,7 +79,7 @@ if ( $related_posts ) : ?>
 
 				<a <?php post_class( 'related-post' ); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 					<div class="bg-image related-post-image" style="background-image: url( <?php echo esc_url( $image_url ); ?> );">
-						<img src="<?php echo $image_url; ?>" />
+						<img src="<?php echo esc_url( $image_url ); ?>" />
 					</div>
 					<?php the_title( '<h4 class="title"><span>', '</span></h4>' ); ?>
 				</a>

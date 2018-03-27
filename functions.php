@@ -151,8 +151,8 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) {
 
 	function sullivan_enqueue_scripts() {
 
-		wp_register_script( 'sullivan_flexslider', get_template_directory_uri() . '/assets/js/jquery.flexslider.js', '', true );
-		wp_enqueue_script( 'sullivan_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'sullivan_flexslider' ), '', true );
+		wp_register_script( 'flexslider', get_template_directory_uri() . '/assets/js/jquery.flexslider.js', '', true );
+		wp_enqueue_script( 'sullivan_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'flexslider' ), '', true );
 
 		if ( ( ! is_admin() ) && is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
@@ -474,11 +474,11 @@ if ( ! function_exists( 'sullivan_post_gallery' ) ) {
 									
 								<li class="slide">
 
-									<img src="<?php echo $image_url; ?>">
+									<img src="<?php echo esc_url( $image_url ); ?>">
 
 									<?php if ( $image_caption ) : ?>
 
-										<p class="slider-caption"><?php echo $image_caption; ?></p>
+										<p class="slider-caption"><?php echo esc_html( $image_caption ); ?></p>
 
 									<?php endif; ?>
 									
@@ -794,7 +794,7 @@ if ( ! function_exists( 'sullivan_header_search' ) ) {
 			<form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'sullivan' ); ?></span>
 				<label for="header-search-field"></label>
-				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'sullivan' ); ?>" value="<?php echo wp_kses_post( get_search_query() ); ?>" name="s" autocomplete="off" />
+				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'sullivan' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" autocomplete="off" />
 				
 				<?php
 
@@ -878,7 +878,7 @@ function sullivan_ajax_search() {
 							$image_url = $image ? esc_url( $image[0] ) : sullivan_get_fallback_image_url();
 							?>
 								
-							<div class="post-image" style="background-image: url( <?php echo $image_url; ?> );"></div>
+							<div class="post-image" style="background-image: url( <?php echo esc_url( $image_url ); ?> );"></div>
 							
 							<div class="inner">
 											
@@ -938,7 +938,6 @@ add_action( 'wp_ajax_ajax_search_results', 'sullivan_ajax_search' );
 
 class Sullivan_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
 	
-
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
@@ -1559,8 +1558,5 @@ add_action( 'customize_register', array( 'sullivan_Customize', 'sullivan_registe
 
 // Enqueue customize controls javascript in Theme Customizer admin screen
 add_action( 'customize_controls_init', array( 'sullivan_Customize' , 'sullivan_customize_controls' ) );
-
-
-
 
 ?>
