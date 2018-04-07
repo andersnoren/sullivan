@@ -83,6 +83,10 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.07 (2018-04-07)
+-------------------------
+- Version bump for the benefit of the WordPress theme uploader
+
 Version 1.06 (2018-03-27)
 -------------------------
 - Updated licenses in readme
