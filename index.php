@@ -1,19 +1,19 @@
 <?php get_header();
 
 global $paged;
-$paged = $paged ? $paged : 1;
+$paged_val = $paged ? $paged : 1;
 
 // Show the hero slider on the first page of the blog
-if ( is_home() && $paged == 1 ) sullivan_hero_slider( 'blog' ); ?>
+if ( is_home() && $paged_val == 1 ) sullivan_hero_slider( 'blog' ); ?>
 
 <main id="site-content">
 
 	<div class="section-inner split">
 
 		<div class="content">
-			
+
 			<?php if ( is_archive() ) : ?>
-			
+
 				<header class="archive-header">
 					<div>
 						<h6 class="subheading"><?php echo sullivan_get_archive_title_prefix(); ?></h6>
@@ -21,9 +21,9 @@ if ( is_home() && $paged == 1 ) sullivan_hero_slider( 'blog' ); ?>
 						<?php the_archive_description(); ?>
 					</div>
 				</header>
-			
+
 			<?php endif;
-			
+
 			if ( have_posts() ) : ?>
 
 				<div class="posts" id="posts">
@@ -37,13 +37,13 @@ if ( is_home() && $paged == 1 ) sullivan_hero_slider( 'blog' ); ?>
 				</div><!-- .posts -->
 
 				<?php get_template_part( 'pagination' ); ?>
-			
+
 			<?php endif; ?>
 
 		</div><!-- .content -->
 
 		<?php get_sidebar(); ?>
-	
+
 	</div><!-- .section-inner -->
 
 </main>

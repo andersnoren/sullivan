@@ -1,48 +1,49 @@
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-	
+
 	<header class="post-header">
 
-		<?php 
-		
+		<?php
+
 		// Get the post meta top values
-		$post_meta_top = get_theme_mod( 'sullivan_post_meta_top' ); 
+		$post_meta_top = get_theme_mod( 'sullivan_post_meta_top' );
 
 		// If it's empty, use the default set of post meta
 		if ( ! $post_meta_top ) {
 			$post_meta_top = array(
 				'post-date',
 				'sticky',
-				'edit-link'
+				'edit-link',
 			);
 		}
-		
+
 		// If it has the value empty, it's explicitly empty and the default post meta shouldn't be output
 		if ( $post_meta_top && ! in_array( 'empty', $post_meta_top ) ) : ?>
 
 			<p class="header-meta subheading">
 
-				<?php 
-				
+				<?php
+
 				// Post date
 				if ( in_array( 'post-date', $post_meta_top ) ) : ?>
 					<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
 				<?php endif;
-				
+
 				// Post author
-				if ( in_array( 'author', $post_meta_top ) ) : ?>
-					<span class="post-author"><?php printf( __( 'By %s', 'sullivan' ), '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . wp_kses_post( get_the_author_meta( 'display_name' ) ) . '</a>' ); ?></span>
+				if ( in_array( 'author', $post_meta_top ) ) :
+					// Translators: %s = author name with link ?>
+					<span class="post-author"><?php printf( _x( 'By %s', 'Translators: %s = author name with link', 'sullivan' ), '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . wp_kses_post( get_the_author_meta( 'display_name' ) ) . '</a>' ); ?></span>
 				<?php endif;
-				
+
 				// Comments
-				if ( in_array( 'comments', $post_meta_top ) && comments_open() ) : ?> 
+				if ( in_array( 'comments', $post_meta_top ) && comments_open() ) : ?>
 					<span><?php comments_popup_link(); ?></span>
 				<?php endif;
-				
+
 				// Sticky
 				if ( in_array( 'sticky', $post_meta_top ) && is_sticky() ) : ?>
 					<span class="sticky-post"><?php _e( 'Sticky', 'sullivan' ); ?></span>
 				<?php endif;
-				
+
 				// Edit link
 				if ( in_array( 'edit-link', $post_meta_top ) && current_user_can( 'edit_post', get_the_id() ) ) : ?>
 					<span class="edit-post"><?php edit_post_link( __( 'Edit post', 'sullivan' ) ); ?></span>
@@ -50,19 +51,19 @@
 
 			</p><!-- .post-top-meta -->
 
-			<?php 
+			<?php
 		endif;
-		
+
 		if ( get_the_title() ) :
 			if ( ! is_single() ) : ?>
 				<h1 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h1>
-			<?php 
+			<?php
 			else :
 				the_title( '<h1 class="post-title">', '</h1>' );
-			endif; 
-		endif; 
+			endif;
+		endif;
 		?>
-	
+
 	</header><!-- .post-header -->
 
 	<?php
@@ -74,12 +75,11 @@
 
 		<div class="featured-media">
 
-			<?php 
-			
+			<?php
+
 			// Either show the gallery
 			if ( $show_gallery ) {
 				sullivan_post_gallery( $post->ID );
-			
 			// Or display the post thumbnail
 			} else {
 				the_post_thumbnail();
@@ -100,27 +100,27 @@
 
 		<?php endif; ?>
 
-		<?php 
-		
+		<?php
+
 		// Get the post meta top values
-		$post_meta_bottom = get_theme_mod( 'sullivan_post_meta_bottom' ); 
+		$post_meta_bottom = get_theme_mod( 'sullivan_post_meta_bottom' );
 
 		// If it's empty, use the default set of post meta
 		if ( ! $post_meta_bottom ) {
 			$post_meta_bottom = array(
 				'author',
 				'categories',
-				'comments-link'
+				'comments-link',
 			);
 		}
-		
+
 		// If it has the value empty, it's explicitly empty and the default post meta shouldn't be output
 		if ( $post_meta_bottom && ! in_array( 'empty', $post_meta_bottom ) ) : ?>
 
 			<div class="post-meta top">
 
-				<?php 
-				
+				<?php
+
 				// Author
 				if ( in_array( 'author', $post_meta_bottom ) ) : ?>
 					<p class="post-author">
@@ -128,7 +128,7 @@
 						<span class="meta-title mobile-meta-title subheading"><?php _e( 'By', 'sullivan' ); ?> </span>
 						<span class="meta-content"><?php the_author_posts_link(); ?></span>
 					</p>
-					<?php 
+					<?php
 				endif;
 
 
@@ -142,7 +142,7 @@
 				endif;
 
 				// Categories
-				if ( in_array( 'tags', $post_meta_bottom ) && has_tag() ) : ?>	
+				if ( in_array( 'tags', $post_meta_bottom ) && has_tag() ) : ?>
 					<p class="post-tags">
 						<span class="meta-title subheading"><?php _e( 'Tagged with', 'sullivan' ); ?></span>
 						<span class="meta-content"><?php the_tags( '', ', ', '' ); ?></span>
@@ -156,9 +156,9 @@
 						<span class="meta-title subheading"><?php _e( 'Discussion', 'sullivan' ); ?></span>
 						<span class="meta-content"><?php comments_popup_link(); ?></span>
 					</p>
-					<?php 
-				endif; 
-				
+					<?php
+				endif;
+
 				// Sticky
 				if ( in_array( 'sticky', $post_meta_bottom ) && is_sticky() ) : ?>
 					<p class="sticky-post">
@@ -166,13 +166,13 @@
 						<span class="meta-content"><?php _e( 'Sticky post', 'sullivan' ); ?></span>
 					</p>
 				<?php endif;
-				
+
 				// Edit link
 				if ( in_array( 'edit-link', $post_meta_bottom ) && current_user_can( 'edit_post', get_the_id() ) ) : ?>
 					<p class="edit-post">
 						<span class="meta-title subheading"><?php _e( 'Administration', 'sullivan' ); ?></span>
 						<span class="meta-content">
-							<?php 
+							<?php
 							// Make sure we display something in the customizer, as edit_post_link() doesn't output anything there
 							if ( is_customize_preview() ) {
 								_e( 'Edit post', 'sullivan' );
@@ -208,7 +208,7 @@
 	</div><!-- .post-inner -->
 
 	<?php if ( is_single() ) :
-			
+
 		$tags = get_the_tags(); ?>
 
 		<div class="post-inner compensate">
@@ -231,7 +231,7 @@
 
 			</div>
 
-			<?php 
+			<?php
 			$next_post = get_next_post();
 			$prev_post = get_previous_post();
 
@@ -239,18 +239,26 @@
 
 				<div class="single-pagination<?php if ( ! $next_post || ! $prev_post ) echo ' only-one'; ?>">
 
-					<?php if ( $next_post ) : ?>
+					<?php if ( $next_post ) :
+						$next_post_title_args = array(
+							'post' => $next_post->ID,
+						);
+						?>
 
-						<a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>" title="<?php the_title_attribute( array( 'post' => $next_post->ID ) ); ?>">
+						<a class="next-post" href="<?php echo esc_url( get_permalink( $next_post->ID ) ); ?>" title="<?php the_title_attribute( $next_post_title_args ); ?>">
 							<span class="subheading"><?php _e( 'Next post', 'sullivan' ); ?></span>
 							<span class="title"><?php echo wp_kses_post( get_the_title( $next_post->ID ) ); ?></span>
 						</a>
 
-					<?php endif; ?>
+					<?php endif;
 
-					<?php if ( $prev_post ) : ?>
+					if ( $prev_post ) :
+						$prev_post_title_args = array(
+							'post' => $prev_post->ID,
+						);
+						?>
 
-						<a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>" title="<?php the_title_attribute( array( 'post' => $prev_post->ID ) ); ?>">
+						<a class="previous-post" href="<?php echo esc_url( get_permalink( $prev_post->ID ) ); ?>" title="<?php the_title_attribute( $prev_post_title_args ); ?>">
 							<span class="subheading"><?php _e( 'Previous post', 'sullivan' ); ?></span>
 							<span class="title"><?php echo wp_kses_post( get_the_title( $prev_post->ID ) ); ?></span>
 						</a>
@@ -264,18 +272,18 @@
 		</div><!-- .post-inner -->
 
 		<?php
-		
+
 		// If comments are open, or there are at least one comment
 		if ( get_comments_number() || comments_open() ) : ?>
-		
+
 			<div class="hanging-titles">
 				<?php comments_template(); ?>
 			</div>
-		
-		<?php endif; 
-		
+
+		<?php endif;
+
 		// Display related posts
-		get_template_part( 'related-posts' ); 
+		get_template_part( 'related-posts' );
 
 	endif; ?>
 

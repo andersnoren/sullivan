@@ -1,27 +1,27 @@
 <li <?php post_class( 'content-search' ); ?> id="post-<?php the_ID(); ?>">
 
-    <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-	
-        <?php
+	<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 
-        if ( sullivan_is_woocommerce_activated() ) {
-            $image_size = apply_filters( 'single_product_archive_thumbnail_size', 'shop_catalog' );
-        } else {
-            $image_size = 'post-thumbnail';
-        }
+		<?php
 
-        $image_url = get_the_post_thumbnail_url( $image_size ) ?: sullivan_get_fallback_image_url(); ?>
+		if ( sullivan_is_woocommerce_activated() ) {
+			$image_size = apply_filters( 'single_product_archive_thumbnail_size', 'shop_catalog' );
+		} else {
+			$image_size = 'post-thumbnail';
+		}
 
-        <img src="<?php echo esc_url( $image_url ); ?>" />
+		$image_url = get_the_post_thumbnail_url( $image_size ) ? get_the_post_thumbnail_url( $image_size ) : sullivan_get_fallback_image_url(); ?>
 
-        <?php the_title( '<h2>', '</h2>' ); ?>
+		<img src="<?php echo esc_url( $image_url ); ?>" />
 
-        <?php if ( get_post_type() == 'post' ) : ?>
+		<?php the_title( '<h2>', '</h2>' ); ?>
 
-            <p class="post-date"><?php the_date( get_option( 'date_format' ) ); ?></p>
+		<?php if ( get_post_type() === 'post' ) : ?>
 
-        <?php endif; ?>
+			<p class="post-date"><?php the_date( get_option( 'date_format' ) ); ?></p>
 
-    </a>
+		<?php endif; ?>
+
+	</a>
 
 </article>

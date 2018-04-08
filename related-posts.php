@@ -21,31 +21,29 @@ $base_args = array(
 $categories = wp_get_post_categories( $post->ID );
 
 if ( $categories ) {
-	
+
 	$categories_args = $base_args;
 	$categories_args['category__in'] = $categories;
-	
+
 	$categories_posts = get_posts( $categories_args );
-	
-	foreach( $categories_posts as $categories_post ) {
+
+	foreach ( $categories_posts as $categories_post ) {
 		$related_post_ids[] = $categories_post->ID;
 	}
-	
 }
 
 // If we don't get four posts from that, fill up with posts selected at random
 if ( count( $related_post_ids ) < 4 ) {
-	
+
 	// Only with as many as we need though
 	$random_post_args = $base_args;
 	$random_post_args['posts_per_page'] = 4 - count( $related_post_ids );
-	
+
 	$random_posts = get_posts( $random_post_args );
-	
-	foreach( $random_posts as $random_post ) {
+
+	foreach ( $random_posts as $random_post ) {
 		$related_post_ids[] = $random_post->ID;
 	}
-	
 }
 
 // Get the posts we've scrambled together
@@ -62,12 +60,12 @@ if ( $related_posts ) : ?>
 
 			<h3 class="related-posts-title"><?php _e( 'Related Posts', 'sullivan' ); ?></h3>
 
-			<?php 
+			<?php
 
-			foreach( $related_posts as $post ) {
+			foreach ( $related_posts as $post ) {
 
 				setup_postdata( $post );
-					
+
 				if ( has_post_thumbnail() ) {
 					$image = wp_get_attachment_image_src( get_post_thumbnail_id(), 'large' );
 					$image_url = $image[0];
@@ -90,7 +88,7 @@ if ( $related_posts ) : ?>
 			wp_reset_postdata();
 
 			?>
-		
+
 		</div><!-- .related-posts -->
 
 	</div><!-- .section-inner.wide -->

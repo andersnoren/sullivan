@@ -7,23 +7,25 @@
 if ( ! function_exists( 'sullivan_setup' ) ) {
 
 	function sullivan_setup() {
-		
+
 		// Automatic feed
 		add_theme_support( 'automatic-feed-links' );
-		
+
 		// Set content-width
 		global $content_width;
-		if ( ! isset( $content_width ) ) $content_width = 600;
-		
+		if ( ! isset( $content_width ) ) {
+			$content_width = 600;
+		}
+
 		// Post thumbnails
 		add_theme_support( 'post-thumbnails' );
 
 		// Set post thumbnail size
 		set_post_thumbnail_size( 870, 9999 );
-		
+
 		// Custom Image Sizes
 		add_image_size( 'sullivan_fullscreen', 1860, 9999 );
-		
+
 		// Custom logo
 		add_theme_support( 'custom-logo', array(
 			'height'      => 300,
@@ -40,28 +42,28 @@ if ( ! function_exists( 'sullivan_setup' ) ) {
 		add_theme_support( 'woocommerce' );
 		add_theme_support( 'wc-product-gallery-lightbox' );
 		add_theme_support( 'wc-product-gallery-slider' );
-		
+
 		// Title tag
 		add_theme_support( 'title-tag' );
-		
+
 		// Add nav menu
 		register_nav_menu( 'primary-menu', __( 'Primary Menu', 'sullivan' ) );
 		register_nav_menu( 'mobile-menu', __( 'Mobile Menu', 'sullivan' ) );
 		register_nav_menu( 'social', __( 'Social Menu', 'sullivan' ) );
-		
+
 		// Add excerpts to pages
 		add_post_type_support( 'page', array( 'excerpt' ) );
-		
+
 		// HTML5 semantic markup
 		add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
-		
+
 		// Make the theme translation ready
 		load_theme_textdomain( 'sullivan', get_template_directory() . '/languages' );
 
 	}
 	add_action( 'after_setup_theme', 'sullivan_setup' );
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -109,11 +111,11 @@ if ( ! function_exists( 'sullivan_load_style' ) ) {
 			}
 
 			wp_enqueue_style( 'sullivan-style', get_template_directory_uri() . '/style.css', $dependencies );
-		} 
+		} // End if().
 	}
 	add_action( 'wp_enqueue_scripts', 'sullivan_load_style' );
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -124,9 +126,9 @@ if ( ! function_exists( 'sullivan_load_style' ) ) {
 if ( ! function_exists( 'sullivan_add_editor_styles' ) ) {
 
 	function sullivan_add_editor_styles() {
-		add_editor_style( array( 
-			'sullivan-editor-styles.css', 
-			'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,700,700i&amp;subset=latin-ext' 
+		add_editor_style( array(
+			'sullivan-editor-styles.css',
+			'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,700,700i&amp;subset=latin-ext',
 		) );
 	}
 	add_action( 'init', 'sullivan_add_editor_styles' );
@@ -161,20 +163,20 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) {
 		global $wp_query;
 
 		// AJAX PAGINATION
-		wp_localize_script( 'sullivan_global', 'ajax_search', array(
+		wp_localize_script( 'sullivan_global', 'sullivan_ajax_search', array(
 			'ajaxurl'		=> admin_url( 'admin-ajax.php' ),
-			'query_vars'	=> json_encode( $wp_query->query )
+			'query_vars'	=> json_encode( $wp_query->query ),
 		) );
 
 	}
 	add_action( 'wp_enqueue_scripts', 'sullivan_enqueue_scripts' );
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
    SHOW NOTICE ON THEME ACTIVATION
-   When the theme is activated, display a notice informing the user about the compatibility 
+   When the theme is activated, display a notice informing the user about the compatibility
    plugin (if it isn't active)
    --------------------------------------------------------------------------------------------- */
 
@@ -200,8 +202,9 @@ function sullivan_theme_activation_notice_output() {
 	?>
 
 	<div class="updated notice is-dismissible">
-        <p><?php printf( __( 'Thanks for installing Sullivan! In order to activate the slideshow functionality, you need to install the Sullivan Compatibility Plugin from the %s.', 'sullivan' ), '<a href="' . admin_url( 'plugin-install.php?s=sullivan&tab=search' ) . '">' . __( 'WordPress.org plugin directory', 'sullivan' ) . '</a>' ); ?></p>
-    </div>
+		<?php /* Translators: $s = the text "WordPress.org plugin directory" wrapped in a link to the plugin directory */ ?>
+		<p><?php printf( _x( 'Thanks for installing Sullivan! In order to activate the slideshow functionality, you need to install the Sullivan Compatibility Plugin from the %s.', 'Translators: $s = the text "WordPress.org plugin directory" wrapped in a link to the plugin directory', 'sullivan' ), '<a href="' . admin_url( 'plugin-install.php?s=sullivan&tab=search' ) . '">' . __( 'WordPress.org plugin directory', 'sullivan' ) . '</a>' ); ?></p>
+	</div>
 
 	<?php
 
@@ -221,7 +224,7 @@ if ( ! function_exists( 'sullivan_post_classes' ) ) {
 
 		// Class indicating presence/lack of post thumbnail
 		$classes[] = ( has_post_thumbnail() ? 'has-thumbnail' : 'missing-thumbnail' );
-		
+
 		return $classes;
 	}
 	add_action( 'post_class', 'sullivan_post_classes' );
@@ -261,9 +264,9 @@ if ( ! function_exists( 'sullivan_body_classes' ) ) {
 
 		// Slim page template class names (class = name - file suffix)
 		if ( is_page_template() ) {
-			$classes[] = preg_replace('/\\.[^.\\s]{3,4}$/', '', get_page_template_slug( $post->ID ) );
+			$classes[] = preg_replace( '/\\.[^.\\s]{3,4}$/', '', get_page_template_slug( $post->ID ) );
 		}
-		
+
 		return $classes;
 	}
 	add_action( 'body_class', 'sullivan_body_classes' );
@@ -278,7 +281,7 @@ if ( ! function_exists( 'sullivan_body_classes' ) ) {
 
 if ( ! function_exists( 'sullivan_has_js' ) ) {
 
-	function sullivan_has_js() { 
+	function sullivan_has_js() {
 		?>
 		<script>jQuery( 'html' ).removeClass( 'no-js' ).addClass( 'js' );</script>
 		<?php
@@ -294,7 +297,7 @@ if ( ! function_exists( 'sullivan_has_js' ) ) {
 
 
 if ( ! function_exists( 'sullivan_sidebar_registration' ) ) {
-	
+
 	function sullivan_sidebar_registration() {
 
 		// Arguments used in all register_sidebar() calls
@@ -302,7 +305,7 @@ if ( ! function_exists( 'sullivan_sidebar_registration' ) ) {
 			'before_title' 	=> '<h3 class="widget-title subheading">',
 			'after_title' 	=> '</h3>',
 			'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
-			'after_widget' 	=> '</div></div>'
+			'after_widget' 	=> '</div></div>',
 		);
 
 		// Footer #1
@@ -337,7 +340,7 @@ if ( ! function_exists( 'sullivan_sidebar_registration' ) ) {
 		if ( sullivan_is_woocommerce_activated() ) {
 			$sidebar_blog_name = __( 'Sidebar Blog', 'sullivan' );
 			$sidebar_description = __( 'Widgets in this area will be shown in the sidebar on regular posts and pages.', 'sullivan' );
-		
+
 		// If not, it's the only sidebar and we can just call it "Sidebar"
 		} else {
 			$sidebar_blog_name = __( 'Sidebar', 'sullivan' );
@@ -362,10 +365,10 @@ if ( ! function_exists( 'sullivan_sidebar_registration' ) ) {
 
 		}
 
-	}
-	add_action( 'widgets_init', 'sullivan_sidebar_registration' ); 
+	} // End if().
+	add_action( 'widgets_init', 'sullivan_sidebar_registration' );
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -388,9 +391,9 @@ if ( ! function_exists( 'sullivan_register_widgets' ) ) {
 	function sullivan_register_widgets() {
 
 		// Default widgets
-		register_widget( 'sullivan_contact_information' );
-		register_widget( 'sullivan_recent_comments' );
-		register_widget( 'sullivan_recent_posts' );
+		register_widget( 'Sullivan_Contact_Information' );
+		register_widget( 'Sullivan_Recent_Comments' );
+		register_widget( 'Sullivan_Recent_Posts' );
 
 	}
 	add_action( 'widgets_init', 'sullivan_register_widgets' );
@@ -417,7 +420,7 @@ if ( ! function_exists( 'sullivan_has_format_gallery_gallery' ) ) {
 			$content = get_the_content( $post_id );
 
 			// Check if the post content starts with a gallery shortcode
-			if ( substr( $content, 0, 8 ) === "[gallery" ) {
+			if ( substr( $content, 0, 8 ) === '[gallery' ) {
 				return true;
 			}
 
@@ -447,31 +450,31 @@ if ( ! function_exists( 'sullivan_post_gallery' ) ) {
 		$content = get_the_content( $post_id );
 
 		// Check if the post content starts with a gallery shortcode
-		if ( substr( $content, 0, 8 ) === "[gallery" ) {
+		if ( substr( $content, 0, 8 ) === '[gallery' ) {
 
 			// Get the IDs of the shortcode
 			preg_match( '/\[gallery.*ids=.(.*).\]/', $content, $ids );
 
 			// Build an array from them
-			$image_ids = explode( ",", $ids[1] );
+			$image_ids = explode( ',', $ids[1] );
 
 			if ( $image_ids ) : ?>
-			
+
 				<div class="flexslider post-slider bg-black loading">
-				
+
 					<ul class="slides">
-			
-						<?php foreach( $image_ids as $image_id ) : 
-							
+
+						<?php foreach ( $image_ids as $image_id ) :
+
 							$image = wp_get_attachment_image_src( $image_id, 'post-thumbnail' );
 
 							if ( $image ) :
 
 								$image_url = esc_url( $image[0] );
 								$image_caption = wp_kses_post( wp_get_attachment_caption( $image_id ) );
-							
+
 								?>
-									
+
 								<li class="slide">
 
 									<img src="<?php echo esc_url( $image_url ); ?>">
@@ -481,26 +484,26 @@ if ( ! function_exists( 'sullivan_post_gallery' ) ) {
 										<p class="slider-caption"><?php echo esc_html( $image_caption ); ?></p>
 
 									<?php endif; ?>
-									
+
 								</li><!-- .slide -->
 
 							<?php endif; ?>
-								
+
 						<?php endforeach; ?>
-				
+
 					</ul>
-					
+
 				</div>
-				
+
 				<?php
-				
+
 			endif; // if $images_id
 
-		}
+		} // End if().
 
 	}
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -512,14 +515,14 @@ if ( ! function_exists( 'sullivan_strip_out_post_gallery' ) ) {
 	function sullivan_strip_out_post_gallery( $content ) {
 
 		if ( sullivan_has_post_gallery( get_the_ID() ) ) {
-			
+
 			// Check if the post content starts with a gallery shortcode
 			if ( substr( $content, 0, 8 ) === '[gallery' ) {
 
 				$pattern = get_shortcode_regex();
 
 				// Find the gallery shortcode in question
-				if ( preg_match( '/'. $pattern .'/s', $content, $matches ) ) {
+				if ( preg_match( '/' . $pattern . '/s', $content, $matches ) ) {
 					$gallery_shortcode = $matches[0];
 
 					// Get the position of the first occurrence of the gallery shortcode (prevents removing multiples, in case they exist)
@@ -541,8 +544,8 @@ if ( ! function_exists( 'sullivan_strip_out_post_gallery' ) ) {
 	add_filter( 'the_content', 'sullivan_strip_out_post_gallery' );
 
 }
-   
-   
+
+
 /* ---------------------------------------------------------------------------------------------
 	DELIST DEFAULT WIDGETS REPLACE BY THEME ONES
 	--------------------------------------------------------------------------------------------- */
@@ -581,10 +584,10 @@ if ( ! function_exists( 'sullivan_modify_read_more_link' ) ) {
 
 if ( ! function_exists( 'sullivan_get_comment_excerpt' ) ) {
 
-	function sullivan_get_comment_excerpt( $comment_ID = 0, $num_words = 20 ) {
+	function sullivan_get_comment_excerpt( $comment_id = 0, $num_words = 20 ) {
 
 		// Get our comment text
-		$comment = get_comment( $comment_ID );
+		$comment = get_comment( $comment_id );
 		$comment_text = strip_tags( $comment->comment_content );
 
 		// Separate it into words
@@ -596,7 +599,7 @@ if ( ! function_exists( 'sullivan_get_comment_excerpt' ) ) {
 			$excerpt = '';
 
 			for ( $i = 0; $i < $num_words; $i++ ) {
-				$excerpt .= $word_array[$i] . ' ';
+				$excerpt .= $word_array[ $i ] . ' ';
 			}
 
 			// Remove surrounding whitespace and trailing dot
@@ -615,7 +618,7 @@ if ( ! function_exists( 'sullivan_get_comment_excerpt' ) ) {
 		return apply_filters( 'get_comment_excerpt', $excerpt );
 	}
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -624,15 +627,13 @@ if ( ! function_exists( 'sullivan_get_comment_excerpt' ) ) {
 
 
 if ( ! function_exists( 'sullivan_is_woocommerce_activated' ) ) {
-
 	function sullivan_is_woocommerce_activated() {
-		if ( class_exists( 'woocommerce' ) ) { 
-			return true; 
-		} else { 
-			return false; 
+		if ( class_exists( 'woocommerce' ) ) {
+			return true;
+		} else {
+			return false;
 		}
 	}
-
 }
 
 
@@ -646,9 +647,9 @@ if ( sullivan_is_woocommerce_activated() ) {
 	// All functions that require Woocommerce functionality to work are contained within this file
 	locate_template( 'functions-woocommerce.php', true );
 
-   /* 
+   /*
 	* EXCEPTION:
-	* sullivan_sidebar_registration() and sullivan_register_widgets() both have  
+	* sullivan_sidebar_registration() and sullivan_register_widgets() both have
 	* conditional registration of shop specific sidebar areas and widgets.
 	* */
 
@@ -666,7 +667,7 @@ if ( ! function_exists( 'sullivan_custom_logo' ) ) {
 
 		// Get the logo
 		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
-		
+
 		if ( $logo ) {
 
 			// For clarity
@@ -681,8 +682,8 @@ if ( ! function_exists( 'sullivan_custom_logo' ) ) {
 			}
 
 			?>
-			
-			<a href="<?php echo esc_url( home_url() ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo-link">
+
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>" class="custom-logo-link">
 				<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" />
 			</a>
 
@@ -742,10 +743,10 @@ if ( ! function_exists( 'sullivan_remove_archive_title_prefix' ) ) {
 			$title = __( 'Archives', 'sullivan' );
 		}
 		return $title;
-	}
+	} // End if().
 	add_filter( 'get_the_archive_title', 'sullivan_remove_archive_title_prefix' );
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -787,15 +788,16 @@ if ( ! function_exists( 'sullivan_get_archive_title_prefix' ) ) {
 
 if ( ! function_exists( 'sullivan_header_search' ) ) {
 
-	function sullivan_header_search() { ?>
+	function sullivan_header_search() {
+		?>
 
 		<div class="header-search">
 
 			<form role="search" method="get" class="header-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'sullivan' ); ?></span>
 				<label for="header-search-field"></label>
-				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'sullivan' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" autocomplete="off" />
-				
+				<input type="search" id="header-search-field" class="ajax-search-field" placeholder="<?php esc_attr_e( 'Search', 'sullivan' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+
 				<?php
 
 				$defaults = array( 'post', 'page' );
@@ -806,7 +808,7 @@ if ( ! function_exists( 'sullivan_header_search' ) ) {
 
 				$post_types_in_search = get_theme_mod( 'sullivan_filter_search_post_types', $defaults );
 
-				foreach( $post_types_in_search as $post_type ) {
+				foreach ( $post_types_in_search as $post_type ) {
 					echo '<input type="hidden" name="post_type" value="' . esc_attr( $post_type ) . '">';
 				}
 
@@ -820,8 +822,10 @@ if ( ! function_exists( 'sullivan_header_search' ) ) {
 
 
 		<?php
+
 	}
-}
+
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
@@ -855,53 +859,54 @@ function sullivan_ajax_search() {
 		$ajax_query = new WP_Query( $args );
 
 		if ( $ajax_query->have_posts() ) {
-			
+
 			?>
 
 			<ul class="sullivan-widget-list">
-				
+
 				<?php
 
 				// Custom loop
-				while ( $ajax_query->have_posts() ) : $ajax_query->the_post(); 
+				while ( $ajax_query->have_posts() ) : $ajax_query->the_post();
 
 					$post_format = get_post_format() ? esc_attr( get_post_format() ) : 'standard';
 					$post_type = esc_attr( get_post_type() );
-				
+
 					?>
 
 					<li>
 						<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-					
+
 							<?php
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
 							$image_url = $image ? esc_url( $image[0] ) : sullivan_get_fallback_image_url();
 							?>
-								
+
 							<div class="post-image" style="background-image: url( <?php echo esc_url( $image_url ); ?> );"></div>
-							
+
 							<div class="inner">
-											
+
 								<p class="title"><?php the_title(); ?></p>
 
 								<?php if ( $post_type == 'post' ) : ?>
 
 									<p class="meta"><?php the_time( get_option( 'date_format' ) ); ?></p>
 
-								<?php elseif( $post_type == 'product' ) : 
+								<?php elseif ( $post_type == 'product' ) :
 
 									global $product; ?>
 
 									<p class="meta"><?php echo $product->get_price_html(); ?></p>
-									
+
 								<?php endif; ?>
-							
+
 							</div>
-					
+
 						</a>
-					</li>					
+					</li>
 
 					<?php
+
 				// End the loop
 				endwhile;
 
@@ -909,19 +914,21 @@ function sullivan_ajax_search() {
 
 			</ul>
 
-			<?php if ( $ajax_query->max_num_pages > 1 ) : ?>
+			<?php if ( $ajax_query->max_num_pages > 1 ) :
 
-				<a class="show-all" href="<?php echo esc_url( add_query_arg( 's', $string, home_url() ) ); ?>"><span><?php printf( _n( 'Show %s result', 'Show all %s results', $ajax_query->found_posts, 'sullivan' ), $ajax_query->found_posts ); ?></span></a>
+				/* Translators: $s = the number of posts found */ ?>
+				<a class="show-all" href="<?php echo esc_url( add_query_arg( 's', $string, home_url( '/' ) ) ); ?>"><span><?php printf( _nx( 'Show %s result', 'Show all %s results', $ajax_query->found_posts, 'Translators: $s = the number of posts found', 'sullivan' ), $ajax_query->found_posts ); ?></span></a>
 
-			<?php endif; ?>
-
-			<?php
+				<?php
+			endif;
 
 		} else {
 
 			echo '<p class="no-results-message">' . __( 'We could not find anything that matches your search query. Please try again.', 'sullivan' ) . '</p>';
 
-		}
+		} // End if().
+
+		wp_reset_postdata();
 
 	endif; // if string
 
@@ -936,8 +943,8 @@ add_action( 'wp_ajax_ajax_search_results', 'sullivan_ajax_search' );
    --------------------------------------------------------------------------------------------- */
 
 
-class Sullivan_Walker_with_Sub_Toggles extends Walker_Nav_Menu {
-	
+class Sullivan_Walker_With_Sub_Toggles extends Walker_Nav_Menu {
+
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
 		if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
@@ -1041,7 +1048,7 @@ if ( ! function_exists( 'sullivan_get_fallback_image_url' ) ) {
 		$fallback_image_url = isset( $fallback_image ) ? esc_url( $fallback_image[0] ) : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
 
 		return $fallback_image_url;
- 
+
 	}
 
 }
@@ -1108,40 +1115,40 @@ if ( ! function_exists( 'sullivan_hero_slider' ) ) {
 		if ( $return == true ) {
 			ob_start();
 		}
-		
+
 		?>
-	
+
 		<div class="flexslider hero-slider loading bg-black" data-slideshow-speed="7000" id="heroslider_<?php echo $area; ?>">
-		
+
 			<ul class="slides">
-	
-				<?php foreach( $slides as $slide ) : 
+
+				<?php foreach ( $slides as $slide ) :
 
 					// Check if the id in the image customizer setting has a file to go along with it
 					if ( has_post_thumbnail( $slide->ID ) ) {
 						$slide_image_url = get_the_post_thumbnail_url( $slide->ID, 'sullivan_fullscreen' );
 					}
-					
+
 					?>
-					
+
 					<li class="slide">
 
 						<div class="bg-image dark-overlay"<?php if ( $slide_image_url ) echo ' style="background-image: url( ' . esc_url( $slide_image_url ) . ' );"'; ?>>
 							<div class="section-inner">
-								
+
 								<header>
 
-									<?php 
+									<?php
 
 									$slide_title = get_post_meta( $slide->ID, 'sullivan_slide_title', true );
 									$slide_subtitle = get_post_meta( $slide->ID, 'sullivan_slide_subtitle', true );
 									$slide_button_text = get_post_meta( $slide->ID, 'sullivan_slide_button_text', true );
 									$slide_button_url = get_post_meta( $slide->ID, 'sullivan_slide_button_url', true );
-									
+
 									if ( $slide_title ) : ?>
 										<h1><?php echo wp_kses_post( $slide_title ); ?></h1>
 									<?php endif;
-									
+
 									if ( $slide_subtitle ) : ?>
 										<p class="sans-excerpt"><?php echo wp_kses_post( $slide_subtitle ); ?></p>
 									<?php endif;
@@ -1159,13 +1166,13 @@ if ( ! function_exists( 'sullivan_hero_slider' ) ) {
 							</div><!-- .section-inner -->
 						</div><!-- .bg-image -->
 					</li><!-- .slide -->
-						
+
 				<?php endforeach; ?>
-		
+
 			</ul>
-			
+
 		</div>
-			
+
 		<?php
 
 		// If we're returning, get the output buffer contents and return them
@@ -1181,18 +1188,18 @@ if ( ! function_exists( 'sullivan_hero_slider' ) ) {
 
 	}
 
-}
+} // End if().
 
 
 /* ---------------------------------------------------------------------------------------------
-   	LIMIT SEARCH RESULTS BY POST TYPE	
+   	LIMIT SEARCH RESULTS BY POST TYPE
    --------------------------------------------------------------------------------------------- */
 
 
 if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 
 	function sullivan_search_results_filter( $query ) {
-	
+
 		if ( $query->is_search && ! is_admin() ) {
 
 			// Get the value of the customizer setting (second arg: default value)
@@ -1201,9 +1208,9 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 			// Set the query to the specific post types
 			$query->set( 'post_type', $post_types_in_search );
 		}
-	
+
 		return $query;
-	} 
+	}
 	add_filter( 'pre_get_posts', 'sullivan_search_results_filter' );
 
 }
@@ -1220,7 +1227,7 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 
 		// Custom Customizer control that outputs an HR to seperate other controls
 		class Sullivan_Customize_Control_Seperator extends WP_Customize_Control {
-		
+
 			public function render_content() {
 				echo '<hr class="sullivan-customizer-seperator" />';
 			}
@@ -1239,7 +1246,7 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 
 			public function render_content() {
 				if ( isset( $this->content ) ) {
-					echo '<h2 style="margin: 0 0 5px;">' . esc_attr( $this->content ) . '</h2>';
+					echo '<h2 style="margin: 0 0 5px;">' . esc_html( $this->content ) . '</h2>';
 				}
 			}
 
@@ -1277,32 +1284,32 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 
 				if ( empty( $this->choices ) )
 					return;
-					
+
 				if ( ! empty( $this->label ) ) : ?>
 					<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<?php endif;
-				
+
 				if ( ! empty( $this->description ) ) : ?>
-					<span class="description customize-control-description"><?php echo esc_attr( $this->description ); ?></span>
+					<span class="description customize-control-description"><?php echo esc_html( $this->description ); ?></span>
 				<?php endif;
-				
+
 				$multi_values = ! is_array( $this->value() ) ? explode( ',', $this->value() ) : $this->value(); ?>
-		
+
 				<ul>
 					<?php foreach ( $this->choices as $value => $label ) : ?>
-		
+
 						<li>
 							<label>
-								<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ) ); ?> /> 
+								<input type="checkbox" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $multi_values ) ); ?> />
 								<?php echo esc_html( $label ); ?>
 							</label>
 						</li>
-		
+
 					<?php endforeach; ?>
 				</ul>
-		
+
 				<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( implode( ',', $multi_values ) ); ?>" />
-				<?php 
+				<?php
 			}
 		}
 
@@ -1320,9 +1327,7 @@ class Sullivan_Customize {
 
 	public static function sullivan_register( $wp_customize ) {
 
-
 		/* Theme Options section ----------------------------- */
-
 
 		$wp_customize->add_section( 'sullivan_options', array(
 			'title' 		=> __( 'Theme Options', 'sullivan' ),
@@ -1331,13 +1336,11 @@ class Sullivan_Customize {
 			'description' 	=> __( 'Customize the theme settings for Sullivan.', 'sullivan' ),
 		) );
 
-		
 		/* Sticky the site navigation ----------------------------- */
-
 
 		$wp_customize->add_setting( 'sullivan_sticky_nav', array(
 			'capability' 		=> 'edit_theme_options',
-			'sanitize_callback' => 'sullivan_sanitize_checkbox'
+			'sanitize_callback' => 'sullivan_sanitize_checkbox',
 		) );
 
 		$wp_customize->add_control( 'sullivan_sticky_nav', array(
@@ -1347,14 +1350,12 @@ class Sullivan_Customize {
 			'description' 	=> __( 'Keep the site navigation stuck to the top of the window when the visitor has scrolled past it.', 'sullivan' ),
 		) );
 
-
 		/* 2X Header Logo ----------------------------- */
-
 
 		$wp_customize->add_setting( 'sullivan_retina_logo', array(
 			'capability' 		=> 'edit_theme_options',
 			'sanitize_callback' => 'sullivan_sanitize_checkbox',
-			'transport'			=> 'postMessage'
+			'transport'			=> 'postMessage',
 		) );
 
 		$wp_customize->add_control( 'sullivan_retina_logo', array(
@@ -1369,14 +1370,10 @@ class Sullivan_Customize {
 		$wp_customize->selective_refresh->add_partial( 'sullivan_retina_logo', array(
 			'selector' 			=> '.header-titles .custom-logo-link',
 			'settings' 			=> array( 'sullivan_retina_logo' ),
-			'render_callback' 	=> function(){
-				sullivan_custom_logo();
-			},
+			'render_callback' 	=> sullivan_custom_logo(),
 		) );
 
-
 		/* Fallback image setting ----------------------------- */
-
 
 		// Seperator before fallback image
 		$wp_customize->add_setting( 'sullivan_fallback_image_hr', array(
@@ -1387,11 +1384,10 @@ class Sullivan_Customize {
 			'section' 	=> 'sullivan_options',
 		) ) );
 
-
 		// Fallback image setting
 		$wp_customize->add_setting( 'sullivan_fallback_image', array(
-			'sanitize_callback' => 'sanitize_text_field',
-			'transport'			=> 'postMessage'
+			'sanitize_callback' => 'esc_url_raw',
+			'transport'			=> 'postMessage',
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'sullivan_fallback_image', array(
@@ -1401,9 +1397,7 @@ class Sullivan_Customize {
 			'section' 		=> 'sullivan_options',
 		) ) );
 
-
 		/* Search Post Type Filter ----------------------------- */
-
 
 		// Get post types that are public, and visible in search
 		$post_types = get_post_types( array(
@@ -1414,10 +1408,10 @@ class Sullivan_Customize {
 		$post_types_customizer_values = array();
 
 		// Build an array of post types, with key: name and value: label
-		foreach( $post_types as $post_type ) {
+		foreach ( $post_types as $post_type ) {
 			$post_type_obj = get_post_type_object( $post_type );
 			$post_type_singular_label = $post_type_obj->labels->singular_name;
-			$post_types_customizer_values[$post_type] = $post_type_singular_label;
+			$post_types_customizer_values[ $post_type ] = $post_type_singular_label;
 		}
 
 		// Seperator before post types
@@ -1430,7 +1424,10 @@ class Sullivan_Customize {
 		) ) );
 
 		// Default post types
-		$defaults = array( 'post', 'page' );
+		$defaults = array(
+			'post',
+			'page',
+		);
 
 		// Add products, if WooCommerce is active
 		if ( sullivan_is_woocommerce_activated() ) {
@@ -1440,19 +1437,17 @@ class Sullivan_Customize {
 		// Add multiple checkbox setting for post types
 		$wp_customize->add_setting( 'sullivan_filter_search_post_types', array(
 			'default'           => $defaults,
-			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
+			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes',
 		) );
 
 		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_filter_search_post_types', array(
 			'section' 		=> 'sullivan_options',
 			'label'   		=> __( 'Post types to include in search:', 'sullivan' ),
 			'description'	=> __( 'If you do not select any post types, search results will always display as "No results found".', 'sullivan' ),
-			'choices' 		=> $post_types_customizer_values 
+			'choices' 		=> $post_types_customizer_values,
 		) ) );
 
-
 		/* Post Meta Setting ----------------------------- */
-
 
 		// Seperator before post meta
 		$wp_customize->add_setting( 'sullivan_fallback_image_hr', array(
@@ -1463,11 +1458,10 @@ class Sullivan_Customize {
 			'section' 	=> 'sullivan_options',
 		) ) );
 
-
 		// Post Meta Top Setting
 		$wp_customize->add_setting( 'sullivan_post_meta_top', array(
 			'default'           => array( 'post-date', 'sticky', 'edit-link' ),
-			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
+			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes',
 		) );
 
 		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_post_meta_top', array(
@@ -1480,14 +1474,13 @@ class Sullivan_Customize {
 				'edit-link'		=> __( 'Edit Link (for logged in users)', 'sullivan' ),
 				'post-date'		=> __( 'Post date', 'sullivan' ),
 				'sticky'		=> __( 'Sticky status', 'sullivan' ),
-			) 
+			 ),
 		) ) );
-
 
 		// Post Meta Bottom Setting
 		$wp_customize->add_setting( 'sullivan_post_meta_bottom', array(
 			'default'           => array( 'author', 'categories', 'comments' ),
-			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes'
+			'sanitize_callback' => 'sullivan_sanitize_multiple_checkboxes',
 		) );
 
 		$wp_customize->add_control( new Sullivan_Customize_Control_Checkbox_Multiple( $wp_customize, 'sullivan_post_meta_bottom', array(
@@ -1502,35 +1495,9 @@ class Sullivan_Customize {
 				'post-date'		=> __( 'Post date', 'sullivan' ),
 				'sticky'		=> __( 'Sticky status', 'sullivan' ),
 				'tags'			=> __( 'Tags', 'sullivan' ),
-			) 
+			),
 		) ) );
 
-
-		/* Built-in controls ----------------------------- */
-
-
-		$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
-		$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
-		// Update blogname with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'sullivan_header_site_title', array(
-			'selector' => '.header-titles .site-title .site-name',
-			'settings' => array( 'blogname' ),
-			'render_callback' => function() {
-				return get_bloginfo( 'name', 'display' );
-			},
-		) );
-
-		// Update blogdescription with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'sullivan_header_site_description', array(
-			'selector' => '.header-titles .site-description',
-			'settings' => array( 'blogdescription' ),
-			'render_callback' => function() {
-				return get_bloginfo( 'description', 'display' );
-			},
-		) );
-		
-		
 		/* Sanitation functions ----------------------------- */
 
 		// Sanitize boolean for checkbox
@@ -1540,15 +1507,15 @@ class Sullivan_Customize {
 
 		// Sanitize booleans for multiple checkboxes
 		function sullivan_sanitize_multiple_checkboxes( $values ) {
-			$multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
+			$multi_values = ! is_array( $values ) ? explode( ',', $values ) : $values;
 			return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
 		}
-		
+
 	}
 
 	// Initiate the customize controls js
 	public static function sullivan_customize_controls() {
-		wp_enqueue_script( 'sullivan-customize-controls', get_template_directory_uri() . '/assets/js/customize-controls.js', array(  'jquery', 'customize-controls' ), '', true );
+		wp_enqueue_script( 'sullivan-customize-controls', get_template_directory_uri() . '/assets/js/customize-controls.js', array( 'jquery', 'customize-controls' ), '', true );
 	}
 
 }
@@ -1557,6 +1524,4 @@ class Sullivan_Customize {
 add_action( 'customize_register', array( 'sullivan_Customize', 'sullivan_register' ) );
 
 // Enqueue customize controls javascript in Theme Customizer admin screen
-add_action( 'customize_controls_init', array( 'sullivan_Customize' , 'sullivan_customize_controls' ) );
-
-?>
+add_action( 'customize_controls_init', array( 'sullivan_Customize', 'sullivan_customize_controls' ) );

@@ -27,8 +27,13 @@ $average      = $product->get_average_rating();
 if ( $rating_count > 0 ) : ?>
 
 	<div class="woocommerce-product-rating">
-		<?php echo wc_get_rating_html( $average, $rating_count ); ?>
-		<?php if ( comments_open() ) : ?><a href="#reviews" class="woocommerce-review-link" rel="nofollow"><?php printf( _n( '%s review', '%s reviews', $review_count, 'sullivan' ), '<span class="count">' . esc_html( $review_count ) . '</span>' ); ?></a><?php endif ?>
+		<?php
+		echo wc_get_rating_html( $average, $rating_count );
+
+		/* Translators: %s = the number of reviews */
+		if ( comments_open() ) : ?>
+			<a href="#reviews" class="woocommerce-review-link" rel="nofollow"><?php printf( _nx( '%s review', '%s reviews', $review_count, 'Translators: %s = the number of reviews', 'sullivan' ), '<span class="count">' . esc_html( $review_count ) . '</span>' ); ?></a>
+		<?php endif ?>
 	</div>
 
 <?php endif; ?>

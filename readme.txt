@@ -83,6 +83,19 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.08 (2018-04-08)
+-------------------------
+- Removed modifications of global $paged variable
+- Removed partial refresh for blog_name and /_description, to keep 5.2 compatibility (by removing anonymous functions in the render_callback)
+- Renamed ajax_search to be theme prefixed
+- Added '/' to the home_url() arg
+- Added missing wp_reset_postdata()
+- Fixed escaping of placeholder value, get_search_query()
+- Removed global variables in global.js
+- Changed global.js function prefix from WP to sullivan
+- Updated printf/sprintf calls with notes for translators detailing variable values
+- Code cleanup based on Theme Sniffer WordPress-Extra results
+
 Version 1.07 (2018-04-07)
 -------------------------
 - Version bump for the benefit of the WordPress theme uploader

@@ -4,57 +4,57 @@
 
 	<div class="section-inner">
 
-        <?php
+		<?php
 
-        if ( have_posts() )  : 
+		if ( have_posts() ) :
 
-            while ( have_posts() ) : the_post();
+			while ( have_posts() ) : the_post();
 
-                ?>
+				?>
 
-                <article <?php post_class(); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-                    
-                    <header class="section-inner thin page-header text-center">
-                    
-                        <?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
+				<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 
-                        <?php if ( $post->post_excerpt ) : ?>
+					<header class="section-inner thin page-header text-center">
 
-                            <p class="sans-excerpt"><?php echo wp_kses_post( $post->post_excerpt ); ?></p>
+						<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 
-                        <?php endif; ?>
-                    
-                    </header><!-- .post-header -->
+						<?php if ( $post->post_excerpt ) : ?>
 
-                    <?php 
+							<p class="sans-excerpt"><?php echo wp_kses_post( $post->post_excerpt ); ?></p>
 
-                    $image = wp_get_attachment_image_src( get_the_ID(), 'post-thumbnail' );
-                    
-                    if ( $image ) :  ?>
+						<?php endif; ?>
 
-                        <div class="featured-media section-inner medium">
+					</header><!-- .post-header -->
 
-                            <img src="<?php echo esc_url( $image[0] ); ?>" />
+					<?php
 
-                        </div><!-- .featured-media -->
+					$image = wp_get_attachment_image_src( get_the_ID(), 'post-thumbnail' );
 
-                    <?php endif; ?>
+					if ( $image ) :  ?>
 
-                    <div class="entry-content page-content section-inner thin">
+						<div class="featured-media section-inner medium">
 
-                        <?php the_content(); ?>
+							<img src="<?php echo esc_url( $image[0] ); ?>" />
 
-                    </div><!-- .entry-content -->
+						</div><!-- .featured-media -->
 
-                </article>
-                
-                <?php
+					<?php endif; ?>
 
-            endwhile;
+					<div class="entry-content page-content section-inner thin">
 
-        endif; 
+						<?php the_content(); ?>
 
-        ?>
+					</div><!-- .entry-content -->
+
+				</article>
+
+				<?php
+
+			endwhile;
+
+		endif;
+
+		?>
 
 	</div><!-- .section-inner -->
 

@@ -29,9 +29,9 @@ if ( ! woocommerce_products_will_display() ) {
 	$total    = $wp_query->found_posts;
 	$first    = ( $per_page * $paged ) - $per_page + 1;
 	$last     = min( $total, $wp_query->get( 'posts_per_page' ) * $paged );
-    
+
 	echo '<span class="prefix">' . __( 'Showing', 'sullivan' ) . ' </span>';
-	
+
 	echo '<span class="rest">';
 
 	if ( $total <= $per_page || -1 === $per_page ) {

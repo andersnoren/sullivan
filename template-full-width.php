@@ -2,4 +2,4 @@
 
 /* Template Name: Full Width Template */
 
-get_template_part( 'page' ); ?>
+get_template_part( 'page' );

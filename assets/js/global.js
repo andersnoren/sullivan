@@ -1,42 +1,37 @@
 // ======================================================================= Namespace
-var WP = WP || {},
+var sullivan = sullivan || {},
 $ = jQuery;
 
 
-// ======================================================================= Global variables
-var doc = $( document ),
-	win = $( window );
-
-
 // =======================================================================  Mobile Menu
-WP.mobileMenu = {
-	
+sullivan.mobileMenu = {
+
 	init: function(){
 
 		// Toggle mobile menu on nav-toggle click
-		$( '.nav-toggle' ).on( 'click', function(){	
-			WP.mobileMenu.toggleMenu();
+		$( '.nav-toggle' ).on( 'click', function(){
+			sullivan.mobileMenu.toggleMenu();
 		} );
 
 		// Toggle the sub menus in the mobile menu
 		$( '.sub-nav-toggle' ).on( 'click', function(){
-			WP.mobileMenu.toggleSubMenu( $( this ) );
+			sullivan.mobileMenu.toggleSubMenu( $( this ) );
 		} );
 
 		// On load, check if we need to expand the sub menus
-		win.on( 'load', function(){
-			WP.mobileMenu.checkSubMenuActive();
+		$( window ).on( 'load', function(){
+			sullivan.mobileMenu.checkSubMenuActive();
 		} );
 
 		// Hide mobile menu on mobile menu overlay click
 		$( '.mobile-nav-content-overlay' ).on( 'click', function(){
-			WP.mobileMenu.hideMenu();
+			sullivan.mobileMenu.hideMenu();
 		} );
 
 		// Hide mobile menu on resize
-		win.on( 'resize', function(){
-			if ( win.width() > 1000 ) {
-				WP.mobileMenu.hideMenu( pauseFlex = false );
+		$( window ).on( 'resize', function(){
+			if ( $( window ).width() > 1000 ) {
+				sullivan.mobileMenu.hideMenu( pauseFlex = false );
 			}
 		} );
 
@@ -46,9 +41,9 @@ WP.mobileMenu = {
 	toggleMenu: function() {
 
 		if ( $( 'body' ).hasClass( 'showing-mobile-menu' ) ) {
-			WP.mobileMenu.hideMenu();
+			sullivan.mobileMenu.hideMenu();
 		} else {
-			WP.mobileMenu.showMenu();
+			sullivan.mobileMenu.showMenu();
 		}
 
 	},
@@ -76,7 +71,7 @@ WP.mobileMenu = {
 
 		// Empty the mobile search results
 		setTimeout( function(){
-			WP.ajaxSearch.emptyResults();
+			sullivan.ajaxSearch.emptyResults();
 		}, 1000 )
 
 		// Play sliders again when we show the menu
@@ -111,25 +106,25 @@ WP.mobileMenu = {
 
 	}
 
-} // WP.mobileMenu
+} // sullivan.mobileMenu
 
 
 // ======================================================================= Toggles
-WP.toggles = {
-	
+sullivan.toggles = {
+
 	init: function () {
 
 		$( '.toggle' ).on( 'click', function( e ){
 
 			console.log( e );
-			
+
 			// Get our targets
 			var targetString = $( this ).data( 'toggle-target' );
 			var target = $( targetString );
 
 			// Untoggle any currently toggled toggles
 			$( '.toggle' ).not( this ).removeClass( 'active' );
-			
+
 			// The diva toggleable elements steal the stage for themselves
 			$( '.diva' ).not( target ).each( function() {
 				if ( $( this ).hasClass( 'active' ) ) {
@@ -147,17 +142,17 @@ WP.toggles = {
 			}
 
 			return false;
-		
+
 		} );
 
 	}
 
-} // WP.toggles
+} // sullivan.toggles
 
 
 // ==================================================================== Sticky Menu
-WP.stickyMenu = {
-	
+sullivan.stickyMenu = {
+
 	init: function() {
 
 		var stickyElement = $( '.stick-me' );
@@ -174,12 +169,12 @@ WP.stickyMenu = {
 			}
 
 			// Stick it on resize, scroll and load
-			win.on( 'resize scroll load', function(){
+			$( window ).on( 'resize scroll load', function(){
 				var stickyOffset = $( '#sticky-adjuster' ).offset().top;
-				WP.stickyMenu.stickIt( stickyElement, stickyClass, stickyOffset );
+				sullivan.stickyMenu.stickIt( stickyElement, stickyClass, stickyOffset );
 			} );
 
-			WP.stickyMenu.stickIt( stickyElement, stickyClass, stickyOffset );
+			sullivan.stickyMenu.stickIt( stickyElement, stickyClass, stickyOffset );
 
 		}
 
@@ -188,10 +183,10 @@ WP.stickyMenu = {
 	// Stick the search form
 	stickIt: function ( stickyElement, stickyClass, stickyOffset ) {
 
-		var winScroll = win.scrollTop();
+		var winScroll = $( window ).scrollTop();
 
 		if ( stickyElement.css( 'display' ) != 'none' && winScroll > stickyOffset ) {
-			
+
 			// If a sticky edge element exists and we've scrolled past it, hide the filter bar
 			if ( ! stickyElement.hasClass( stickyClass ) ) {
 				stickyElement.addClass( stickyClass );
@@ -200,7 +195,7 @@ WP.stickyMenu = {
 
 		// If not, remove class and sticky-adjuster properties
 		} else {
-			WP.stickyMenu.unstickIt();
+			sullivan.stickyMenu.unstickIt();
 		}
 
 	},
@@ -214,8 +209,8 @@ WP.stickyMenu = {
 
 
 // =======================================================================  Modals
-WP.modals = {
-	
+sullivan.modals = {
+
 	init: function(){
 
 		// Search Modal
@@ -231,12 +226,12 @@ WP.modals = {
 
 	},
 
-} // WP.modals
+} // sullivan.modals
 
 
 // =======================================================================  Cover Page
 
-WP.coverPage = {
+sullivan.coverPage = {
 
 	init: function(){
 
@@ -250,25 +245,25 @@ WP.coverPage = {
 
 	}
 
-} // WP.coverPage
+} // sullivan.coverPage
 
 
 // =======================================================================  Fancy Number Inputs
 
-WP.fancyNumberInputs = {
+sullivan.fancyNumberInputs = {
 
 	init: function(){
 
 		// Add the extra markup
-		WP.fancyNumberInputs.addQuantityMarkup();
+		sullivan.fancyNumberInputs.addQuantityMarkup();
 
 		// Loop through all quantity elements and set up our variables
-		WP.fancyNumberInputs.handleQuantityElements();
+		sullivan.fancyNumberInputs.handleQuantityElements();
 
 		// Add the quantity markup back and rerun the handling when WC fragments have been refreshed
 		$( 'body' ).on( 'wc_fragments_refreshed', function(){
-			WP.fancyNumberInputs.addQuantityMarkup();
-			WP.fancyNumberInputs.handleQuantityElements();
+			sullivan.fancyNumberInputs.addQuantityMarkup();
+			sullivan.fancyNumberInputs.handleQuantityElements();
 		} );
 
 	},
@@ -302,13 +297,13 @@ WP.fancyNumberInputs = {
 					newVal = 1;
 				}
 
-				if ( newVal >= max ) { 
-					$btnUp.addClass( 'disabled' ); 
+				if ( newVal >= max ) {
+					$btnUp.addClass( 'disabled' );
 					$( this ).val( max );
-				} else if ( newVal <= min ) { 
-					$btnDown.addClass( 'disabled' ); 
+				} else if ( newVal <= min ) {
+					$btnDown.addClass( 'disabled' );
 				} else {
-					$btnUp.add( $btnDown ).removeClass( 'disabled' ); 
+					$btnUp.add( $btnDown ).removeClass( 'disabled' );
 				}
 
 			} );
@@ -320,7 +315,7 @@ WP.fancyNumberInputs = {
 					var newVal = oldValue;
 				} else {
 					var newVal = oldValue + 1;
-					$btnDown.removeClass( 'disabled' ); 
+					$btnDown.removeClass( 'disabled' );
 				}
 				$spinner.find( 'input' ).val( newVal );
 				$spinner.find( 'input' ).trigger( 'change' );
@@ -333,12 +328,12 @@ WP.fancyNumberInputs = {
 					var newVal = oldValue;
 				} else {
 					var newVal = oldValue - 1;
-					$btnUp.removeClass( 'disabled' ); 
+					$btnUp.removeClass( 'disabled' );
 				}
 				$spinner.find( 'input' ).val( newVal );
 				$spinner.find( 'input' ).trigger( 'change' );
 			} );
-	
+
 		} );
 
 	}
@@ -349,8 +344,8 @@ WP.fancyNumberInputs = {
 // =======================================================================  Hero Slider
 
 
-WP.heroSlider = {
-	
+sullivan.heroSlider = {
+
 	init: function() {
 
 		var $slider = $( '.hero-slider' );
@@ -366,7 +361,7 @@ WP.heroSlider = {
 				animationSpeed: animSpeed,
 				controlNav: true,
 				directionNav: false,
-				keyboard: false, 
+				keyboard: false,
 				pauseOnHover: true,
 				slideshowSpeed: slideshowSpeed,
 				smoothHeight: false,
@@ -387,25 +382,25 @@ WP.heroSlider = {
 				},
 			} );
 
-			win.bind( 'resize', function() {
-				setTimeout( function(){ 
+			$( window ).bind( 'resize', function() {
+				setTimeout( function(){
 					var slider = $slider.data( 'flexslider' );
 					slider.resize();
 				}, 1000 );
 			} );
 
-		}
+		} // End if().
 
 	}
 
-} // WP.heroSlider
+} // sullivan.heroSlider
 
 
 // =======================================================================  Post Slider
 
 
-WP.postSlider = {
-	
+sullivan.postSlider = {
+
 	init: function() {
 
 		var $slider = $( '.post-slider' );
@@ -418,7 +413,7 @@ WP.postSlider = {
 				animationSpeed: 1000,
 				controlNav: false,
 				directionNav: true,
-				keyboard: false, 
+				keyboard: false,
 				pauseOnHover: true,
 				start: function( $slider ) {
 					$slider.removeClass( 'loading' ).addClass( 'loaded' );
@@ -426,8 +421,8 @@ WP.postSlider = {
 				},
 			} );
 
-			win.bind( 'resize', function() {
-				setTimeout( function(){ 
+			$( window ).bind( 'resize', function() {
+				setTimeout( function(){
 					var slider = $slider.data( 'flexslider' );
 					slider.resize();
 				}, 1000 );
@@ -437,25 +432,25 @@ WP.postSlider = {
 
 	}
 
-} // WP.postSlider
+} // sullivan.postSlider
 
 
 // =======================================================================  Scroll Show
-	
-WP.scrollShow = {
-	
+
+sullivan.scrollShow = {
+
 	init: function(){
 
 		// Add class to elements when they're in view
 		if ( $( '.tracker' ).length ) {
 
-			win.on( 'load', function () {
-				WP.scrollShow.detectTrackers();
+			$( window ).on( 'load', function () {
+				sullivan.scrollShow.detectTrackers();
 			} );
 
-			win.scroll( function () {
+			$( window ).scroll( function () {
 				$( '.tracker' ).each( function () {
-					if ( WP.scrollShow.isScrolledIntoView( this ) === true ) {
+					if ( sullivan.scrollShow.isScrolledIntoView( this ) === true ) {
 						$( this ).addClass( 'spotted' );
 					}
 				} );
@@ -464,12 +459,12 @@ WP.scrollShow = {
 		}
 
 	},
-	
+
 	// Go through the trackers and see whether we've shown them
 	detectTrackers: function() {
 		$( '.tracker' ).each( function () {
 			$( this ).addClass( 'will-spot' );
-			if ( $( this ).offset().top < win.height() ) {
+			if ( $( this ).offset().top < $( window ).height() ) {
 				$( this ).addClass( 'spotted' );
 			}
 		} );
@@ -478,23 +473,23 @@ WP.scrollShow = {
 	// Check whether an element is within the viewport
 	isScrolledIntoView: function( elem ) {
 
-		var docViewTop = win.scrollTop(),
-			docViewBottom = docViewTop + win.height();
+		var docViewTop = $( window ).scrollTop(),
+			docViewBottom = docViewTop + $( window ).height();
 
 		var elemTop = $( elem ).offset().top,
-			elemBuffer = win.width > 600 ? 200 : 50,
+			elemBuffer = $( window ).width > 600 ? 200 : 50,
 			elemBottom = elemTop + elemBuffer;
 
 		return ( elemBottom <= docViewBottom );
 
 	}
 
-} // WP.scrollShow
+} // sullivan.scrollShow
 
 
 // =======================================================================  Fade Blocks
-WP.fadeBlocks = {
-	
+sullivan.fadeBlocks = {
+
 	init: function(){
 
 		// Parallax effect on the fade blocks
@@ -504,16 +499,16 @@ WP.fadeBlocks = {
 			window.msRequestAnimationFrame ||
 			window.oRequestAnimationFrame ||
 			// IE fallback
-			function(callback){ window.setTimeout(callback, 1000/60) };
-			
+			function( callback ) { window.setTimeout( callback, 1000 / 60 ) };
+
 		function loop(){
 
 			var windowOffset = window.pageYOffset;
 
-			if ( windowOffset < win.outerHeight() ) {
+			if ( windowOffset < $( window ).outerHeight() ) {
 
-				$( '.fade-block' ).css({ 
-					'transform': 'translateY( ' + Math.ceil ( windowOffset * 0.2 ) + 'px )',
+				$( '.fade-block' ).css({
+					'transform': 'translateY( ' + Math.ceil( windowOffset * 0.2 ) + 'px )',
 					'opacity': 1 - ( windowOffset * 0.002 )
 				} );
 
@@ -527,68 +522,68 @@ WP.fadeBlocks = {
 
 	}
 
-} // WP.fadeBlocks
+} // sullivan.fadeBlocks
 
 
 
 // =======================================================================  Resize videos
-WP.intrinsicRatioEmbeds = {
-	
+sullivan.intrinsicRatioEmbeds = {
+
 	init: function(){
 
 		// Resize videos after their container
-		var vidSelector = ".post iframe, .post object, .post video, .widget-content iframe, .widget-content object, .widget-content iframe";	
+		var vidSelector = ".post iframe, .post object, .post video, .widget-content iframe, .widget-content object, .widget-content iframe";
 		var resizeVideo = function(sSel) {
-			$( sSel ).each(function() {
-				var $video = $(this),
+			$( sSel ).each( function() {
+				var $video = $( this ),
 					$container = $video.parent(),
 					iTargetWidth = $container.width();
 
-				if ( !$video.attr("data-origwidth") ) {
-					$video.attr("data-origwidth", $video.attr("width"));
-					$video.attr("data-origheight", $video.attr("height"));
+				if ( ! $video.attr( "data-origwidth" ) ) {
+					$video.attr( "data-origwidth", $video.attr( "width" ) );
+					$video.attr( "data-origheight", $video.attr( "height" ) );
 				}
 
-				var ratio = iTargetWidth / $video.attr("data-origwidth");
+				var ratio = iTargetWidth / $video.attr( "data-origwidth" );
 
-				$video.css("width", iTargetWidth + "px");
-				$video.css("height", ( $video.attr("data-origheight") * ratio ) + "px");
+				$video.css( "width", iTargetWidth + "px" );
+				$video.css( "height", ( $video.attr( "data-origheight" ) * ratio ) + "px" );
 			});
 		};
 
 		resizeVideo( vidSelector );
 
-		win.resize( function() {
+		$( window ).resize( function() {
 			resizeVideo( vidSelector );
 		} );
 
 	},
 
-} // WP.intrinsicRatioEmbeds
+} // sullivan.intrinsicRatioEmbeds
 
 
 
 // =======================================================================  Smooth Scroll
-WP.smoothScroll = {
-	
+sullivan.smoothScroll = {
+
 	init: function(){
 
 		// Smooth scroll to anchor links
-		$('a[href*="#"]')
+		$( 'a[href*="#"]' )
 		// Remove links that don't actually link to anything
-		.not('[href="#"]')
-		.not('[href="#0"]')
-		.click(function(event) {
+		.not( '[href="#"]' )
+		.not( '[href="#0"]' )
+		.click( function( event ) {
 			// On-page links
-			if ( location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname ) {
+			if ( location.pathname.replace( /^\//, '' ) == this.pathname.replace( /^\//, '' ) && location.hostname == this.hostname ) {
 				// Figure out element to scroll to
-				var target = $(this.hash);
-				target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+				var target = $( this.hash );
+				target = target.length ? target : $( '[name=' + this.hash.slice( 1 ) + ']' );
 				// Does a scroll target exist?
-				if (target.length) {
+				if ( target.length ) {
 					// Only prevent default if animation is actually gonna happen
 					event.preventDefault();
-					$('html, body').animate({
+					$( 'html, body' ).animate({
 						scrollTop: target.offset().top
 					}, 1000 );
 				}
@@ -597,58 +592,58 @@ WP.smoothScroll = {
 
 	},
 
-} // WP.smoothScroll
+} // sullivan.smoothScroll
 
 
 // ======================================================================= AJAX Search
-WP.ajaxSearch = {
-	
+sullivan.ajaxSearch = {
+
 	init: function(){
 
 		// Delay function
 		delay = ( function(){
 			var timer = 0;
 			return function( callback, ms ) {
-				clearTimeout (timer);
-				timer = setTimeout(callback, ms);
+				clearTimeout( timer );
+				timer = setTimeout( callback, ms );
 			}
-		})();
+		} )();
 
 		// Update results on keyup and focus, after delay
 		$( '.ajax-search-field' ).on( 'keyup focus', function() {
 			if ( this.value.length != 0 ) {
 				$searchField = $( this );
 				delay( function(){
-					WP.ajaxSearch.loadPosts( $searchField );
+					sullivan.ajaxSearch.loadPosts( $searchField );
 				}, 200 );
 			} else {
-				WP.ajaxSearch.emptyResults();
+				sullivan.ajaxSearch.emptyResults();
 			}
 		} );
 
 		// Check for empty on blur
 		$( '.ajax-search-field' ).on( 'blur', function() {
 			if ( $( this ).val().length == 0 ) {
-				WP.ajaxSearch.emptyResults();
+				sullivan.ajaxSearch.emptyResults();
 			}
 		} );
 
 		// Empty search on cancel search click
 		$( '.cancel-search' ).on( 'click', function(){
-			WP.ajaxSearch.emptyResults();
-		} )
+			sullivan.ajaxSearch.emptyResults();
+		} );
 
 	},
 
 	loadPosts: function( $searchField ){
 
-		var $container = $( '.ajax-search-results' ),
-			data = $searchField.val();
+		var $container 	= $( '.ajax-search-results' ),
+			data 		= $searchField.val();
 
 		search_string = JSON.stringify( data );
 
-		$.ajax({
-			url: ajax_search.ajaxurl,
+		$.ajax( {
+			url: sullivan_ajax_search.ajaxurl,
 			type: 'post',
 			data: {
 				action: 'ajax_search_results',
@@ -678,7 +673,7 @@ WP.ajaxSearch = {
 			error: function(jqXHR, textStatus, errorThrown) {
 				console.log( 'AJAX error: ' + errorThrown );
 			}
-		});
+		} );
 
 	},
 
@@ -701,36 +696,36 @@ WP.ajaxSearch = {
 		} );
 	}
 
-} // WP.ajaxSearch
+} // sullivan.ajaxSearch
 
 
 // ======================================================================= Function calls
-doc.ready( function( ) {
+$( document ).ready( function( ) {
 
-	WP.mobileMenu.init();							// Mobile menu
+	sullivan.mobileMenu.init();							// Mobile menu
 
-	WP.toggles.init();								// Toggles
+	sullivan.toggles.init();							// Toggles
 
-	WP.stickyMenu.init();							// Sticky menu
+	sullivan.stickyMenu.init();							// Sticky menu
 
-	WP.modals.init();								// Handle modals
+	sullivan.modals.init();								// Handle modals
 
-	WP.coverPage.init();							// Cover Page specifics
+	sullivan.coverPage.init();							// Cover Page specifics
 
-	WP.fancyNumberInputs.init();					// Make the number inputs fancy
+	sullivan.fancyNumberInputs.init();					// Make the number inputs fancy
 
-	WP.heroSlider.init();							// Hero Slider
+	sullivan.heroSlider.init();							// Hero Slider
 
-	WP.postSlider.init();							// Post Slider
+	sullivan.postSlider.init();							// Post Slider
 
-	WP.intrinsicRatioEmbeds.init();					// Resize embeds
+	sullivan.intrinsicRatioEmbeds.init();				// Resize embeds
 
-	WP.scrollShow.init();							// Show elements on scroll
+	sullivan.scrollShow.init();							// Show elements on scroll
 
-	WP.smoothScroll.init();							// Smooth scrolls to anchor links
+	sullivan.smoothScroll.init();						// Smooth scrolls to anchor links
 
-	WP.fadeBlocks.init();							// Fade blocks on scroll
+	sullivan.fadeBlocks.init();							// Fade blocks on scroll
 
-	WP.ajaxSearch.init();							// AJAX search
+	sullivan.ajaxSearch.init();							// AJAX search
 
 } );

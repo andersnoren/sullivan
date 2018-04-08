@@ -3,16 +3,16 @@
 <html class="no-js" <?php language_attributes(); ?>>
 
 	<head>
-		
+
 		<meta http-equiv="content-type" content="<?php bloginfo( 'html_type' ); ?>" charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-        
-        <link rel="profile" href="http://gmpg.org/xfn/11">
-		 
+
+		<link rel="profile" href="http://gmpg.org/xfn/11">
+
 		<?php wp_head(); ?>
-	
+
 	</head>
-	
+
 	<body <?php body_class(); ?>>
 
 		<div class="mobile-menu-wrapper">
@@ -22,7 +22,7 @@
 				<form role="search" method="get" class="mobile-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 					<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'sullivan' ); ?></span>
 					<label for="mobile-search-field"></label>
-					<input type="search" id="mobile-search-field" class="ajax-search-field" placeholder="<?php _e( 'Search', 'sullivan' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" name="s" autocomplete="off" />
+					<input type="search" id="mobile-search-field" class="ajax-search-field" placeholder="<?php esc_attr_e( 'Search', 'sullivan' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
 					<div class="cancel-search"></div>
 				</form>
 
@@ -31,48 +31,48 @@
 			</div><!-- .mobile-search -->
 
 			<ul class="mobile-menu">
-				<?php 
+				<?php
 				if ( has_nav_menu( 'mobile-menu' ) ) {
-					wp_nav_menu( array( 
+					wp_nav_menu( array(
 						'container' 		=> '',
 						'items_wrap' 		=> '%3$s',
 						'theme_location' 	=> 'mobile-menu',
-						'walker'			=> new sullivan_Walker_with_Sub_Toggles()
-					) ); 
+						'walker'			=> new Sullivan_Walker_With_Sub_Toggles(),
+					) );
 				} else {
 					wp_list_pages( array(
 						'container' => '',
-						'title_li' 	=> ''
+						'title_li' 	=> '',
 					) );
 				}
 				?>
 			</ul>
 
 			<?php if ( has_nav_menu( 'social' ) ) : ?>
-					
+
 				<ul class="social-menu mobile">
-							
-					<?php 
+
+					<?php
 
 					$nav_social_args = array(
-						'theme_location'	=>	'social',
-						'container'			=>	'',
-						'container_class'	=>	'menu-social',
-						'items_wrap'		=>	'%3$s',
-						'menu_id'			=>	'menu-social-items',
-						'menu_class'		=>	'menu-items',
-						'depth'				=>	1,
-						'link_before'		=>	'<span class="screen-reader-text">',
-						'link_after'		=>	'</span>',
-						'fallback_cb'		=>	'',
+						'theme_location'	=> 'social',
+						'container'			=> '',
+						'container_class'	=> 'menu-social',
+						'items_wrap'		=> '%3$s',
+						'menu_id'			=> 'menu-social-items',
+						'menu_class'		=> 'menu-items',
+						'depth'				=> 1,
+						'link_before'		=> '<span class="screen-reader-text">',
+						'link_after'		=> '</span>',
+						'fallback_cb'		=> '',
 					);
 
 					wp_nav_menu( $nav_social_args );
 
 					?>
-					
+
 				</ul><!-- .social-menu -->
-			
+
 			<?php endif;
 
 			if ( sullivan_is_woocommerce_activated() ) :
@@ -89,7 +89,7 @@
 							<a class="register" href="<?php echo add_query_arg( 'form', 'registration', esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ) ); ?>"><?php _e( 'Register', 'sullivan' ); ?></a>
 						<?php endif; ?>
 
-					<?php else : 
+					<?php else :
 
 						$account_url = esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>
 
@@ -109,7 +109,7 @@
 			<div class="mobile-nav-content-overlay dark-overlay"></div>
 
 			<?php if ( sullivan_is_woocommerce_activated() ) woocommerce_demo_store(); ?>
-    
+
 			<header class="site-header">
 
 				<div class="nav-toggle">
@@ -119,7 +119,7 @@
 					<div class="bar"></div>
 
 				</div>
-				
+
 				<div class="header-inner section-inner">
 
 					<?php sullivan_header_search(); ?>
@@ -129,23 +129,23 @@
 						<?php if ( function_exists( 'the_custom_logo' ) && get_theme_mod( 'custom_logo' ) ) :
 
 							sullivan_custom_logo();
-							
+
 						elseif ( is_front_page() || is_home() ) : ?>
 
-							<h1 class="site-title"><a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></h1>
-						
+							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></h1>
+
 						<?php else : ?>
-						
-							<h2 class="site-title"><a href="<?php echo esc_url( home_url() ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></h2>
-						
+
+							<h2 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-name"><?php bloginfo( 'name' ); ?></a></h2>
+
 						<?php endif;
-						
+
 						if ( get_bloginfo( 'description' ) ) : ?>
 
 							<p class="site-description"><?php echo wp_kses_post( get_bloginfo( 'description' ) ); ?></p>
 
 						<?php endif;
-						
+
 						if ( sullivan_is_woocommerce_activated() ) {
 
 							sullivan_woo_account_modal();
@@ -157,9 +157,9 @@
 							echo '<ul class="social-menu header">';
 
 								wp_nav_menu( $nav_social_args );
-								
+
 							echo '</ul><!-- .social-menu -->';
-							
+
 						}
 
 						?>
@@ -169,17 +169,17 @@
 				</div><!-- .header-inner -->
 
 				<ul class="site-nav<?php if ( get_theme_mod( 'sullivan_sticky_nav' ) ) echo ' stick-me'; ?>">
-					<?php 
+					<?php
 					if ( has_nav_menu( 'primary-menu' ) ) {
-						wp_nav_menu( array( 
+						wp_nav_menu( array(
 							'container' 		=> '',
 							'items_wrap' 		=> '%3$s',
 							'theme_location' 	=> 'primary-menu',
-						) ); 
+						) );
 					} else {
 						wp_list_pages( array(
 							'container' => '',
-							'title_li' 	=> ''
+							'title_li' 	=> '',
 						) );
 					}
 					?>
