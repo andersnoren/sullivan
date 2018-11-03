@@ -83,6 +83,26 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.11 (2018-11-03)
+-------------------------
+- Updated with Gutenberg support
+	- Gutenberg editor styles
+	- Styling of Gutenberg blocks
+	- Custom Sullivan Gutenberg palette
+	- Custom Sullivan Gutenberg typography styles
+- Added option to disable Google Fonts with a translateable string
+- Updated theme description
+- Fixed the footer social menu
+
+Version 1.10 (2018-05-24)
+-------------------------
+- Improved styling of checkboxes in comment respond
+
+Version 1.09 (2018-04-14)
+-------------------------
+- Removed old customizer control for adding slideshow slides
+- Added demo link to the theme description
+
 Version 1.08 (2018-04-08)
 -------------------------
 - Removed modifications of global $paged variable

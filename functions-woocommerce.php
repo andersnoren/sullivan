@@ -694,7 +694,7 @@ if ( ! function_exists( 'sullivan_woo_account_modal' ) ) {
 							'endpoint'  => 'edit-account',
 						),
 						array(
-							'label'     => __( 'Adresses', 'sullivan' ),
+							'label'     => __( 'Addresses', 'sullivan' ),
 							'endpoint'  => 'edit-address',
 						),
 					);

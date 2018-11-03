@@ -53,7 +53,7 @@
 
 					<?php if ( has_nav_menu( 'social' ) ) : ?>
 
-						<ul class="social-menu">
+						<ul class="social-menu social-icons">
 
 							<?php
 							wp_nav_menu( array(

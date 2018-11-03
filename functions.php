@@ -1254,24 +1254,6 @@ if ( ! function_exists( 'sullivan_search_results_filter' ) ) {
 
 	endif;
 
-	if ( ! class_exists( 'sullivan_Customize_Control_Add_Slide' ) ) :
-
-		// Custom Customizer control that outputs a button that increments the max_slides number input
-		class Sullivan_Customize_Control_Add_Slide extends WP_Customize_Control {
-
-			// Whitelist content parameter
-			public $content = '';
-
-			public function render_content() {
-				if ( isset( $this->content ) ) {
-					echo '<a href="#" class="button button-primary" id="button-add-slide" data-slideshow="' . esc_attr( $this->content ) . '">' . __( 'Add slide', 'sullivan' ) . '</a>';
-				}
-			}
-
-		}
-
-	endif;
-
 	if ( ! class_exists( 'sullivan_Customize_Control_Checkbox_Multiple' ) ) :
 
 		// Custom Customizer control that outputs a specified number of checkboxes
@@ -1525,3 +1507,128 @@ add_action( 'customize_register', array( 'sullivan_Customize', 'sullivan_registe
 
 // Enqueue customize controls javascript in Theme Customizer admin screen
 add_action( 'customize_controls_init', array( 'sullivan_Customize', 'sullivan_customize_controls' ) );
+
+
+/* ---------------------------------------------------------------------------------------------
+   SPECIFY GUTENBERG SUPPORT
+------------------------------------------------------------------------------------------------ */
+
+
+if ( ! function_exists( 'sullivan_add_gutenberg_features' ) ) :
+
+	function sullivan_add_gutenberg_features() {
+
+		/* Gutenberg Features --------------------------------------- */
+
+		add_theme_support( 'align-wide' );
+
+		/* Gutenberg Palette --------------------------------------- */
+
+		add_theme_support( 'editor-color-palette', array(
+			array(
+				'name' 	=> _x( 'Black', 'Name of the black color in the Gutenberg palette', 'sullivan' ),
+				'slug' 	=> 'black',
+				'color' => '#111',
+			),
+			array(
+				'name' 	=> _x( 'Dark Gray', 'Name of the dark gray color in the Gutenberg palette', 'sullivan' ),
+				'slug' 	=> 'dark-gray',
+				'color' => '#333',
+			),
+			array(
+				'name' 	=> _x( 'Medium Gray', 'Name of the medium gray color in the Gutenberg palette', 'sullivan' ),
+				'slug' 	=> 'medium-gray',
+				'color' => '#555',
+			),
+			array(
+				'name' 	=> _x( 'Light Gray', 'Name of the light gray color in the Gutenberg palette', 'sullivan' ),
+				'slug' 	=> 'light-gray',
+				'color' => '#777',
+			),
+			array(
+				'name' 	=> _x( 'White', 'Name of the white color in the Gutenberg palette', 'sullivan' ),
+				'slug' 	=> 'white',
+				'color' => '#fff',
+			),
+		) );
+
+		/* Gutenberg Font Sizes --------------------------------------- */
+
+		add_theme_support( 'editor-font-sizes', array(
+			array(
+				'name' 		=> _x( 'Small', 'Name of the small font size in Gutenberg', 'sullivan' ),
+				'shortName' => _x( 'S', 'Short name of the small font size in the Gutenberg editor.', 'sullivan' ),
+				'size' 		=> 16,
+				'slug' 		=> 'small',
+			),
+			array(
+				'name' 		=> _x( 'Regular', 'Name of the regular font size in Gutenberg', 'sullivan' ),
+				'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'sullivan' ),
+				'size' 		=> 18,
+				'slug' 		=> 'regular',
+			),
+			array(
+				'name' 		=> _x( 'Large', 'Name of the large font size in Gutenberg', 'sullivan' ),
+				'shortName' => _x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'sullivan' ),
+				'size' 		=> 24,
+				'slug' 		=> 'large',
+			),
+			array(
+				'name' 		=> _x( 'Larger', 'Name of the larger font size in Gutenberg', 'sullivan' ),
+				'shortName' => _x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'sullivan' ),
+				'size' 		=> 28,
+				'slug' 		=> 'larger',
+			),
+		) );
+
+	}
+	add_action( 'after_setup_theme', 'sullivan_add_gutenberg_features' );
+
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   GUTENBERG EDITOR STYLES
+   --------------------------------------------------------------------------------------------- */
+
+
+if ( ! function_exists( 'sullivan_block_editor_styles' ) ) :
+
+	function sullivan_block_editor_styles() {
+
+		$dependencies = array();
+
+		/**
+		 * Translators: If there are characters in your language that are not
+		 * supported by the theme fonts, translate this to 'off'. Do not translate
+		 * into your own language.
+		 */
+		$google_fonts = _x( 'on', 'Google Fonts: on or off', 'sullivan' );
+
+		if ( 'off' !== $google_fonts ) {
+
+			$font_families = array();
+
+			$font_families[] = 'Archivo:400,400i,500,500i,700,700i';
+
+			$query_args = array(
+				'family' => urlencode( implode( '|', $font_families ) ),
+				'subset' => urlencode( 'latin-ext' ),
+			);
+
+			$fonts_url = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+
+			wp_register_style( 'sullivan-block-editor-styles-font', $fonts_url, array(), null );
+			$dependencies[] = 'sullivan-block-editor-styles-font';
+
+		}
+
+		// Enqueue the editor styles
+		wp_enqueue_style( 'sullivan-block-editor-styles', get_theme_file_uri( '/sullivan-gutenberg-editor-style.css' ), $dependencies, '1.0', 'all' );
+
+	}
+	add_action( 'enqueue_block_editor_assets', 'sullivan_block_editor_styles', 1 );
+
+endif;
+
+?>

@@ -6,7 +6,7 @@ $ = jQuery;
 // =======================================================================  Mobile Menu
 sullivan.mobileMenu = {
 
-	init: function(){
+	init: function() {
 
 		// Toggle mobile menu on nav-toggle click
 		$( '.nav-toggle' ).on( 'click', function(){

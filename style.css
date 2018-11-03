@@ -2,8 +2,8 @@
 
 	Theme Name: Sullivan
     Text Domain: sullivan
-	Version: 1.08
-	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory.
+	Version: 1.11
+	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Gutenberg support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory. Demo: http://www.andersnoren.se/themes/sullivan/
 	Tags: two-columns, right-sidebar, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, e-commerce
 	Author: Anders Norén
 	Author URI: http://www.andersnoren.se
@@ -1661,6 +1661,11 @@ img {
 	display: block; 
 }
 
+.comment-respond input[type="checkbox"] + label {
+	display: inline;
+	margin: 0 0 0 5px;
+}
+
 .comment-respond input[type="text"],
 .comment-respond input[type="email"],
 .comment-respond textarea {
@@ -1695,7 +1700,13 @@ abbr {
 hr {
 	border: none;
 	border-top: 1px solid rgba( 0, 0, 0, 0.13 );
-	margin: 50px 0;
+	margin: 50px auto;
+	width: 50%;
+}
+
+hr.is-style-wide,
+hr.is-style-dots {
+	width: 100%;
 }
 
 .entry-content > *:first-child { margin-top: 0; }
@@ -1798,6 +1809,18 @@ pre {
 	font-size: 14px;
 	line-height: 1.35;
 	padding: 20px;
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+p.has-drop-cap:not(:focus):first-letter {
+	font-family: 'Charis SIL', Georgia, serif;
+	font-size: 7.75em;
+	font-weight: 400;
+    margin: 0 .07em 0 0;
 }
 
 
@@ -1849,9 +1872,10 @@ blockquote cite:before {
 }
 
 .gallery-caption,
-.wp-caption-text {
-    font-size: 0.8em;
-	margin: 10px 0 0;
+.wp-caption-text,
+.entry-content figcaption {
+    font-size: 0.9em;
+	margin: 15px 0 0;
 }
 
 .entry-content .gallery-caption,
@@ -1859,19 +1883,28 @@ blockquote cite:before {
 	margin-bottom: 0;
 }
 
-.wp-caption-text {
+.wp-caption-text,
+.entry-content figcaption {
 	color: rgba( 0, 0, 0, .5 );
 }
 
-.wp-caption-text a {
+.wp-caption-text a,
+figcaption a {
 	color: inherit;
 	display: inline;
+}
+
+.entry-content .alignnone,
+.entry-content .aligncenter,
+.entry-content .alignwide,
+.entry-content .alignfull {
+	margin: 2.5em auto;
 }
 
 .alignleft,
 .alignright {
 	margin-bottom: 20px;
-    width: 40%;
+    max-width: 40%;
 }
 
 .alignleft {
@@ -2055,6 +2088,10 @@ input[type="submit"] {
 	-webkit-appearance: none;
 }
 
+.mejs-container button {
+	min-width: auto;
+}
+
 button:hover,
 .button:hover,
 input[type="button"]:hover,
@@ -2190,6 +2227,222 @@ th {
 }
 
 
+/* Gutenberg Accent Colors --------------------------------------- */
+
+.entry-content .has-background { background-color: #111; }
+
+.entry-content .has-black-color { color: #111; }
+.entry-content .has-black-background-color { background-color: #111; }
+
+.entry-content .has-dark-gray-color { color: #333; }
+.entry-content .has-dark-gray-background-color { background-color: #333; }
+
+.entry-content .has-medium-gray-color { color: #555; }
+.entry-content .has-medium-gray-background-color { background-color: #555; }
+
+.entry-content .has-light-gray-color { color: #777; }
+.entry-content .has-light-gray-background-color { background-color: #777; }
+
+.entry-content .has-white-color { color: #fff; }
+.entry-content .has-white-background-color { background-color: #fff; }
+
+
+/* Gutenberg Font Sizes --------------------------------------- */
+
+.entry-content .has-small-font-size { font-size: .842em; }
+.entry-content .has-regular-font-size { font-size: 1em; }
+
+.entry-content .has-large-font-size,
+.entry-content .has-larger-font-size {
+	line-height: 1.5;
+}
+
+.entry-content .has-large-font-size { font-size: 1.33em; }
+.entry-content .has-larger-font-size { font-size: 1.55em; }
+
+
+/* Block: Button --------------------------------------- */
+
+.entry-content .wp-block-file__button,
+.entry-content .wp-block-button__link {
+	background-color: #000;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 0.85em;
+	font-weight: 700;
+	line-height: 1.2;
+	padding: 1em 1.4em;
+}
+
+.dark-mode .entry-content .wp-block-file__button,
+.dark-mode .entry-content .wp-block-button__link {
+	background-color: #fff;
+	color: #000;
+}
+
+.entry-content .wp-block-file a {
+	color: inherit;
+}
+
+.entry-content a.wp-block-file__button {
+	color: #fff;
+}
+
+.entry-content .wp-block-file__button:hover,
+.entry-content .wp-block-button__link:hover {
+	opacity: .85;
+	text-decoration: none;
+}
+
+
+/* Block: Quote --------------------------------------- */
+
+.entry-content .wp-block-quote.is-large, 
+.entry-content .wp-block-quote.is-style-large {
+	margin: 0 0 30px 0;
+	padding: 0 0 0 30px;
+}
+
+.entry-content blockquote p:last-child {
+	margin-bottom: 0;
+}
+
+.wp-block-quote.is-large p, 
+.wp-block-quote.is-style-large p {
+	font-size: 1.25em;
+	font-style: normal;
+	line-height: 1.5;
+}
+
+.wp-block-quote.is-large cite, 
+.wp-block-quote.is-style-large cite {
+	display: block;
+	font-size: 1em;
+	text-align: left;
+}
+
+
+/* Block: Pullquote --------------------------------------- */
+
+.wp-block-pullquote,
+.wp-block-pullquote blockquote {
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+.wp-block-pullquote blockquote {
+	margin: 0;
+}
+
+.wp-block-pullquote blockquote:before {
+	content: none;
+}
+
+.wp-block-pullquote.alignleft, 
+.wp-block-pullquote.alignright {
+	max-width: 50%;
+}
+
+.wp-block-pullquote blockquote p,
+.wp-block-pullquote.alignleft blockquote p,
+.wp-block-pullquote.alignright blockquote p {
+	font-family: 'Charis SIL', Georgia, serif;
+	font-size: 1.25em;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+	margin-bottom: 1em;
+}
+
+.wp-block-pullquote.alignleft blockquote p,
+.wp-block-pullquote.alignright blockquote p {
+	line-height: 1.3;
+}
+
+
+/* Block: Gallery --------------------------------------- */
+
+.wp-block-gallery .blocks-gallery-image figcaption, 
+.wp-block-gallery .blocks-gallery-item figcaption {
+	color: #fff;
+	margin: 0;
+	padding-bottom: 10px;
+}
+
+.entry-content .wp-block-gallery.alignfull {
+	padding: 0 8px;
+}
+
+.entry-content ul.wp-block-gallery:not(.alignfull):not(.alignwide) {
+	margin-left: 0;
+}
+
+.entry-content ul.wp-block-gallery > li:first-child {
+	margin-top: 0;
+}
+
+.entry-content ul.wp-block-gallery > li:last-child {
+	margin-bottom: 16px;
+}
+
+
+/* Block: Image --------------------------------------- */
+
+.wp-block-image .aligncenter > figcaption, 
+.wp-block-image .alignleft > figcaption, 
+.wp-block-image .alignright > figcaption, 
+.wp-block-image.is-resized > figcaption {
+	display: block;
+}
+
+/* Block: Cover Image --------------------------------------- */
+
+.wp-block-cover-image.alignfull {
+	min-height: 75vh;
+}
+
+.wp-block-cover-image p {
+	font-weight: 400;
+}
+
+
+/* Block: Column --------------------------------------- */
+
+.wp-block-column {
+	padding: 0 5px;
+}
+
+
+/* Block: Audio --------------------------------------- */
+
+.wp-block-audio audio {
+	width: 100%;
+}
+
+
+/* Block: File --------------------------------------- */
+
+.entry-content .wp-block-file {
+	align-items: center;
+	background: rgba( 0, 0, 0, 0.05 );
+	border-radius: 4px;
+	display: flex;
+	justify-content: space-between;
+	margin: 30px 0;
+	padding: 20px;
+}
+
+.entry-content .wp-block-file a:not(.wp-block-file__button) {
+	border: none;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.entry-content .wp-block-file__button {
+	flex-shrink: 0;
+}
+
+
 /* -------------------------------------------------------------------------------- */
 /*	X.	Post Content
  * 		Styling specific to the post-content wrapper (used on posts)
@@ -2200,6 +2453,13 @@ th {
 	max-width: none;
 	position: relative;
 		left: -310px;
+	width: 910px;
+}
+
+.post-content .alignfull,
+.post-content .alignwide {
+	margin-left: -310px;
+	max-width: 910px;
 	width: 910px;
 }
 
@@ -2224,6 +2484,18 @@ th {
 /* Page Content Media ---------------------------- */
 
 /* IMAGES */
+
+.page-content .alignfull {
+	margin-left: calc( 50% - 50vw );
+	max-width: 100vw;
+	width: 100vw;
+}
+
+.page-content .alignwide {
+	margin-left: calc( 50% - 520px );
+	max-width: 1040px;
+	width: 1040px;
+}
 
 .page-content .alignnone {
 	margin-left: -135px;
@@ -2870,30 +3142,30 @@ ul.page-numbers .next { right: 0; }
 
 /* SOCIAL MENU BASE */
 
-.social-menu li a::before {
+.social-icons a::before {
 	content: '\f408';
 	display: block;
 	font-family: 'FontAwesome';
 	font-size: 20px;
 }
 
-.social-menu li a[href*="codepen.io"]::before { content: '\f1cb'; }
-.social-menu li a[href*="dribbble.com"]::before { content: '\f17d'; }
-.social-menu li a[href*="facebook.com"]::before { content: '\f230'; }
-.social-menu li a[href*="flickr.com"]::before { content: '\f16e'; }
-.social-menu li a[href*="github.com"]::before { content: '\f09b'; }
-.social-menu li a[href*="instagram.com"]::before { content: '\f16d'; }
-.social-menu li a[href*="linkedin.com"]::before { content: '\f0e1'; }
-.social-menu li a[href*="pinterest.com"]::before { content: '\f0d2'; }
-.social-menu li a[href*="plus.google.com"]::before { content: '\f0d5'; }
-.social-menu li a[href*="soundcloud.com"]::before { content: '\f1be'; }
-.social-menu li a[href*="tumblr.com"]::before { content: '\f173'; }
-.social-menu li a[href*="twitter.com"]::before { content: '\f099'; }
-.social-menu li a[href*="vimeo.com"]::before { content: '\f194'; }
-.social-menu li a[href*="wordpress.org"]::before,
-.social-menu li a[href*="wordpress.com"]::before { content: '\f19a'; }
-.social-menu li a[href*="youtube.com"]::before { content: '\f167'; }
-.social-menu li a[href*="mailto"]::before { content: '\f0e0'; }
+.social-icons a[href*="codepen.io"]::before { content: '\f1cb'; }
+.social-icons a[href*="dribbble.com"]::before { content: '\f17d'; }
+.social-icons a[href*="facebook.com"]::before { content: '\f230'; }
+.social-icons a[href*="flickr.com"]::before { content: '\f16e'; }
+.social-icons a[href*="github.com"]::before { content: '\f09b'; }
+.social-icons a[href*="instagram.com"]::before { content: '\f16d'; }
+.social-icons a[href*="linkedin.com"]::before { content: '\f0e1'; }
+.social-icons a[href*="pinterest.com"]::before { content: '\f0d2'; }
+.social-icons a[href*="plus.google.com"]::before { content: '\f0d5'; }
+.social-icons a[href*="soundcloud.com"]::before { content: '\f1be'; }
+.social-icons a[href*="tumblr.com"]::before { content: '\f173'; }
+.social-icons a[href*="twitter.com"]::before { content: '\f099'; }
+.social-icons a[href*="vimeo.com"]::before { content: '\f194'; }
+.social-icons a[href*="wordpress.org"]::before,
+.social-icons a[href*="wordpress.com"]::before { content: '\f19a'; }
+.social-icons a[href*="youtube.com"]::before { content: '\f167'; }
+.social-icons a[href*="mailto"]::before { content: '\f0e0'; }
 
 
 /* FOOTER SOCIAL SPECIFIC */
@@ -2940,8 +3212,15 @@ ul.page-numbers .next { right: 0; }
 	/* Post Content ---------------------------- */
 
 	.post-content .alignnone {
-		max-width: 100%;
 		left: auto;
+		max-width: 100%;
+		width: 100%;
+	}
+
+	.post-content .alignfull,
+	.post-content .alignwide {
+		margin-left: 0;
+		max-width: 100%;
 		width: 100%;
 	}
 	
@@ -3010,6 +3289,21 @@ ul.page-numbers .next { right: 0; }
 }
 
 
+@media ( max-width: 1155px ) {
+
+
+	/* Page Content ---------------------------- */
+
+	.page-content .alignwide {
+		margin-left: calc( 50% - 45vw );
+		max-width: 90vw;
+		width: 90vw;
+	}
+
+
+}
+
+
 @media ( max-width: 1100px ) {
 
 
@@ -3049,6 +3343,21 @@ ul.page-numbers .next { right: 0; }
         width: calc( 33.3% - 30px );
     }
 
+
+	/* Post Content ---------------------------- */
+
+	.post-content .alignfull,
+	.post-content .alignwide {
+		margin-left: calc( ( 95vw - 100% ) * -1 );
+		max-width: 100vw;
+		width: 100vw;
+	}
+
+	.post-content .alignfull figcaption,
+	.post-content .alignwide figcaption {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
 
 	/* Sidebar ---------------------------- */
 
@@ -3588,6 +3897,11 @@ ul.page-numbers .next { right: 0; }
 		max-width: 100%;
 		right: auto;
 		width: 100%;
+	}
+
+	.post-content .alignfull,
+	.post-content .alignwide {
+		margin-left: calc( 50% - 50vw );
 	}
 
 
