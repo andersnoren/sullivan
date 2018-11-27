@@ -1337,7 +1337,6 @@ class Sullivan_Customize {
 		$wp_customize->add_setting( 'sullivan_retina_logo', array(
 			'capability' 		=> 'edit_theme_options',
 			'sanitize_callback' => 'sullivan_sanitize_checkbox',
-			'transport'			=> 'postMessage',
 		) );
 
 		$wp_customize->add_control( 'sullivan_retina_logo', array(
@@ -1346,13 +1345,6 @@ class Sullivan_Customize {
 			'priority'		=> 10,
 			'label' 		=> __( 'Retina logo', 'sullivan' ),
 			'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'sullivan' ),
-		) );
-
-		// Update logo retina setting with selective refresh
-		$wp_customize->selective_refresh->add_partial( 'sullivan_retina_logo', array(
-			'selector' 			=> '.header-titles .custom-logo-link',
-			'settings' 			=> array( 'sullivan_retina_logo' ),
-			'render_callback' 	=> sullivan_custom_logo(),
 		) );
 
 		/* Fallback image setting ----------------------------- */

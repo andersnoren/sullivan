@@ -83,6 +83,14 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.13 (2018-11-11)
+-------------------------
+- Fixed a Customizer issue causing double output of the logo
+
+Version 1.12 (2018-11-06)
+-------------------------
+- Fixed the calendar widget table rows having white background in the footer
+
 Version 1.11 (2018-11-03)
 -------------------------
 - Updated with Gutenberg support
