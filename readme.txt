@@ -83,6 +83,15 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.15 (2018-12-07)
+-------------------------
+- Fixed Gutenberg style changes required due to changes in the default block editor CSS and classes
+- Fixed the Classic Block TinyMCE buttons being set to the wrong font
+
+Version 1.14 (2018-11-30)
+-------------------------
+- Fixed Gutenberg editor styles font being overwritten
+
 Version 1.13 (2018-11-11)
 -------------------------
 - Fixed a Customizer issue causing double output of the logo
