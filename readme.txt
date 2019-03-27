@@ -83,6 +83,14 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.17 (2019-03-27)
+-------------------------
+- Made the header quicklinks filterable, and able to handle links with set URLs in addition to WooCommerce account page endpoints
+
+Version 1.16 (2019-02-02)
+-------------------------
+- Improved styling of grouped products
+
 Version 1.15 (2018-12-07)
 -------------------------
 - Fixed Gutenberg style changes required due to changes in the default block editor CSS and classes

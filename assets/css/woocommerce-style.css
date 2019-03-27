@@ -837,8 +837,38 @@ del + ins {
 }
 
 .single-product .summary .cart .button {
+	min-width: 180px;
+}
+
+.single-product .summary .cart .quantity + .button {
     margin: 0 0 0 20px;
-    width: 180px;
+}
+
+/* Grouped Product Form */
+
+.single-product .summary .cart.grouped_form {
+	display: block;
+}
+
+.grouped_form .group_table {
+	margin-bottom: 20px;
+}
+
+.grouped_form td {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.woocommerce-grouped-product-list-item__quantity {
+	width: 107px;
+}
+
+.grouped_form .woocommerce-grouped-product-list-item__label {
+	padding-left: 15px;
+}
+
+.grouped_form .in-stock {
+	margin-bottom: 0;
 }
 
 /* Variations Form */
@@ -2531,7 +2561,7 @@ h3 + .woocommerce-address-fields {
         margin-bottom: 20px;
     }
 
-    .single-product .summary .cart .button {
+    .single-product .summary .cart .quantity + .button {
         margin-left: 15px;
     }
 

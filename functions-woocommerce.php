@@ -692,10 +692,12 @@ if ( ! function_exists( 'sullivan_woo_account_modal' ) ) {
 						array(
 							'label'     => __( 'Account details', 'sullivan' ),
 							'endpoint'  => 'edit-account',
+							'slug'		=> 'edit-account',
 						),
 						array(
 							'label'     => __( 'Addresses', 'sullivan' ),
 							'endpoint'  => 'edit-address',
+							'slug'		=> 'edit-address',
 						),
 					);
 
@@ -712,18 +714,43 @@ if ( ! function_exists( 'sullivan_woo_account_modal' ) ) {
 						array_unshift( $quicklinks, array(
 							'label'  	=> __( 'Orders', 'sullivan' ),
 							'endpoint'  => 'orders',
+							'slug'		=> 'orders',
 						) );
 					}
+
+					// Make the quicklinks filterable
+					$quicklinks = apply_filters( 'sullivan_quicklinks', $quicklinks );
+
 					?>
 
 					<nav class="user-quicklinks">
+
 						<?php foreach ( $quicklinks as $link ) :
-							// Check if we're currently viewing this endpoint
-							$classes = is_wc_endpoint_url( $link['endpoint'] ) ? 'active ' : '';
-							$classes .= $link['endpoint'];
+
+							// Add the slug as a class
+							$link_classes = $link['slug'];
+
+							// Handle links with a set URL
+							if ( isset( $link['url'] ) ) {
+								$link_url = $link['url'];
+
+							// Handle links with a WooCommerce endpoint
+							} elseif ( isset( $link['endpoint'] ) ) {
+								$link_classes .= is_wc_endpoint_url( $link['endpoint'] ) ? ' active' : '';
+								$link_url = get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) . $link['endpoint'] . '/';
+							}
+
+							if ( ! isset( $link_url ) ) {
+								continue;
+							}
+
 							?>
-							<a<?php if ( $classes ) echo ' class="' . $classes . '"'; ?> href="<?php echo get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) . $link['endpoint'] . '/'; ?>"><?php echo wp_kses_post( $link['label'] ); ?></a>
+
+							<a class="<?php echo $link_classes; ?>" href="<?php echo esc_url( $link_url ); ?>">
+								<?php echo wp_kses_post( $link['label'] ); ?>
+							</a>
 						<?php endforeach; ?>
+
 					</nav>
 
 					<footer class="log-out-wrapper">
