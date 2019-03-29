@@ -1374,6 +1374,19 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     margin-top: 40px;
 }
 
+.place-order .woocommerce-terms-and-conditions-wrapper {
+	margin-bottom: 15px;
+}
+
+.place-order .woocommerce-terms-and-conditions-wrapper p {
+	font-size: 0.8em;
+	line-height: 1.25;
+}
+
+.place-order .woocommerce-terms-and-conditions-wrapper a {
+	text-decoration: underline;
+}
+
 
 /* Order Review ----------------------------- */
 
@@ -1423,8 +1436,8 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     position: relative;
 }
 
-.wc_payment_methods label:before,
-.wc_payment_methods label:after {
+.wc_payment_methods > li > label:before,
+.wc_payment_methods > li > label:after {
     border-radius: 50%;
     content: "";
     display: block;
@@ -1435,17 +1448,17 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     width: 16px;
 }
 
-.wc_payment_methods input {
+.wc_payment_methods > li > input {
     position: absolute;
         left: -9999px;
 }
 
-.wc_payment_methods label:before {
+.wc_payment_methods > li > label:before {
     border: 2px solid #111;
     cursor: pointer;
 }
 
-.wc_payment_methods label:after {
+.wc_payment_methods > li > label:after {
     background: #111;
     height: 10px;
     left: -25px;
@@ -1455,7 +1468,7 @@ form.woocommerce-checkout #customer_details .woocommerce-additional-fields {
     width: 10px;
 }
 
-.wc_payment_methods input:checked + label:after {
+.wc_payment_methods > li > input:checked + label:after {
     transform: scale( 1 );
 }
 

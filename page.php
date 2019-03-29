@@ -28,7 +28,7 @@
 
 				?>
 
-				<article <?php post_class(); ?> id="post-<?php the_ID(); ?>" href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+				<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 					<?php
 					// Don't show the header on the login form page

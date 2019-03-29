@@ -83,6 +83,10 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.18 (2019-XX-XX)
+-------------------------
+- Removed title and href attributes from article elements
+
 Version 1.17 (2019-03-27)
 -------------------------
 - Made the header quicklinks filterable, and able to handle links with set URLs in addition to WooCommerce account page endpoints
