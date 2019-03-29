@@ -83,9 +83,10 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
-Version 1.18 (2019-XX-XX)
+Version 1.18 (2019-03-29)
 -------------------------
 - Removed title and href attributes from article elements
+- Better styling of elements in the checkout
 
 Version 1.17 (2019-03-27)
 -------------------------
