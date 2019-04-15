@@ -15,6 +15,12 @@
 
 	<body <?php body_class(); ?>>
 
+		<?php 
+		if ( function_exists( 'wp_body_open' ) ) {
+			wp_body_open(); 
+		}
+		?>
+
 		<div class="mobile-menu-wrapper">
 
 			<div class="mobile-search">
@@ -122,7 +128,11 @@
 
 				<div class="header-inner section-inner">
 
-					<?php sullivan_header_search(); ?>
+					<?php 
+
+					do_action( 'sullivan_header_inner_opening' );
+					
+					sullivan_header_search(); ?>
 
 					<div class="header-titles">
 
@@ -165,6 +175,8 @@
 						?>
 
 					</div><!-- .header-titles -->
+
+					<?php do_action( 'sullivan_header_inner_opening' ); ?>
 
 				</div><!-- .header-inner -->
 

@@ -2,8 +2,8 @@
 
 	Theme Name: Sullivan
     Text Domain: sullivan
-	Version: 1.18
-	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Gutenberg support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory. Demo: https://www.andersnoren.se/themes/sullivan/
+	Version: 1.21
+	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Block Editor/Gutenberg support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory. Demo: https://www.andersnoren.se/themes/sullivan/
 	Tags: two-columns, right-sidebar, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, e-commerce
 	Author: Anders Norén
 	Author URI: https://www.andersnoren.se
@@ -198,6 +198,7 @@ input::-moz-placeholder { color: #999; }
 
 #site-content {
 	background: #fff;
+	display: block;
 	padding: 80px 0;
 }
 
@@ -1839,6 +1840,10 @@ blockquote cite:before {
 	content: "— "; 
 }
 
+.entry-content blockquote {
+	margin-bottom: 20px;
+}
+
 
 /* Pull Quotes ----------------------------- */
 
@@ -2550,14 +2555,21 @@ th {
 	padding-top: 0;
 }
 
+.page-hero-wrapper {
+	display: flex;
+	overflow: hidden;
+}
+
 .page-hero {
-	align-items: center;
 	color: #fff;
 	display: flex;
-	height: 500px;
+	flex-direction: column;
+	justify-content: center;
 	margin-bottom: 80px;
-	padding: 120px 0;
+	min-height: 500px;
+	padding: 80px 0;
 	text-shadow: 0 1px 0 rgba( 0, 0, 0, .5 );
+	width: 100%;
 }
 
 .page-hero > * {
@@ -2651,6 +2663,7 @@ ul.page-numbers {
 	margin: 60px 0 -20px 0;
 	padding-top: 60px;
 	position: relative;
+	width: 100%;
 }
 
 ul.page-numbers {
@@ -4265,12 +4278,8 @@ ul.page-numbers .next { right: 0; }
 	/* TEMPLATE COVER */
 
 	.page-hero {
-		height: 75vw;
-		max-height: 400px;
-	}
-
-	.page-hero.with-content {
-		height: 400px;
+		min-height: 400px;
+		padding: 50px 0;
 	}
 
 

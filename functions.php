@@ -77,6 +77,7 @@ if ( ! function_exists( 'sullivan_load_style' ) ) {
 		if ( ! is_admin() ) {
 
 			$dependencies = array();
+			$theme_version = wp_get_theme( 'Sullivan' )->get( 'Version' );
 
 			/**
 			 * Translators: If there are characters in your language that are not
@@ -106,11 +107,11 @@ if ( ! function_exists( 'sullivan_load_style' ) ) {
 
 			// Add WooCommerce styles, if WC is activated
 			if ( sullivan_is_woocommerce_activated() ) {
-				wp_register_style( 'sullivan-woocommerce', get_template_directory_uri() . '/assets/css/woocommerce-style.css' );
+				wp_register_style( 'sullivan-woocommerce', get_template_directory_uri() . '/assets/css/woocommerce-style.css', array(), $theme_version );
 				$dependencies[] = 'sullivan-woocommerce';
 			}
 
-			wp_enqueue_style( 'sullivan-style', get_template_directory_uri() . '/style.css', $dependencies );
+			wp_enqueue_style( 'sullivan-style', get_template_directory_uri() . '/style.css', $dependencies, $theme_version );
 		} // End if().
 	}
 	add_action( 'wp_enqueue_scripts', 'sullivan_load_style' );
@@ -153,8 +154,10 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) {
 
 	function sullivan_enqueue_scripts() {
 
+		$theme_version = wp_get_theme( 'Sullivan' )->get( 'Version' );
+
 		wp_register_script( 'flexslider', get_template_directory_uri() . '/assets/js/jquery.flexslider.js', '', true );
-		wp_enqueue_script( 'sullivan_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'flexslider' ), '', true );
+		wp_enqueue_script( 'sullivan_global', get_template_directory_uri() . '/assets/js/global.js', array( 'jquery', 'flexslider' ), $theme_version, true );
 
 		if ( ( ! is_admin() ) && is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );

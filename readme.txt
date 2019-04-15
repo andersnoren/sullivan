@@ -83,6 +83,21 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.21 (2019-04-XX)
+-------------------------
+- Fixed IE11 issues
+
+Version 1.20 (2019-04-15)
+-------------------------
+- Added actions to the opening and closing of the header-inner element, to make it easier to add custom elements to the header
+- Changed page-header to use min-height instead of height, to prevent content overflow
+- Added margin to entry-content blockquote elements
+- Added the theme version number to enqueues of theme files
+
+Version 1.19 (2019-04-07)
+-------------------------
+- Added the new wp_body_open() function, along with a function_exists check
+
 Version 1.18 (2019-03-29)
 -------------------------
 - Removed title and href attributes from article elements

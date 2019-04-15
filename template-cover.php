@@ -20,23 +20,27 @@ get_header(); ?>
 
 				?>
 
-				<div class="page-hero with-content dark-overlay bg-image bg-attach"<?php if ( $featured_image_url ) echo ' style="background-image: url( ' . esc_url( $featured_image_url ) . ' )"'; ?>>
+				<div class="page-hero-wrapper">
 
-					<header class="section-inner thin page-header text-center fade-block">
+					<div class="page-hero with-content dark-overlay bg-image bg-attach"<?php if ( $featured_image_url ) echo ' style="background-image: url( ' . esc_url( $featured_image_url ) . ' )"'; ?>>
 
-						<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
+						<header class="section-inner thin page-header text-center fade-block">
 
-						<?php if ( has_excerpt() ) : ?>
+							<?php the_title( '<h1 class="page-title">', '</h1>' ); ?>
 
-							<p class="sans-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
+							<?php if ( has_excerpt() ) : ?>
 
-						<?php endif; ?>
+								<p class="sans-excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
 
-					</header><!-- .post-header -->
+							<?php endif; ?>
 
-					<div class="to-content"></div>
+						</header><!-- .post-header -->
 
-				</div><!-- .page-hero -->
+						<div class="to-content"></div>
+
+					</div><!-- .page-hero -->
+
+				</div><!-- .page-hero-wrapper -->
 
 				<div id="content-element" class="entry-content page-content section-inner thin">
 
