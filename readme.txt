@@ -2,7 +2,7 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 4.8
+Tested up to: 5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -83,7 +83,20 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
-Version 1.21 (2019-04-XX)
+Version 1.22 (2019-07-17)
+-------------------------
+- Fixed intrinsicRatioEmbeds only targeting elements in `.post`, which missed embeds on pages
+- Added theme URI to style.css
+- Updated "Tested up to"
+- Added theme tags
+- Added skip link
+- Don't show comments if the post is password protected
+- Don't show the post thumbnail if the post is password protected
+- Fixed font issues in the block editor styles
+- Other minor tweaks to the block editor styles
+- Updated `single-product/rating.php` with the latest WooCommerce version (v3.6.0)
+
+Version 1.21 (2019-04-16)
 -------------------------
 - Fixed IE11 issues
 

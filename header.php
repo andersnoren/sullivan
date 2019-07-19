@@ -21,6 +21,8 @@
 		}
 		?>
 
+		<a class="skip-link faux-button" href="#site-content"><?php _e( 'Skip to the content', 'sullivan' ); ?></a>
+
 		<div class="mobile-menu-wrapper">
 
 			<div class="mobile-search">

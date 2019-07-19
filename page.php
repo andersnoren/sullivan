@@ -81,7 +81,7 @@
 
 					</div><!-- .entry-content -->
 
-					<?php if ( get_comments_number() || comments_open() ) : ?>
+					<?php if ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) : ?>
 
 						<div class="section-inner section-inner thin  max-percentage">
 							<?php comments_template(); ?>

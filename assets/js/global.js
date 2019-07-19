@@ -116,8 +116,6 @@ sullivan.toggles = {
 
 		$( '.toggle' ).on( 'click', function( e ){
 
-			console.log( e );
-
 			// Get our targets
 			var targetString = $( this ).data( 'toggle-target' );
 			var target = $( targetString );
@@ -249,7 +247,6 @@ sullivan.coverPage = {
 
 
 // =======================================================================  Fancy Number Inputs
-
 sullivan.fancyNumberInputs = {
 
 	init: function(){
@@ -342,8 +339,6 @@ sullivan.fancyNumberInputs = {
 
 
 // =======================================================================  Hero Slider
-
-
 sullivan.heroSlider = {
 
 	init: function() {
@@ -397,8 +392,6 @@ sullivan.heroSlider = {
 
 
 // =======================================================================  Post Slider
-
-
 sullivan.postSlider = {
 
 	init: function() {
@@ -436,7 +429,6 @@ sullivan.postSlider = {
 
 
 // =======================================================================  Scroll Show
-
 sullivan.scrollShow = {
 
 	init: function(){
@@ -525,14 +517,13 @@ sullivan.fadeBlocks = {
 } // sullivan.fadeBlocks
 
 
-
 // =======================================================================  Resize videos
 sullivan.intrinsicRatioEmbeds = {
 
-	init: function(){
+	init: function() {
 
 		// Resize videos after their container
-		var vidSelector = ".post iframe, .post object, .post video, .widget-content iframe, .widget-content object, .widget-content iframe";
+		var vidSelector = "iframe, object, video";
 		var resizeVideo = function(sSel) {
 			$( sSel ).each( function() {
 				var $video = $( this ),
@@ -562,7 +553,6 @@ sullivan.intrinsicRatioEmbeds = {
 } // sullivan.intrinsicRatioEmbeds
 
 
-
 // =======================================================================  Smooth Scroll
 sullivan.smoothScroll = {
 
@@ -573,6 +563,7 @@ sullivan.smoothScroll = {
 		// Remove links that don't actually link to anything
 		.not( '[href="#"]' )
 		.not( '[href="#0"]' )
+		.not( '.skip-link' )
 		.click( function( event ) {
 			// On-page links
 			if ( location.pathname.replace( /^\//, '' ) == this.pathname.replace( /^\//, '' ) && location.hostname == this.hostname ) {

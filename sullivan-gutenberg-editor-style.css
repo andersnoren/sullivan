@@ -45,6 +45,11 @@
 	-webkit-font-smoothing: antialiased;
 }
 
+.editor-styles-wrapper > * {
+	font-family: 'Archivo', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
 .editor-rich-text__tinymce * {
 	font-family: inherit !important;
 }
@@ -109,6 +114,7 @@
 .editor-styles-wrapper .wp-block-heading h6 {
 	font-family: 'Charis SIL', Georgia, serif !important;
 	font-weight: 400;
+	letter-spacing: -0.005em;
 	line-height: 1.2 !important;
 	margin: 50px 0 25px;
 }
@@ -439,7 +445,7 @@ pre.wp-block-verse {
 	background: #000;
 	border-radius: 4px;
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 500;
 	line-height: 1.1;
 	padding: 1em 1.4em;
 }

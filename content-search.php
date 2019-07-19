@@ -10,7 +10,7 @@
 			$image_size = 'post-thumbnail';
 		}
 
-		$image_url = get_the_post_thumbnail_url( $image_size ) ? get_the_post_thumbnail_url( $image_size ) : sullivan_get_fallback_image_url(); ?>
+		$image_url = get_the_post_thumbnail_url( $image_size ) && ! post_password_required() ? get_the_post_thumbnail_url( $image_size ) : sullivan_get_fallback_image_url(); ?>
 
 		<img src="<?php echo esc_url( $image_url ); ?>" />
 

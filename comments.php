@@ -1,4 +1,10 @@
-<?php if ( $comments ) : ?>
+<?php 
+
+if ( post_password_required() ) {
+	return;
+}
+
+if ( $comments ) : ?>
 
 	<div class="comments" id="comments">
 

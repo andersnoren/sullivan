@@ -71,7 +71,7 @@
 	// Check whether the current post is format-gallery and starts with a gallery shortcode
 	$show_gallery = sullivan_has_post_gallery( $post->ID );
 
-	if ( has_post_thumbnail() || $show_gallery ) : ?>
+	if ( ( has_post_thumbnail() || $show_gallery ) && ! post_password_required() ) : ?>
 
 		<div class="featured-media">
 
@@ -80,13 +80,13 @@
 			// Either show the gallery
 			if ( $show_gallery ) {
 				sullivan_post_gallery( $post->ID );
+
 			// Or display the post thumbnail
 			} else {
 				the_post_thumbnail();
 			}
 
 			?>
-
 
 		</div><!-- .featured-media -->
 
@@ -274,7 +274,7 @@
 		<?php
 
 		// If comments are open, or there are at least one comment
-		if ( get_comments_number() || comments_open() ) : ?>
+		if ( ( get_post_type() == 'post' || comments_open() || get_comments_number() ) && ! post_password_required() ) : ?>
 
 			<div class="hanging-titles">
 				<?php comments_template(); ?>
