@@ -2,7 +2,7 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 5.2
+Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,14 @@ Source: http://ionicons.com/
 
 
 == Changelog ==
+
+Version 1.23 (2020-04-02)
+-------------------------
+- Fixed Social Icons issue in mobile menu.
+- Bumped FontAwesome to version 5.9.0, removed unneccessary font files, and added support for a lot more social icons. You might need to empty the cache to render this change correctly, depending on your setup.
+- Updated WooCommerce version of result-count.php template override.
+- Added widget ID output to register_sidebar calls.
+- Improved the structure of the footer social menu in order to make it better at handling a lot of icons.
 
 Version 1.22 (2019-07-17)
 -------------------------

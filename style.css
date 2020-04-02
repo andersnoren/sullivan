@@ -2,7 +2,7 @@
 
 	Theme Name: Sullivan
     Text Domain: sullivan
-	Version: 1.22
+	Version: 1.23
 	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Block Editor/Gutenberg support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory. Demo: https://www.andersnoren.se/themes/sullivan/
 	Tags: two-columns, right-sidebar, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, e-commerce, block-styles, wide-blocks
 	Author: Anders Norén
@@ -147,6 +147,7 @@ body * {
         -moz-box-sizing: border-box; 
 	box-sizing: border-box; 
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	word-break: break-word;
 }
 
@@ -3151,10 +3152,14 @@ ul.page-numbers .next { right: 0; }
 .credits {
 	align-items: center;
 	display: flex;
-	flex-wrap: wrap;
 	font-size: 14px;
 	justify-content: space-between;
 	padding: 50px 0;
+}
+
+.credits p {
+	flex-shrink: 0;
+	margin-right: 20px;
 }
 
 .credits p span:first-child {
@@ -3170,62 +3175,100 @@ ul.page-numbers .next { right: 0; }
 
 /* SOCIAL MENU BASE */
 
-.social-icons a::before {
-	content: '\f408';
+.social-icons li a::before {
+	content: '\f0c1';
 	display: block;
-	font-family: 'FontAwesome';
+	font-family: 'Font Awesome 5';
 	font-size: 20px;
+	text-align: center;
 }
 
-.social-icons a[href*="codepen.io"]::before { content: '\f1cb'; }
-.social-icons a[href*="dribbble.com"]::before { content: '\f17d'; }
-.social-icons a[href*="facebook.com"]::before { content: '\f230'; }
-.social-icons a[href*="flickr.com"]::before { content: '\f16e'; }
-.social-icons a[href*="github.com"]::before { content: '\f09b'; }
-.social-icons a[href*="instagram.com"]::before { content: '\f16d'; }
-.social-icons a[href*="linkedin.com"]::before { content: '\f0e1'; }
-.social-icons a[href*="pinterest.com"]::before { content: '\f0d2'; }
-.social-icons a[href*="plus.google.com"]::before { content: '\f0d5'; }
-.social-icons a[href*="soundcloud.com"]::before { content: '\f1be'; }
-.social-icons a[href*="tumblr.com"]::before { content: '\f173'; }
-.social-icons a[href*="twitter.com"]::before { content: '\f099'; }
-.social-icons a[href*="vimeo.com"]::before { content: '\f194'; }
-.social-icons a[href*="wordpress.org"]::before,
-.social-icons a[href*="wordpress.com"]::before { content: '\f19a'; }
-.social-icons a[href*="youtube.com"]::before { content: '\f167'; }
+/* NON-BRAND ICONS */
+
 .social-icons a[href*="mailto"]::before { content: '\f0e0'; }
+.social-icons a[href*="/feed/"]::before,
+.social-icons a[href*="rss"]::before { content: '\f09e'; }
+
+/* BRAND ICONS */
+
+.social-icons a[href*="500px.com"]::before { content: '\f26e'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="amazon.com"]::before { content: '\f270'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="angel.co"]::before { content: '\f209'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="audible.com"]::before { content: '\f373'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="behance.net"]::before { content: '\f1b4'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="blogger.com"]::before { content: '\f37d'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="codepen.io"]::before { content: '\f1cb'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="creativecommons.com"]::before { content: '\f25e'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="deviantart.com"]::before { content: '\f1bd'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="digg.com"]::before { content: '\f1a6'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="discordapp.com"]::before { content: '\f392'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="dribbble.com"]::before { content: '\f17d'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="ebay"]::before { content: '\f4f4'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="etsy.com"]::before { content: '\f2d7'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="facebook.com"]::before { content: '\f39e'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="flickr.com"]::before { content: '\f16e'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="github.com"]::before { content: '\f113'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="gitlab.com"]::before { content: '\f296'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="goodreads.com"]::before { content: '\f3a9'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="houzz"]::before { content: '\f27c'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="imdb.com"]::before { content: '\f2d8'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="instagram.com"]::before { content: '\f16d'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="kickstarter.com"]::before { content: '\f3bc'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="jsfiddle.net"]::before { content: '\f1cc'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="linkedin.com"]::before { content: '\f0e1'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="last.fm"]::before { content: '\f202'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="medium.com"]::before { content: '\f3c7'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="meetup.com"]::before { content: '\f2e0'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="mixcloud.com"]::before { content: '\f289'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="patreon.com"]::before { content: '\f3d9'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="pscp.tv"]::before { content: '\f3da'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="pinterest"]::before { content: '\f231'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="play.google.com"]::before { content: '\f3ab'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="plus.google.com"]::before { content: '\f0d5'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="producthunt.com"]::before { content: '\f288'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="quora.com"]::before { content: '\f2c4'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="reddit.com"]::before { content: '\f281'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="slack.com"]::before { content: '\f198'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="snapchat"]::before { content: '\f2ac'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="soundcloud.com"]::before { content: '\f1be'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="spotify.com"]::before { content: '\f1bc'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="tumblr.com"]::before { content: '\f173'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="twitch"]::before { content: '\f1e8'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="twitter.com"]::before { content: '\f099'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="vimeo.com"]::before { content: '\f27d'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="wordpress.org"]::before,
+.social-icons a[href*="wordpress.com"]::before { content: '\f411'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="youtube.com"]::before { content: '\f167'; font-family: 'Font Awesome 5 Brands'; }
+.social-icons a[href*="unsplash.com"]::before { content: '\f030'; font-family: 'Font Awesome 5'; }
+.social-icons a[href*="xing"]::before { content: '\f168'; font-family: 'Font Awesome 5 Brands'; }
 
 
 /* FOOTER SOCIAL SPECIFIC */
 
+.credits .social-menu {
+	justify-content: flex-end;
+	display: flex;
+	flex-wrap: wrap;
+	margin: -10px -20px 0 0;
+}
+
 .credits .social-menu li { 
-	display: inline-block;
+	margin: 10px 20px 0 0;
 	position: relative;
 }
 
-.credits .social-menu li { 
-	display: inline-block;
-}
-
-.credits .social-menu li + li {
-	margin-left: 25px;
-}
-
 .credits .social-menu a {
-	color: #fff;
-	padding-right: 28px;
+	align-items: center;
+	display: flex;
+}
+
+.credits .social-menu a span {
+	margin-left: 10px;
 }
 
 .credits .social-menu a:hover {
 	opacity: 0.5;
 	text-decoration: none;
-}
-
-.credits .social-menu li a::before {
-	position: absolute;
-		right: 0;
-		top: calc( 50% - .6rem );
-	text-align: center;
 }
 
 
@@ -3998,18 +4041,8 @@ ul.page-numbers .next { right: 0; }
 
 	/* Footer Credits ---------------------------- */
 
-	.credits .social-menu li + li {
-		margin-left: 15px;
-	}
-
 	.credits .social-menu a span {
-		display: block;
-		text-indent: -9999px;
-	}
-
-	.credits .social-menu li a::before {
-		font-size: 24px;
-		top: calc( 50% - 1.15rem );		
+		display: none;
 	}
 
 
@@ -4413,6 +4446,7 @@ ul.page-numbers .next { right: 0; }
 	}
 
 	.credits .social-menu {
+		justify-content: center;
 		margin-top: 27px;
 	}
 

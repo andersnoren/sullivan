@@ -58,7 +58,7 @@
 
 			<?php if ( has_nav_menu( 'social' ) ) : ?>
 
-				<ul class="social-menu mobile">
+				<ul class="social-menu social-icons mobile">
 
 					<?php
 
@@ -166,7 +166,7 @@
 
 						} elseif ( isset( $nav_social_args ) ) {
 
-							echo '<ul class="social-menu header">';
+							echo '<ul class="social-menu social-icons header">';
 
 								wp_nav_menu( $nav_social_args );
 

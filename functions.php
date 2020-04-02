@@ -102,7 +102,7 @@ if ( ! function_exists( 'sullivan_load_style' ) ) {
 				$dependencies[] = 'sullivan-google-fonts';
 			}
 
-			wp_register_style( 'sullivan-fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.css' );
+			wp_register_style( 'sullivan-fontawesome', get_template_directory_uri() . '/assets/fonts/font-awesome/font-awesome.css' );
 			$dependencies[] = 'sullivan-fontawesome';
 
 			// Add WooCommerce styles, if WC is activated
@@ -307,7 +307,7 @@ if ( ! function_exists( 'sullivan_sidebar_registration' ) ) {
 		$shared_args = array(
 			'before_title' 	=> '<h3 class="widget-title subheading">',
 			'after_title' 	=> '</h3>',
-			'before_widget' => '<div class="widget %2$s"><div class="widget-content">',
+			'before_widget' => '<div id="%1$s" class="widget %2$s"><div class="widget-content">',
 			'after_widget' 	=> '</div></div>',
 		);
 
