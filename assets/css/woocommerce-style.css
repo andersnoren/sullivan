@@ -173,7 +173,7 @@ p.stars a::before {
 
 p.stars a:hover ~ a::before,
 p.stars.selected a.active ~ a:before {
-    color: #99999E;
+    color: #767676;
 }
 
 p.stars:hover a::before,
@@ -187,7 +187,7 @@ p.stars.selected a:not(.active):before {
 
 
 .breadcrumbs {
-    color: #99999E;
+    color: #767676;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 20px;
@@ -275,8 +275,7 @@ p.stars.selected a:not(.active):before {
 }
 
 
-/* Widget Cart ----------------------------- */
-
+/* Widget Cart ------------------------------- */
 
 .woocommerce-mini-cart-item {
     font-size: 14px;
@@ -302,7 +301,7 @@ p.stars.selected a:not(.active):before {
 }
 
 .woocommerce-mini-cart-item .quantity {
-    color: #99999E;
+    color: #767676;
     display: block;
     margin: 6px 0 0;
 }
@@ -641,7 +640,7 @@ li.product .price {
 }
 
 del {
-    color: #99999E;
+    color: #767676;
 }
 
 ins {
@@ -778,7 +777,7 @@ del + ins {
 }
 
 .woocommerce-review-link {
-    color: #99999E;
+    color: #767676;
     font-size: 12px;
     margin-left: 6px;
     position: relative;
@@ -1017,7 +1016,7 @@ del + ins {
 }
 
 #reviews time {
-    color: #99999E;
+    color: #767676;
     font-size: 14px;
     margin-left: 5px;
 }
@@ -1193,6 +1192,11 @@ del + ins {
 }
 
 .shop_table.cart td.actions > .button {
+	display: block;
+	margin-left: auto;
+}
+
+.shop_table.cart td.actions > .coupon ~ .button {
     position: absolute;
         right: 0;
         top: 15px;
@@ -1242,7 +1246,7 @@ del + ins {
 }
 
 .shipping-calculator-button {
-    color: #99999E;
+    color: #767676;
     display: block;
     margin-top: 3px;
     text-decoration: underline;
@@ -1262,7 +1266,7 @@ del + ins {
 }
 
 .woocommerce-remove-coupon {
-    color: #99999E;
+    color: #767676;
     font-size: 13px;
     font-weight: 500;
     margin-left: 3px;
@@ -1980,7 +1984,7 @@ h3 + .woocommerce-address-fields {
 }
 
 .woocommerce .login-registration-form-links .sep {
-    color: #99999E;
+    color: #767676;
     margin: 0 8px 0 5px;
 }
 
@@ -2828,11 +2832,14 @@ h3 + .woocommerce-address-fields {
     }
 
     .shop_table.cart td.actions > .button {
-        margin-top: 30px;
         padding: 20px;
         position: static;
         width: 100%;
     }
+
+	.shop_table.cart td.actions > .coupon ~ .button {
+		margin-top: 30px;
+	}
 
     /* WOO GRAY BOX */
 

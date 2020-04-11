@@ -128,7 +128,7 @@ if ( ! function_exists( 'sullivan_add_editor_styles' ) ) {
 
 	function sullivan_add_editor_styles() {
 		add_editor_style( array(
-			'sullivan-editor-styles.css',
+			'assets/css/sullivan-classic-editor-style.css',
 			'https://fonts.googleapis.com/css?family=Archivo:400,400i,500,500i,700,700i&amp;subset=latin-ext',
 		) );
 	}
@@ -1619,7 +1619,7 @@ if ( ! function_exists( 'sullivan_block_editor_styles' ) ) :
 		}
 
 		// Enqueue the editor styles
-		wp_enqueue_style( 'sullivan-block-editor-styles', get_theme_file_uri( '/sullivan-gutenberg-editor-style.css' ), $dependencies, '1.0', 'all' );
+		wp_enqueue_style( 'sullivan-block-editor-styles', get_theme_file_uri( '/assets/css/sullivan-block-editor-style.css' ), $dependencies, '1.0', 'all' );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'sullivan_block_editor_styles', 1 );

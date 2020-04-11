@@ -83,6 +83,14 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.24 (2020-04-11)
+-------------------------
+- Renamed the editor style files, and moved them to `/assets/css/`.
+- Added social block styles.
+- Fixed the "Update cart" button on the cart page not being visible when the coupon form is hidden.
+- Increased color contrast by bumping the lightest gray color to #767676.
+- Added base block margins, moved block styles to their own heading, cleaned up block styles a bit (not enough, never enough).
+
 Version 1.23 (2020-04-02)
 -------------------------
 - Fixed Social Icons issue in mobile menu.
