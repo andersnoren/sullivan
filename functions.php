@@ -1363,8 +1363,7 @@ class Sullivan_Customize {
 
 		// Fallback image setting
 		$wp_customize->add_setting( 'sullivan_fallback_image', array(
-			'sanitize_callback' => 'esc_url_raw',
-			'transport'			=> 'postMessage',
+			'sanitize_callback' => 'absint',
 		) );
 
 		$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'sullivan_fallback_image', array(

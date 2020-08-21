@@ -6,6 +6,8 @@ Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Tested up to: 5.5
+Requires PHP: 5.4
 
 
 == Installation ==
@@ -82,6 +84,12 @@ Source: http://ionicons.com/
 
 
 == Changelog ==
+
+Version 1.25 (2020-08-21)
+-------------------------
+- Added "Tested up to" and "Requires PHP" to style.css and readme.txt.
+- Changed the sanitize_callback parameter of the fallback image setting in the Customizer from esc_url_raw to absint, fixing the ID being stripped on save (thanks, @timvanheugten).
+- Fixed the top/bottom margin of the first/last element in the entry content not being removed in some cases.
 
 Version 1.24 (2020-04-11)
 -------------------------
