@@ -10,9 +10,9 @@
 
 							for ( $i = 1; $i <= 4; $i++ ) :
 
-								if ( is_active_sidebar( 'footer-' . $i ) ) :
+								if ( $i === 2 ) echo '<div class="secondary-widgets">';
 
-									if ( $i === 2 ) echo '<div class="secondary-widgets">'; ?>
+								if ( is_active_sidebar( 'footer-' . $i ) ) : ?>
 
 									<div class="column column-<?php echo absint( $i ); ?>">
 

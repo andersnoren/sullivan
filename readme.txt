@@ -85,6 +85,10 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.27 (2020-08-25)
+-------------------------
+- Fixed the footer widget markup structure being broken if the second widget area is empty and other widget areas are set.
+
 Version 1.26 (2020-08-24)
 -------------------------
 - Fixed the Post Meta Customizer setting being broken in WordPress 5.5.
