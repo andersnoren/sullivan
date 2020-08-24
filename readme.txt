@@ -85,6 +85,10 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.26 (2020-08-24)
+-------------------------
+- Fixed the Post Meta Customizer setting being broken in WordPress 5.5.
+
 Version 1.25 (2020-08-21)
 -------------------------
 - Added "Tested up to" and "Requires PHP" to style.css and readme.txt.
