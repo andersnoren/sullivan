@@ -579,7 +579,7 @@ if ( ! function_exists( 'sullivan_woo_custom_thumbnail' ) ) {
 		add_filter( 'woocommerce_placeholder_img_src', 'sullivan_woo_custom_thumbnail_src_replace' );
 
 	}
-	add_action( 'init', 'sullivan_woo_custom_thumbnail' );
+	// add_action( 'init', 'sullivan_woo_custom_thumbnail' );
 
 }
 

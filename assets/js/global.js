@@ -571,7 +571,7 @@ sullivan.smoothScroll = {
 				var target = $( this.hash );
 				target = target.length ? target : $( '[name=' + this.hash.slice( 1 ) + ']' );
 				// Does a scroll target exist?
-				if ( target.length ) {
+				if ( target.length && target.is( ':visible' ) ) {
 					// Only prevent default if animation is actually gonna happen
 					event.preventDefault();
 					$( 'html, body' ).animate({

@@ -6,7 +6,7 @@ Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Tested up to: 5.5
+Tested up to: 5.7.1
 Requires PHP: 5.4
 
 
@@ -84,6 +84,12 @@ Source: http://ionicons.com/
 
 
 == Changelog ==
+
+Version 1.28 (2021-04-21)
+-------------------------
+- Fixed the display of featured images on the search results page for non-products.
+- Disabled smooth scroll for product tabs due to it causing the window to scroll to the top of the page.
+- Updated the "Tested up to" value.
 
 Version 1.27 (2020-08-25)
 -------------------------
