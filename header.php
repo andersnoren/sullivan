@@ -178,7 +178,7 @@
 
 					</div><!-- .header-titles -->
 
-					<?php do_action( 'sullivan_header_inner_opening' ); ?>
+					<?php do_action( 'sullivan_header_inner_closing' ); ?>
 
 				</div><!-- .header-inner -->
 

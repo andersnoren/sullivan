@@ -85,6 +85,10 @@ Source: http://ionicons.com/
 
 == Changelog ==
 
+Version 1.29 (2021-05-05)
+-------------------------
+- Fixed the `sullivan_header_inner_opening` action being triggered twice in the header (thanks, @civgio).
+
 Version 1.28 (2021-04-21)
 -------------------------
 - Fixed the display of featured images on the search results page for non-products.
