@@ -53,7 +53,7 @@ Archivo font
 License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
 Source: https://fonts.google.com/specimen/Archivo
 
-Charis SIL font
+Newsreader font
 License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
 Source: https://software.sil.org/charis/
 
@@ -84,6 +84,22 @@ Source: http://ionicons.com/
 
 
 == Changelog ==
+
+Version 2.0 (2022-06-29)
+-------------------------
+- Updated the theme description.
+- Updated the author URL to remove the www prefix.
+- Updated Flexslider to 2.7.2, and added both the minified (enqueued) and non-minified version.
+- Added function_exists() checks to all custom functions.
+- Removed the post_class has-thumbnail/missing-thumbnail classes, since they weren't used.
+- Unified registration and deregistration of widgets into one function.
+- Moved the block editor feature registrations to sullivan_setup().
+- Only register the Google Fonts to the classic editor styles if the translateable Google Fonts string isn't set to false.
+- Replaced Charis SIL with Newsreader on Google Fonts, significantly cutting down on theme file size.
+- Changed the screenshot format to JPG, reducing file size by 80%.
+- Compressed SVGs.
+- Switched from the Google Fonts CDN to font files included in the theme folder.
+- Bumped "Tested up to" to 6.0.
 
 Version 1.29 (2021-05-05)
 -------------------------

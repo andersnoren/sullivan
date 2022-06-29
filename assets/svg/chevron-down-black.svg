@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="12px" height="7px" viewBox="0 0 12 7" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Combined Shape</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Product-Page-Hero-Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-893.000000, -439.000000)">
-        <polygon id="Combined-Shape" fill="#111111" points="899.066827 444.309499 904.016575 439.359751 904.723682 440.066858 899.066827 445.723712 893.409973 440.066858 894.11708 439.359751"></polygon>
-    </g>
-</svg>
+<svg height="7" viewBox="0 0 12 7" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m899.066827 444.309499 4.949748-4.949748.707107.707107-5.656855 5.656854-5.656854-5.656854.707107-.707107z" fill="#111" fill-rule="evenodd" transform="translate(-893 -439)"/></svg>

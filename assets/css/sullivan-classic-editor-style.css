@@ -7,24 +7,24 @@
 
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	src: url( ./assets/fonts/CharisSIL-R.woff );
 }
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-style: italic;
 	src: url( ./assets/fonts/CharisSIL-I.woff );
 }
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-weight: bold;
 	src: url( ./assets/fonts/CharisSIL-B.woff );
 }
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-weight: bold;
 	font-style: italic;
 	src: url( ./assets/fonts/CharisSIL-BI.woff );
@@ -87,7 +87,7 @@ body#tinymce.wp-editor h3,
 body#tinymce.wp-editor h4, 
 body#tinymce.wp-editor h5, 
 body#tinymce.wp-editor h6 {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	line-height: 1.2;
 	margin: 2em 0 1em;
 }

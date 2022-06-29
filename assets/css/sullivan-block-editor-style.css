@@ -7,26 +7,26 @@
 
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-weight: 400;
 	src: url( ./assets/fonts/CharisSIL-R.woff );
 }
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-style: italic;
 	font-weight: 400;
 	src: url( ./assets/fonts/CharisSIL-I.woff );
 }
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-weight: 700;
 	src: url( ./assets/fonts/CharisSIL-B.woff );
 }
 
 @font-face {
-	font-family: 'Charis SIL';
+	font-family: Newsreader;
 	font-weight: 700;
 	font-style: italic;
 	src: url( ./assets/fonts/CharisSIL-BI.woff );
@@ -82,7 +82,7 @@
 /* Typography --------------------------------------------- */
 
 .editor-post-title__block .editor-post-title__input {
-	font-family: 'Charis SIL', Georgia, serif !important;
+	font-family: Newsreader, Georgia, serif !important;
 	font-size: 48px;
 	font-weight: 400;
 	letter-spacing: -0.005em;
@@ -112,7 +112,7 @@
 .editor-styles-wrapper .wp-block-heading h4,
 .editor-styles-wrapper .wp-block-heading h5,
 .editor-styles-wrapper .wp-block-heading h6 {
-	font-family: 'Charis SIL', Georgia, serif !important;
+	font-family: Newsreader, Georgia, serif !important;
 	font-weight: 400;
 	letter-spacing: -0.005em;
 	line-height: 1.2 !important;
@@ -127,7 +127,7 @@
 .editor-styles-wrapper .wp-block-heading h6 { font-size: 1.1em; font-weight: 700; }
 
 p.has-drop-cap:not(:focus):first-letter {
-    font-family: 'Charis SIL', Georgia, serif !important;
+    font-family: Newsreader, Georgia, serif !important;
 	font-size: 7.75em;
 	font-weight: 400;
     margin: 0 .07em 0 0;

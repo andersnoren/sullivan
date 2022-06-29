@@ -60,11 +60,8 @@ get_header(); ?>
 			</article>
 
 			<?php
-
 		endwhile;
-
 	endif;
-
 	?>
 
 </main><!-- #site-content -->

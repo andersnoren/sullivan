@@ -48,7 +48,7 @@
 					<p>
 						<span>&copy; <?php echo date_i18n( __( 'Y', 'sullivan' ) ); ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-name"><?php wp_kses_post( bloginfo( 'name' ) ); ?></a></span>
 						<?php /* Translators: $s = name of the theme developer */ ?>
-						<span><?php printf( _x( 'Theme by %s', 'Translators: $s = name of the theme developer', 'sullivan' ), '<a href="https://www.andersnoren.se">' . __( 'Anders Norén', 'sullivan' ) . '</a>' ); ?></span>
+						<span><?php printf( _x( 'Theme by %s', 'Translators: $s = name of the theme developer', 'sullivan' ), '<a href="https://andersnoren.se">' . __( 'Anders Norén', 'sullivan' ) . '</a>' ); ?></span>
 					</p>
 
 					<?php if ( has_nav_menu( 'social' ) ) : ?>

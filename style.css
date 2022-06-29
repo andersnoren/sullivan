@@ -2,15 +2,15 @@
 
 	Theme Name: Sullivan
     Text Domain: sullivan
-	Version: 1.29
-	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Block Editor/Gutenberg support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows on both the blog page and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory. Demo: https://www.andersnoren.se/themes/sullivan/
+	Version: 2.0
+	Description: Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Block Editor support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows the blog and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more. Note: In order to get the slideshow functionality, you also need to install the Sullivan Compatibility Plugin, available on the WordPress.org plugin directory. Demo: https://andersnoren.se/themes/sullivan/
 	Tags: two-columns, right-sidebar, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, e-commerce, block-styles, wide-blocks
 	Author: Anders Norén
-	Author URI: https://www.andersnoren.se
+	Author URI: https://andersnoren.se
 	License: GNU General Public License version 2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
-	Theme URI: https://www.andersnoren.se/teman/sullivan-wordpress-theme/
-	Tested up to: 5.7.1
+	Theme URI: https://andersnoren.se/teman/sullivan-wordpress-theme/
+	Tested up to: 6.0
 	Requires PHP: 5.4
 	
 	All files, unless otherwise stated, are released under the GNU General Public License
@@ -180,34 +180,6 @@ input:-ms-input-placeholder { color: #767676; }
 input::-moz-placeholder { color: #767676; }
 
 
-/* Fonts ----------------------------- */
-
-
-@font-face {
-	font-family: 'Charis SIL';
-	src: url( ./assets/fonts/CharisSIL-R.woff );
-}
-
-@font-face {
-	font-family: 'Charis SIL';
-	font-style: italic;
-	src: url( ./assets/fonts/CharisSIL-I.woff );
-}
-
-@font-face {
-	font-family: 'Charis SIL';
-	font-weight: bold;
-	src: url( ./assets/fonts/CharisSIL-B.woff );
-}
-
-@font-face {
-	font-family: 'Charis SIL';
-	font-weight: bold;
-	font-style: italic;
-	src: url( ./assets/fonts/CharisSIL-BI.woff );
-}
-
-
 /* -------------------------------------------------------------------------------- */
 /*	X.	Structure
 /* -------------------------------------------------------------------------------- */
@@ -298,10 +270,10 @@ a {
 /* TITLES */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-weight: 400;
-	letter-spacing: -0.005em;
-	line-height: 1.155;
+	letter-spacing: -0.01em;
+	line-height: 1.15;
 	margin: .75em 0 .4em;
 }
 
@@ -332,7 +304,7 @@ h6 { font-size: 16px; }
 /* EXCERPTS */
 
 .excerpt {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 28px;
 	letter-spacing: -0.01em;
 	line-height: 1.4;
@@ -402,7 +374,7 @@ img {
 
 .woocommerce-store-notice {
 	color: #fff;
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 14px;
 	font-style: italic;
 	line-height: 1.25;
@@ -1928,7 +1900,7 @@ img {
 .wp-block-pullquote blockquote p,
 .wp-block-pullquote.alignleft blockquote p,
 .wp-block-pullquote.alignright blockquote p {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 1.25em;
 	font-weight: 700;
 	letter-spacing: -0.025em;
@@ -2111,7 +2083,7 @@ pre {
 }
 
 p.has-drop-cap:not(:focus):first-letter {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 7.75em;
 	font-weight: 400;
     margin: 0 .07em 0 0;
@@ -2140,7 +2112,7 @@ blockquote cite:before {
 /* Pull Quotes ------------------------------- */
 
 .entry-content .pull {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 29px;
 	font-weight: 700;
 	letter-spacing: -0.01em;
@@ -2823,7 +2795,7 @@ ul.page-numbers .next { right: 0; }
 
 
 .widget_text {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 }
 
 .widget_text .textwidget {
@@ -2857,7 +2829,7 @@ ul.page-numbers .next { right: 0; }
 .widget_pages li a,
 .widget_product_categories li a { 
 	color: #111;
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 18px;
 }
 
@@ -2883,7 +2855,7 @@ ul.page-numbers .next { right: 0; }
 
 .widget_rss li a {
 	display: block;
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	color: #111;
 }
 
@@ -3073,7 +3045,7 @@ ul.page-numbers .next { right: 0; }
 }
 
 .sullivan-widget-list .title {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 18px;
 	line-height: 1.15;
 }
@@ -3118,7 +3090,7 @@ ul.page-numbers .next { right: 0; }
 
 
 .widget_sullivan_contact {
-	font-family: 'Charis SIL', Georgia, serif;
+	font-family: Newsreader, Georgia, serif;
 	font-size: 16px;
 }
 
@@ -3773,7 +3745,7 @@ ul.page-numbers .next { right: 0; }
 
 	.mobile-menu > li > a,
 	.mobile-menu > li > div > a {
-		font-family: 'Charis SIL', Georgia, serif;
+		font-family: Newsreader, Georgia, serif;
 		font-size: 22px;
 	}
 
@@ -4123,10 +4095,6 @@ ul.page-numbers .next { right: 0; }
 	/* Element Base ---------------------------- */
 
 	/* TYPOGRAPHY */
-
-	h1, h2, h3, h4, h5, h6 {
-		line-height: 1.15;
-	}
 
 	h1 { font-size: 32px; }
 	h2 { font-size: 28px; }

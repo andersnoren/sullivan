@@ -285,6 +285,7 @@
 		// Display related posts
 		get_template_part( 'related-posts' );
 
-	endif; ?>
+	endif;
+	?>
 
 </article>

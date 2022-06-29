@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>Combined-Shape</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="jagged-border-top" fill="#F5F5F7" fill-rule="nonzero">
-            <polygon id="Combined-Shape" points="3.41060513e-13 8 0.0138528242 8 8.43769499e-14 7.98614718 7.98614718 0 15.9722944 7.98614718 15.9584415 8 16 8 16 16 0 16 0 8"></polygon>
-        </g>
-    </g>
-</svg>
+<svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="m0 8h.01385282l-.01385282-.01385282 7.98614718-7.98614718 7.98614722 7.98614718-.0138529.01385282h.0415585v8h-16z" fill="#f5f5f7"/></svg>
