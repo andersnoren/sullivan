@@ -134,7 +134,7 @@ if ( ! function_exists( 'sullivan_load_style' ) ) :
 		$dependencies = array();
 		$theme_version = wp_get_theme( 'Sullivan' )->get( 'Version' );
 
-		wp_register_style( 'sullivan-google-fonts', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'sullivan-google-fonts', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		$dependencies[] = 'sullivan-google-fonts';
 
 		wp_register_style( 'sullivan-fontawesome', get_template_directory_uri() . '/assets/fonts/font-awesome/font-awesome.css' );
@@ -1464,7 +1464,7 @@ if ( ! function_exists( 'sullivan_block_editor_styles' ) ) :
 
 		$theme_version = wp_get_theme( 'Sullivan' )->get( 'Version' );
 
-		wp_register_style( 'sullivan-block-editor-styles-font', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		wp_register_style( 'sullivan-block-editor-styles-font', get_theme_file_uri( '/assets/css/fonts.css' ) );
 		wp_enqueue_style( 'sullivan-block-editor-styles', get_theme_file_uri( '/assets/css/sullivan-block-editor-style.css' ), array( 'sullivan-block-editor-styles-font' ), $theme_version, 'all' );
 
 	}
