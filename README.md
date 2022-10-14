@@ -2,7 +2,7 @@
 
 Sullivan is a WordPress theme built with WooCommerce powered stores in mind, but it works just as well for regular business websites or blogs. It features a beautiful design with custom styling for all WooCommerce pages and features, Block Editor support, a search field displaying instant results, dropdown modals for both My Account and the basket in the header, full-width slideshows the blog and the store page, a slideshow for posts set to the gallery post format, custom widgets, social menus, and much more.
 
-![Sullivan](https://github.com/andersnoren/sullivan/blob/main/screenshot.png)
+![Sullivan](https://github.com/andersnoren/sullivan/blob/master/screenshot.jpg)
 
 You can download the latest stable release of Sullivan [from WordPress.org](https://wordpress.org/themes/sullivan/).
 
