@@ -352,32 +352,6 @@ if ( ! function_exists( 'sullivan_woo_breadcrumbs_arguments' ) ) {
 
 
 /* ---------------------------------------------------------------------------------------------
-   ADJUST WOOCOMMERCE SORTING STRINGS
-   --------------------------------------------------------------------------------------------- */
-
-
-if ( ! function_exists( 'sullivan_woo_catalog_orderby_arguments' ) ) {
-
-	function sullivan_woo_catalog_orderby_arguments( $args ) {
-
-		$args['menu_order'] = __( 'Default sorting', 'sullivan' );
-		$args['popularity'] = __( 'By popularity', 'sullivan' );
-		$args['rating']     = __( 'By average rating', 'sullivan' );
-		$args['date']       = __( 'By newness', 'sullivan' );
-		$args['price']      = __( 'Price: low to high', 'sullivan' );
-		$args['price-desc'] = __( 'Price: high to low', 'sullivan' );
-
-		return $args;
-
-	}
-	add_filter( 'woocommerce_catalog_orderby', 'sullivan_woo_catalog_orderby_arguments' );
-
-}
-
-$catalog_orderby_options = apply_filters( 'woocommerce_catalog_orderby', array() );
-
-
-/* ---------------------------------------------------------------------------------------------
    WRAP SINGLE PRODUCT UPPER AREA
    --------------------------------------------------------------------------------------------- */
 
@@ -801,7 +775,13 @@ if ( ! function_exists( 'sullivan_woo_cart_modal' ) ) {
 
 			<div class="cart-modal modal arrow-right diva">
 
-				<div class="widget_shopping_cart_content"></div>
+				<div class="widget_shopping_cart_content">
+					<?php
+					if ( function_exists( 'woocommerce_mini_cart' ) ) {
+						woocommerce_mini_cart();
+					}
+					?>
+				</div>
 
 			</div><!-- .cart-modal -->
 

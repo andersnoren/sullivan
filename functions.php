@@ -198,6 +198,11 @@ if ( ! function_exists( 'sullivan_enqueue_scripts' ) ) :
 			'query_vars'	=> json_encode( $wp_query->query ),
 		) );
 
+		// Manually enqueue cart fragments, if Woo is activated.
+		if ( sullivan_is_woocommerce_activated() ) {
+			wp_enqueue_script( 'wc-cart-fragments' );
+		}
+
 	}
 	add_action( 'wp_enqueue_scripts', 'sullivan_enqueue_scripts' );
 endif;

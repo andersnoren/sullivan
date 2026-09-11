@@ -2,11 +2,10 @@
 Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
-Tested up to: 5.4
+Tested up to: 7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Tested up to: 5.7.1
 Requires PHP: 5.4
 
 
@@ -83,7 +82,30 @@ License: MIT License, https://opensource.org/licenses/MIT
 Source: http://ionicons.com/
 
 
+== Copyright ==
+
+Sullivan WordPress Theme, (C) 2018 Anders Norén.
+Sullivan is distributed under the terms of the GNU GPL.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+
 == Changelog ==
+
+Version 2.0.2 (2026-09-10)
+-------------------------
+- Removed the `sullivan_woo_catalog_orderby_arguments()` function, changing the WooCommerce orderby select to the Woo defaults and fixing a notice for _load_textdomain_just_in_time.
+- Updated the mini cart to be manually enqueued, fixing it not being visible in WooCommerce versions later than 7.8. Thanks to Tommaso Tremonti for the bug report and fix.
+- Added a copyright notice to readme.txt to meet theme directory requirements.
+- Bumped "Tested up to" to 7.1.
 
 Version 2.0.1 (2022-07-01)
 -------------------------
